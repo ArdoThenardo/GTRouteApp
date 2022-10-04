@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Trial Mountain",
+        "location": "USA",
+        "Length": 3.45
+    },
+    {
+        "name": "Deep Forest Raceway",
+        "location": "Switzerland",
+        "Length": 3.21
+    },
+    {
+        "name": "High Speed Ring",
+        "location": "Japan",
+        "Length": 2.99
+    },
+    {
+        "name": "Lago Magiorre",
+        "location": "Spain",
+        "Length": 3.64
+    }
+]

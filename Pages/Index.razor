@@ -1,0 +1,53 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@if (circuits == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Length</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var circuit in circuits)
+            {
+                <tr>
+                    <td>@circuit.Name</td>
+                    <td>@circuit.Location</td>
+                    <td>@circuit.Length<span>m</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@code {
+    private List<RaceCircuit>? circuits;
+
+    protected override async Task OnInitializedAsync()
+    {
+        circuits = await Http.GetFromJsonAsync<List<RaceCircuit>>("sample-data/track.json");
+    }
+
+    public class RaceCircuit
+    {
+        public string? Name { get; set; }
+        public string? Location { get; set; }
+        public double Length { get; set; }
+    }
+}
