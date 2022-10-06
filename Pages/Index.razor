@@ -1,6 +1,6 @@
 ﻿@page "/"
 @using GTRouteApp.Data
-@inject HttpClient Http
+@inject RaceTrackService RaceTrackService
 
 <PageTitle>Index</PageTitle>
 
@@ -39,13 +39,14 @@ else
 
 @code {
     private List<RaceTrack> tracks = new();
-    private string apiUrl = "https://localhost:7253/tracks"; // choose between -> "https://localhost:7253/tracks" or "sample-data/track.json"
+    
     protected override async Task OnInitializedAsync()
     {
-        var tracksData = await Http.GetFromJsonAsync<BaseModel<List<RaceTrack>>>(apiUrl);
-        if (tracksData is not null)
-        {
-            tracks.AddRange(tracksData.Data ?? new List<RaceTrack>());
-        }
+        await LoadTracks();
+    }
+
+    private async Task LoadTracks()
+    {
+        this.tracks = await RaceTrackService.GetTracks();
     }
 }
