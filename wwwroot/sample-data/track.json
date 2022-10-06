@@ -1,22 +1,35 @@
-[
-    {
-        "name": "Trial Mountain",
-        "location": "USA",
-        "Length": 3.45
-    },
-    {
-        "name": "Deep Forest Raceway",
-        "location": "Switzerland",
-        "Length": 3.21
-    },
-    {
-        "name": "High Speed Ring",
-        "location": "Japan",
-        "Length": 2.99
-    },
-    {
-        "name": "Lago Magiorre",
-        "location": "Spain",
-        "Length": 3.64
-    }
-]
+{
+    "numberOfData": 3,
+    "data": [
+        {
+            "id": 1,
+            "slug": "example-track-one",
+            "name": "Example Track One",
+            "logoUrl": "url/to/img",
+            "coverUrl": "url/to/img",
+            "roadType": "Tarmac",
+            "numberOfLayouts": 2,
+            "country": "USA"
+        },
+        {
+            "id": 2,
+            "slug": "example-track-two",
+            "name": "Example Track Two",
+            "logoUrl": "url/to/img",
+            "coverUrl": "url/to/img",
+            "roadType": "Tarmac",
+            "numberOfLayouts": 2,
+            "country": "Switzerland"
+        },
+        {
+            "id": 3,
+            "slug": "example-track-three",
+            "name": "Example Track Three",
+            "logoUrl": "url/to/img",
+            "coverUrl": "url/to/img",
+            "roadType": "Tarmac",
+            "numberOfLayouts": 2,
+            "country": "Japan"
+        }
+    ]
+}
