@@ -11,16 +11,10 @@ public class RaceTrackService: BaseService
     public async Task<List<RaceTrack>> GetTracks()
     {
         tracks.Clear();
+        
+        var fetched = await HitRequest<BaseModel<List<RaceTrack>>>($"{_baseUrl}/tracks"); // or try: "sample-data/track.json"
+        tracks.AddRange(fetched.Data ?? new List<RaceTrack>());
 
-        var fetched = await _http.GetFromJsonAsync<BaseModel<List<RaceTrack>>>($"{_baseUrl}/tracks");
-        if (fetched is not null)
-        {
-            tracks.AddRange(fetched.Data ?? new List<RaceTrack>());
-            return tracks;
-        }
-        else
-        {
-            return new List<RaceTrack>();
-        }
+        return tracks;
     }
 }
