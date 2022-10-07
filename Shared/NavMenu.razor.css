@@ -1,3 +1,7 @@
+.navbar {
+    width: 100%;
+}
+
 .navbar-toggler {
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -20,16 +24,9 @@
 
 .nav-item {
     font-size: 0.9rem;
-    padding-bottom: 0.5rem;
+    padding-inline: 0.5rem;
+    padding-block: 3rem;
 }
-
-    .nav-item:first-of-type {
-        padding-top: 1rem;
-    }
-
-    .nav-item:last-of-type {
-        padding-bottom: 1rem;
-    }
 
     .nav-item ::deep a {
         color: #d7d7d7;
@@ -48,6 +45,20 @@
 .nav-item ::deep a:hover {
     background-color: rgba(255,255,255,0.1);
     color: white;
+}
+
+@media (max-width: 576px) {
+    .nav-item {
+        padding: 0;
+    }
+
+        .nav-item:first-of-type {
+            padding-top: 12px;
+        }
+
+    .nav-link span {
+        margin-left: 12px;
+    }
 }
 
 @media (min-width: 641px) {
