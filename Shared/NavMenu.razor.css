@@ -47,7 +47,7 @@
     color: white;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 575px) {
     .nav-item {
         padding: 0;
     }
@@ -58,16 +58,5 @@
 
     .nav-link span {
         margin-left: 12px;
-    }
-}
-
-@media (min-width: 641px) {
-    .navbar-toggler {
-        display: none;
-    }
-
-    .collapse {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
     }
 }
