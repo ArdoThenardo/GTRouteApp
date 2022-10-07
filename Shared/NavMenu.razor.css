@@ -38,13 +38,13 @@
     }
 
 .nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.25);
     color: white;
+    text-decoration: underline;
 }
 
 .nav-item ::deep a:hover {
-    background-color: rgba(255,255,255,0.1);
     color: white;
+    text-decoration: underline;
 }
 
 @media (max-width: 575px) {
