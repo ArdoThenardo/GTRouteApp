@@ -18,6 +18,11 @@ main {
     height: 5rem; /* same as main height */
     width: 100%;
     position: fixed;
+    overflow: hidden;
+}
+
+.content {
+    padding-top: 0;
 }
 
 @media (max-width: 575px) {

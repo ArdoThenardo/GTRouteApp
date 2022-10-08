@@ -1,0 +1,45 @@
+@inject NavigationManager NavigationManager
+
+<div class="subheader-container">
+    <div class="subheader-info">
+        <span class="bi bi-info-square-fill"></span> @Info
+    </div>
+
+    <div class="subheader-view-options">
+        <button type="button" class="btn btn-primary" 
+            @onclick="() => SwitchMode(BrowseMode.Gallery)">
+            <span class="bi bi-image-fill"></span>
+        </button>
+        <button type="button" class="btn btn-primary" 
+            @onclick="() => SwitchMode(BrowseMode.Grid)">
+            <span class="bi bi-grid-3x3-gap-fill"></span>
+        </button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Info { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    private void SwitchMode(BrowseMode mode)
+    {
+        if (mode == BrowseMode.Gallery)
+        {
+            NavigationManager.NavigateTo("/browse/gallery");
+        }
+        else if (mode == BrowseMode.Grid)
+        {
+            NavigationManager.NavigateTo("/browse/grid");
+        }
+    }
+
+    enum BrowseMode {
+        Gallery,
+        Grid
+    }
+}

@@ -1,0 +1,14 @@
+.subheader-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-block: 6px;
+    padding-inline: 12px;
+    background-color: #363538;
+}
+
+.subheader-info {
+    color: #f6f6f6;
+}
