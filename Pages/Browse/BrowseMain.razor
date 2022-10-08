@@ -1,0 +1,37 @@
+@page "/browse"
+@using GTRouteApp.Data
+
+<PageTitle>Browse</PageTitle>
+
+<BrowseSubheader Info="@info" ChosenBrowseMode="@ChangeBrowseMode" />
+
+@if (_mode == BrowseMode.Gallery)
+{
+    <BrowseGallery />
+}
+else if (_mode == BrowseMode.Grid)
+{
+    <BrowseGrid />
+}
+
+@code {
+    private const string galleryInfo = "Click or tap a track on the bottom to highlight";
+    private const string gridInfo = "Click or tap a track to view";
+
+    private BrowseMode _mode = BrowseMode.Gallery;
+    private string info = galleryInfo;
+
+    private void ChangeBrowseMode(BrowseMode mode)
+    {
+        this._mode = mode;
+
+        if (this._mode == BrowseMode.Gallery)
+        {
+            info = galleryInfo;
+        }
+        else if (this._mode == BrowseMode.Grid)
+        {
+            info = gridInfo;
+        }
+    }
+}

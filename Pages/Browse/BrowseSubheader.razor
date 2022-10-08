@@ -1,3 +1,4 @@
+@using GTRouteApp.Data
 @inject NavigationManager NavigationManager
 
 <div class="subheader-container">
@@ -7,11 +8,13 @@
 
     <div class="subheader-view-options">
         <button type="button" class="btn btn-primary" 
-            @onclick="() => SwitchMode(BrowseMode.Gallery)">
+            @onclick="() => SwitchMode(BrowseMode.Gallery)"
+            disabled=@disableGallery>
             <span class="bi bi-image-fill"></span>
         </button>
         <button type="button" class="btn btn-primary" 
-            @onclick="() => SwitchMode(BrowseMode.Grid)">
+            @onclick="() => SwitchMode(BrowseMode.Grid)"
+            disabled=@disableGrid>
             <span class="bi bi-grid-3x3-gap-fill"></span>
         </button>
     </div>
@@ -21,25 +24,17 @@
     [Parameter]
     public string Info { get; set; } = "";
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-    }
+    [Parameter]
+    public EventCallback<BrowseMode> ChosenBrowseMode { get; set; }
+
+    private bool disableGallery = true;
+    private bool disableGrid = false;
 
     private void SwitchMode(BrowseMode mode)
     {
-        if (mode == BrowseMode.Gallery)
-        {
-            NavigationManager.NavigateTo("/browse/gallery");
-        }
-        else if (mode == BrowseMode.Grid)
-        {
-            NavigationManager.NavigateTo("/browse/grid");
-        }
-    }
+        disableGallery = disableGallery ? false : true;
+        disableGrid = disableGrid ? false : true;
 
-    enum BrowseMode {
-        Gallery,
-        Grid
+        ChosenBrowseMode.InvokeAsync(mode);
     }
 }
