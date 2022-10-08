@@ -4,11 +4,30 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding-block: 6px;
-    padding-inline: 12px;
+    padding-block: 8px;
+    padding-inline: 16px;
     background-color: #363538;
 }
 
 .subheader-info {
     color: #f6f6f6;
+    font-size: 16px;
 }
+
+.subheader-view-options {
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    border-radius: 16px;
+    overflow: hidden;
+    align-items: center;
+}
+
+.subheader-view-options button {
+    border-radius: 0;
+    width: 48px;
+}
+
+    .subheader-view-options button:last-of-type {
+        margin-left: 1px;
+    }
