@@ -31,11 +31,28 @@
     text-underline-offset: 6px;
 }
 
-.nav-item ::deep a:hover {
-    color: white;
-    text-decoration: underline;
-    text-underline-offset: 6px;
+/* START OF underline animation on hover */
+.nav-item ::deep span {
+    position: relative;
 }
+
+.nav-item ::deep span::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 12px;
+    left: 0;
+    background-color: white;
+    transform-origin: bottom left;
+    transition: transform 0.2s ease;
+}
+
+.nav-item ::deep span:hover::after {
+    transform: scaleX(1);
+}
+/* END OF underline animation on hover */
 
 @media (max-width: 575px) {
     .nav-item {
