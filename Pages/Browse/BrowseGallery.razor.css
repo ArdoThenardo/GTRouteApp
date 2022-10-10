@@ -24,9 +24,14 @@
     justify-content: space-between;
 }
 
+.highlight-section-1 p {
+    text-shadow: 1px 0px 8px rgba(0, 0, 0, 0.8);
+}
+
 .highlight-section-1 img {
     object-fit: contain;
     width: 16vw;
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.6));
 }
 
 .highlight-section-2 {
@@ -39,6 +44,24 @@
 .section-2-left {
     display: flex;
     flex-direction: column;
+}
+
+.section-2-left p {
+    margin-bottom: 1px;
+    text-shadow: 1px 0px 8px rgba(0, 0, 0, 0.8);
+}
+
+.section-2-left span {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.btn {
+    width: 14vw;
+    padding: 10px;
+    border-radius: 24px;
+    margin-bottom: 8px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
 }
 
 .gallery-selection {
