@@ -77,6 +77,20 @@
     border: 1px solid black;
     min-width: 24vw;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+}
+
+.gallery-item img {
+    width: 12vw;
+}
+
+.gallery-item p {
+    margin-bottom: -24px;
+    width: 20vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
 }
