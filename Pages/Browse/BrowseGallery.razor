@@ -1,6 +1,31 @@
-<h1>Browse - Gallery Mode</h1>
-
-<p>⚠️ Under Construction ⚠️</p>
+<div class="gallery-container">
+    <div class="gallery-highlight" style="background-image: url('');">
+        <div class="highlight-section-1">
+            <p><span class="bi bi-geo-alt-fill"></span> Country</p>
+            <img
+                src="http://s3.amazonaws.com/gt7sp-prod/decal/60/53/41/6269107442822415360_1.png"
+                alt="track logo"
+            />
+        </div>
+        <div class="highlight-section-2">
+            <div class="section-2-left">
+                <p>Road Type</p>
+                <p>Tarmac</p>
+                <p>No. Of Layouts</p>
+                <p>5</p>
+            </div>
+            <p>VIEW</p>
+        </div>
+    </div>
+    <div class="gallery-selection">
+        @for (int i = 1; i <= 20; i++)
+        {
+            <div class="gallery-item">
+                <p>TRACK @i</p>
+            </div>
+        }
+    </div>
+</div>
 
 @code {
     
