@@ -9,6 +9,8 @@
         </div>
         <div class="highlight-section-2">
             <div class="section-2-left">
+                <p>Dev Index Test (will be deleted after api integration)</p>
+                <p><span>@genericData.ElementAt(selectedIndex)</span></p>
                 <p>Road Type</p>
                 <p><span>Tarmac</span></p>
                 <p>No. Of Layouts</p>
@@ -18,19 +20,47 @@
         </div>
     </div>
     <div class="gallery-selection">
-        @for (int i = 1; i <= 20; i++)
+        @foreach(var item in genericData.Select((text, index) => (text, index)))
         {
-            <div class="gallery-item">
-                <img
-                    src="img/sample-logo.png"
-                    alt="track logo"
-                />
-                <p>TRACK @i</p>
-            </div>
+            @if (selectedIndex == item.index)
+            {
+                <div class="gallery-item-selected">
+                    <img
+                        src="img/sample-logo.png"
+                        alt="track logo"
+                    />
+                    <p>@item.text</p>
+                </div>
+            }
+            else
+            {
+                <div class="gallery-item" @onclick="() => SetSelection(item.index)">
+                    <img
+                        src="img/sample-logo.png"
+                        alt="track logo"
+                    />
+                    <p>@item.text</p>
+                </div>
+            }
         }
     </div>
 </div>
 
 @code {
-    
+    private List<string> genericData = new List<string>(); // to be deleted after api integration 
+    private int selectedIndex = 0;
+
+    protected override void OnInitialized()
+    {
+        // to be deleted after api integration
+        for (int i = 0; i < 20; i++)
+        {
+            genericData.Add($"dummy track {i} string");
+        }
+    }
+
+    private void SetSelection(int index)
+    {
+        selectedIndex = index;
+    }
 }
