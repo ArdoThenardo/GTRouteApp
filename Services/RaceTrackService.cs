@@ -1,20 +1,39 @@
-using System.Net.Http.Json;
-
 namespace GTRouteApp.Data;
 
 public class RaceTrackService: BaseService
 {
+    private string GetTracksUrl = $"{_baseUrl}/tracks"; // or try: "sample-data/track.json"
     private List<RaceTrack> tracks = new();
+    private string recentError = "";
 
     public RaceTrackService(HttpClient http): base(http) { }
 
     public async Task<List<RaceTrack>> GetTracks()
     {
         tracks.Clear();
-        
-        var fetched = await HitRequest<BaseModel<List<RaceTrack>>>($"{_baseUrl}/tracks"); // or try: "sample-data/track.json"
-        tracks.AddRange(fetched.Data ?? new List<RaceTrack>());
+        recentError = "";
 
-        return tracks;
+        try
+        {
+            var fetched = await HitRequest<BaseModel<List<RaceTrack>>>(GetTracksUrl);
+            
+            if (fetched.NumberOfData == 0) {
+                recentError = "There is no track data.";
+            }
+            tracks.AddRange(fetched.Data ?? new List<RaceTrack>());
+
+            return tracks;
+        }
+        catch
+        {
+            recentError = "Unable to get track data from server. Please try again at later time.";
+
+            return new List<RaceTrack>();
+        }
+    }
+
+    public string GetRecentErrorMessage()
+    {
+        return recentError;
     }
 }

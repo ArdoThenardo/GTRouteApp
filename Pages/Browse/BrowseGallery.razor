@@ -4,7 +4,14 @@
 <div class="gallery-container">
     @if (tracks == null || tracks.Count == 0)
     {
-        <p>Loading...</p>
+        @if (showError)
+        {
+            <p>@errorMessage</p>
+        }
+        else
+        {
+            <p>Loading...</p>
+        }
     }
     else
     {
@@ -57,10 +64,14 @@
 @code {
     private List<RaceTrack> tracks = new();
     private int selectedIndex = 0;
+    
+    private string errorMessage = "";
+    private bool showError = false;
 
     protected override async Task OnInitializedAsync()
     {
         await LoadTracks();
+        CheckError();
     }
 
     private async Task LoadTracks()
@@ -71,5 +82,11 @@
     private void SetSelection(int index)
     {
         selectedIndex = index;
+    }
+
+    private void CheckError()
+    {
+        errorMessage = RaceTrackService.GetRecentErrorMessage();
+        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
     }
 }
