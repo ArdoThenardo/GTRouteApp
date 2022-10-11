@@ -1,62 +1,71 @@
+@using GTRouteApp.Data
+@inject RaceTrackService RaceTrackService
+
 <div class="gallery-container">
-    <div class="gallery-highlight" style="background-image: url('img/sample-cover.jpg');">
-        <div class="highlight-section-1">
-            <p><span class="bi bi-geo-alt-fill"></span> Country</p>
-            <img
-                src="img/sample-logo.png"
-                alt="track logo"
-            />
-        </div>
-        <div class="highlight-section-2">
-            <div class="section-2-left">
-                <p>Dev Index Test (will be deleted after api integration)</p>
-                <p><span>@genericData.ElementAt(selectedIndex)</span></p>
-                <p>Road Type</p>
-                <p><span>Tarmac</span></p>
-                <p>No. Of Layouts</p>
-                <p><span>5</span></p>
+    @if (tracks == null || tracks.Count == 0)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="gallery-highlight" style="background-image: url('@tracks.ElementAt(selectedIndex).CoverUrl');">
+            <div class="highlight-section-1">
+                <p><span class="bi bi-geo-alt-fill"></span> @tracks.ElementAt(selectedIndex).Country</p>
+                <img
+                    src="@tracks.ElementAt(selectedIndex).LogoUrl"
+                    alt="@tracks.ElementAt(selectedIndex).LogoUrl"
+                />
             </div>
-            <button type="button" class="btn btn-secondary">View</button>
+            <div class="highlight-section-2">
+                <div class="section-2-left">
+                    <p>Road Type</p>
+                    <p><span>@tracks.ElementAt(selectedIndex).RoadType</span></p>
+                    <p>No. Of Layouts</p>
+                    <p><span>@tracks.ElementAt(selectedIndex).NumberOfLayouts</span></p>
+                </div>
+                <button type="button" class="btn btn-secondary">View</button>
+            </div>
         </div>
-    </div>
-    <div class="gallery-selection">
-        @foreach(var item in genericData.Select((text, index) => (text, index)))
-        {
-            @if (selectedIndex == item.index)
+        <div class="gallery-selection">
+            @foreach(var track in tracks.Select((trackData, index) => (trackData, index)))
             {
-                <div class="gallery-item-selected">
-                    <img
-                        src="img/sample-logo.png"
-                        alt="track logo"
-                    />
-                    <p>@item.text</p>
-                </div>
+                @if (selectedIndex == track.index)
+                {
+                    <div class="gallery-item-selected">
+                        <img
+                            src="@track.trackData.LogoUrl"
+                            alt="@track.trackData.LogoUrl"
+                        />
+                        <p>@track.trackData.Name</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="gallery-item" @onclick="() => SetSelection(track.index)">
+                        <img
+                            src="@track.trackData.LogoUrl"
+                            alt="@track.trackData.LogoUrl"
+                        />
+                        <p>@track.trackData.Name</p>
+                    </div>
+                }
             }
-            else
-            {
-                <div class="gallery-item" @onclick="() => SetSelection(item.index)">
-                    <img
-                        src="img/sample-logo.png"
-                        alt="track logo"
-                    />
-                    <p>@item.text</p>
-                </div>
-            }
-        }
-    </div>
+        </div>
+    }
 </div>
 
 @code {
-    private List<string> genericData = new List<string>(); // to be deleted after api integration 
+    private List<RaceTrack> tracks = new();
     private int selectedIndex = 0;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        // to be deleted after api integration
-        for (int i = 0; i < 20; i++)
-        {
-            genericData.Add($"dummy track {i} string");
-        }
+        await LoadTracks();
+    }
+
+    private async Task LoadTracks()
+    {
+        tracks = await RaceTrackService.GetTracks();
     }
 
     private void SetSelection(int index)
