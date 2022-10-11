@@ -5,8 +5,8 @@
             "id": 1,
             "slug": "example-track-one",
             "name": "Example Track One",
-            "logoUrl": "url/to/img",
-            "coverUrl": "url/to/img",
+            "logoUrl": "img/sample-logo.png",
+            "coverUrl": "img/sample-cover.jpg",
             "roadType": "Tarmac",
             "numberOfLayouts": 2,
             "country": "USA"
@@ -15,20 +15,20 @@
             "id": 2,
             "slug": "example-track-two",
             "name": "Example Track Two",
-            "logoUrl": "url/to/img",
-            "coverUrl": "url/to/img",
-            "roadType": "Tarmac",
-            "numberOfLayouts": 2,
+            "logoUrl": "img/sample-logo.png",
+            "coverUrl": "img/sample-cover.jpg",
+            "roadType": "Snow",
+            "numberOfLayouts": 3,
             "country": "Switzerland"
         },
         {
             "id": 3,
             "slug": "example-track-three",
             "name": "Example Track Three",
-            "logoUrl": "url/to/img",
-            "coverUrl": "url/to/img",
-            "roadType": "Tarmac",
-            "numberOfLayouts": 2,
+            "logoUrl": "img/sample-logo.png",
+            "coverUrl": "img/sample-cover.jpg",
+            "roadType": "Dirt",
+            "numberOfLayouts": 4,
             "country": "Japan"
         }
     ]
