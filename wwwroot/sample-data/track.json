@@ -7,6 +7,7 @@
             "name": "Example Track One",
             "logoUrl": "img/sample-logo.png",
             "coverUrl": "img/sample-cover.jpg",
+            "category": "Real Circuit",
             "roadType": "Tarmac",
             "numberOfLayouts": 2,
             "country": "USA"
@@ -17,6 +18,7 @@
             "name": "Example Track Two",
             "logoUrl": "img/sample-logo.png",
             "coverUrl": "img/sample-cover.jpg",
+            "category": "Original Circuit",
             "roadType": "Snow",
             "numberOfLayouts": 3,
             "country": "Switzerland"
@@ -27,6 +29,7 @@
             "name": "Example Track Three",
             "logoUrl": "img/sample-logo.png",
             "coverUrl": "img/sample-cover.jpg",
+            "category": "City Circuit",
             "roadType": "Dirt",
             "numberOfLayouts": 4,
             "country": "Japan"
