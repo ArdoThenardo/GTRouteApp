@@ -25,7 +25,18 @@
 }
 
 .highlight-section-1 p {
+    display: flex;
+    gap: 6px;
+    font-size: larger;
+    font-weight: bold;
     text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.8);
+}
+
+.section-1-country-span {
+    display: inline-block;
+    max-width: 0%;
+    overflow: hidden;
+    animation: span-max-width 0.5s ease-out forwards;
 }
 
 .highlight-section-1 img {
@@ -52,8 +63,13 @@
 }
 
 .section-2-left span {
+    display: inline-block;
     font-size: xx-large;
     font-weight: bold;
+    white-space: nowrap;
+    max-width: 0%;
+    overflow: hidden;
+    animation: span-max-width 0.5s ease-out forwards;
 }
 
 .btn {
@@ -126,4 +142,9 @@
     text-align: center;
     white-space: nowrap;
     text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.2);
+}
+
+@keyframes span-max-width {
+    0% { max-width: 0%; }
+    100% { max-width: 100%; }
 }
