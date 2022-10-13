@@ -27,8 +27,8 @@
 .highlight-section-1 p {
     display: flex;
     gap: 6px;
-    font-size: larger;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 700;
     text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.8);
 }
 
@@ -59,13 +59,15 @@
 
 .section-2-left p {
     margin-bottom: 1px;
+    font-size: 16px;
+    font-weight: 500;
     text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.8);
 }
 
 .section-2-left span {
     display: inline-block;
-    font-size: xx-large;
-    font-weight: bold;
+    font-size: 32px;
+    font-weight: 700;
     white-space: nowrap;
     max-width: 0%;
     overflow: hidden;
@@ -77,6 +79,8 @@
     padding: 10px;
     border-radius: 24px;
     margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
 
@@ -137,6 +141,8 @@
 .gallery-item p, .gallery-item-selected p {
     margin-bottom: -24px;
     width: 20vw;
+    font-size: 16px;
+    font-weight: 600;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
