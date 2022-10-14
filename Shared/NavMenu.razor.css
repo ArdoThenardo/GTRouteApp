@@ -7,17 +7,17 @@
 }
 
 .navbar-brand {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
 }
 
 .nav-item {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     padding-inline: 0.5rem;
     padding-block: 3rem;
 }
 
     .nav-item ::deep a {
-        color: #d7d7d7;
+        color: #f0f5f9;
         border-radius: 4px;
         height: 3rem;
         display: flex;
@@ -26,7 +26,7 @@
     }
 
 .nav-item ::deep a.active {
-    color: white;
+    color: #f4f4f2;
     text-decoration: underline;
     text-underline-offset: 6px;
 }
@@ -44,7 +44,7 @@
     height: 1px;
     bottom: 12px;
     left: 0;
-    background-color: white;
+    background-color: #f0f5f9;
     transform-origin: bottom left;
     transition: transform 0.2s ease;
 }

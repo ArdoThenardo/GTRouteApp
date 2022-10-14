@@ -1,8 +1,32 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 @import url("bootstrap-icons-1.9.1/bootstrap-icons.css");
 
+@font-face {
+    font-family: "PlusJakartaSans";
+    src: url("custom-fonts/PlusJakartaSans-Regular.ttf") format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "PlusJakartaSans";
+    src: url("custom-fonts/PlusJakartaSans-Medium.ttf") format("truetype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "PlusJakartaSans";
+    src: url("custom-fonts/PlusJakartaSans-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "PlusJakartaSans";
+    src: url("custom-fonts/PlusJakartaSans-Bold.ttf") format("truetype");
+    font-weight: 700;
+}
+
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'PlusJakartaSans', Helvetica, Arial, sans-serif;
 }
 
 h1:focus {

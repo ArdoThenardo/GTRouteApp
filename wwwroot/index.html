@@ -21,6 +21,17 @@
     </div>
     <script src="js/bootstrap/bootstrap.bundle.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script lang="javascript">
+        function resetAnimation(element) {
+            element.style.animation = "none";
+            
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    element.style.animation = "";
+                }, 0);
+            });
+        }
+    </script>
 </body>
 
 </html>

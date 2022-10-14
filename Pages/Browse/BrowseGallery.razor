@@ -1,5 +1,6 @@
 @using GTRouteApp.Data
 @inject RaceTrackService RaceTrackService
+@inject IJSRuntime JS
 
 <div class="gallery-container">
     @if (tracks == null || tracks.Count == 0)
@@ -17,7 +18,10 @@
     {
         <div class="gallery-highlight" style="background-image: url('@tracks.ElementAt(selectedIndex).CoverUrl');">
             <div class="highlight-section-1">
-                <p><span class="bi bi-geo-alt-fill"></span> @tracks.ElementAt(selectedIndex).Country</p>
+                <p>
+                    <span class="bi bi-geo-alt-fill"></span> 
+                    <span @ref="section1CountryRef" class="section-1-country-span">@tracks.ElementAt(selectedIndex).Country</span>
+                </p>
                 <img
                     src="@tracks.ElementAt(selectedIndex).LogoUrl"
                     alt="@tracks.ElementAt(selectedIndex).LogoUrl"
@@ -26,11 +30,11 @@
             <div class="highlight-section-2">
                 <div class="section-2-left">
                     <p>Category</p>
-                    <p><span>@tracks.ElementAt(selectedIndex).Category</span></p>
+                    <p><span @ref="section2CategoryRef">@tracks.ElementAt(selectedIndex).Category</span></p>
                     <p>Road Type</p>
-                    <p><span>@tracks.ElementAt(selectedIndex).RoadType</span></p>
+                    <p><span @ref="section2RoadTypeRef">@tracks.ElementAt(selectedIndex).RoadType</span></p>
                     <p>No. Of Layouts</p>
-                    <p><span>@tracks.ElementAt(selectedIndex).NumberOfLayouts</span></p>
+                    <p><span @ref="section2LayoutRef">@tracks.ElementAt(selectedIndex).NumberOfLayouts</span></p>
                 </div>
                 <button type="button" class="btn btn-secondary">View Detail</button>
             </div>
@@ -70,6 +74,11 @@
     private string errorMessage = "";
     private bool showError = false;
 
+    ElementReference section1CountryRef;
+    ElementReference section2CategoryRef;
+    ElementReference section2RoadTypeRef;
+    ElementReference section2LayoutRef;
+
     protected override async Task OnInitializedAsync()
     {
         await LoadTracks();
@@ -81,14 +90,24 @@
         tracks = await RaceTrackService.GetTracks();
     }
 
-    private void SetSelection(int index)
+    private async Task SetSelection(int index)
     {
         selectedIndex = index;
+
+        await ResetHighlightAnimationWithJS();
     }
 
     private void CheckError()
     {
         errorMessage = RaceTrackService.GetRecentErrorMessage();
         showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
+
+    private async Task ResetHighlightAnimationWithJS()
+    {
+        await JS.InvokeVoidAsync("resetAnimation", section1CountryRef);
+        await JS.InvokeVoidAsync("resetAnimation", section2CategoryRef);
+        await JS.InvokeVoidAsync("resetAnimation", section2RoadTypeRef);
+        await JS.InvokeVoidAsync("resetAnimation", section2LayoutRef);
     }
 }
