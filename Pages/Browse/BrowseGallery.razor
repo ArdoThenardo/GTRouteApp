@@ -19,8 +19,8 @@
         <div class="gallery-highlight" style="background-image: url('@tracks.ElementAt(selectedIndex).CoverUrl');">
             <div class="highlight-section-1">
                 <p>
-                    <span class="bi bi-geo-alt-fill"></span> 
-                    <span @ref="section1CountryRef" class="section-1-country-span">@tracks.ElementAt(selectedIndex).Country</span>
+                    <span class="fi fi-@tracks.ElementAt(selectedIndex).Country?.code"></span>
+                    <span @ref="section1CountryRef" class="section-1-country-span">@tracks.ElementAt(selectedIndex).Country?.name</span>
                 </p>
                 <img
                     src="@tracks.ElementAt(selectedIndex).LogoUrl"

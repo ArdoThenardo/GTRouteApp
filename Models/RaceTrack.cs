@@ -8,5 +8,5 @@ public class RaceTrack {
     public string? Category { get; set; }
     public string? RoadType { get; set; }
     public int NumberOfLayouts { get; set; }
-    public string? Country { get; set; }
+    public Country? Country { get; set; }
 }
