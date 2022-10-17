@@ -1,0 +1,27 @@
+.grid-container {
+    background-color: #e8e8e8;
+    width: 100%;
+}
+
+.grid-list {
+    height: 85vh;
+    padding-block: 8px;
+    padding-inline: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.item-container {
+    padding: 8px;
+    aspect-ratio: 1 / 1;
+    width: 25%;
+}
+
+.item-content {
+    background-color: #f4f4f2;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #1e2022;
+    border-radius: 8px;
+}
