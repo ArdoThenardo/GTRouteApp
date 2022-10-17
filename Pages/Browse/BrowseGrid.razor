@@ -1,28 +1,36 @@
 @using GTRouteApp.Data
+@inject RaceTrackService RaceTrackService
 
 <div class="grid-container">
-    @if (!showGrid)
+    @if (tracks == null || tracks.Count == 0)
     {
-        <p>Loading...</p>
+        @if (showError)
+        {
+            <p>@errorMessage</p>
+        }
+        else
+        {
+            <p>Loading...</p>
+        }
     }
     else
     {
         <div class="grid-list">
-            @for (int i = 0; i < 20; i++)
+            @foreach (var track in tracks)
             {
                 <div class="item-container">
                     <div class="item-content">
                         <div class="content-section-1">
                             <img 
-                                src="img/sample-logo.png"
-                                alt="img/sample-logo.png"
+                                src="@track.LogoUrl"
+                                alt="@track.LogoUrl"
                             />
-                            <p>Trial Mountain</p>
+                            <p>@track.Name</p>
                         </div>
                         <div class="content-section-2">
                             <p>
-                                <span class="fi fi-jp"></span>
-                                <span> Original Circuit</span>
+                                <span class="fi fi-@track.Country?.code"></span>
+                                <span> @track.Category</span>
                             </p>
                         </div>
                     </div>
@@ -33,5 +41,24 @@
 </div>
 
 @code {
-    private bool showGrid  = true; // temporary variable
+    private List<RaceTrack> tracks = new();
+
+    private string errorMessage = "";
+    private bool showError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTracks();
+    }
+
+    private async Task LoadTracks()
+    {
+        tracks = await RaceTrackService.GetTracks();
+    }
+
+    private void CheckError()
+    {
+        errorMessage = RaceTrackService.GetRecentErrorMessage();
+        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
 }
