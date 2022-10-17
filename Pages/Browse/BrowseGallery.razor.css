@@ -26,6 +26,8 @@
 
 .highlight-section-1 p {
     display: flex;
+    align-items: center;
+    height: 1.4em;
     gap: 6px;
     font-size: 22px;
     font-weight: 700;

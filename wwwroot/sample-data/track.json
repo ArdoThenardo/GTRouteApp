@@ -10,7 +10,10 @@
             "category": "Real Circuit",
             "roadType": "Tarmac",
             "numberOfLayouts": 2,
-            "country": "USA"
+            "country": {
+                "name": "USA",
+                "code": "us"
+            }
         },
         {
             "id": 2,
@@ -21,7 +24,10 @@
             "category": "Original Circuit",
             "roadType": "Snow",
             "numberOfLayouts": 3,
-            "country": "Switzerland"
+            "country": {
+                "name": "Switzerland",
+                "code": "ch"
+            }
         },
         {
             "id": 3,
@@ -32,7 +38,20 @@
             "category": "City Circuit",
             "roadType": "Dirt",
             "numberOfLayouts": 4,
-            "country": "Japan"
+            "country": {
+                "name": "Japan",
+                "code": "jp"
+            }
+        },
+        {
+            "id": 4,
+            "slug": "example-track-four",
+            "name": "Example Track Four with Null Country",
+            "logoUrl": "img/sample-logo.png",
+            "coverUrl": "img/sample-cover.jpg",
+            "category": "City Circuit",
+            "roadType": "Dirt",
+            "numberOfLayouts": 4
         }
     ]
 }
