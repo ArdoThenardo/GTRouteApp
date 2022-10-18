@@ -101,7 +101,7 @@
 .gallery-item {
     background-color: #f4f4f2;
     color: #1e2022;
-    border: 0;
+    border: 1px solid #1e2022;
     border-radius: 16px;
     min-width: 24vw;
     display: flex;
@@ -116,7 +116,6 @@
 .gallery-item:hover{
     cursor: pointer;
     transform: scale(0.95);
-    border: 0px solid #1e2022;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.8);
 }
 

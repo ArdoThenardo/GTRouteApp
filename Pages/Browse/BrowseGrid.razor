@@ -1,7 +1,64 @@
-<h1>Browse - Grid Mode</h1>
+@using GTRouteApp.Data
+@inject RaceTrackService RaceTrackService
 
-<p>⚠️ Under Construction ⚠️</p>
+<div class="grid-container">
+    @if (tracks == null || tracks.Count == 0)
+    {
+        @if (showError)
+        {
+            <p>@errorMessage</p>
+        }
+        else
+        {
+            <p>Loading...</p>
+        }
+    }
+    else
+    {
+        <div class="grid-list">
+            @foreach (var track in tracks)
+            {
+                <div class="item-container">
+                    <div class="item-content">
+                        <div class="content-section-1">
+                            <img 
+                                src="@track.LogoUrl"
+                                alt="@track.LogoUrl"
+                            />
+                            <p>@track.Name</p>
+                        </div>
+                        <div class="content-section-2">
+                            <p>
+                                <span class="fi fi-@track.Country?.code"></span>
+                                <span> @track.Category</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
 
 @code {
-    
+    private List<RaceTrack> tracks = new();
+
+    private string errorMessage = "";
+    private bool showError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTracks();
+    }
+
+    private async Task LoadTracks()
+    {
+        tracks = await RaceTrackService.GetTracks();
+    }
+
+    private void CheckError()
+    {
+        errorMessage = RaceTrackService.GetRecentErrorMessage();
+        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
 }
