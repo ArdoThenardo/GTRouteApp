@@ -1,13 +1,58 @@
 @page "/devmode"
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <PageTitle>Dev Mode</PageTitle>
 
-<button class="btn btn-primary" @onclick="EnterDevMode">Enter</button>
+<div style="
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    height: 75vh;">
+    <div style="width: 45%">
+        <p style="text-align: center;">Please input a passcode to access dev mode</p>
+
+        <form class="form-floating" @onsubmit="Submit">
+            <input type="password" class="form-control @validationClass" placeholder="pass" @bind-value="pass">
+            <label>Passcode</label>
+        </form>
+
+        <button 
+            class="btn btn-primary"
+            style="width: 100%; margin-top: 12px;" 
+            @onclick="Submit">
+            Enter
+        </button>
+    </div>
+</div>
 
 @code {
+    private string pass = "";
+    private const string invalidClass = "is-invalid";
+    private string validationClass = "";
+
+    private async Task Submit()
+    {
+        if (pass == "surv1v3")
+        {
+            EnterDevMode();
+        }
+        else
+        {
+            validationClass = invalidClass;
+            
+            await ShowAlert();
+        }
+    }
+
     private void EnterDevMode()
     {
         NavigationManager.NavigateTo("/devmode/list");
+    }
+
+    private async Task ShowAlert()
+    {
+        await JS.InvokeVoidAsync("showAlert", "Please type a right passcode");
     }
 }
