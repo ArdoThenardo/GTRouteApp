@@ -1,11 +1,13 @@
 @page "/devmode"
+@inject NavigationManager NavigationManager
 
 <PageTitle>Dev Mode</PageTitle>
 
-<h1>Dev Mode</h1>
-
-<p>⚠️ Under Construction ⚠️</p>
+<button class="btn btn-primary" @onclick="EnterDevMode">Enter</button>
 
 @code {
-    
+    private void EnterDevMode()
+    {
+        NavigationManager.NavigateTo("/devmode/list");
+    }
 }
