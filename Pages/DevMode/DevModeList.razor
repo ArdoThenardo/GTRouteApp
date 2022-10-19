@@ -1,0 +1,72 @@
+@page "/devmode/list"
+@using GTRouteApp.Data
+@inject RaceTrackService RaceTrackService
+
+<PageTitle>Dev Mode - List</PageTitle>
+
+@if (tracks == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="list-container">
+        <div class="list-header">
+            <button type="button" class="btn btn-success"><span class="bi bi-plus-lg"></span> Add New Track</button>
+            <button type="button" class="btn btn-warning"><span class="bi bi-send-fill"></span> Export All Data to JSON</button>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Category</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var track in tracks)
+                    {
+                        <tr>
+                            <td>
+                                <div style="display: flex;">
+                                    <img 
+                                        src="@track.LogoUrl" 
+                                        alt="@track.Name"
+                                        style="width: 6vw; margin-right: 8px;" 
+                                    />
+                                    @track.Name
+                                </div>
+                            </td>
+                            <td>
+                                <span class="fi fi-@track.Country?.code" style="margin-right: 8px;"></span>
+                                @track.Country?.name
+                            </td>
+                            <td>@track.Category</td>
+                            <td>
+                                <button class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
+                                <button class="btn btn-danger"><span class="bi bi-trash-fill"></span></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@code {
+    private List<RaceTrack> tracks = new();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTracks();
+    }
+
+    private async Task LoadTracks()
+    {
+        tracks = await RaceTrackService.GetTracks();
+    }
+}

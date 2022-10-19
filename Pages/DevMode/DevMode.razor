@@ -1,11 +1,58 @@
 @page "/devmode"
+@using GTRouteApp.Data
+@inject DevModeService DevModeService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <PageTitle>Dev Mode</PageTitle>
 
-<h1>Dev Mode</h1>
+<div class="devmode-container">
+    <div class="devmode-form-container">
+        <p>Please input a passcode to access dev mode</p>
 
-<p>⚠️ Under Construction ⚠️</p>
+        <form class="form-floating" @onsubmit="Submit">
+            <input type="password" class="form-control @validationClass" placeholder="pass" @bind-value="pass">
+            <label>Passcode</label>
+        </form>
+
+        <button 
+            class="btn btn-primary"
+            @onclick="Submit">
+            Enter
+        </button>
+    </div>
+</div>
 
 @code {
-    
+    private string pass = "";
+    private const string invalidClass = "is-invalid";
+    private string validationClass = "";
+
+    private async Task Submit()
+    {
+        var isValid = await DevModeService.ValidatePassCode(pass);
+        
+        if (isValid)
+        {
+            EnterDevMode();
+        }
+        else
+        {
+            validationClass = invalidClass;
+
+            var errorMessage = DevModeService.GetRecentErrorMessage();
+            
+            await ShowAlert(errorMessage);
+        }
+    }
+
+    private void EnterDevMode()
+    {
+        NavigationManager.NavigateTo("/devmode/list");
+    }
+
+    private async Task ShowAlert(string errorMessage)
+    {
+        await JS.InvokeVoidAsync("showAlert", errorMessage);
+    }
 }
