@@ -6,14 +6,9 @@
 
 <PageTitle>Dev Mode</PageTitle>
 
-<div style="
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-    height: 75vh;">
-    <div style="width: 45%">
-        <p style="text-align: center;">Please input a passcode to access dev mode</p>
+<div class="devmode-container">
+    <div class="devmode-form-container">
+        <p>Please input a passcode to access dev mode</p>
 
         <form class="form-floating" @onsubmit="Submit">
             <input type="password" class="form-control @validationClass" placeholder="pass" @bind-value="pass">
@@ -22,7 +17,6 @@
 
         <button 
             class="btn btn-primary"
-            style="width: 100%; margin-top: 12px;" 
             @onclick="Submit">
             Enter
         </button>

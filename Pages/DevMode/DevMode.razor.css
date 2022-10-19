@@ -1,0 +1,20 @@
+.devmode-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+}
+
+.devmode-form-container {
+    width: 45%;
+}
+
+.devmode-form-container p {
+    text-align: center;
+}
+
+.devmode-form-container button {
+    width: 100%;
+    margin-top: 12px;
+}
