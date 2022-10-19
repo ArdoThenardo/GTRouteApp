@@ -1,4 +1,6 @@
 @page "/devmode"
+@using GTRouteApp.Data
+@inject DevModeService DevModeService
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JS
 
@@ -34,7 +36,9 @@
 
     private async Task Submit()
     {
-        if (pass == "surv1v3")
+        var isValid = await DevModeService.ValidatePassCode(pass);
+        
+        if (isValid)
         {
             EnterDevMode();
         }
