@@ -39,8 +39,10 @@
         else
         {
             validationClass = invalidClass;
+
+            var errorMessage = DevModeService.GetRecentErrorMessage();
             
-            await ShowAlert();
+            await ShowAlert(errorMessage);
         }
     }
 
@@ -49,8 +51,8 @@
         NavigationManager.NavigateTo("/devmode/list");
     }
 
-    private async Task ShowAlert()
+    private async Task ShowAlert(string errorMessage)
     {
-        await JS.InvokeVoidAsync("showAlert", "Please type a right passcode");
+        await JS.InvokeVoidAsync("showAlert", errorMessage);
     }
 }
