@@ -3,59 +3,72 @@
 
 <PageTitle>Dev Mode - Add New Track</PageTitle>
 
-<div>
-    <EditForm Model=@editModel style="width: 45%;">
-        <h3>Add New Track</h3>
-        <form class="form-floating">
-            <InputText @bind-Value="editModel.Name" class="form-control" placeholder="Insert track name" />
-            <label>Track Name</label>
-        </form>
-        <form class="form-floating">
-            <InputSelect @bind-Value="editModel.Country" class="form-select" placeholder="Select a country">
-                <option value="">Select a country</option>
-                <option value="us">USA</option>
-                <option value="ch">Switzerland</option>
-                <option value="jp">Japan</option>
-            </InputSelect>
-            <label>Country</label>
-        </form>
-        <form class="form-floating">
-            <InputText @bind-Value="editModel.LogoUrl" class="form-control" placeholder="Insert track logo image url" />
-            <label>Logo</label>
-        </form>
-        <form class="form-floating">
-            <InputText @bind-Value="editModel.CoverUrl" class="form-control" placeholder="Insert cover image url" />
-            <label>Cover</label>
-        </form>
-        <form class="form-floating">
-            <InputSelect @bind-Value="editModel.Category" class="form-select" placeholder="Select a track category">
-                <option value="">Select a track category</option>
-                <option value="Original Circuit">Original Circuit</option>
-                <option value="Real Circuit">Real Circuit</option>
-                <option value="City Circuit">City Circuit</option>
-                <option value="Dirt Circuit">Dirt Circuit</option>
-                <option value="Snow Circuit">Snow Circuit</option>
-            </InputSelect>
-            <label>Category</label>
-        </form>
-        <form class="form-floating">
-            <InputSelect @bind-Value="editModel.RoadType" class="form-select" placeholder="Select a track road surface type">
-                <option value="">Select a track road surface type</option>
-                <option value="Tarmac">Tarmac</option>
-                <option value="Dirt">Dirt</option>
-                <option value="Snow">Snow</option>
-            </InputSelect>
-            <label>Road Type</label>
-        </form>
-        <form>
-            <label>Number of Layouts</label>
-            <InputNumber @bind-Value="editModel.NumberOfLayouts" />
-        </form>
-        <form>
-            <input type="password" class="form-control" placeholder="Insert a passcode">
-        </form>
-        <button type="button" class="btn btn-success"><span class="bi bi-plus-lg"></span> Add</button>
-    </EditForm>
+<div class="track-form-container">
+    <div class="track-form-content">
+        <EditForm Model=@editModel>
+            <h3>Add New Track</h3>
+            <div class="track-form-row">
+                <form class="form-floating">
+                    <InputText @bind-Value="editModel.Name" class="form-control" placeholder="Insert track name" />
+                    <label>Track Name</label>
+                </form>
+                <form class="form-floating">
+                    <InputSelect @bind-Value="editModel.Country" class="form-select" placeholder="Select a country">
+                        <option value="">Select a country</option>
+                        <option value="us">USA</option>
+                        <option value="ch">Switzerland</option>
+                        <option value="jp">Japan</option>
+                    </InputSelect>
+                    <label>Country</label>
+                </form>
+            </div>
+
+            <div class="track-form-row">
+                <form class="form-floating">
+                    <InputText @bind-Value="editModel.LogoUrl" class="form-control" placeholder="Insert track logo image url" />
+                    <label>Logo</label>
+                </form>
+                <form class="form-floating">
+                    <InputText @bind-Value="editModel.CoverUrl" class="form-control" placeholder="Insert cover image url" />
+                    <label>Cover</label>
+                </form>
+            </div>
+
+            <div class="track-form-row">
+                <form class="form-floating">
+                    <InputSelect @bind-Value="editModel.Category" class="form-select" placeholder="Select a track category">
+                        <option value="">Select a track category</option>
+                        <option value="Original Circuit">Original Circuit</option>
+                        <option value="Real Circuit">Real Circuit</option>
+                        <option value="City Circuit">City Circuit</option>
+                        <option value="Dirt Circuit">Dirt Circuit</option>
+                        <option value="Snow Circuit">Snow Circuit</option>
+                    </InputSelect>
+                    <label>Category</label>
+                </form>
+                <form class="form-floating">
+                    <InputSelect @bind-Value="editModel.RoadType" class="form-select" placeholder="Select a track road surface type">
+                        <option value="">Select a track road surface type</option>
+                        <option value="Tarmac">Tarmac</option>
+                        <option value="Dirt">Dirt</option>
+                        <option value="Snow">Snow</option>
+                    </InputSelect>
+                    <label>Road Type</label>
+                </form>
+                <form>
+                    <label>Number of Layouts</label>
+                    <InputNumber @bind-Value="editModel.NumberOfLayouts" />
+                </form>
+            </div>
+
+            <div class="track-form-row">
+                <form>
+                    <input type="password" class="form-control" placeholder="Insert a passcode">
+                </form>
+                <button type="button" class="btn btn-success"><span class="bi bi-plus-lg"></span> Add</button>
+            </div>
+        </EditForm>
+    </div>
 </div>
 
 @code {
