@@ -26,6 +26,12 @@
 }
 
 .track-form-row {
+    margin-top: 16px;
     display: flex;
     flex-direction: row;
+    width: 100%;
+}
+
+.track-form-row:last-of-type {
+    justify-content: flex-end;
 }

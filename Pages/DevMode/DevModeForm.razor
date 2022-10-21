@@ -14,12 +14,13 @@
     <div class="track-form-content">
         <EditForm Model=@editModel>
             <h3>Add New Track</h3>
+
             <div class="track-form-row">
-                <form class="form-floating">
+                <form class="form-floating" style="width: 70%; padding-right: 16px;">
                     <InputText @bind-Value="editModel.Name" class="form-control" placeholder="Insert track name" />
                     <label>Track Name</label>
                 </form>
-                <form class="form-floating">
+                <form class="form-floating" style="width: 30%;">
                     <InputSelect @bind-Value="editModel.Country" class="form-select" placeholder="Select a country">
                         <option value="">Select a country</option>
                         <option value="us">USA</option>
@@ -31,18 +32,18 @@
             </div>
 
             <div class="track-form-row">
-                <form class="form-floating">
+                <form class="form-floating" style="width: 35%; padding-right: 16px;">
                     <InputText @bind-Value="editModel.LogoUrl" class="form-control" placeholder="Insert track logo image url" />
                     <label>Logo</label>
                 </form>
-                <form class="form-floating">
+                <form class="form-floating" style="width: 65%;">
                     <InputText @bind-Value="editModel.CoverUrl" class="form-control" placeholder="Insert cover image url" />
                     <label>Cover</label>
                 </form>
             </div>
 
             <div class="track-form-row">
-                <form class="form-floating">
+                <form class="form-floating" style="width: 40%; padding-right: 16px;">
                     <InputSelect @bind-Value="editModel.Category" class="form-select" placeholder="Select a track category">
                         <option value="">Select a track category</option>
                         <option value="Original Circuit">Original Circuit</option>
@@ -53,7 +54,7 @@
                     </InputSelect>
                     <label>Category</label>
                 </form>
-                <form class="form-floating">
+                <form class="form-floating" style="width: 40%; padding-right: 16px;">
                     <InputSelect @bind-Value="editModel.RoadType" class="form-select" placeholder="Select a track road surface type">
                         <option value="">Select a track road surface type</option>
                         <option value="Tarmac">Tarmac</option>
@@ -62,14 +63,14 @@
                     </InputSelect>
                     <label>Road Type</label>
                 </form>
-                <form>
+                <form style="width: 20%;">
                     <label>Number of Layouts</label>
-                    <InputNumber @bind-Value="editModel.NumberOfLayouts" />
+                    <InputNumber @bind-Value="editModel.NumberOfLayouts" style="width: 100%;" />
                 </form>
             </div>
 
             <div class="track-form-row">
-                <form>
+                <form style="margin-right: 16px;">
                     <input type="password" class="form-control" placeholder="Insert a passcode">
                 </form>
                 <button type="button" class="btn btn-success"><span class="bi bi-plus-lg"></span> Add</button>
