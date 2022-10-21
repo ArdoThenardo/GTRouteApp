@@ -1,0 +1,147 @@
+@page "/devmode/new"
+@using GTRouteApp.Data
+@inject NavigationManager NavigationManager
+
+<PageTitle>Dev Mode - Add New Track</PageTitle>
+
+<div class="track-form-container">
+    <div class="track-form-nav">
+        <button type="button" class="btn btn-primary" @onclick="BackToList">
+            <span class="bi bi-arrow-left-square-fill"></span> Back
+        </button>
+    </div>
+
+    <div class="track-form-content">
+        <EditForm Model=@editModel>
+            <h3>Add New Track</h3>
+
+            <div class="track-form-row">
+                <form class="form-floating" style="width: 70%;">
+                    <InputText @bind-Value="editModel.Name" class="form-control" placeholder="Insert track name" />
+                    <label>Track Name</label>
+                </form>
+                <form class="form-floating" style="width: 30%;">
+                    <InputSelect @bind-Value="editModel.Country" class="form-select" placeholder="Select a country">
+                        <option value="">Select a country</option>
+                        <option value="us">USA</option>
+                        <option value="ch">Switzerland</option>
+                        <option value="jp">Japan</option>
+                    </InputSelect>
+                    <label>Country</label>
+                </form>
+            </div>
+
+            <div class="track-form-row" style="height: 200px;">
+                <div class="form-img" style="width: 35%;">
+                    <form class="form-floating" style="width:100%; height:100%;">
+                        <img src="@previewLogoUrl" alt="Preview Logo Url">
+                    </form>
+                </div>
+                <div class="form-img" style="width: 65%;">
+                    <form class="form-floating" style="width:100%; height:100%;">
+                        <img src="@previewCoverUrl" alt="Preview Cover Url">
+                    </form>
+                </div>
+            </div>
+
+            <div class="track-form-row">
+                <form class="form-floating" style="width: 35%;">
+                    <InputText 
+                        @bind-Value="editModel.LogoUrl" 
+                        @onfocusout="SetPreviewLogo"
+                        class="form-control" 
+                        placeholder="Insert track logo image url" />
+                    <label>Logo Url</label>
+                </form>
+                <form class="form-floating" style="width: 65%;">
+                    <InputText 
+                        @bind-Value="editModel.CoverUrl"
+                        @onfocusout="SetPreviewCover" 
+                        class="form-control" 
+                        placeholder="Insert cover image url" />
+                    <label>Cover Url</label>
+                </form>
+            </div>
+
+            <p style="font-size: 12px;">
+                *Instruction for Logo Url & Cover Url: Insert a url image and then check if a url is 
+                valid and able to show image inside box above the form
+            </p>
+
+            <div class="track-form-row">
+                <form class="form-floating" style="width: 40%;">
+                    <InputSelect @bind-Value="editModel.Category" class="form-select" placeholder="Select a track category">
+                        <option value="">Select a track category</option>
+                        @foreach (var category in categorySelection)
+                        {
+                            <option value="@category">@category</option>
+                        }
+                    </InputSelect>
+                    <label>Category</label>
+                </form>
+                <form class="form-floating" style="width: 40%;">
+                    <InputSelect @bind-Value="editModel.RoadType" class="form-select" placeholder="Select a track road surface type">
+                        <option value="">Select a track road surface type</option>
+                        @foreach (var roadType in roadTypeSelection)
+                        {
+                             <option value="@roadType">@roadType</option>
+                        }
+                    </InputSelect>
+                    <label>Road Type</label>
+                </form>
+                <form class="form-floating" style="width: 20%;">
+                    <InputSelect @bind-Value="editModel.NumberOfLayouts" class="form-select" placeholder="Select number of layouts available on track">
+                        <option value="0">0</option>
+                        @for (int num = 1; num <= 10; num++)
+                        {
+                            <option value="@num">@num</option>
+                        }
+                    </InputSelect>
+                    <label>No. of Layouts</label>
+                </form>
+            </div>
+
+            <div class="track-form-row">
+                <form>
+                    <input type="password" class="form-control" placeholder="Insert a passcode">
+                </form>
+                <button type="button" class="btn btn-success"><span class="bi bi-plus-lg"></span> Add</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+
+    private RaceTrackEditModel editModel = new();
+    private string[] categorySelection = new string[] { "Original Circuit", "Real Circuit", "City Circuit", "Dirt Circuit", "Snow Circuit" };
+    private string[] roadTypeSelection = new string[] { "Tarmac", "Dirt", "Snow" };
+    private string previewLogoUrl = "";
+    private string previewCoverUrl = "";
+
+    private void SetPreviewLogo()
+    {
+        previewLogoUrl = editModel.LogoUrl ?? "";
+    }
+
+    private void SetPreviewCover()
+    {
+        previewCoverUrl = editModel.CoverUrl ?? "";
+    }
+
+    private void BackToList()
+    {
+        NavigationManager.NavigateTo("/devmode/list");
+    }
+
+    public class RaceTrackEditModel
+    {
+        public string? Name { get; set; }
+        public string? Country { get; set; }
+        public string? LogoUrl { get; set; }
+        public string? CoverUrl { get; set; }
+        public string? Category { get; set; }
+        public string? RoadType { get; set; }
+        public int NumberOfLayouts { get; set; }
+    }
+}

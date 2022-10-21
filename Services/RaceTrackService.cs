@@ -2,7 +2,10 @@ namespace GTRouteApp.Data;
 
 public class RaceTrackService: BaseService
 {
-    private string GetTracksUrl = $"{_baseUrl}/tracks"; // or try: "sample-data/track.json"
+    // API Url to use:
+    // local: $"{_baseUrl}/tracks";
+    // sample json: "sample-data/track.json";
+    private const string GetTracksUrl = "sample-data/track.json";
     private List<RaceTrack> tracks = new();
     private string recentError = "";
 
