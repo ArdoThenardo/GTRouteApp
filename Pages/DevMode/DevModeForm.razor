@@ -72,20 +72,20 @@
                 <form class="form-floating" style="width: 40%;">
                     <InputSelect @bind-Value="editModel.Category" class="form-select" placeholder="Select a track category">
                         <option value="">Select a track category</option>
-                        <option value="Original Circuit">Original Circuit</option>
-                        <option value="Real Circuit">Real Circuit</option>
-                        <option value="City Circuit">City Circuit</option>
-                        <option value="Dirt Circuit">Dirt Circuit</option>
-                        <option value="Snow Circuit">Snow Circuit</option>
+                        @foreach (var category in categorySelection)
+                        {
+                            <option value="@category">@category</option>
+                        }
                     </InputSelect>
                     <label>Category</label>
                 </form>
                 <form class="form-floating" style="width: 40%;">
                     <InputSelect @bind-Value="editModel.RoadType" class="form-select" placeholder="Select a track road surface type">
                         <option value="">Select a track road surface type</option>
-                        <option value="Tarmac">Tarmac</option>
-                        <option value="Dirt">Dirt</option>
-                        <option value="Snow">Snow</option>
+                        @foreach (var roadType in roadTypeSelection)
+                        {
+                             <option value="@roadType">@roadType</option>
+                        }
                     </InputSelect>
                     <label>Road Type</label>
                 </form>
@@ -114,6 +114,8 @@
 @code {
 
     private RaceTrackEditModel editModel = new();
+    private string[] categorySelection = new string[] { "Original Circuit", "Real Circuit", "City Circuit", "Dirt Circuit", "Snow Circuit" };
+    private string[] roadTypeSelection = new string[] { "Tarmac", "Dirt", "Snow" };
     private string previewLogoUrl = "";
     private string previewCoverUrl = "";
 
