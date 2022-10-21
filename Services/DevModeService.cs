@@ -2,7 +2,10 @@ namespace GTRouteApp.Data;
 
 public class DevModeService: BaseService
 {
-    private const string GetValidationUrl = $"{_baseUrl}/get-validation-dev"; // or try "sample-data/passcode.json";
+    // API Url to use:
+    // local: $"{_baseUrl}/get-validation-dev"; 
+    // sample json: "sample-data/passcode.json";
+    private const string GetValidationUrl = "sample-data/passcode.json";
     private string recentError = "";
 
     public DevModeService(HttpClient http): base(http) { }
