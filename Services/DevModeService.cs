@@ -8,7 +8,7 @@ public class DevModeService: BaseService
     private const string GetValidationUrl = "sample-data/passcode.json";
 
     // API Url to use:
-    // local: --in progress--
+    // local:  $"{_baseUrl}/countries";
     // sample json: "sample-data/country.json";
     private const string GetCountryListUrl = "sample-data/country.json";
 
