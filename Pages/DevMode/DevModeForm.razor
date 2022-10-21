@@ -1,6 +1,8 @@
 @page "/devmode/new"
 @using GTRouteApp.Data
+@inject DevModeService DevModeService
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <PageTitle>Dev Mode - Add New Track</PageTitle>
 
@@ -21,11 +23,12 @@
                     <label>Track Name</label>
                 </form>
                 <form class="form-floating" style="width: 30%;">
-                    <InputSelect @bind-Value="editModel.Country" class="form-select" placeholder="Select a country">
+                    <InputSelect @bind-Value="editModel.CountryCode" class="form-select" placeholder="Select a country">
                         <option value="">Select a country</option>
-                        <option value="us">USA</option>
-                        <option value="ch">Switzerland</option>
-                        <option value="jp">Japan</option>
+                        @foreach (var country in countrySelection)
+                        {
+                            <option value="@country.code">@country.name</option>
+                        }
                     </InputSelect>
                     <label>Country</label>
                 </form>
@@ -114,10 +117,22 @@
 @code {
 
     private RaceTrackEditModel editModel = new();
+    private List<Country> countrySelection = new();
     private string[] categorySelection = new string[] { "Original Circuit", "Real Circuit", "City Circuit", "Dirt Circuit", "Snow Circuit" };
     private string[] roadTypeSelection = new string[] { "Tarmac", "Dirt", "Snow" };
     private string previewLogoUrl = "";
     private string previewCoverUrl = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetCountryList();
+        await CheckError();
+    }
+
+    private async Task GetCountryList()
+    {
+        countrySelection = await DevModeService.GetCountryList();
+    }
 
     private void SetPreviewLogo()
     {
@@ -134,10 +149,25 @@
         NavigationManager.NavigateTo("/devmode/list");
     }
 
+    private async Task CheckError()
+    {
+        var errorMessage = DevModeService.GetRecentErrorMessage();
+
+        if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            await ShowAlert(errorMessage);
+        }
+    }
+
+    private async Task ShowAlert(string errorMessage)
+    {
+        await JS.InvokeVoidAsync("showAlert", errorMessage);
+    }
+
     public class RaceTrackEditModel
     {
         public string? Name { get; set; }
-        public string? Country { get; set; }
+        public string? CountryCode { get; set; }
         public string? LogoUrl { get; set; }
         public string? CoverUrl { get; set; }
         public string? Category { get; set; }
