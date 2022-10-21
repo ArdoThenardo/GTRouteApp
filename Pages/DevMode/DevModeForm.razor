@@ -1,9 +1,16 @@
 @page "/devmode/new"
 @using GTRouteApp.Data
+@inject NavigationManager NavigationManager
 
 <PageTitle>Dev Mode - Add New Track</PageTitle>
 
 <div class="track-form-container">
+    <div class="track-form-nav">
+        <button type="button" class="btn btn-primary" @onclick="BackToList">
+            <span class="bi bi-arrow-left-square-fill"></span> Back
+        </button>
+    </div>
+
     <div class="track-form-content">
         <EditForm Model=@editModel>
             <h3>Add New Track</h3>
@@ -74,6 +81,11 @@
 @code {
 
     private RaceTrackEditModel editModel = new();
+
+    private void BackToList()
+    {
+        NavigationManager.NavigateTo("/devmode/list");
+    }
 
     public class RaceTrackEditModel
     {
