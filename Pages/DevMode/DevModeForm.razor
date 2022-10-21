@@ -16,7 +16,7 @@
             <h3>Add New Track</h3>
 
             <div class="track-form-row">
-                <form class="form-floating" style="width: 70%; padding-right: 16px;">
+                <form class="form-floating" style="width: 70%;">
                     <InputText @bind-Value="editModel.Name" class="form-control" placeholder="Insert track name" />
                     <label>Track Name</label>
                 </form>
@@ -31,19 +31,45 @@
                 </form>
             </div>
 
-            <div class="track-form-row">
-                <form class="form-floating" style="width: 35%; padding-right: 16px;">
-                    <InputText @bind-Value="editModel.LogoUrl" class="form-control" placeholder="Insert track logo image url" />
-                    <label>Logo</label>
-                </form>
-                <form class="form-floating" style="width: 65%;">
-                    <InputText @bind-Value="editModel.CoverUrl" class="form-control" placeholder="Insert cover image url" />
-                    <label>Cover</label>
-                </form>
+            <div class="track-form-row" style="height: 200px;">
+                <div class="form-img" style="width: 35%;">
+                    <form class="form-floating" style="width:100%; height:100%;">
+                        <img src="@previewLogoUrl" alt="Preview Logo Url">
+                    </form>
+                </div>
+                <div class="form-img" style="width: 65%;">
+                    <form class="form-floating" style="width:100%; height:100%;">
+                        <img src="@previewCoverUrl" alt="Preview Cover Url">
+                    </form>
+                </div>
             </div>
 
             <div class="track-form-row">
-                <form class="form-floating" style="width: 40%; padding-right: 16px;">
+                <form class="form-floating" style="width: 35%;">
+                    <InputText 
+                        @bind-Value="editModel.LogoUrl" 
+                        @onfocusout="SetPreviewLogo"
+                        class="form-control" 
+                        placeholder="Insert track logo image url" />
+                    <label>Logo Url</label>
+                </form>
+                <form class="form-floating" style="width: 65%;">
+                    <InputText 
+                        @bind-Value="editModel.CoverUrl"
+                        @onfocusout="SetPreviewCover" 
+                        class="form-control" 
+                        placeholder="Insert cover image url" />
+                    <label>Cover Url</label>
+                </form>
+            </div>
+
+            <p style="font-size: 12px;">
+                *Instruction for Logo Url & Cover Url: Insert a url image and then check if a url is 
+                valid and able to show image inside box above the form
+            </p>
+
+            <div class="track-form-row">
+                <form class="form-floating" style="width: 40%;">
                     <InputSelect @bind-Value="editModel.Category" class="form-select" placeholder="Select a track category">
                         <option value="">Select a track category</option>
                         <option value="Original Circuit">Original Circuit</option>
@@ -54,7 +80,7 @@
                     </InputSelect>
                     <label>Category</label>
                 </form>
-                <form class="form-floating" style="width: 40%; padding-right: 16px;">
+                <form class="form-floating" style="width: 40%;">
                     <InputSelect @bind-Value="editModel.RoadType" class="form-select" placeholder="Select a track road surface type">
                         <option value="">Select a track road surface type</option>
                         <option value="Tarmac">Tarmac</option>
@@ -70,7 +96,7 @@
             </div>
 
             <div class="track-form-row">
-                <form style="margin-right: 16px;">
+                <form>
                     <input type="password" class="form-control" placeholder="Insert a passcode">
                 </form>
                 <button type="button" class="btn btn-success"><span class="bi bi-plus-lg"></span> Add</button>
@@ -82,6 +108,18 @@
 @code {
 
     private RaceTrackEditModel editModel = new();
+    private string previewLogoUrl = "";
+    private string previewCoverUrl = "";
+
+    private void SetPreviewLogo()
+    {
+        previewLogoUrl = editModel.LogoUrl ?? "";
+    }
+
+    private void SetPreviewCover()
+    {
+        previewCoverUrl = editModel.CoverUrl ?? "";
+    }
 
     private void BackToList()
     {

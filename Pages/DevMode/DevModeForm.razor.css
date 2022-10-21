@@ -30,8 +30,22 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    gap: 16px;
 }
 
 .track-form-row:last-of-type {
     justify-content: flex-end;
+}
+
+.form-img {
+    background-color: #e8e8e8;
+    border: 0.5px solid #1e2022;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
