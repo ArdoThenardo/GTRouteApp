@@ -7,16 +7,16 @@ public class DevModeService: BaseService
     // API Url to use:
     // local: $"{_baseUrl}/get-validation-dev"; 
     // sample json: "sample-data/passcode.json";
-    private const string GetValidationUrl = "sample-data/passcode.json";
+    private const string GetValidationUrl = $"{_baseUrl}/get-validation-dev";
 
     // API Url to use:
     // local:  $"{_baseUrl}/countries";
     // sample json: "sample-data/country.json";
-    private const string GetCountryListUrl = "sample-data/country.json";
+    private const string GetCountryListUrl = $"{_baseUrl}/countries";
 
     // API Url to use:
     // local: $"{_baseUrl}/add-track";
-    // sample json: --to be created--; you can get example response, but no data will be added 
+    // sample json: not available;
     private const string PostNewTrackUrl = $"{_baseUrl}/add-track";
 
     private List<Country> countries = new();
@@ -92,12 +92,26 @@ public class DevModeService: BaseService
         {
             var response = await PostRequest(encodedContent, PostNewTrackUrl);
 
-            var contentValue = await response.Content.ReadFromJsonAsync<RaceTrack>();
-            isPostSuccess = true;
+            if (response.IsSuccessStatusCode)
+            {
+                isPostSuccess = true;
 
-            var msg = $"{contentValue?.Name} ({contentValue?.Category}, {contentValue?.Country?.name}) was succesfully added.";
+                var contentValue = await response.Content.ReadFromJsonAsync<BaseModel<RaceTrack>>();
+            
+                var msg = $"{contentValue?.Data?.Name} ({contentValue?.Data?.Category}, {contentValue?.Data?.Country?.name}) was succesfully added.";
 
-            return msg;
+                return msg;
+            }
+            else
+            {
+                isPostSuccess = false;
+
+                var contentValue = await response.Content.ReadFromJsonAsync<BaseModel<string>>();
+
+                var msg = $"There is a error from server. Message: {contentValue?.Data}";
+
+                return msg;
+            }
         }
         catch
         {

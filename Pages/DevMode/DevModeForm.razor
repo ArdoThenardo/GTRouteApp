@@ -152,20 +152,14 @@
                 NavigationManager.NavigateTo("/devmode/list");
             }
         }
-        else
-        {
-            await FormInitialization(); // need to be called because country list is gone after showAlert JS
-        }
     }
 
     private async Task<bool> ValidateForm()
     {
-        if (!string.IsNullOrWhiteSpace(passcode) || !string.IsNullOrWhiteSpace(editModel.Name)
-            || !string.IsNullOrWhiteSpace(editModel.CountryCode) || !string.IsNullOrWhiteSpace(editModel.LogoUrl)
-            || !string.IsNullOrWhiteSpace(editModel.CoverUrl) || !string.IsNullOrWhiteSpace(editModel.Category)
-            || !string.IsNullOrWhiteSpace(editModel.RoadType) || editModel.NumberOfLayouts < 1 )
+        if (!string.IsNullOrWhiteSpace(passcode))
         {
             var isPasscodeValid = await DevModeService.ValidatePassCode(passcode);
+            var isEditModelValid = ValidateEditModel();
 
             if (!isPasscodeValid)
             {
@@ -175,15 +169,62 @@
             }
             else
             {
+                if (!isEditModelValid)
+                {
+                    await ShowAlert("Please fill the form and try again");
+
+                    return false;
+                }
+                
                 return true;
             }
         }
         else
         {
-            await ShowAlert("Please fill empty form and try again");
+            await ShowAlert("Please enter the passcode and try again");
 
             return false;
         }
+    }
+
+    private bool ValidateEditModel()
+    {
+        if (string.IsNullOrWhiteSpace(editModel.Name))
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(editModel.CountryCode))
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(editModel.LogoUrl))
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(editModel.CoverUrl))
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(editModel.Category))
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(editModel.RoadType))
+        {
+            return false;
+        }
+
+        if (editModel.NumberOfLayouts < 1)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private async Task GetCountryList()
