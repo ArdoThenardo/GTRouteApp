@@ -20,6 +20,7 @@ public class DevModeService: BaseService
     private const string PostNewTrackUrl = $"{_baseUrl}/add-track";
 
     private List<Country> countries = new();
+    private bool isPostSuccess = false;
     private string recentError = "";
 
     public DevModeService(HttpClient http): base(http) { }
@@ -87,13 +88,30 @@ public class DevModeService: BaseService
 
         var encodedContent = new FormUrlEncodedContent(data);
 
-        var response = await PostRequest(encodedContent, PostNewTrackUrl);
+        try
+        {
+            var response = await PostRequest(encodedContent, PostNewTrackUrl);
 
-        var successValue = await response.Content.ReadFromJsonAsync<RaceTrack>();
+            var contentValue = await response.Content.ReadFromJsonAsync<RaceTrack>();
+            isPostSuccess = true;
 
-        var msg = $"{successValue?.Name} ({successValue?.Category}, {successValue?.Country?.name}) was succesfully added.";
+            var msg = $"{contentValue?.Name} ({contentValue?.Category}, {contentValue?.Country?.name}) was succesfully added.";
 
-        return msg;
+            return msg;
+        }
+        catch
+        {
+            isPostSuccess = false;
+
+            var msg = "Unable to add new track. Please try again at later time";
+
+            return msg;
+        }
+    }
+
+    public bool GetPostStatus()
+    {
+        return isPostSuccess;
     }
 
     public string GetRecentErrorMessage()

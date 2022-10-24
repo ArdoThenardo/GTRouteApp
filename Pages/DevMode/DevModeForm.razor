@@ -146,7 +146,11 @@
             var response = await DevModeService.PostNewTrack(editModel);
             await ShowAlert(response);
 
-            NavigationManager.NavigateTo("/devmode/list");
+            var isPostSuccess = DevModeService.GetPostStatus();
+            if (isPostSuccess)
+            {
+                NavigationManager.NavigateTo("/devmode/list");
+            }
         }
         else
         {
