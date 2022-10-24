@@ -19,4 +19,11 @@ public class BaseService
 
         return fetched ?? new();
     }
+
+    protected async Task<HttpResponseMessage> PostRequest(FormUrlEncodedContent data, string url)
+    {
+        var response = await _http.PostAsync(url, data);
+        
+        return response;
+    }
 }

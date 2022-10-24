@@ -1,0 +1,17 @@
+{
+    "numberOfData": 3,
+    "data": [
+        {
+            "name": "USA",
+            "code": "us"
+        },
+        {
+            "name": "Japan",
+            "code": "jp"
+        },
+        {
+            "name": "Test Country",
+            "code": "xx"
+        }
+    ]
+}
