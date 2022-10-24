@@ -2,6 +2,8 @@
     background-color: #e8e8e8;
     width: 100%;
     height: 90vh;
+    padding-bottom: 10%;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,6 +38,29 @@
 .track-form-row:last-of-type {
     justify-content: flex-end;
 }
+.form-w20 {
+    width: 20%;
+}
+
+.form-w30 {
+    width: 30%;
+}
+
+.form-w35 {
+    width: 35%;
+}
+
+.form-w40 {
+    width: 40%;
+}
+
+.form-w65 {
+    width: 65%;
+}
+
+.form-w70 {
+    width: 70%;
+}
 
 .form-img {
     background-color: #e8e8e8;
@@ -48,4 +73,9 @@ img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+::deep .validation-message {
+    color: #d72323;
+    font-size: 14px;
 }
