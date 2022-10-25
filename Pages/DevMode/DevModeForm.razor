@@ -1,4 +1,4 @@
-@page "/devmode/new"
+@page "/devmode/form"
 @using GTRouteApp.Data
 @inject DevModeService DevModeService
 @inject NavigationManager NavigationManager
@@ -145,6 +145,14 @@
 </div>
 
 @code {
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "isEdit")] 
+    public bool IsEdit { get; set; } = false;
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "slug")] 
+    public string slug { get; set; } = "";
 
     private RaceTrackEditModel editModel = new();
     private List<Country> countrySelection = new();

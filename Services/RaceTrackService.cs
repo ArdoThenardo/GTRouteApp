@@ -5,7 +5,7 @@ public class RaceTrackService: BaseService
     // API Url to use:
     // local: $"{_baseUrl}/tracks";
     // sample json: "sample-data/track.json";
-    private const string GetTracksUrl = "sample-data/track.json";
+    private const string GetTracksUrl = $"{_baseUrl}/tracks";
     private List<RaceTrack> tracks = new();
     private string recentError = "";
 
