@@ -14,33 +14,40 @@
     </div>
 
     <div class="track-form-content">
-        <EditForm Model=@editModel>
+        <EditForm Model=@editModel OnValidSubmit="PostNewTrack">
             <h3>Add New Track</h3>
 
             <div class="track-form-row">
-                <form class="form-floating" style="width: 70%;">
-                    <InputText @bind-Value="editModel.Name" class="form-control" placeholder="Insert track name" />
-                    <label>Track Name</label>
-                </form>
-                <form class="form-floating" style="width: 30%;">
-                    <InputSelect @bind-Value="editModel.CountryCode" class="form-select" placeholder="Select a country">
-                        <option value="">Select a country</option>
-                        @foreach (var country in countrySelection)
-                        {
-                            <option value="@country.code">@country.name</option>
-                        }
-                    </InputSelect>
-                    <label>Country</label>
-                </form>
+                <div class="form-w70">
+                    <form class="form-floating">
+                        <InputText @bind-Value="editModel.Name" class="form-control" placeholder="Insert track name" />
+                        <label>Track Name</label>
+                    </form>
+                    <ValidationMessage For="@(() => editModel.Name)" />
+                </div>
+
+                <div class="form-w30">
+                    <form class="form-floating">
+                        <InputSelect @bind-Value="editModel.CountryCode" class="form-select" placeholder="Select a country">
+                            <option value="">Select a country</option>
+                            @foreach (var country in countrySelection)
+                            {
+                                <option value="@country.code">@country.name</option>
+                            }
+                        </InputSelect>
+                        <label>Country</label>
+                    </form>
+                    <ValidationMessage For="@(() => editModel.CountryCode)" />
+                </div>
             </div>
 
             <div class="track-form-row" style="height: 200px;">
-                <div class="form-img" style="width: 35%;">
+                <div class="form-img form-w35">
                     <form class="form-floating" style="width:100%; height:100%;">
                         <img src="@previewLogoUrl" alt="Preview Logo Url">
                     </form>
                 </div>
-                <div class="form-img" style="width: 65%;">
+                <div class="form-img form-w65">
                     <form class="form-floating" style="width:100%; height:100%;">
                         <img src="@previewCoverUrl" alt="Preview Cover Url">
                     </form>
@@ -48,22 +55,29 @@
             </div>
 
             <div class="track-form-row">
-                <form class="form-floating" style="width: 35%;">
-                    <InputText 
-                        @bind-Value="editModel.LogoUrl" 
-                        @onfocusout="SetPreviewLogo"
-                        class="form-control" 
-                        placeholder="Insert track logo image url" />
-                    <label>Logo Url</label>
-                </form>
-                <form class="form-floating" style="width: 65%;">
-                    <InputText 
-                        @bind-Value="editModel.CoverUrl"
-                        @onfocusout="SetPreviewCover" 
-                        class="form-control" 
-                        placeholder="Insert cover image url" />
-                    <label>Cover Url</label>
-                </form>
+                <div class="form-w35">
+                    <form class="form-floating">
+                        <InputText 
+                            @bind-Value="editModel.LogoUrl" 
+                            @onfocusout="SetPreviewLogo"
+                            class="form-control" 
+                            placeholder="Insert track logo image url" />
+                        <label>Logo Url</label>
+                    </form>
+                    <ValidationMessage For="@(() => editModel.LogoUrl)" />
+                </div>
+
+                <div class="form-w65">
+                    <form class="form-floating">
+                        <InputText 
+                            @bind-Value="editModel.CoverUrl"
+                            @onfocusout="SetPreviewCover" 
+                            class="form-control" 
+                            placeholder="Insert cover image url" />
+                        <label>Cover Url</label>
+                    </form>
+                    <ValidationMessage For="@(() => editModel.CoverUrl)" />
+                </div>
             </div>
 
             <p style="font-size: 12px;">
@@ -72,46 +86,60 @@
             </p>
 
             <div class="track-form-row">
-                <form class="form-floating" style="width: 40%;">
-                    <InputSelect @bind-Value="editModel.Category" class="form-select" placeholder="Select a track category">
-                        <option value="">Select a track category</option>
-                        @foreach (var category in categorySelection)
-                        {
-                            <option value="@category">@category</option>
-                        }
-                    </InputSelect>
-                    <label>Category</label>
-                </form>
-                <form class="form-floating" style="width: 40%;">
-                    <InputSelect @bind-Value="editModel.RoadType" class="form-select" placeholder="Select a track road surface type">
-                        <option value="">Select a track road surface type</option>
-                        @foreach (var roadType in roadTypeSelection)
-                        {
-                             <option value="@roadType">@roadType</option>
-                        }
-                    </InputSelect>
-                    <label>Road Type</label>
-                </form>
-                <form class="form-floating" style="width: 20%;">
-                    <InputSelect @bind-Value="editModel.NumberOfLayouts" class="form-select" placeholder="Select number of layouts available on track">
-                        <option value="0">0</option>
-                        @for (int num = 1; num <= 10; num++)
-                        {
-                            <option value="@num">@num</option>
-                        }
-                    </InputSelect>
-                    <label>No. of Layouts</label>
-                </form>
+                <div class="form-w40">
+                    <form class="form-floating">
+                        <InputSelect @bind-Value="editModel.Category" class="form-select" placeholder="Select a track category">
+                            <option value="">Select a track category</option>
+                            @foreach (var category in categorySelection)
+                            {
+                                <option value="@category">@category</option>
+                            }
+                        </InputSelect>
+                        <label>Category</label>
+                    </form>
+                    <ValidationMessage For="@(() => editModel.Category)" />
+                </div>
+
+                <div class="form-w40">
+                    <form class="form-floating">
+                        <InputSelect @bind-Value="editModel.RoadType" class="form-select" placeholder="Select a track road surface type">
+                            <option value="">Select a track road surface type</option>
+                            @foreach (var roadType in roadTypeSelection)
+                            {
+                                <option value="@roadType">@roadType</option>
+                            }
+                        </InputSelect>
+                        <label>Road Type</label>
+                    </form>
+                    <ValidationMessage For="@(() => editModel.RoadType)" />
+                </div>
+
+                <div class="form-w20">
+                    <form class="form-floating">
+                        <InputSelect @bind-Value="editModel.NumberOfLayouts" class="form-select" placeholder="Select number of layouts available on track">
+                            <option value="0">0</option>
+                            @for (int num = 1; num <= 10; num++)
+                            {
+                                <option value="@num">@num</option>
+                            }
+                        </InputSelect>
+                        <label>No. of Layouts</label>
+                    </form>
+                    <ValidationMessage For="@(() => editModel.NumberOfLayouts)" />
+                </div>
             </div>
 
             <div class="track-form-row">
+                <ValidationMessage For="@(() => passcode)" />
                 <form>
                     <input type="password" class="form-control" @bind-value="passcode" placeholder="Insert a passcode">
                 </form>
-                <button type="button" class="btn btn-success" @onclick="PostNewTrack">
+                <button type="submit" class="btn btn-success">
                     <span class="bi bi-plus-lg"></span> Add
                 </button>
             </div>
+
+            <DataAnnotationsValidator />
         </EditForm>
     </div>
 </div>
@@ -152,18 +180,11 @@
                 NavigationManager.NavigateTo("/devmode/list");
             }
         }
-        else
-        {
-            await FormInitialization(); // need to be called because country list is gone after showAlert JS
-        }
     }
 
     private async Task<bool> ValidateForm()
     {
-        if (!string.IsNullOrWhiteSpace(passcode) || !string.IsNullOrWhiteSpace(editModel.Name)
-            || !string.IsNullOrWhiteSpace(editModel.CountryCode) || !string.IsNullOrWhiteSpace(editModel.LogoUrl)
-            || !string.IsNullOrWhiteSpace(editModel.CoverUrl) || !string.IsNullOrWhiteSpace(editModel.Category)
-            || !string.IsNullOrWhiteSpace(editModel.RoadType) || editModel.NumberOfLayouts < 1 )
+        if (!string.IsNullOrWhiteSpace(passcode))
         {
             var isPasscodeValid = await DevModeService.ValidatePassCode(passcode);
 
@@ -173,14 +194,12 @@
 
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            
+            return true;
         }
         else
         {
-            await ShowAlert("Please fill empty form and try again");
+            await ShowAlert("Please enter the passcode and try again");
 
             return false;
         }
@@ -188,7 +207,9 @@
 
     private async Task GetCountryList()
     {
-        countrySelection = await DevModeService.GetCountryList();
+        var fetchedList = await DevModeService.GetCountryList();
+
+        countrySelection.AddRange(fetchedList);
     }
 
     private void SetPreviewLogo()
