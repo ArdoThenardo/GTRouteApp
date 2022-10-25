@@ -55,7 +55,7 @@
             </div>
 
             <div class="track-form-row">
-                <div sclass="form-w35">
+                <div class="form-w35">
                     <form class="form-floating">
                         <InputText 
                             @bind-Value="editModel.LogoUrl" 
@@ -187,7 +187,6 @@
         if (!string.IsNullOrWhiteSpace(passcode))
         {
             var isPasscodeValid = await DevModeService.ValidatePassCode(passcode);
-            var isEditModelValid = ValidateEditModel();
 
             if (!isPasscodeValid)
             {
@@ -195,17 +194,8 @@
 
                 return false;
             }
-            else
-            {
-                if (!isEditModelValid)
-                {
-                    await ShowAlert("Please fill the form and try again");
-
-                    return false;
-                }
-                
-                return true;
-            }
+            
+            return true;
         }
         else
         {
@@ -213,46 +203,6 @@
 
             return false;
         }
-    }
-
-    private bool ValidateEditModel()
-    {
-        if (string.IsNullOrWhiteSpace(editModel.Name))
-        {
-            return false;
-        }
-
-        if (string.IsNullOrWhiteSpace(editModel.CountryCode))
-        {
-            return false;
-        }
-
-        if (string.IsNullOrWhiteSpace(editModel.LogoUrl))
-        {
-            return false;
-        }
-
-        if (string.IsNullOrWhiteSpace(editModel.CoverUrl))
-        {
-            return false;
-        }
-
-        if (string.IsNullOrWhiteSpace(editModel.Category))
-        {
-            return false;
-        }
-
-        if (string.IsNullOrWhiteSpace(editModel.RoadType))
-        {
-            return false;
-        }
-
-        if (editModel.NumberOfLayouts < 1)
-        {
-            return false;
-        }
-
-        return true;
     }
 
     private async Task GetCountryList()
