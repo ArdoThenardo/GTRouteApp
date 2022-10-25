@@ -207,7 +207,9 @@
 
     private async Task GetCountryList()
     {
-        countrySelection = await DevModeService.GetCountryList();
+        var fetchedList = await DevModeService.GetCountryList();
+
+        countrySelection.AddRange(fetchedList);
     }
 
     private void SetPreviewLogo()
