@@ -47,7 +47,7 @@ else
                             </td>
                             <td>@track.Category</td>
                             <td>
-                                <button class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
+                                <button class="btn btn-primary" @onclick="() => EditTrack(track.Slug!)"><span class="bi bi-pencil-square"></span></button>
                                 <button class="btn btn-danger"><span class="bi bi-trash-fill"></span></button>
                             </td>
                         </tr>
@@ -68,11 +68,18 @@ else
 
     private async Task LoadTracks()
     {
-        tracks = await RaceTrackService.GetTracks();
+        var fetched = await RaceTrackService.GetTracks();
+
+        tracks.AddRange(fetched);
     }
 
     private void AccessAddNewTrack()
     {
-        NavigationManager.NavigateTo("/devmode/new");
+        NavigationManager.NavigateTo("/devmode/form");
+    }
+
+    private void EditTrack(string slug)
+    {
+        NavigationManager.NavigateTo($"/devmode/form?isEdit={true}&slug={slug}");
     }
 }
