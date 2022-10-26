@@ -26,4 +26,11 @@ public class BaseService
         
         return response;
     }
+
+    protected async Task<HttpResponseMessage> PutRequest(FormUrlEncodedContent data, string url)
+    {
+        var response = await _http.PutAsync(url, data);
+        
+        return response;
+    }
 }

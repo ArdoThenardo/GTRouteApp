@@ -15,7 +15,7 @@
     </div>
 
     <div class="track-form-content">
-        <EditForm Model=@editModel OnValidSubmit="PostNewTrack">
+        <EditForm Model=@editModel OnValidSubmit="SubmitTrack">
             @if (IsEdit)
             {
                 <h3>Edit @editModel.Name</h3>
@@ -192,17 +192,21 @@
         await CheckError();
     }
 
-    private async Task PostNewTrack()
+    private async Task SubmitTrack()
     {
         var isFormValid = await ValidateForm();
 
         if (isFormValid)
         {
-            var response = await DevModeService.PostNewTrack(editModel);
+            var response = !IsEdit ? 
+                await DevModeService.PostNewTrack(editModel) : 
+                await DevModeService.UpdateTrack(slug, editModel) ;
             await ShowAlert(response);
 
-            var isPostSuccess = DevModeService.GetPostStatus();
-            if (isPostSuccess)
+            var isSuccess = !IsEdit ? 
+                DevModeService.GetPostStatus() : 
+                DevModeService.GetUpdateStatus();
+            if (isSuccess)
             {
                 NavigationManager.NavigateTo("/devmode/list");
             }

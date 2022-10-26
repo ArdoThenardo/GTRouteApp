@@ -19,8 +19,14 @@ public class DevModeService: BaseService
     // sample json: not available;
     private const string PostNewTrackUrl = $"{_baseUrl}/add-track";
 
+    // API Url to use:
+    // local: $"{_baseUrl}/edit-track?slug=track-slug";
+    // sample json: not available;
+    private const string UpdateTrackUrl = $"{_baseUrl}/edit-track";
+
     private List<Country> countries = new();
     private bool isPostSuccess = false;
+    private bool isUpdateSuccess = false;
     private string recentError = "";
 
     public DevModeService(HttpClient http): base(http) { }
@@ -75,18 +81,7 @@ public class DevModeService: BaseService
 
     public async Task<string> PostNewTrack(RaceTrackEditModel editModel)
     {
-        var data = new[]
-        {
-            new KeyValuePair<string, string>("name", editModel.Name ?? ""),
-            new KeyValuePair<string, string>("country_code", editModel.CountryCode ?? ""),
-            new KeyValuePair<string, string>("logo_url", editModel.LogoUrl ?? ""),
-            new KeyValuePair<string, string>("cover_url", editModel.CoverUrl ?? ""),
-            new KeyValuePair<string, string>("category", editModel.Category ?? ""),
-            new KeyValuePair<string, string>("road_type", editModel.RoadType ?? ""),
-            new KeyValuePair<string, string>("num_of_layouts", editModel.NumberOfLayouts.ToString()),
-        };
-
-        var encodedContent = new FormUrlEncodedContent(data);
+        var encodedContent = GenerateEncodedContent(editModel);
 
         try
         {
@@ -123,9 +118,69 @@ public class DevModeService: BaseService
         }
     }
 
+    public async Task<string> UpdateTrack(string slug, RaceTrackEditModel editModel)
+    {
+        var encodedContent = GenerateEncodedContent(editModel);
+
+        try
+        {
+            var response = await PutRequest(encodedContent, $"{UpdateTrackUrl}?slug={slug}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                isUpdateSuccess = true;
+
+                var msg = "Track information was successfully updated.";
+
+                return msg;
+            }
+            else
+            {
+                isUpdateSuccess = false;
+
+                var contentValue = await response.Content.ReadFromJsonAsync<BaseModel<string>>();
+
+                var msg = $"There is a error from server. Message: {contentValue?.Data}";
+
+                return msg;
+            }
+        }
+        catch
+        {
+            isUpdateSuccess = false;
+
+            var msg = "Unable to update track information. Please try again at later time";
+
+            return msg;
+        }
+    }
+
+    private FormUrlEncodedContent GenerateEncodedContent(RaceTrackEditModel editModel)
+    {
+        var data = new[]
+        {
+            new KeyValuePair<string, string>("name", editModel.Name ?? ""),
+            new KeyValuePair<string, string>("country_code", editModel.CountryCode ?? ""),
+            new KeyValuePair<string, string>("logo_url", editModel.LogoUrl ?? ""),
+            new KeyValuePair<string, string>("cover_url", editModel.CoverUrl ?? ""),
+            new KeyValuePair<string, string>("category", editModel.Category ?? ""),
+            new KeyValuePair<string, string>("road_type", editModel.RoadType ?? ""),
+            new KeyValuePair<string, string>("num_of_layouts", editModel.NumberOfLayouts.ToString()),
+        };
+
+        var encodedContent = new FormUrlEncodedContent(data);
+
+        return encodedContent;
+    }
+
     public bool GetPostStatus()
     {
         return isPostSuccess;
+    }
+
+    public bool GetUpdateStatus()
+    {
+        return isUpdateSuccess;
     }
 
     public string GetRecentErrorMessage()
