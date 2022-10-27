@@ -1,5 +1,7 @@
 @using GTRouteApp.Data
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
+@implements IAsyncDisposable
 
 <div class="subheader-container">
     <div class="subheader-info">
@@ -9,11 +11,19 @@
     <div class="subheader-view-options">
         <button type="button" class="btn btn-secondary" 
             @onclick="() => SwitchMode(BrowseMode.Gallery)"
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            title="Switch to Gallery View"
+            @ref="galleryRef"
             disabled=@disableGallery>
             <span class="bi bi-image-fill"></span>
         </button>
         <button type="button" class="btn btn-secondary" 
             @onclick="() => SwitchMode(BrowseMode.Grid)"
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            title="Switch to Grid View"
+            @ref="gridRef"
             disabled=@disableGrid>
             <span class="bi bi-grid-3x3-gap-fill"></span>
         </button>
@@ -30,11 +40,37 @@
     private bool disableGallery = true;
     private bool disableGrid = false;
 
-    private void SwitchMode(BrowseMode mode)
+    private const string subheaderJSPath = "./Pages/Browse/BrowseSubheader.razor.js";
+    private Lazy<IJSObjectReference> subheaderJS = new();
+    ElementReference galleryRef;
+    ElementReference gridRef;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            subheaderJS = new(await JS.InvokeAsync<IJSObjectReference>("import", subheaderJSPath));
+            await subheaderJS.Value.InvokeVoidAsync("initializeTooltips", galleryRef, gridRef);
+        }
+    }
+
+    private async Task SwitchMode(BrowseMode mode)
     {
         disableGallery = disableGallery ? false : true;
         disableGrid = disableGrid ? false : true;
+        await HideTooltips();
 
-        ChosenBrowseMode.InvokeAsync(mode);
+        await ChosenBrowseMode.InvokeAsync(mode);
+    }
+
+    private async Task HideTooltips()
+    {
+        await subheaderJS.Value.InvokeVoidAsync("hideTooltips");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (subheaderJS.IsValueCreated)
+            await subheaderJS.Value.DisposeAsync();
     }
 }

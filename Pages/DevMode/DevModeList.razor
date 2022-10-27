@@ -2,6 +2,8 @@
 @using GTRouteApp.Data
 @inject RaceTrackService RaceTrackService
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
+@implements IAsyncDisposable
 
 <PageTitle>Dev Mode - List</PageTitle>
 
@@ -24,7 +26,16 @@ else
                         <th>Name</th>
                         <th>Country</th>
                         <th>Category</th>
-                        <th></th>
+                        <th>
+                            <span data-bs-toggle="tooltip" 
+                                data-bs-placement="top"
+                                data-bs-html="true" 
+                                title="<span class='bi bi-pencil-square'></span> Edit Track<br>
+                                    <span class='bi bi-trash-fill'></span> Delete Track" 
+                                @ref="itemButtonsRef">
+                                <span class="bi bi-question-circle"></span>
+                            </span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,8 +58,8 @@ else
                             </td>
                             <td>@track.Category</td>
                             <td>
-                                <button class="btn btn-primary" @onclick="() => EditTrack(track.Slug!)"><span class="bi bi-pencil-square"></span></button>
-                                <button class="btn btn-danger"><span class="bi bi-trash-fill"></span></button>
+                                <button type="button" class="btn btn-primary" @onclick="() => EditTrack(track.Slug!)"><span class="bi bi-pencil-square"></span></button>
+                                <button type="button" class="btn btn-danger"><span class="bi bi-trash-fill"></span></button>
                             </td>
                         </tr>
                     }
@@ -60,10 +71,23 @@ else
 
 @code {
     private List<RaceTrack> tracks = new();
+
+    private const string devmodeListJSPath = "./Pages/DevMode/DevModeList.razor.js";
+    private Lazy<IJSObjectReference> devmodeListJS = new();
+    ElementReference itemButtonsRef;
     
     protected override async Task OnInitializedAsync()
     {
         await LoadTracks();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            devmodeListJS = new(await JS.InvokeAsync<IJSObjectReference>("import", devmodeListJSPath));
+            await devmodeListJS.Value.InvokeVoidAsync("initializeTooltips", itemButtonsRef);
+        }
     }
 
     private async Task LoadTracks()
@@ -78,8 +102,23 @@ else
         NavigationManager.NavigateTo("/devmode/form");
     }
 
-    private void EditTrack(string slug)
+    private async Task EditTrack(string slug)
     {
+        await HideTooltips();
+        
         NavigationManager.NavigateTo($"/devmode/form?isEdit={true}&slug={slug}");
+    }
+
+    private async Task HideTooltips()
+    {
+        await devmodeListJS.Value.InvokeVoidAsync("hideTooltips");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (devmodeListJS.IsValueCreated)
+        {
+            await devmodeListJS.Value.DisposeAsync();
+        }
     }
 }
