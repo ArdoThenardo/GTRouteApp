@@ -24,6 +24,11 @@ public class DevModeService: BaseService
     // sample json: not available;
     private const string UpdateTrackUrl = $"{_baseUrl}/edit-track";
 
+    // API Url to use:
+    // local: $"{_baseUrl}/delete-track?slug=track-slug";
+    // sample json: not available;
+    private const string DeleteTrackUrl = $"{_baseUrl}/delete-track";
+
     private List<Country> countries = new();
     private bool isPostSuccess = false;
     private bool isUpdateSuccess = false;
@@ -150,6 +155,35 @@ public class DevModeService: BaseService
             isUpdateSuccess = false;
 
             var msg = "Unable to update track information. Please try again at later time";
+
+            return msg;
+        }
+    }
+
+    public async Task<string> DeleteTrack(string slug)
+    {
+        try
+        {
+            var response = await DeleteRequest($"{DeleteTrackUrl}?slug={slug}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var msg = "Track information is successfully deleted.";
+
+                return msg;
+            }
+            else
+            {
+                var contentValue = await response.Content.ReadFromJsonAsync<BaseModel<string>>();
+
+                var msg = $"There is a error from server. Message: {contentValue?.Data}";
+
+                return msg;
+            }
+        }
+        catch
+        {
+            var msg = "Unable to delete track information. Please try again at later time";
 
             return msg;
         }
