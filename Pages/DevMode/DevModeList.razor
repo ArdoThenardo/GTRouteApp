@@ -1,6 +1,7 @@
 @page "/devmode/list"
 @using GTRouteApp.Data
 @inject RaceTrackService RaceTrackService
+@inject DevModeService DevModeService
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JS
 @implements IAsyncDisposable
@@ -59,7 +60,7 @@ else
                             <td>@track.Category</td>
                             <td>
                                 <button type="button" class="btn btn-primary" @onclick="() => EditTrack(track.Slug!)"><span class="bi bi-pencil-square"></span></button>
-                                <button type="button" class="btn btn-danger"><span class="bi bi-trash-fill"></span></button>
+                                <button type="button" class="btn btn-danger" @onclick="() => DeleteTrack(track.Slug!)"><span class="bi bi-trash-fill"></span></button>
                             </td>
                         </tr>
                     }
@@ -78,7 +79,7 @@ else
     
     protected override async Task OnInitializedAsync()
     {
-        await LoadTracks();
+        await InitializeList();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -97,6 +98,13 @@ else
         tracks.AddRange(fetched);
     }
 
+    private async Task InitializeList()
+    {
+        tracks.Clear();
+
+        await LoadTracks();
+    }
+
     private void AccessAddNewTrack()
     {
         NavigationManager.NavigateTo("/devmode/form");
@@ -109,9 +117,23 @@ else
         NavigationManager.NavigateTo($"/devmode/form?isEdit={true}&slug={slug}");
     }
 
+    private async Task DeleteTrack(string slug)
+    {
+        var response = await DevModeService.DeleteTrack(slug);
+
+        await InitializeList();
+
+        await ShowAlert(response);
+    }
+
     private async Task HideTooltips()
     {
         await devmodeListJS.Value.InvokeVoidAsync("hideTooltips");
+    }
+
+    private async Task ShowAlert(string message)
+    {
+        await JS.InvokeVoidAsync("showAlert", message);
     }
 
     public async ValueTask DisposeAsync()
