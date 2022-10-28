@@ -119,11 +119,14 @@ else
 
     private async Task DeleteTrack(string slug)
     {
-        var response = await DevModeService.DeleteTrack(slug);
+        var isDeleteConfirmed = await devmodeListJS.Value.InvokeAsync<bool>("confirmAlert", "Do you want to delete this track?");
+        if (isDeleteConfirmed)
+        {
+            var response = await DevModeService.DeleteTrack(slug);
+            await ShowAlert(response);
 
-        await InitializeList();
-
-        await ShowAlert(response);
+            await InitializeList();
+        }
     }
 
     private async Task HideTooltips()
