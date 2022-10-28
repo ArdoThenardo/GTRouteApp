@@ -33,4 +33,11 @@ public class BaseService
         
         return response;
     }
+
+    protected async Task<HttpResponseMessage> DeleteRequest(string url)
+    {
+        var response = await _http.DeleteAsync(url);
+
+        return response;
+    }
 }
