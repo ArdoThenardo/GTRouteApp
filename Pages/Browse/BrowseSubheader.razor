@@ -5,11 +5,11 @@
 
 <div class="subheader-container">
     <div class="subheader-info">
-        <span class="bi bi-info-square-fill"></span> @Info
+        <span class="bi bi-info-square-fill" style="margin-right: 6px;"></span>@Info
     </div>
 
     <div class="subheader-view-options">
-        <button type="button" class="btn btn-secondary" 
+        <button type="button" class="btn btn-selection" 
             @onclick="() => SwitchMode(BrowseMode.Gallery)"
             data-bs-toggle="tooltip"
             data-bs-placement="left"
@@ -18,7 +18,7 @@
             disabled=@disableGallery>
             <span class="bi bi-image-fill"></span>
         </button>
-        <button type="button" class="btn btn-secondary" 
+        <button type="button" class="btn btn-selection" 
             @onclick="() => SwitchMode(BrowseMode.Grid)"
             data-bs-toggle="tooltip"
             data-bs-placement="left"

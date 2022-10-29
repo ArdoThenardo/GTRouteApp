@@ -32,3 +32,15 @@
     .subheader-view-options button:last-of-type {
         margin-left: 1px;
     }
+
+.btn-selection {
+    color: #1e2022;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-selection:hover {
+    color: #1e2022;
+    background-color: #ffca2c;
+    border-color: #ffc720;
+}

@@ -10,8 +10,8 @@ main {
 }
 
 .navigation-bar {
-    background-color: #52616b;
-    border-bottom: 1.2px solid rgba(30, 32, 34, 0.4);
+    background-color: #303841;
+    border-bottom: 1.2px solid rgba(232, 232, 232, 0.5);
     display: flex;
     justify-content: flex-start;
     align-items: center;

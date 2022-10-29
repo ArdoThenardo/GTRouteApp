@@ -41,8 +41,8 @@
     position: absolute;
     width: 100%;
     transform: scaleX(0);
-    height: 1px;
-    bottom: 12px;
+    height: 1.4px;
+    bottom: 10px;
     left: 0;
     background-color: #f0f5f9;
     transform-origin: bottom left;
