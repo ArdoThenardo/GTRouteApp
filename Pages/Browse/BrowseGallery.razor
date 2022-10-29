@@ -25,6 +25,7 @@
                 <img
                     src="@tracks.ElementAt(selectedIndex).LogoUrl"
                     alt="@tracks.ElementAt(selectedIndex).LogoUrl"
+                    @ref="section1LogoRef"
                 />
             </div>
             <div class="highlight-section-2">
@@ -36,7 +37,7 @@
                     <p>No. Of Layouts</p>
                     <p><span @ref="section2LayoutRef">@tracks.ElementAt(selectedIndex).NumberOfLayouts</span></p>
                 </div>
-                <button type="button" class="btn btn-secondary">View Detail</button>
+                <button type="button" class="btn btn-success">View Track</button>
             </div>
         </div>
         <div class="gallery-selection">
@@ -74,10 +75,8 @@
     private string errorMessage = "";
     private bool showError = false;
 
-    ElementReference section1CountryRef;
-    ElementReference section2CategoryRef;
-    ElementReference section2RoadTypeRef;
-    ElementReference section2LayoutRef;
+    ElementReference section1CountryRef, section1LogoRef;
+    ElementReference section2CategoryRef, section2RoadTypeRef, section2LayoutRef;
 
     protected override async Task OnInitializedAsync()
     {
@@ -106,6 +105,7 @@
     private async Task ResetHighlightAnimationWithJS()
     {
         await JS.InvokeVoidAsync("resetAnimation", section1CountryRef);
+        await JS.InvokeVoidAsync("resetAnimation", section1LogoRef);
         await JS.InvokeVoidAsync("resetAnimation", section2CategoryRef);
         await JS.InvokeVoidAsync("resetAnimation", section2RoadTypeRef);
         await JS.InvokeVoidAsync("resetAnimation", section2LayoutRef);

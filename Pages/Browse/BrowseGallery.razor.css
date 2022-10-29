@@ -45,6 +45,7 @@
     object-fit: contain;
     width: 16vw;
     filter: drop-shadow(0 0 3px rgba(30, 32, 34, 0.6));
+    animation: img-max-opacity 0.75s ease-in forwards;
 }
 
 .highlight-section-2 {
@@ -154,4 +155,10 @@
 @keyframes span-max-width {
     0% { max-width: 0%; }
     100% { max-width: 100%; }
+}
+
+@keyframes img-max-opacity {
+    0% { opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
