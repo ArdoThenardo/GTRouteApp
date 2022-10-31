@@ -45,22 +45,29 @@
             {
                 @if (selectedIndex == track.index)
                 {
-                    <div class="gallery-item-selected">
-                        <img
-                            src="@track.trackData.LogoUrl"
-                            alt="@track.trackData.LogoUrl"
-                        />
-                        <p>@track.trackData.Name</p>
+                    <div class="gallery-item-container-selected" 
+                        style="background-image: url(@track.trackData.CoverUrl);">
+                        <div class="gallery-item-content-selected">
+                            <img
+                                src="@track.trackData.LogoUrl"
+                                alt="@track.trackData.LogoUrl"
+                            />
+                            <p>@track.trackData.Name</p>
+                        </div>
                     </div>
                 }
                 else
                 {
-                    <div class="gallery-item" @onclick="() => SetSelection(track.index)">
-                        <img
-                            src="@track.trackData.LogoUrl"
-                            alt="@track.trackData.LogoUrl"
-                        />
-                        <p>@track.trackData.Name</p>
+                    <div class="gallery-item-container" 
+                        style="background-image: url(@track.trackData.CoverUrl);" 
+                        @onclick="() => SetSelection(track.index)">
+                        <div class="gallery-item-content">
+                            <img
+                                src="@track.trackData.LogoUrl"
+                                alt="@track.trackData.LogoUrl"
+                            />
+                            <p>@track.trackData.Name</p>
+                        </div>
                     </div>
                 }
             }

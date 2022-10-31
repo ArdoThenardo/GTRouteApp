@@ -19,7 +19,7 @@
             @foreach (var track in tracks)
             {
                 <div class="item-container">
-                    <div class="item-content">
+                    <div class="item-content" style="background-image: url(@track.CoverUrl);">
                         <div class="content-section-1">
                             <img 
                                 src="@track.LogoUrl"
@@ -29,8 +29,8 @@
                         </div>
                         <div class="content-section-2">
                             <p>
-                                <span class="fi fi-@track.Country?.code"></span>
-                                <span> @track.Category</span>
+                                <span class="fi fi-@track.Country?.code" style="margin-right: 6px;"></span>
+                                <span>@track.Category</span>
                             </p>
                         </div>
                     </div>

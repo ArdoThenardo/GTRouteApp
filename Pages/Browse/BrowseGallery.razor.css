@@ -99,48 +99,58 @@
     box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
 
-.gallery-item {
-    background-color: #f4f4f2;
+.gallery-selection::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-item-container, .gallery-item-container-selected {
+    background-size: cover;
+    background-blend-mode: overlay;
+    width: 22vw;
+    border-radius: 16px;
+    transform: scale(0.95);
+    transition: 0.25s;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+}
+
+.gallery-item-content {
+    background-color: rgba(244, 244, 242, 0.7);
+    backdrop-filter: blur(2px);
+    height: 100%;
     color: #1e2022;
     border: 1px solid #1e2022;
     border-radius: 16px;
-    width: 22vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    transform: scale(0.95);
-    transition: 0.25s;
-    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.2);
 }
 
-.gallery-item:hover{
+.gallery-item-container:hover{
     cursor: pointer;
     transform: scale(0.95);
-    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.8);
+    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
-.gallery-item-selected {
-    background-color: #1e2022;
+.gallery-item-content-selected {
+    background-color: rgba(30, 32, 34, 0.7);
+    backdrop-filter: blur(2px);
+    height: 100%;
     color: #f4f4f2;
-    border: 1px solid #f0f5f9;
+    border: 2px solid #ffc107;
     border-radius: 16px;
-    width: 22vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    transform: scale(0.95);
-    transition: 0.25s;
-    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
 
-.gallery-item img, .gallery-item-selected img {
+.gallery-item-content img, .gallery-item-content-selected img {
     width: 10vw;
-    filter: drop-shadow(0 0 3px rgba(30, 32, 34, 0.2));
+    filter: drop-shadow(0 0 3px rgba(30, 32, 34, 0.4));
 }
 
-.gallery-item p, .gallery-item-selected p {
+.gallery-item-content p, .gallery-item-content-selected p {
     margin-bottom: -24px;
     width: 20vw;
     font-size: 16px;
@@ -149,7 +159,7 @@
     text-overflow: ellipsis;
     text-align: center;
     white-space: nowrap;
-    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.2);
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.4);
 }
 
 @keyframes span-max-width {
