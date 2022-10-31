@@ -99,6 +99,10 @@
     box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
 
+.gallery-selection::-webkit-scrollbar {
+    display: none;
+}
+
 .gallery-item {
     background-color: #f4f4f2;
     color: #1e2022;

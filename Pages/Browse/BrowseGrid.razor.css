@@ -5,6 +5,10 @@
     overflow-y: scroll;
 }
 
+.grid-container::-webkit-scrollbar {
+    display: none;
+}
+
 .grid-list {
     padding-block: 8px;
     padding-inline: 8px;
