@@ -24,6 +24,7 @@
     width: 100%;
     border: 1px solid #1e2022;
     border-radius: 8px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: 0.25s;
@@ -57,11 +58,13 @@
 }
 
 .content-section-2 {
+    background-color: #1e2022;
     height: 15%;
     border-top: 1px solid #1e2022;
 }
 
 .content-section-2 p {
+    color: #f4f4f2;
     position: relative;
     margin-inline: 12px;
     top: 50%;
