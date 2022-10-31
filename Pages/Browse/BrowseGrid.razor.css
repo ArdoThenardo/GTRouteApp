@@ -42,7 +42,7 @@
 }
 
 .content-section-1 {
-    background-color: rgba(244, 244, 242, 0.58);
+    background-color: rgba(244, 244, 242, 0.7);
     backdrop-filter: blur(4px);
     height: 85%;
     display: flex;
