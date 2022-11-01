@@ -59,6 +59,13 @@ a, .btn-link {
     color: red;
 }
 
+.preload-ui {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
