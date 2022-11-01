@@ -10,7 +10,7 @@
         }
         else
         {
-            <p>Loading...</p>
+            <div class="loading-traditional"></div>
         }
     }
     else
@@ -49,6 +49,7 @@
     protected override async Task OnInitializedAsync()
     {
         await LoadTracks();
+        CheckError();
     }
 
     private async Task LoadTracks()
