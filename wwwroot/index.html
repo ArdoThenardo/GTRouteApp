@@ -8,12 +8,18 @@
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css" rel="stylesheet" />
+    <link href="css/whirl/loading_traditional.css" rel="stylesheet" />
+    <link href="css/whirl/loading_scaling_dots.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="GTRouteApp.styles.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <div class="preload-ui">
+            <div class="loading-scaling-dots"><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
