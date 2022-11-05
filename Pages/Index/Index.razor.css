@@ -5,3 +5,27 @@
     display: flex;
     flex-direction: column;
 }
+
+.home-featured {
+    width: 100%;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-row-1, .featured-row-2 {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+}
+
+.row-1-featured-item {
+    width: 50%;
+    height: 100%;
+}
+
+.row-2-featured-item {
+    width: 33.33%;
+    height: 100%;
+}
