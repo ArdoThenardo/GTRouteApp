@@ -4,7 +4,7 @@ public class FeaturedService: BaseService
 {
     // API Url to use:
     // local: $"{_baseUrl}/featured";
-    // sample json: not available;
+    // sample json: "sample-data/featured.json";
     private const string GetFeaturedUrl = $"{_baseUrl}/featured";
 
     private List<FeaturedTrack> featured = new();
