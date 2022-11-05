@@ -20,12 +20,20 @@
     flex-direction: row;
 }
 
+.row-1-featured-item, .row-2-featured-item {
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    color: #f4f4f2;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
 .row-1-featured-item {
     width: 50%;
-    height: 100%;
 }
 
 .row-2-featured-item {
     width: 33.33%;
-    height: 100%;
 }
