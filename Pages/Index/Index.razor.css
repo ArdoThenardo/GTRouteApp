@@ -37,3 +37,22 @@
 .row-2-featured-item {
     width: 33.33%;
 }
+
+.featured-info {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0) 100%);
+    width: 100%;
+    padding: 16px;
+}
+
+.featured-title {
+    margin-bottom: 4px;
+    font-size: 24px;
+    font-weight: 700;
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.8);
+}
+
+.featured-text {
+    font-size: 18px;
+    font-weight: 500;
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.8);
+}

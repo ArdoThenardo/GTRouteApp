@@ -24,30 +24,40 @@
             <div class="featured-row-1">
                 <div class="row-1-featured-item" 
                     style="background-image: url(@featured.ElementAt(0).CoverUrl)">
-                    <p>@featured.ElementAt(0).Name</p>
-                    <p>@((MarkupString)(featured.ElementAt(0).Text ?? ""))</p>
+                    <div class="featured-info">
+                        <p class="featured-title">@featured.ElementAt(0).Name</p>
+                        <p class="featured-text">@((MarkupString)(featured.ElementAt(0).Text ?? ""))</p>
+                    </div>
                 </div>
                 <div class="row-1-featured-item" 
                     style="background-image: url(@featured.ElementAt(1).CoverUrl)">
-                    <p>@featured.ElementAt(1).Name</p>
-                    <p>@((MarkupString)(featured.ElementAt(1).Text ?? ""))</p>
+                    <div class="featured-info">
+                        <p class="featured-title">@featured.ElementAt(1).Name</p>
+                        <p class="featured-text">@((MarkupString)(featured.ElementAt(1).Text ?? ""))</p>
+                    </div>
                 </div>
             </div>
             <div class="featured-row-2">
                 <div class="row-2-featured-item" 
                     style="background-image: url(@featured.ElementAt(2).CoverUrl)">
-                    <p>@featured.ElementAt(2).Name</p>
-                    <p>@((MarkupString)(featured.ElementAt(2).Text ?? ""))</p>
+                    <div class="featured-info">
+                        <p class="featured-title">@featured.ElementAt(2).Name</p>
+                        <p class="featured-text">@((MarkupString)(featured.ElementAt(2).Text ?? ""))</p>
+                    </div>
                 </div>
                 <div class="row-2-featured-item" 
                     style="background-image: url(@featured.ElementAt(3).CoverUrl)">
-                    <p>@featured.ElementAt(3).Name</p>
-                    <p>@((MarkupString)(featured.ElementAt(3).Text ?? ""))</p>
+                    <div class="featured-info">
+                        <p class="featured-title">@featured.ElementAt(3).Name</p>
+                        <p class="featured-text">@((MarkupString)(featured.ElementAt(3).Text ?? ""))</p>
+                    </div>
                 </div>
                 <div class="row-2-featured-item" 
                     style="background-image: url(@featured.ElementAt(4).CoverUrl)">
-                    <p>@featured.ElementAt(4).Name</p>
-                    <p>@((MarkupString)(featured.ElementAt(4).Text ?? ""))</p>
+                    <div class="featured-info">
+                        <p class="featured-title">@featured.ElementAt(4).Name</p>
+                        <p class="featured-text">@((MarkupString)(featured.ElementAt(4).Text ?? ""))</p>
+                    </div>
                 </div>
             </div>
         </div>
