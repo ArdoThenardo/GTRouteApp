@@ -4,6 +4,7 @@
         {
             "slug": "grand-valley-speedway-1666758817",
             "name": "Grand Valley Speedway",
+            "logoUrl": "img/sample-logo.png",
             "coverUrl": "img/sample-cover.jpg",
             "category": "Original Circuit",
             "country": null,
@@ -12,17 +13,19 @@
         {
             "slug": "deep-forest-raceway",
             "name": "Deep Forest Raceway",
+            "logoUrl": "img/sample-logo.png",
             "coverUrl": "img/sample-cover.jpg",
             "category": "Original Circuit",
             "country": {
                 "name": "Switzerland",
                 "code": "ch"
             },
-            "text": "Original Circuit that located on <span class='fi fi-ch'></span> Switzerland."
+            "text": "Original Circuit that is located on <span class='fi fi-ch'></span> Switzerland."
         },
         {
             "slug": "special-stage-route-11-1667391749",
             "name": "Special Stage Route 11",
+            "logoUrl": "img/sample-logo.png",
             "coverUrl": "img/sample-cover.jpg",
             "category": "City Circuit",
             "country": null,
@@ -31,6 +34,7 @@
         {
             "slug": "silverstone-1667529309",
             "name": "Silverstone",
+            "logoUrl": "img/sample-logo.png",
             "coverUrl": "img/sample-cover.jpg",
             "category": "Real Circuit",
             "country": null,
@@ -39,6 +43,7 @@
         {
             "slug": "test-track-3-croatia-1666758791",
             "name": "Test Track 3 Croatia",
+            "logoUrl": "img/sample-logo.png",
             "coverUrl": "img/sample-cover.jpg",
             "category": "Snow Circuit",
             "country": null,
