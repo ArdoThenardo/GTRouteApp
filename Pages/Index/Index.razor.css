@@ -29,6 +29,13 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
+    opacity: 0;
+    animation: reveal-featured .5s forwards var(--delay);
+}
+
+@keyframes reveal-featured {
+    from { translate: 0 20px; }
+    to { translate: none; opacity: 1; }
 }
 
 .row-1-featured-item {
@@ -42,7 +49,8 @@
 .featured-info {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0) 100%);
     width: 100%;
-    padding: 16px;
+    padding-block: 16px;
+    padding-inline: 24px;
 }
 
 .featured-info img {
