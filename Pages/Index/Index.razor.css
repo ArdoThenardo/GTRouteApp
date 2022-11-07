@@ -30,12 +30,21 @@
     align-items: flex-start;
     justify-content: flex-end;
     opacity: 0;
+    transition: .25s;
     animation: reveal-featured .5s forwards var(--delay);
 }
 
 @keyframes reveal-featured {
     from { translate: 0 20px; }
     to { translate: none; opacity: 1; }
+}
+
+.row-1-featured-item:hover, .row-2-featured-item:hover {
+    cursor: pointer;
+    transition: .25s;
+    transform: translateY(-4px);
+    border-color: transparent;
+    box-shadow: 1px 1px 8px 8px rgba(30, 32, 34, 0.8);
 }
 
 .row-1-featured-item {
