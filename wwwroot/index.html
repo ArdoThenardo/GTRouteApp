@@ -33,7 +33,7 @@
             alert(message);
         }
 
-        function resetAnimation(element) {
+        function resetAnimationByStyle(element) {
             element.style.animation = "none";
             
             requestAnimationFrame(() => {
@@ -41,6 +41,15 @@
                     element.style.animation = "";
                 }, 0);
             });
+        }
+
+        function resetAnimationByReinsertClassName(element, elementClassName) {
+            // original code Chris Coyier & Felis Phasma. Source: https://css-tricks.com/restart-css-animation/
+            element.classList.remove(elementClassName);
+
+            void element.offsetWidth;
+
+            element.classList.add(elementClassName);
         }
     </script>
 </body>

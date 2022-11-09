@@ -16,7 +16,7 @@
     }
     else
     {
-        <div class="gallery-highlight" style="background-image: url('@tracks.ElementAt(selectedIndex).CoverUrl');">
+        <div @ref="highlightCoverRef" class="gallery-highlight" style="--bg-cover: url('@tracks.ElementAt(selectedIndex).CoverUrl');">
             <div class="highlight-section-1">
                 <p>
                     <span class="fi fi-@tracks.ElementAt(selectedIndex).Country?.code"></span>
@@ -82,7 +82,7 @@
     private string errorMessage = "";
     private bool showError = false;
 
-    ElementReference section1CountryRef, section1LogoRef;
+    ElementReference highlightCoverRef, section1CountryRef, section1LogoRef;
     ElementReference section2CategoryRef, section2RoadTypeRef, section2LayoutRef;
 
     protected override async Task OnInitializedAsync()
@@ -111,10 +111,11 @@
 
     private async Task ResetHighlightAnimationWithJS()
     {
-        await JS.InvokeVoidAsync("resetAnimation", section1CountryRef);
-        await JS.InvokeVoidAsync("resetAnimation", section1LogoRef);
-        await JS.InvokeVoidAsync("resetAnimation", section2CategoryRef);
-        await JS.InvokeVoidAsync("resetAnimation", section2RoadTypeRef);
-        await JS.InvokeVoidAsync("resetAnimation", section2LayoutRef);
+        await JS.InvokeVoidAsync("resetAnimationByReinsertClassName", highlightCoverRef, "gallery-highlight");
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section1CountryRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section1LogoRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2CategoryRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2RoadTypeRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2LayoutRef);
     }
 }

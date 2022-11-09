@@ -7,19 +7,33 @@
 }
 
 .gallery-highlight {
+    position: relative;
     width: 100%;
     height: 100vh;
     background-color: #1e2022;
-    background-size: cover;
+    overflow: hidden;
     color: #f4f4f2;
-    padding-block: 8px;
-    padding-inline: 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 1;
+}
+
+.gallery-highlight::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: var(--bg-cover);
+    background-size: cover;
+    transition: .5s;
+    z-index: -1;
+    animation: reveal-cover .75s ease-in-out forwards;
 }
 
 .highlight-section-1 {
+    padding-top: 8px;
+    padding-inline: 16px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -50,6 +64,8 @@
 }
 
 .highlight-section-2 {
+    padding-bottom: 8px;
+    padding-inline: 16px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -116,7 +132,7 @@
 
 .gallery-item-content {
     background-color: rgba(244, 244, 242, 0.7);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
     height: 100%;
     color: #1e2022;
     border: 1px solid #1e2022;
@@ -127,15 +143,14 @@
     justify-content: space-evenly;
 }
 
-.gallery-item-container:hover{
+.gallery-item-container:hover {
     cursor: pointer;
-    transform: scale(0.95);
     box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
 .gallery-item-content-selected {
     background-color: rgba(30, 32, 34, 0.7);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
     height: 100%;
     color: #f4f4f2;
     border: 2px solid #ffc107;
@@ -172,4 +187,9 @@
     0% { opacity: 0; }
     50% { opacity: 0.5; }
     100% { opacity: 1; }
+}
+
+@keyframes reveal-cover {
+    from { opacity: 0; transform: translateY(24px) scale(1.1); }
+    to { opacity: 1; transform: translateY(0) scale(1.0); } 
 }
