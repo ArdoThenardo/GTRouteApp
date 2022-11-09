@@ -132,7 +132,7 @@
 
 .gallery-item-content {
     background-color: rgba(244, 244, 242, 0.7);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
     height: 100%;
     color: #1e2022;
     border: 1px solid #1e2022;
@@ -143,15 +143,14 @@
     justify-content: space-evenly;
 }
 
-.gallery-item-container:hover{
+.gallery-item-container:hover {
     cursor: pointer;
-    transform: scale(0.95);
     box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
 .gallery-item-content-selected {
     background-color: rgba(30, 32, 34, 0.7);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
     height: 100%;
     color: #f4f4f2;
     border: 2px solid #ffc107;
