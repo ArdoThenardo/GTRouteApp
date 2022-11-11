@@ -1,5 +1,6 @@
 @using GTRouteApp.Data
 @inject RaceTrackService RaceTrackService
+@inject NavigationManager NavigationManager
 
 <div class="grid-container">
     @if (tracks == null || tracks.Count == 0)
@@ -19,7 +20,9 @@
             @foreach (var track in tracks)
             {
                 <div class="item-container">
-                    <div class="item-content" style="background-image: url(@track.CoverUrl);">
+                    <div class="item-content" 
+                        style="background-image: url(@track.CoverUrl);"
+                        @onclick="() => AccessTrackDetail(track.Slug!)">
                         <div class="content-section-1">
                             <img 
                                 src="@track.LogoUrl"
@@ -55,6 +58,11 @@
     private async Task LoadTracks()
     {
         tracks = await RaceTrackService.GetTracks();
+    }
+
+    private void AccessTrackDetail(string slug)
+    {
+        NavigationManager.NavigateTo($"/{slug}");
     }
 
     private void CheckError()

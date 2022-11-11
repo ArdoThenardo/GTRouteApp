@@ -1,0 +1,13 @@
+@page "/{slug}"
+
+@using GTRouteApp.Data
+
+<div>
+    <p>@slug</p>
+</div>
+
+@code {
+
+    [Parameter]
+    public string slug { get; set; } = "";
+}
