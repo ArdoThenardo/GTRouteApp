@@ -1,5 +1,6 @@
 @using GTRouteApp.Data
 @inject RaceTrackService RaceTrackService
+@inject NavigationManager NavigationManager
 @inject IJSRuntime JS
 
 <div class="gallery-container">
@@ -37,7 +38,11 @@
                     <p>No. Of Layouts</p>
                     <p><span @ref="section2LayoutRef">@tracks.ElementAt(selectedIndex).NumberOfLayouts</span></p>
                 </div>
-                <button type="button" class="btn btn-success">View Track</button>
+                <button type="button" 
+                    class="btn btn-success"
+                    @onclick="@(() => AccessTrackDetail(tracks.ElementAt(selectedIndex).Slug!))">
+                    View Track
+                </button>
             </div>
         </div>
         <div class="gallery-selection">
@@ -101,6 +106,11 @@
         selectedIndex = index;
 
         await ResetHighlightAnimationWithJS();
+    }
+
+    private void AccessTrackDetail(string slug)
+    {
+        NavigationManager.NavigateTo($"/{slug}");
     }
 
     private void CheckError()
