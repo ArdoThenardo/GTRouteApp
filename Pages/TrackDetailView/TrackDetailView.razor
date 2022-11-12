@@ -1,0 +1,40 @@
+@page "/{slug}"
+
+@using GTRouteApp.Data
+@inject TrackDetailService TrackDetailService
+@inject NavigationManager NavigationManager
+
+<div style="display: flex; flex-direction: column">
+    <p>@slug</p>
+    <p>@detail.Category | @detail.RoadType</p>
+    <p>@detail.Name</p>
+    <p><span class="fi fi-@detail.Country?.code"></span> @detail.Country?.name</p>
+</div>
+
+@code {
+
+    [Parameter]
+    public string slug { get; set; } = "";
+    private TrackDetail detail = new();
+    private string errorMessage = "";
+    private bool showError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDetail(slug);
+        CheckError();
+    }
+
+    private async Task LoadDetail(string slug)
+    {
+        var fetched = await TrackDetailService.GetTrackDetail(slug);
+        detail = fetched;
+    }
+
+    private void CheckError()
+    {
+        errorMessage = TrackDetailService.GetRecentErrorMessage();
+        Console.WriteLine($"error={errorMessage}");
+        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
+}

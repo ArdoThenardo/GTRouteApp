@@ -1,0 +1,13 @@
+{
+    "numberOfData": 1,
+    "data": {
+        "name": "Grand Valley Speedway",
+        "logoUrl":"img/sample-logo.png",
+        "category": "Original Circuit",
+        "roadType": "Tarmac",
+        "country": {
+            "name": "USA",
+            "code": "us"
+        }
+    }
+}
