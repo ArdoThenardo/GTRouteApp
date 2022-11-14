@@ -76,13 +76,17 @@
 
     public void GoBack(string originPage = "browse")
     {
-        if (originPage == "home")
+        if (originPage.Equals("home"))
         {
             NavigationManager.NavigateTo("/");
         }
-        else if (originPage == "browse")
+        else if (originPage.Equals("browseGallery"))
         {
-            NavigationManager.NavigateTo("/browse");
+            NavigationManager.NavigateTo("/browse?preselect_mode=gallery");
+        }
+        else if (originPage.Equals("browseGrid"))
+        {
+            NavigationManager.NavigateTo("/browse?preselect_mode=grid");
         }
     }
 }
