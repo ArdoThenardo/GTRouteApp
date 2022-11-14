@@ -19,9 +19,18 @@
     else
     {
         <div class="detail-nav">
-            <button type="button" class="btn btn-secondary">
-                <span class="bi bi-arrow-left-square"></span> Back
-            </button>
+            @if (!string.IsNullOrWhiteSpace(origin))
+            {
+                <button type="button" class="btn btn-secondary" @onclick="() => GoBack(origin)">
+                    <span class="bi bi-arrow-left-square"></span> Back
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-secondary" @onclick="() => GoBack()">
+                    <span class="bi bi-arrow-left-square"></span> Browse Race Tracks
+                </button>
+            }
         </div>
         <div class="detail-header">
             <div class="detail-header-group-1">
@@ -40,6 +49,9 @@
 
     [Parameter]
     public string slug { get; set; } = "";
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "origin")]
+    public string origin { get; set; } = "";
     private TrackDetail detail = new();
     private string errorMessage = "";
     private bool showError = false;
@@ -60,5 +72,17 @@
     {
         errorMessage = TrackDetailService.GetRecentErrorMessage();
         showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
+
+    public void GoBack(string originPage = "browse")
+    {
+        if (originPage == "home")
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        else if (originPage == "browse")
+        {
+            NavigationManager.NavigateTo("/browse");
+        }
     }
 }
