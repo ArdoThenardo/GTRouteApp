@@ -37,6 +37,9 @@
     [Parameter]
     public EventCallback<BrowseMode> ChosenBrowseMode { get; set; }
 
+    [Parameter]
+    public string preselect_mode { get; set; } = ""; // gallery or grid
+
     private bool disableGallery = true;
     private bool disableGrid = false;
 
@@ -44,6 +47,23 @@
     private Lazy<IJSObjectReference> subheaderJS = new();
     ElementReference galleryRef;
     ElementReference gridRef;
+
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrWhiteSpace(preselect_mode))
+        {
+            if (preselect_mode.Equals("gallery"))
+            {
+                disableGallery = true;
+                disableGrid = false;
+            }
+            else if (preselect_mode.Equals("grid"))
+            {
+                disableGallery = false;
+                disableGrid = true;
+            }
+        }
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

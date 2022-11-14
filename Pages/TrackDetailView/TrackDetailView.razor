@@ -1,0 +1,92 @@
+@page "/detail/{slug}"
+
+@using GTRouteApp.Data
+@inject TrackDetailService TrackDetailService
+@inject NavigationManager NavigationManager
+
+<div class="detail-container">
+    @if (detail == null || string.IsNullOrWhiteSpace(detail.Name)) // assume no detail if there is no name 
+    {
+        @if (showError)
+        {
+            <p>@errorMessage</p>
+        }
+        else
+        {
+            <div class="loading-traditional" style="height: 85vh;"></div>
+        }
+    }
+    else
+    {
+        <div class="detail-nav">
+            @if (!string.IsNullOrWhiteSpace(origin))
+            {
+                <button type="button" class="btn btn-secondary" @onclick="() => GoBack(origin)">
+                    <span class="bi bi-arrow-left-square"></span> Back
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-secondary" @onclick="() => GoBack()">
+                    <span class="bi bi-arrow-left-square"></span> Browse Race Tracks
+                </button>
+            }
+        </div>
+        <div class="detail-header">
+            <div class="detail-header-group-1">
+                <img src="@detail.LogoUrl" alt="@detail.Name" />
+                <div class="detail-header-inner">
+                    <p class="detail-secondary">@detail.Category | @detail.RoadType</p>
+                    <p class="detail-primary">@detail.Name</p>
+                </div>
+            </div>
+            <p class="detail-primary"><span class="fi fi-@detail.Country?.code"></span> @detail.Country?.name</p>
+        </div>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public string slug { get; set; } = "";
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "origin")]
+    public string origin { get; set; } = "";
+    private TrackDetail detail = new();
+    private string errorMessage = "";
+    private bool showError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDetail(slug);
+        CheckError();
+    }
+
+    private async Task LoadDetail(string slug)
+    {
+        var fetched = await TrackDetailService.GetTrackDetail(slug);
+        detail = fetched;
+    }
+
+    private void CheckError()
+    {
+        errorMessage = TrackDetailService.GetRecentErrorMessage();
+        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
+
+    public void GoBack(string originPage = "browse")
+    {
+        if (originPage.Equals("home"))
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        else if (originPage.Equals("browseGallery"))
+        {
+            NavigationManager.NavigateTo("/browse?preselect_mode=gallery");
+        }
+        else if (originPage.Equals("browseGrid"))
+        {
+            NavigationManager.NavigateTo("/browse?preselect_mode=grid");
+        }
+    }
+}
