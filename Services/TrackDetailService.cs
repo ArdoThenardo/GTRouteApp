@@ -5,7 +5,7 @@ public class TrackDetailService: BaseService
     // API Url to use:
     // remote: $"{_baseUrl}/{slug}";
     // sample-json: $"sample-json/track_detail.json";
-    private const string GetDetailUrl = $"{_baseUrl}/";
+    private const string GetDetailUrl = $"{_baseUrl}/detail/";
 
     private TrackDetail detail = new();
     private string recentError = "";
