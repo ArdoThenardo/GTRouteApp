@@ -8,6 +8,22 @@
         "country": {
             "name": "USA",
             "code": "us"
-        }
+        },
+        "layouts": [
+            {
+                "slug": "grand-valley-speedway",
+                "name": "Full Course",
+                "mapUrl": "img/sample-map.webp",
+                "length": 5.4,
+                "corners": 18
+            },
+            {
+                "slug": "grand-valley-speedway",
+                "name": "East Course",
+                "mapUrl": "img/sample-map.webp",
+                "length": 3.2,
+                "corners": 12
+            }
+        ]
     }
 }
