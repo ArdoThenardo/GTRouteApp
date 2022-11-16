@@ -3,9 +3,9 @@ namespace GTRouteApp.Data;
 public class TrackDetailService: BaseService
 {
     // API Url to use:
-    // remote: $"{_baseUrl}/detail" + {slug};
+    // remote: $"{_baseUrl}/detail/" + {slug};
     // sample-json: $"sample-data/track_detail.json";
-    private const string GetDetailUrl = $"sample-data/track_detail.json";
+    private const string GetDetailUrl = $"{_baseUrl}/detail/";
 
     private TrackDetail detail = new();
     private string recentError = "";
@@ -19,7 +19,7 @@ public class TrackDetailService: BaseService
 
         try
         {
-            var fetched = await HitRequest<BaseModel<TrackDetail>>(GetDetailUrl);
+            var fetched = await HitRequest<BaseModel<TrackDetail>>($"{GetDetailUrl}{slug}");
 
             if (fetched.NumberOfData == 0 || fetched.Data == null)
                 recentError = "There is no data";
