@@ -44,36 +44,7 @@
         </div>
         @if (layouts.Count() > 0)
         {
-            <div class="detail-layout">
-                <div class="layout-selection">
-                    @foreach (var layoutItem in layouts.Select((layoutData, index) => (layoutData, index)))
-                    {
-                        @if (layoutItem.index == selectedLayoutIndex)
-                        {
-                            <div class="layout-item-selected">
-                                <p>@layoutItem.layoutData.Name</p>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="layout-item">
-                                <p>@layoutItem.layoutData.Name</p>
-                            </div>
-                        }
-                    }
-                </div>
-                <div class="layout-map">
-                    <img src="@layouts.ElementAt(selectedLayoutIndex).MapUrl" 
-                        alt="@layouts.ElementAt(selectedLayoutIndex).Name" />
-                </div>
-                <div class="layout-info">
-                    <p class="info-label">Length</p>
-                    <p class="info-value">@layouts.ElementAt(selectedLayoutIndex).Length km</p>
-
-                    <p class="info-label">Corners</p>
-                    <p class="info-value">@layouts.ElementAt(selectedLayoutIndex).Corners</p>
-                </div>
-            </div>
+            <TrackDetailLayout Layouts="@layouts" />
         }
     }
 </div>
@@ -87,7 +58,6 @@
     public string origin { get; set; } = "";
     private TrackDetail detail = new();
     private List<TrackLayout> layouts = new();
-    private int selectedLayoutIndex = 0;
     private string errorMessage = "";
     private bool showError = false;
 
