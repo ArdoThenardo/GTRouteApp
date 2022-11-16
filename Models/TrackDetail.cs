@@ -7,4 +7,5 @@ public class TrackDetail
     public string? Category { get; set; }
     public string? RoadType { get; set; }
     public Country? Country { get; set; }
+    public List<TrackLayout> Layouts { get; set; } = new();
 }
