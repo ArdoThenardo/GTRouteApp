@@ -53,6 +53,7 @@ p {
     background-color: #1e2022;
     border: 1px solid #ffc107;
     border-radius: 12px;
+    transition: 0.25s;
 }
 
 .layout-map {
