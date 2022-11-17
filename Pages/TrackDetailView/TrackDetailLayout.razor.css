@@ -16,11 +16,21 @@ p {
     background-color: #303841;
     width: 30%;
     height: 100%;
-    border-right: 1px solid #1e2022;
+    border-right: 1px solid transparent;
     padding: 24px;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+}
+
+.layout-selection::-webkit-scrollbar {
+    background-color: #303841;
+    width: 4px;
+}
+
+.layout-selection::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #e8e8e8;
 }
 
 .layout-item, .layout-item-selected {
