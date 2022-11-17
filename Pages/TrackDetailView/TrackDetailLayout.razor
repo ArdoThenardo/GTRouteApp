@@ -12,7 +12,7 @@
             }
             else
             {
-                <div class="layout-item">
+                <div class="layout-item" @onclick="() => SetSelection(layoutItem.index)">
                     <p>@layoutItem.layoutData.Name</p>
                 </div>
             }
@@ -36,4 +36,9 @@
     public List<TrackLayout> Layouts { get; set; } = new();
 
     private int selectedLayoutIndex = 0;
+
+    private void SetSelection(int index)
+    {
+        selectedLayoutIndex = index;
+    }
 }
