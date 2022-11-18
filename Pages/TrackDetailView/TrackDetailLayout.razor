@@ -23,11 +23,14 @@
             alt="@Layouts.ElementAt(selectedLayoutIndex).Name" />
     </div>
     <div class="layout-info">
-        <p class="info-label">Length</p>
-        <p class="info-value">@Layouts.ElementAt(selectedLayoutIndex).Length km</p>
-
-        <p class="info-label">Corners</p>
-        <p class="info-value">@Layouts.ElementAt(selectedLayoutIndex).Corners</p>
+        <div class="info-group">
+            <p class="info-label">Length</p>
+            <p class="info-value">@Layouts.ElementAt(selectedLayoutIndex).Length km</p>
+        </div>
+        <div class="info-group">
+            <p class="info-label">Corners</p>
+            <p class="info-value">@Layouts.ElementAt(selectedLayoutIndex).Corners</p>
+        </div>
     </div>
 </div>
 
