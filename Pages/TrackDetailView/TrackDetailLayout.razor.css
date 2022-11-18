@@ -6,7 +6,6 @@ p {
 .detail-layout {
     width: 100%;
     height: 32vh;
-    padding-top: 16px;
     padding-inline: 16px;
     display: flex;
     flex-direction: row;
@@ -68,7 +67,7 @@ p {
 
 .layout-map {
     background-color: #f4f4f2;
-    width: 30%;
+    width: 35%;
     height: 100%;
     padding: 24px;
 }
@@ -82,19 +81,29 @@ p {
 }
 
 .layout-info {
-    background-color: burlywood;
-    width: 20%;
+    background-color: #f4f4f2;
+    width: 35%;
     height: 100%;
+    padding-block: 24px;
+    padding-inline: 8px;
     display: flex;
     flex-direction: column;
 }
 
+.info-group {
+    margin-top: 8px;
+}
+
+.info-group:nth-child(2) {
+    margin-top: 12px;
+}
+
 .info-label {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .info-value {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
 }
