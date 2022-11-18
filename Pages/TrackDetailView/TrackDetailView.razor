@@ -32,16 +32,7 @@
                 </button>
             }
         </div>
-        <div class="detail-header">
-            <div class="detail-header-group-1">
-                <img src="@detail.LogoUrl" alt="@detail.Name" />
-                <div class="detail-header-inner">
-                    <p class="detail-secondary">@detail.Category | @detail.RoadType</p>
-                    <p class="detail-primary">@detail.Name</p>
-                </div>
-            </div>
-            <p class="detail-primary"><span class="fi fi-@detail.Country?.code"></span> @detail.Country?.name</p>
-        </div>
+        <TrackDetailHeader Detail="@detail" />
         @if (layouts.Count() > 0)
         {
             <TrackDetailLayout Layouts="@layouts" />

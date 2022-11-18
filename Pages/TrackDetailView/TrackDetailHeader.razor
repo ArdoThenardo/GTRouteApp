@@ -1,0 +1,17 @@
+@using GTRouteApp.Data;
+
+<div class="detail-header">
+    <div class="detail-header-group-1">
+        <img src="@Detail.LogoUrl" alt="@Detail.Name" />
+        <div class="detail-header-inner">
+            <p class="detail-secondary">@Detail.Category | @Detail.RoadType</p>
+            <p class="detail-primary">@Detail.Name</p>
+        </div>
+    </div>
+    <p class="detail-primary"><span class="fi fi-@Detail.Country?.code"></span> @Detail.Country?.name</p>
+</div>
+
+@code {
+    [Parameter]
+    public TrackDetail Detail { get; set; } = new();
+}
