@@ -16,3 +16,8 @@
     border-radius: 18px;
     font-size: 15px;
 }
+
+.inner-container {
+    padding-bottom: 160px; /* temporary empty space */
+    padding-inline: 16px;
+}

@@ -3,10 +3,13 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    padding-inline: 16px;
     padding-block: 20px;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1.5px solid #1e2022;
+    border-inline: 1.5px solid #1e2022;
+    border-block: 1.5px solid #1e2022;
+    border-radius: 24px 24px 0 0;
 }
 
 .detail-header img {

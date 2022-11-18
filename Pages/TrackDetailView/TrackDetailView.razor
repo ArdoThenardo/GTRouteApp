@@ -32,11 +32,13 @@
                 </button>
             }
         </div>
-        <TrackDetailHeader Detail="@detail" />
-        @if (layouts.Count() > 0)
-        {
-            <TrackDetailLayout Layouts="@layouts" />
-        }
+        <div class="inner-container">
+            <TrackDetailHeader Detail="@detail" />
+            @if (layouts.Count() > 0)
+            {
+                <TrackDetailLayout Layouts="@layouts" />
+            }
+        </div>
     }
 </div>
 
