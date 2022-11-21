@@ -38,14 +38,10 @@
             {
                 <TrackDetailLayout Layouts="@layouts" />
             }
-            <div>
-                <ul>
-                    @foreach (var image in images)
-                    {
-                        <li>@image.ImageName | @image.ImageUrl | @image.Description</li>
-                    }
-                </ul>
-            </div>
+            @if (images.Count() > 0)
+            {
+                <TrackDetailGallery Images="@images" />
+            }
         </div>
     }
 </div>
