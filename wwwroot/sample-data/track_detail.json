@@ -52,6 +52,36 @@
                 "length": 2.75,
                 "corners": 8
             }
+        ],
+        "images": [
+            {
+                "slug": "grand-valley-speedway",
+                "imageName": "gvs-001",
+                "imageUrl": "img/sample-cover.jpg",
+                "description": "Panorama view of Grand Valley Speedway from turn 1-2",
+                "author": "admin"
+            },
+            {
+                "slug": "grand-valley-speedway",
+                "imageName": "gvs-002",
+                "imageUrl": "img/sample-cover.jpg",
+                "description": "Panorama view of Grand Valley Speedway from bridge part of track",
+                "author": "admin"
+            },
+            {
+                "slug": "grand-valley-speedway",
+                "imageName": "gvs-003",
+                "imageUrl": "img/sample-cover.jpg",
+                "description": "Panorama view of Grand Valley Speedway from turn 6-7",
+                "author": "admin"
+            },
+            {
+                "slug": "grand-valley-speedway",
+                "imageName": "gvs-004",
+                "imageUrl": "img/sample-cover.jpg",
+                "description": "Start/Finish line of Grand Valley Speedway.",
+                "author": "admin"
+            }
         ]
     }
 }
