@@ -1,5 +1,7 @@
 p {
-    color: #1e2022;
+    color: #f4f4f2;
+    font-size: 16px;
+    font-weight: 600;
     margin-bottom: 0;
 }
 
@@ -8,7 +10,6 @@ p {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 65vh;
 }
 
 .detail-gallery-highlight {
@@ -18,7 +19,7 @@ p {
 }
 
 .highlight-image-section {
-    width: 70%;
+    width: 60%;
 }
 
 .highlight-image-section img {
@@ -29,11 +30,20 @@ p {
 
 .highlight-info-section {
     background-color: #1e2022;
-    width: 35%;
+    width: 40%;
     display: flex;
     flex-direction: column;
+    padding: 24px;
 }
 
-.highlight-info-section p {
-    color: #f4f4f2;
+.info-part-1 {
+    border-bottom: 1px solid #f4f4f2;
+}
+
+.info-part-1 p {
+    margin-bottom: 12px;
+}
+
+.info-part-2 p {
+    margin-top: 12px;
 }
