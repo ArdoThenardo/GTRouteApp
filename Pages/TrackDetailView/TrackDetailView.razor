@@ -38,6 +38,10 @@
             {
                 <TrackDetailLayout Layouts="@layouts" />
             }
+            @if (images.Count() > 0)
+            {
+                <TrackDetailGallery Images="@images" />
+            }
         </div>
     }
 </div>
@@ -51,6 +55,7 @@
     public string origin { get; set; } = "";
     private TrackDetail detail = new();
     private List<TrackLayout> layouts = new();
+    private List<TrackImage> images = new();
     private string errorMessage = "";
     private bool showError = false;
 
@@ -65,6 +70,7 @@
         var fetched = await TrackDetailService.GetTrackDetail(slug);
         detail = fetched;
         layouts.AddRange(detail.Layouts);
+        images.AddRange(detail.Images);
     }
 
     private void CheckError()
