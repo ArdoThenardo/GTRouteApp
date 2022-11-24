@@ -1,11 +1,13 @@
 @using GTRouteApp.Data
+@inject IJSRuntime JS
 
 <div class="detail-gallery">
     <div class="detail-gallery-highlight">
         <div class="highlight-image-section">
             <img src="@Images.ElementAt(selectedImageIndex).ImageUrl" 
                 alt="@Images.ElementAt(selectedImageIndex).ImageName" />
-            <button class="btn btn-secondary full-btn">
+            <button class="btn btn-secondary full-btn" 
+                @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
                 <span class="bi bi-arrows-fullscreen"></span>
             </button>
         </div>
@@ -45,5 +47,11 @@
     private void SetSelection(int selectedIndex)
     {
         selectedImageIndex = selectedIndex;
+    }
+
+    private async Task OpenImageInFullScreen(string? url)
+    {
+        if (url is not null)
+            await JS.InvokeVoidAsync("open", url, "_blank");
     }
 }
