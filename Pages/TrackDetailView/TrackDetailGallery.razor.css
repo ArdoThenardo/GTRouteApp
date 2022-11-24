@@ -72,10 +72,12 @@ p {
     height: 85px;
     margin-right: 8px;
     border-radius: 8px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
 }
 
 .gallery-item:hover {
     cursor: pointer;
+    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
 .gallery-item img, .gallery-item-selected img {
@@ -86,7 +88,12 @@ p {
 }
 
 .gallery-item img {
+    filter: grayscale(0.8);
     border: 2px solid #1e2022;
+}
+
+.gallery-item:hover img {
+    filter: grayscale(0);
 }
 
 .gallery-item-selected img {
