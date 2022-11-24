@@ -15,13 +15,22 @@
             </div>
         </div>
     </div>
-    <div>
-        <ul>
-            @foreach (var image in Images)
+    <div class="detail-gallery-selection">
+        @foreach (var image in Images.Select((imageData, index) => (imageData, index)))
+        {
+            @if (selectedImageIndex == image.index)
             {
-                <li>@image.ImageUrl | @image.Description | @image.Author</li>
+                <div class="gallery-item-selected">
+                    <img src="@image.imageData.ImageUrl" alt="@image.imageData.ImageName" />
+                </div>
             }
-        </ul>
+            else
+            {
+                <div class="gallery-item" @onclick="() => SetSelection(image.index)">
+                    <img src="@image.imageData.ImageUrl" alt="@image.imageData.ImageName" />
+                </div>
+            }
+        }
     </div>
 </div>
 
@@ -29,4 +38,9 @@
     [Parameter]
     public List<TrackImage> Images { get; set; } = new();
     private int selectedImageIndex = 0;
+
+    private void SetSelection(int selectedIndex)
+    {
+        selectedImageIndex = selectedIndex;
+    }
 }

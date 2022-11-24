@@ -47,3 +47,55 @@ p {
 .info-part-2 p {
     margin-top: 12px;
 }
+
+.detail-gallery-selection {
+    display: flex;
+    flex-direction: row;
+    height: 35%;
+    padding: 8px;
+    overflow-x: scroll;
+    box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
+}
+
+.detail-gallery-selection::-webkit-scrollbar {
+    background-color: #f4f4f2;
+    height: 4px;
+}
+
+.detail-gallery-selection::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #1e2022;
+}
+
+.gallery-item, .gallery-item-selected {
+    width: 140px;
+    height: 85px;
+    margin-right: 8px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+}
+
+.gallery-item:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
+}
+
+.gallery-item img, .gallery-item-selected img {
+    object-fit: cover;
+    width: 140px;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.gallery-item img {
+    filter: grayscale(0.8);
+    border: 2px solid #1e2022;
+}
+
+.gallery-item:hover img {
+    filter: grayscale(0);
+}
+
+.gallery-item-selected img {
+    border: 2px solid #ffc107;
+}
