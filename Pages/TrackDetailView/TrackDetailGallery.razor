@@ -4,6 +4,9 @@
 <div class="detail-gallery">
     <div class="detail-gallery-highlight">
         <div class="highlight-image-section">
+            <div class="highlight-placeholder">
+                <span class="bi bi-image-fill"></span>
+            </div>
             <img src="@Images.ElementAt(selectedImageIndex).ImageUrl" 
                 alt="@Images.ElementAt(selectedImageIndex).ImageName" />
             <button class="btn btn-secondary full-btn" 
@@ -26,13 +29,21 @@
             @if (selectedImageIndex == image.index)
             {
                 <div class="gallery-item-selected">
-                    <img src="@image.imageData.ImageUrl" alt="@image.imageData.ImageName" />
+                    <div class="item-placeholder">
+                        <span class="bi bi-image-fill"></span>
+                    </div>
+                    <img src="@image.imageData.ImageUrl" 
+                        alt="@image.imageData.ImageName" />
                 </div>
             }
             else
             {
                 <div class="gallery-item" @onclick="() => SetSelection(image.index)">
-                    <img src="@image.imageData.ImageUrl" alt="@image.imageData.ImageName" />
+                    <div class="item-placeholder">
+                        <span class="bi bi-image-fill"></span>
+                    </div>
+                    <img src="@image.imageData.ImageUrl" 
+                        alt="@image.imageData.ImageName" />
                 </div>
             }
         }
