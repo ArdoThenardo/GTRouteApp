@@ -1,10 +1,18 @@
 @using GTRouteApp.Data
+@inject IJSRuntime JS
 
 <div class="detail-gallery">
     <div class="detail-gallery-highlight">
         <div class="highlight-image-section">
+            <div class="highlight-placeholder">
+                <span class="bi bi-image-fill"></span>
+            </div>
             <img src="@Images.ElementAt(selectedImageIndex).ImageUrl" 
                 alt="@Images.ElementAt(selectedImageIndex).ImageName" />
+            <button class="btn btn-secondary full-btn" 
+                @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
+                <span class="bi bi-arrows-fullscreen"></span>
+            </button>
         </div>
         <div class="highlight-info-section">
             <div class="info-part-1">
@@ -21,13 +29,21 @@
             @if (selectedImageIndex == image.index)
             {
                 <div class="gallery-item-selected">
-                    <img src="@image.imageData.ImageUrl" alt="@image.imageData.ImageName" />
+                    <div class="item-placeholder">
+                        <span class="bi bi-image-fill"></span>
+                    </div>
+                    <img src="@image.imageData.ImageUrl" 
+                        alt="@image.imageData.ImageName" />
                 </div>
             }
             else
             {
                 <div class="gallery-item" @onclick="() => SetSelection(image.index)">
-                    <img src="@image.imageData.ImageUrl" alt="@image.imageData.ImageName" />
+                    <div class="item-placeholder">
+                        <span class="bi bi-image-fill"></span>
+                    </div>
+                    <img src="@image.imageData.ImageUrl" 
+                        alt="@image.imageData.ImageName" />
                 </div>
             }
         }
@@ -42,5 +58,11 @@
     private void SetSelection(int selectedIndex)
     {
         selectedImageIndex = selectedIndex;
+    }
+
+    private async Task OpenImageInFullScreen(string? url)
+    {
+        if (url is not null)
+            await JS.InvokeVoidAsync("open", url, "_blank");
     }
 }
