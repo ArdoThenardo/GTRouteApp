@@ -15,13 +15,13 @@
             </div>
         </div>
     </div>
-    <div>
-        <ul>
-            @foreach (var image in Images)
-            {
-                <li>@image.ImageUrl | @image.Description | @image.Author</li>
-            }
-        </ul>
+    <div class="detail-gallery-selection">
+        @foreach (var image in Images)
+        {
+            <div class="gallery-item">
+                <img src="@image.ImageUrl" alt="@image.ImageName" />
+            </div>
+        }
     </div>
 </div>
 
