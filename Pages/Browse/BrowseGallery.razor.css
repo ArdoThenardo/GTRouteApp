@@ -118,12 +118,15 @@
 
 .gallery-selection::-webkit-scrollbar {
     background-color: #e8e8e8;
-    height: 4px;
+    height: 10px;
 }
 
 .gallery-selection::-webkit-scrollbar-thumb {
+    padding: 2px;
+    border: 2px solid transparent;
     border-radius: 10px;
     background-color: #1e2022;
+    background-clip: padding-box;
 }
 
 .gallery-item-container, .gallery-item-container-selected {
