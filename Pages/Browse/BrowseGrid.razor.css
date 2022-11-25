@@ -6,7 +6,16 @@
 }
 
 .grid-container::-webkit-scrollbar {
-    display: none;
+    background-color: #e8e8e8;
+    width: 12px;
+}
+
+.grid-container::-webkit-scrollbar-thumb {
+    padding: 2px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background-color: #1e2022;
+    background-clip: padding-box;
 }
 
 .grid-list {
@@ -44,7 +53,7 @@
 .content-section-1 {
     background-color: rgba(244, 244, 242, 0.7);
     backdrop-filter: blur(4px);
-    height: 85%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
