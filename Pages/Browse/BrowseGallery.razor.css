@@ -123,7 +123,6 @@
 .gallery-item-container, .gallery-item-container-selected {
     background-size: cover;
     background-blend-mode: overlay;
-    width: 22vw;
     border-radius: 16px;
     transform: scale(0.95);
     transition: 0.25s;
@@ -133,6 +132,7 @@
 .gallery-item-content {
     background-color: rgba(244, 244, 242, 0.7);
     backdrop-filter: blur(1px);
+    width: 22vw;
     height: 100%;
     color: #1e2022;
     border: 1px solid #1e2022;
@@ -151,6 +151,7 @@
 .gallery-item-content-selected {
     background-color: rgba(30, 32, 34, 0.7);
     backdrop-filter: blur(1px);
+    width: 22vw;
     height: 100%;
     color: #f4f4f2;
     border: 2px solid #ffc107;
@@ -162,7 +163,8 @@
 }
 
 .gallery-item-content img, .gallery-item-content-selected img {
-    width: 10vw;
+    object-fit: contain;
+    width: 50%;
     filter: drop-shadow(0 0 3px rgba(30, 32, 34, 0.4));
 }
 
