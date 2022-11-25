@@ -31,12 +31,17 @@
             </div>
             <div class="highlight-section-2">
                 <div class="section-2-left">
+                    <p>
+                        <span @ref="section2NameRef">@tracks.ElementAt(selectedIndex).Name</span>
+                    </p>
                     <p>Category</p>
-                    <p><span @ref="section2CategoryRef">@tracks.ElementAt(selectedIndex).Category</span></p>
-                    <p>Road Type</p>
-                    <p><span @ref="section2RoadTypeRef">@tracks.ElementAt(selectedIndex).RoadType</span></p>
+                    <p>
+                        <span @ref="section2CategoryRef">@tracks.ElementAt(selectedIndex).Category</span>
+                    </p>
                     <p>No. Of Layouts</p>
-                    <p><span @ref="section2LayoutRef">@tracks.ElementAt(selectedIndex).NumberOfLayouts</span></p>
+                    <p>
+                        <span @ref="section2LayoutRef">@tracks.ElementAt(selectedIndex).NumberOfLayouts</span>
+                    </p>
                 </div>
                 <button type="button" 
                     class="btn btn-success"
@@ -88,7 +93,7 @@
     private bool showError = false;
 
     ElementReference highlightCoverRef, section1CountryRef, section1LogoRef;
-    ElementReference section2CategoryRef, section2RoadTypeRef, section2LayoutRef;
+    ElementReference section2NameRef, section2CategoryRef, section2LayoutRef;
 
     protected override async Task OnInitializedAsync()
     {
@@ -124,8 +129,8 @@
         await JS.InvokeVoidAsync("resetAnimationByReinsertClassName", highlightCoverRef, "gallery-highlight");
         await JS.InvokeVoidAsync("resetAnimationByStyle", section1CountryRef);
         await JS.InvokeVoidAsync("resetAnimationByStyle", section1LogoRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2NameRef);
         await JS.InvokeVoidAsync("resetAnimationByStyle", section2CategoryRef);
-        await JS.InvokeVoidAsync("resetAnimationByStyle", section2RoadTypeRef);
         await JS.InvokeVoidAsync("resetAnimationByStyle", section2LayoutRef);
     }
 }

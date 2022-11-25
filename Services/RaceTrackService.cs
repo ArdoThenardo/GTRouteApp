@@ -29,7 +29,7 @@ public class RaceTrackService: BaseService
             if (fetched.NumberOfData == 0) {
                 recentError = "There is no track data.";
             }
-            tracks.AddRange(fetched.Data ?? new List<RaceTrack>());
+            tracks.AddRange(fetched.Data ?? Enumerable.Empty<RaceTrack>().ToList());
 
             return tracks;
         }
@@ -37,7 +37,7 @@ public class RaceTrackService: BaseService
         {
             recentError = "Unable to get track data from server. Please try again at later time.";
 
-            return new List<RaceTrack>();
+            return Enumerable.Empty<RaceTrack>().ToList();
         }
     }
 
