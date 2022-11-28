@@ -32,6 +32,13 @@ p {
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 16px;
+    transition: 0.25s;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+}
+
+.other-item:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
 .item-image {
