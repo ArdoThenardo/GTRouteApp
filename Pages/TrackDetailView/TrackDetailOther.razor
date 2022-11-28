@@ -5,12 +5,23 @@
         <h3>Other Race Track Suggestions</h3>
     </div>
     <div>
-        <ul>
             @foreach (var track in OtherTracks)
             {
-                <li>@track.Name | @track.Category | @track.Country?.name</li>
+                <div class="other-item">
+                    <div class="item-image" style="background-image: url(@track.CoverUrl);">
+                        <img src="@track.LogoUrl" alt="@track.Name" />
+                    </div>
+                    <div class="item-info">
+                        <p class="info-secondary">@track.Category</p>
+                        <p class="info-primary">@track.Name</p>
+                    </div>
+                    <div class="item-country">
+                        <p class="info-primary">
+                            <span class="fi fi-@track.Country?.code"></span> @track.Country?.name
+                        </p>
+                    </div>
+                </div>
             }
-        </ul>
     </div>
 </div>
 
