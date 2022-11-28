@@ -2,7 +2,7 @@
     "numberOfData": 1,
     "data": {
         "name": "Grand Valley Speedway",
-        "logoUrl":"img/sample-logo.png",
+        "logoUrl": "img/sample-logo.png",
         "category": "Original Circuit",
         "roadType": "Tarmac",
         "country": {
@@ -81,6 +81,73 @@
                 "imageUrl": "img/sample-cover.jpg",
                 "description": "Start/Finish line of Grand Valley Speedway.",
                 "author": "admin"
+            }
+        ],
+        "otherTracks": [
+            {
+                "slug": "tsukuba-circuit-1668137687",
+                "name": "Tsukuba Circuit",
+                "logoUrl": "img/sample-logo.png",
+                "coverUrl": "img/sample-cover.jpg",
+                "category": "Real Circuit",
+                "roadType": "Tarmac",
+                "numberOfLayouts": 1,
+                "country": {
+                    "name": "Japan",
+                    "code": "jp"
+                }
+            },
+            {
+                "slug": "fuji-speedway-1667529278",
+                "name": "Fuji Speedway",
+                "logoUrl": "img/sample-logo.png",
+                "coverUrl": "img/sample-cover.jpg",
+                "category": "Real Circuit",
+                "roadType": "Tarmac",
+                "numberOfLayouts": 2,
+                "country": {
+                    "name": "Japan",
+                    "code": "jp"
+                }
+            },
+            {
+                "slug": "high-speed-ring",
+                "name": "High Speed Ring",
+                "logoUrl": "img/sample-logo.png",
+                "coverUrl": "img/sample-cover.jpg",
+                "category": "Original Circuit",
+                "roadType": "Tarmac",
+                "numberOfLayouts": 2,
+                "country": {
+                    "name": "Japan",
+                    "code": "jp"
+                }
+            },
+            {
+                "slug": "colorado-springs-1668138084",
+                "name": "Colorado Springs",
+                "logoUrl": "img/sample-logo.png",
+                "coverUrl": "img/sample-cover.jpg",
+                "category": "Dirt Circuit",
+                "roadType": "Dirt",
+                "numberOfLayouts": 1,
+                "country": {
+                    "name": "USA",
+                    "code": "us"
+                }
+            },
+            {
+                "slug": "fishermans-ranch-1668138024",
+                "name": "Fishermans Ranch",
+                "logoUrl": "img/sample-logo.png",
+                "coverUrl": "img/sample-cover.jpg",
+                "category": "Dirt Circuit",
+                "roadType": "Dirt",
+                "numberOfLayouts": 2,
+                "country": {
+                    "name": "USA",
+                    "code": "us"
+                }
             }
         ]
     }
