@@ -64,8 +64,18 @@
     private string errorMessage = "";
     private bool showError = false;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
+        await InitializeTrackDetail();
+    }
+
+    private async Task InitializeTrackDetail()
+    {
+        detail = new();
+        layouts = new();
+        images = new();
+        otherTracks = new();
+
         await LoadDetail(slug);
         CheckError();
     }
