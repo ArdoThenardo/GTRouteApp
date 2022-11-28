@@ -9,4 +9,5 @@ public class TrackDetail
     public Country? Country { get; set; }
     public List<TrackLayout> Layouts { get; set; } = new();
     public List<TrackImage> Images { get; set; } = new();
+    public List<RaceTrack> OtherTracks { get; set; } = new();
 }
