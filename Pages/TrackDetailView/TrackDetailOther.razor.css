@@ -10,7 +10,7 @@ p {
 .other-item {
     background-color: #f4f4f2;
     width: 100%;
-    height: 120px;
+    height: 100px;
     display: flex;
     flex-direction: row;
     border: 1px solid #1e2022;
@@ -22,7 +22,7 @@ p {
 .item-image {
     background-size: cover;
     background-blend-mode: overlay;
-    width: 15%;
+    width: 14%;
 }
 
 .item-image img {
@@ -30,7 +30,7 @@ p {
     display: block;
     width: 100%;
     height: 100%;
-    padding: 16%;
+    padding: 12%;
     object-fit: contain;
     border-right: 2px solid #1e2022;
     filter: drop-shadow(0 0 3px rgba(30, 32, 34, 0.6));
@@ -40,6 +40,17 @@ p {
     display: flex;
     flex-direction: column;
     width: 55%;
+    padding-left: 12px;
+    justify-content: center;
+}
+
+.item-country {
+    display: flex;
+    flex-direction: column;
+    width: 31%;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 24px;
 }
 
 .info-primary {
