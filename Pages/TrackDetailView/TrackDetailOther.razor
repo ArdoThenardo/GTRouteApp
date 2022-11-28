@@ -1,0 +1,20 @@
+@using GTRouteApp.Data
+
+<div class="detail-other">
+    <div>
+        <h3>Other Race Track Suggestions</h3>
+    </div>
+    <div>
+        <ul>
+            @foreach (var track in OtherTracks)
+            {
+                <li>@track.Name | @track.Category | @track.Country?.name</li>
+            }
+        </ul>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<RaceTrack> OtherTracks { get; set; } = new();    
+}

@@ -44,12 +44,7 @@
             }
             @if (otherTracks.Count() > 0)
             {
-                <ul>
-                    @foreach (var track in otherTracks)
-                    {
-                        <li>@track.Name | @track.Category | @track.Country?.name</li>
-                    }
-                </ul>
+                <TrackDetailOther OtherTracks="@otherTracks" />
             }
         </div>
     }
