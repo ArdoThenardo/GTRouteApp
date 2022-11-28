@@ -1,27 +1,27 @@
 @using GTRouteApp.Data
 
 <div class="detail-other">
-    <div>
+    <div class="other-header">
         <h4>Other Race Track Suggestions</h4>
     </div>
-    <div>
-            @foreach (var track in OtherTracks)
-            {
-                <div class="other-item">
-                    <div class="item-image" style="background-image: url(@track.CoverUrl);">
-                        <img src="@track.LogoUrl" alt="@track.Name" />
-                    </div>
-                    <div class="item-info">
-                        <p class="info-secondary">@track.Category</p>
-                        <p class="info-primary">@track.Name</p>
-                    </div>
-                    <div class="item-country">
-                        <p class="info-primary">
-                            <span class="fi fi-@track.Country?.code"></span> @track.Country?.name
-                        </p>
-                    </div>
+    <div class="other-tracks-list">
+        @foreach (var track in OtherTracks)
+        {
+            <div class="other-item">
+                <div class="item-image" style="background-image: url(@track.CoverUrl);">
+                    <img src="@track.LogoUrl" alt="@track.Name" />
                 </div>
-            }
+                <div class="item-info">
+                    <p class="info-secondary">@track.Category</p>
+                    <p class="info-primary">@track.Name</p>
+                </div>
+                <div class="item-country">
+                    <p class="info-primary">
+                        <span class="fi fi-@track.Country?.code"></span> @track.Country?.name
+                    </p>
+                </div>
+            </div>
+        }
     </div>
 </div>
 
