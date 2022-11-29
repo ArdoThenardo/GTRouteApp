@@ -7,7 +7,12 @@
 }
 
 .navbar-brand {
-    font-size: 1.4rem;
+    width: 160px;
+}
+
+.navbar-brand img {
+    object-fit: contain;
+    width: 100%;
 }
 
 .nav-item {
