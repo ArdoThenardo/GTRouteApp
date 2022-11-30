@@ -1,0 +1,30 @@
+span {
+    color: #f4f4f2;
+}
+
+a, ::deep a {
+    text-decoration: none;
+}
+
+.footer-container {
+    background-color: #303841;
+    display: grid;
+    grid-template-columns: repeat(3, 33.33%);
+    padding: 32px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 8px;
+}
+
+.footer-column img {
+    object-fit: contain;
+    height: 42px;
+}
+
+.footer-separator {
+    height: 24px;
+}
