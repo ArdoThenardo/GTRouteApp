@@ -6,13 +6,15 @@
 <PageTitle>Home</PageTitle>
 
 <div class="home-container">
-    <IndexSubheader Info="Welcome to GTRoad! Here you can look for information of every race tracks that featured on Gran Turismo series." />
+    <IndexSubheader Info="Welcome to GTRoad! Here you can look for information of race tracks that featured on Gran Turismo series." />
 
     @if (featured == null || featured.Count() == 0)
     {
         @if (showError)
         {
-            <p>@errorMessage</p>
+            <div style="height: 85vh;">
+                <p>@errorMessage</p>
+            </div>
         }
         else
         {
@@ -77,6 +79,8 @@
                 </div>
             </div>
         </div>
+
+        <IndexNotice />
     }
 </div>
 
