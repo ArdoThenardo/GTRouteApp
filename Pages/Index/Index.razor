@@ -12,7 +12,9 @@
     {
         @if (showError)
         {
-            <p>@errorMessage</p>
+            <div style="height: 85vh;">
+                <p>@errorMessage</p>
+            </div>
         }
         else
         {
@@ -77,19 +79,9 @@
                 </div>
             </div>
         </div>
+
+        <IndexNotice />
     }
-    <div class="in-progress-notice">
-        <h4>
-            <span class="bi bi-cone-striped" style="margin-right: 8px;"></span>
-            More Race Track entries will be added in the future
-            <span class="bi bi-cone-striped" style="margin-left: 8px;"></span>
-        </h4>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sem et justo lobortis venenatis. 
-            Sed luctus, massa quis dapibus sollicitudin, dui arcu posuere tellus, in dignissim felis sem et nisi. 
-            Vivamus feugiat nunc vitae magna facilisis eleifend. Nulla condimentum nisi dui, vitae ullamcorper massa pellentesque id.
-        </p>
-    </div>
 </div>
 
 @code {
