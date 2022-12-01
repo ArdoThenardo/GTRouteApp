@@ -22,6 +22,6 @@ public class RaceTrackEditModel
     [Required(ErrorMessage = "Please select a road type on the race track")]
     public string? RoadType { get; set; }
 
-    [Required, Range(1, 10, ErrorMessage = "Please select a number of layout (min. 1) available for race track")]
+    [Required, Range(1, 20, ErrorMessage = "Please select a number of layout (min. 1) available for race track")]
     public int NumberOfLayouts { get; set; }
 }
