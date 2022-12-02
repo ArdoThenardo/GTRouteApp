@@ -64,6 +64,11 @@
     private string errorMessage = "";
     private bool showError = false;
 
+    protected override void OnInitialized()
+    {
+        ClearTrackDetail();
+    }
+
     protected override async Task OnParametersSetAsync()
     {
         await InitializeTrackDetail();
@@ -71,13 +76,18 @@
 
     private async Task InitializeTrackDetail()
     {
+        ClearTrackDetail();
+
+        await LoadDetail(slug);
+        CheckError();
+    }
+
+    private void ClearTrackDetail()
+    {
         detail = new();
         layouts = new();
         images = new();
         otherTracks = new();
-
-        await LoadDetail(slug);
-        CheckError();
     }
 
     private async Task LoadDetail(string slug)
