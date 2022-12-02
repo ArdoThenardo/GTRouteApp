@@ -29,6 +29,7 @@
 
 .inner-group-1-img {
     position: relative;
+    width: 96%;
 }
 
 .img-cover {
@@ -52,7 +53,7 @@
 }
 
 .horizontal-separator {
-    width: 16px;
+    width: 4%;
 }
 
 .detail-header-group-2 {
