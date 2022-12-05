@@ -11,29 +11,29 @@
         }
         else
         {
-            <div class="loading-traditional"></div>
+            <div class="loading-traditional" style="height: 85vh;"></div>
         }
     }
     else
     {
         <div class="grid-list">
-            @foreach (var track in tracks)
+            @foreach (var track in tracks.Select((trackData, index) => (trackData, index)))
             {
                 <div class="item-container">
-                    <div class="item-content" 
-                        style="background-image: url(@track.CoverUrl);"
-                        @onclick="() => AccessTrackDetail(track.Slug!)">
+                    <div class="item-content"
+                        style="background-image: url(@track.trackData.CoverUrl); --delay: @track.index;)"
+                        @onclick="() => AccessTrackDetail(track.trackData.Slug!)">
                         <div class="content-section-1">
                             <img 
-                                src="@track.LogoUrl"
-                                alt="@track.LogoUrl"
+                                src="@track.trackData.LogoUrl"
+                                alt="@track.trackData.LogoUrl"
                             />
-                            <p>@track.Name</p>
+                            <p>@track.trackData.Name</p>
                         </div>
                         <div class="content-section-2">
                             <p>
-                                <span class="fi fi-@track.Country?.code" style="margin-right: 6px;"></span>
-                                <span>@track.Category</span>
+                                <span class="fi fi-@track.trackData.Country?.code" style="margin-right: 6px;"></span>
+                                <span>@track.trackData.Category</span>
                             </p>
                         </div>
                     </div>
@@ -62,7 +62,8 @@
 
     private async Task LoadTracks()
     {
-        tracks = await RaceTrackService.GetTracks();
+        var fetched = await RaceTrackService.GetTracks();
+        tracks.AddRange(fetched);
     }
 
     private void AccessTrackDetail(string slug)
