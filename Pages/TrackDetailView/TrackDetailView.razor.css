@@ -7,7 +7,7 @@
 
 .detail-nav {
     padding-top: 16px;
-    padding-inline: 16px;
+    padding-inline: 24px;
     margin-bottom: 3%;
 }
 
@@ -18,10 +18,10 @@
 }
 
 .inner-container {
-    margin-inline: 16px;
+    margin-inline: 24px;
     margin-bottom: 60px;
     padding-bottom: 16px;
-    padding-inline: 16px;
+    padding-inline: 24px;
     border-radius: 12px;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
