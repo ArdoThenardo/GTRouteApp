@@ -12,7 +12,8 @@
                     <span class="bi bi-image-fill"></span>
                 </div>
                 <img src="@Images.ElementAt(selectedImageIndex).ImageUrl" 
-                    alt="@Images.ElementAt(selectedImageIndex).ImageName" />
+                    alt="@Images.ElementAt(selectedImageIndex).ImageName"
+                    @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
                 <button class="btn btn-secondary full-btn" 
                     @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
                     <span class="bi bi-arrows-fullscreen"></span>
