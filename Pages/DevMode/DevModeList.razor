@@ -31,7 +31,8 @@ else
                             <span data-bs-toggle="tooltip" 
                                 data-bs-placement="top"
                                 data-bs-html="true" 
-                                title="<span class='bi bi-pencil-square'></span> Edit Track<br>
+                                title="<span class='bi bi-pencil-square'></span> Edit General Track Info<br>
+                                    <span class='bi bi-sign-merge-left'> Manage Layouts</span><br>
                                     <span class='bi bi-trash-fill'></span> Delete Track" 
                                 @ref="itemButtonsRef">
                                 <span class="bi bi-question-circle"></span>
@@ -60,6 +61,7 @@ else
                             <td>@track.Category</td>
                             <td>
                                 <button type="button" class="btn btn-primary" @onclick="() => EditTrack(track.Slug!)"><span class="bi bi-pencil-square"></span></button>
+                                <button type="button" class="btn btn-primary" @onclick="() => ManageLayouts(track.Slug!, track.Name!)"><span class="bi bi-sign-merge-left"></span></button>
                                 <button type="button" class="btn btn-danger" @onclick="() => DeleteTrack(track.Slug!)"><span class="bi bi-trash-fill"></span></button>
                             </td>
                         </tr>
@@ -115,6 +117,13 @@ else
         await HideTooltips();
         
         NavigationManager.NavigateTo($"/devmode/form?isEdit={true}&slug={slug}");
+    }
+
+    private async Task ManageLayouts(string slug, string name)
+    {
+        await HideTooltips();
+
+        NavigationManager.NavigateTo($"/devmode/layouts?slug={slug}&name={name}");
     }
 
     private async Task DeleteTrack(string slug)
