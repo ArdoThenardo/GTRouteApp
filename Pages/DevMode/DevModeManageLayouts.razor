@@ -1,0 +1,13 @@
+@page "/devmode/layouts"
+
+<PageTitle>Dev Mode - Manage Track Layouts</PageTitle>
+
+<div>
+    <p>Currently try to manage: @slug</p>
+</div>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "slug")] 
+    public string slug { get; set; } = "";
+}
