@@ -2,6 +2,7 @@
 @using GTRouteApp.Data
 @inject DevModeService DevModeService
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <PageTitle>Dev Mode - Manage Track Layouts</PageTitle>
 
@@ -142,8 +143,9 @@
 
     private async Task LoadLayouts(string slug)
     {
-        var fetched = await DevModeService.GetLayouts(slug);
+        layouts.Clear();
 
+        var fetched = await DevModeService.GetLayouts(slug);
         layouts.AddRange(fetched);
     }
 
@@ -152,8 +154,28 @@
         previewMapUrl = editModel.MapUrl ?? "";
     }
 
-    private void SubmitLayout()
+    private async Task SubmitLayout()
     {
-        Console.WriteLine($"name: {editModel.Name}, url: {editModel.MapUrl}, length: {editModel.Length}, corners: {editModel.Corners}");
+        var response = await DevModeService.PostNewLayout(editModel, Slug);
+        await ShowAlert(response);
+
+        var isSuccess = DevModeService.GetPostStatus();
+        if (isSuccess)
+        {
+            ClearForm();
+            // refresh list of layouts
+            await LoadLayouts(Slug);
+        }
+    }
+
+    private void ClearForm()
+    {
+        editModel = new();
+        SetPreviewMap();
+    }
+
+    private async Task ShowAlert(string errorMessage)
+    {
+        await JS.InvokeVoidAsync("showAlert", errorMessage);
     }
 }

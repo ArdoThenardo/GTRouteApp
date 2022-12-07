@@ -34,6 +34,11 @@ public class DevModeService: BaseService
     // sample json: "sample-data/layouts.json";
     private const string GetLayoutsUrl = $"{_baseUrl}/detail/layout";
 
+    // API Url to use:
+    // local: $"{_baseUrl}/detail/add-layout?slug=track-slug";
+    // sample json: not available;
+    private const string AddLayoutUrl = $"{_baseUrl}/detail/add-layout";
+
     private List<Country> countries = new();
     private List<TrackLayout> layouts = new();
     private bool isPostSuccess = false;
@@ -220,6 +225,45 @@ public class DevModeService: BaseService
         }
     }
 
+    public async Task<string> PostNewLayout(LayoutEditModel editModel, string slug)
+    {
+        var encodedContent = GenerateEncodedContent(editModel);
+
+        try
+        {
+            var response = await PostRequest(encodedContent, $"{AddLayoutUrl}?slug={slug}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                isPostSuccess = true;
+
+                var contentValue = await response.Content.ReadFromJsonAsync<BaseModel<TrackLayout>>();
+            
+                var msg = $"{contentValue?.Data?.Name} (length: {contentValue?.Data?.Length}, corners: {contentValue?.Data?.Corners}) was succesfully added.";
+
+                return msg;
+            }
+            else
+            {
+                isPostSuccess = false;
+
+                var contentValue = await response.Content.ReadFromJsonAsync<BaseModel<string>>();
+
+                var msg = $"There is a error from server. Message: {contentValue?.Data}";
+
+                return msg;
+            }
+        }
+        catch
+        {
+            isPostSuccess = false;
+
+            var msg = "Unable to add new layout. Please try again at later time.";
+
+            return msg;
+        }
+    }
+
     private FormUrlEncodedContent GenerateEncodedContent(RaceTrackEditModel editModel)
     {
         var data = new[]
@@ -236,6 +280,21 @@ public class DevModeService: BaseService
         var encodedContent = new FormUrlEncodedContent(data);
 
         return encodedContent;
+    }
+
+    private FormUrlEncodedContent GenerateEncodedContent(LayoutEditModel editModel)
+    {
+        var data = new[]
+        {
+            new KeyValuePair<string, string>("name", editModel.Name ?? ""),
+            new KeyValuePair<string, string>("mapUrl", editModel.MapUrl ?? ""),
+            new KeyValuePair<string, string>("length", editModel.Length.ToString() ?? ""),
+            new KeyValuePair<string, string>("corners", editModel.Corners.ToString() ?? "")
+        };
+
+        var encodedContent = new FormUrlEncodedContent(data);
+
+        return encodedContent; 
     }
 
     public bool GetPostStatus()
