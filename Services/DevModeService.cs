@@ -202,8 +202,7 @@ public class DevModeService: BaseService
 
         try
         {
-            //var fetched = await HitRequest<BaseModel<List<TrackLayout>>>($"{GetLayouts}?slug={slug}");
-            var fetched = await HitRequest<BaseModel<List<TrackLayout>>>($"sample-data/layouts.json");
+            var fetched = await HitRequest<BaseModel<List<TrackLayout>>>($"{GetLayoutsUrl}?slug={slug}");
 
             if (fetched.NumberOfData == 0)
             {
