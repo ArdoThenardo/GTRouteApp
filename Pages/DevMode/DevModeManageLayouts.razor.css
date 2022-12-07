@@ -8,6 +8,11 @@ img {
     object-fit: contain;
 }
 
+p {
+    color: #1e2022;
+    margin-bottom: 0;
+}
+
 .manage-layouts-container {
     background-color: #e8e8e8;
     width: 100%;
@@ -90,7 +95,64 @@ img {
     display: flex;
     flex-direction: column;
     margin-top: 16px;
-    border-top: 1px solid #1e2022;
+    padding-block: 16px;
+    padding-inline: 24px;
+    border-top: 2px solid #1e2022;
+}
+
+.layout-list-item {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    border: 1px solid #1e2022;
+    border-radius: 12px;
+    margin-top: 16px;
+}
+
+.item-group-1 {
+    width: 40%;
+}
+
+.item-img {
+    background-color: #1e2022;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 100%;
+}
+
+.item-group-2 {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 16px;
+    justify-content: space-around;
+}
+
+.item-info-row {
+    margin-bottom: 16px;
+}
+
+.item-info-row-multi {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.detail-label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.detail-value, .item-info-row p {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.item-action-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 ::deep .validation-message {
