@@ -29,7 +29,13 @@ public class DevModeService: BaseService
     // sample json: not available;
     private const string DeleteTrackUrl = $"{_baseUrl}/delete-track";
 
+    // API Url to use:
+    // local: $"{_baseUrl}/detail/layout?slug=track-slug";
+    // sample json: "sample-data/layouts.json";
+    private const string GetLayoutsUrl = $"{_baseUrl}/detail/layout";
+
     private List<Country> countries = new();
+    private List<TrackLayout> layouts = new();
     private bool isPostSuccess = false;
     private bool isUpdateSuccess = false;
     private string recentError = "";
@@ -186,6 +192,32 @@ public class DevModeService: BaseService
             var msg = "Unable to delete track information. Please try again at later time";
 
             return msg;
+        }
+    }
+
+    public async Task<List<TrackLayout>> GetLayouts(string slug)
+    {
+        layouts.Clear();
+        recentError = "";
+
+        try
+        {
+            //var fetched = await HitRequest<BaseModel<List<TrackLayout>>>($"{GetLayouts}?slug={slug}");
+            var fetched = await HitRequest<BaseModel<List<TrackLayout>>>($"sample-data/layouts.json");
+
+            if (fetched.NumberOfData == 0)
+            {
+                recentError = "There is no layout on list";
+            }
+            layouts.AddRange(fetched.Data ?? Enumerable.Empty<TrackLayout>().ToList());
+
+            return layouts;
+        }
+        catch
+        {
+            recentError = "Unable to load list of layouts. Please reload this page to try again.";
+
+            return Enumerable.Empty<TrackLayout>().ToList();
         }
     }
 

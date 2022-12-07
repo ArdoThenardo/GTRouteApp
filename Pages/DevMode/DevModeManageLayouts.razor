@@ -1,5 +1,6 @@
 @page "/devmode/layouts"
 @using GTRouteApp.Data
+@inject DevModeService DevModeService
 @inject NavigationManager NavigationManager
 
 <PageTitle>Dev Mode - Manage Track Layouts</PageTitle>
@@ -77,6 +78,15 @@
 
             <DataAnnotationsValidator />
         </EditForm>
+
+        <div class="layouts-list">
+            <ul>
+                @foreach (var layoutItem in layouts)
+                {
+                    <li>@layoutItem.Name, length: @layoutItem.Length | corner: @layoutItem.Corners</li>
+                }
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -89,12 +99,25 @@
     [SupplyParameterFromQuery(Name = "name")]
     public string TrackName { get; set; } = "";
 
+    private List<TrackLayout> layouts = new();
     private LayoutEditModel editModel = new();
     private string previewMapUrl = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadLayouts(Slug);
+    }
 
     private void BackToList()
     {
         NavigationManager.NavigateTo("/devmode/list");
+    }
+
+    private async Task LoadLayouts(string slug)
+    {
+        var fetched = await DevModeService.GetLayouts(slug);
+
+        layouts.AddRange(fetched);
     }
 
     private void SetPreviewMap()

@@ -1,0 +1,29 @@
+{
+    "numberOfData": 3,
+    "data": [
+        {
+            "id": 1,
+            "slug": "trial-mountain-circuit-1666685272",
+            "name": "Full Course",
+            "mapUrl": "https://localhost:7253/sample_files/sample-map.webp",
+            "length": 5.43,
+            "corners": 14
+        },
+        {
+            "id": 2,
+            "slug": "trial-mountain-circuit-1666685272",
+            "name": "Full Course Reverse",
+            "mapUrl": "https://localhost:7253/sample_files/sample-map.webp",
+            "length": 5.43,
+            "corners": 14
+        },
+        {
+            "id": 3,
+            "slug": "trial-mountain-circuit-1666685272",
+            "name": "Short Course",
+            "mapUrl": "https://localhost:7253/sample_files/sample-map.webp",
+            "length": 5.43,
+            "corners": 14
+        }
+    ]
+}

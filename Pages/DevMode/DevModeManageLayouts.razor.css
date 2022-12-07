@@ -86,6 +86,13 @@ img {
     width: 100%;
 }
 
+.layouts-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    border-top: 1px solid #1e2022;
+}
+
 ::deep .validation-message {
     color: #d72323;
     font-size: 14px;
