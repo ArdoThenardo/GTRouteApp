@@ -1,5 +1,6 @@
 @page "/devmode/layouts"
 @using GTRouteApp.Data
+@inject DevModeService DevModeService
 @inject NavigationManager NavigationManager
 
 <PageTitle>Dev Mode - Manage Track Layouts</PageTitle>
@@ -20,7 +21,7 @@
             <div class="layouts-form-group">
                 <div class="form-group-1">
                     <div class="form-img">
-                        <img src="" alt="Preview layout map" />
+                        <img src="@previewMapUrl" alt="Preview layout map" />
                     </div>
                 </div>
 
@@ -77,6 +78,42 @@
 
             <DataAnnotationsValidator />
         </EditForm>
+
+        <div class="layouts-list">
+            @foreach (var layoutItem in layouts)
+            {
+                <div class="layout-list-item">
+                    <div class="item-group-1">
+                        <div class="item-img">
+                            <img src="@layoutItem.MapUrl" alt="@layoutItem.Name" />
+                        </div>
+                    </div>
+
+                    <div class="item-group-2">
+                        <div class="item-info-row">
+                            <p>@layoutItem.Name</p>
+                        </div>
+
+                        <div class="item-info-row-multi">
+                            <div class="form-w50">
+                                <p class="detail-label">Length</p>
+                                <p class="detail-value">@layoutItem.Length</p>
+                            </div>
+                            <div class="form-w50">
+                                <p class="detail-label">Corners</p>
+                                <p class="detail-value">@layoutItem.Corners</p>
+                            </div>
+                        </div>
+
+                        <div class="item-action-row">
+                            <button type="button" class="btn btn-danger">
+                                <span class="bi bi-trash-fill"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </div>
 
@@ -89,12 +126,25 @@
     [SupplyParameterFromQuery(Name = "name")]
     public string TrackName { get; set; } = "";
 
+    private List<TrackLayout> layouts = new();
     private LayoutEditModel editModel = new();
     private string previewMapUrl = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadLayouts(Slug);
+    }
 
     private void BackToList()
     {
         NavigationManager.NavigateTo("/devmode/list");
+    }
+
+    private async Task LoadLayouts(string slug)
+    {
+        var fetched = await DevModeService.GetLayouts(slug);
+
+        layouts.AddRange(fetched);
     }
 
     private void SetPreviewMap()
