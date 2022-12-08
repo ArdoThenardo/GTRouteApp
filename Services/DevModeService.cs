@@ -39,6 +39,11 @@ public class DevModeService: BaseService
     // sample json: not available;
     private const string AddLayoutUrl = $"{_baseUrl}/detail/add-layout";
 
+    // API Url to use:
+    // local: $"{_baseUrl}/detail/delete?slug=track-slug&name=layout-name";
+    // sample json: not available;
+    private const string DeleteLayoutUrl = $"{_baseUrl}/detail/delete-layout";
+
     private List<Country> countries = new();
     private List<TrackLayout> layouts = new();
     private bool isPostSuccess = false;
@@ -259,6 +264,35 @@ public class DevModeService: BaseService
             isPostSuccess = false;
 
             var msg = "Unable to add new layout. Please try again at later time.";
+
+            return msg;
+        }
+    }
+
+    public async Task<string> DeleteLayout(string slug, string name)
+    {
+        try
+        {
+            var response = await DeleteRequest($"{DeleteLayoutUrl}?slug={slug}&name={name}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var msg = "Layout information is successfully deleted.";
+
+                return msg;
+            }
+            else
+            {
+                var contentValue = await response.Content.ReadFromJsonAsync<BaseModel<string>>();
+
+                var msg = $"There is a error from server. Message: {contentValue?.Data}";
+
+                return msg;
+            }
+        }
+        catch
+        {
+            var msg = "Unable to delete layout information. Please try again at later time";
 
             return msg;
         }

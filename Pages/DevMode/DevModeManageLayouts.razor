@@ -107,7 +107,7 @@
                         </div>
 
                         <div class="item-action-row">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" @onclick="() => DeleteLayout(layoutItem.Name)">
                                 <span class="bi bi-trash-fill"></span>
                             </button>
                         </div>
@@ -163,6 +163,19 @@
         if (isSuccess)
         {
             ClearForm();
+            // refresh list of layouts
+            await LoadLayouts(Slug);
+        }
+    }
+
+     private async Task DeleteLayout(string? name)
+    {
+        var isDeleteConfirmed = await JS.InvokeAsync<bool>("showConfirmationAlert", "Do you want to delete this track layout?");
+        if (isDeleteConfirmed)
+        {
+            var response = await DevModeService.DeleteLayout(Slug, name ?? "");
+            await ShowAlert(response);
+
             // refresh list of layouts
             await LoadLayouts(Slug);
         }
