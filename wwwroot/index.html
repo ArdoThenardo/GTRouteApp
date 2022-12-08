@@ -36,6 +36,14 @@
             alert(message);
         }
 
+        function showConfirmationAlert(message) {
+            if (confirm(message) == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         function resetAnimationByStyle(element) {
             element.style.animation = "none";
             
