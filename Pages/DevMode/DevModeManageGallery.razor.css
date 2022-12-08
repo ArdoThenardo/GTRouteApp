@@ -1,0 +1,4 @@
+.manage-gallery-container {
+    display: flex;
+    flex-direction: column;
+}

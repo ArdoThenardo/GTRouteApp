@@ -1,0 +1,14 @@
+@page "/devmode/gallery"
+
+<PageTitle>Dev Mode - Manage Gallery</PageTitle>
+
+<div class="manage-gallery-container">
+    <p>Under Construction. Trying to manage: @Slug</p>
+    <p>under construction</p>
+</div>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "slug")]
+    public string Slug { get; set; } = "";
+}
