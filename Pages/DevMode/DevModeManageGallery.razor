@@ -1,0 +1,116 @@
+@page "/devmode/gallery"
+@using GTRouteApp.Data
+@inject NavigationManager NavigationManager
+
+<PageTitle>Dev Mode - Manage Gallery</PageTitle>
+
+<div class="manage-gallery-container">
+    <div class="form-nav">
+        <button type="button" class="btn btn-primary" @onclick="BackToList">
+            <span class="bi bi-arrow-left-square-fill"></span> Back
+        </button>
+    </div>
+
+    <div class="form-content">
+        <div class="form-title">
+            <h5>Manage Gallery for @TrackName</h5>
+        </div>
+
+        <EditForm Model="@editModel" OnValidSubmit="SubmitImage">
+            <div class="gallery-form-group">
+                <div class="form-group-1">
+                    <div class="form-img">
+                        <img src="@previewImageUrl" alt="Preview image" />
+                    </div>
+                </div>
+
+                <div class="form-group-2">
+                    <div class="form-block-row">
+                        <form class="form-floating">
+                            <InputText @bind-Value="editModel.Name" 
+                                class="form-control" 
+                                placeholder="Insert image name" />
+                            <label>Image Name</label>
+                        </form>
+                        <ValidationMessage For="@(() => editModel.Name)" />
+                    </div>
+
+                    <div class="form-block-row">
+                        <form class="form-floating">
+                            <InputText @bind-Value="editModel.Author"
+                                class="form-control"
+                                placeholder="Insert author or source of the image" />
+                            <label>Author / Source</label>
+                        </form>
+                        <ValidationMessage For="@(() => editModel.Author)" />
+                    </div>
+
+                    <div class="form-block-row">
+                        <form class="form-floating">
+                            <InputText @bind-Value="editModel.ImageUrl"
+                                @onfocusout="SetPreviewImage"
+                                class="form-control"
+                                placeholder="Insert url to the image" />
+                            <label>Image Url</label>
+                        </form>
+                        <ValidationMessage For="@(() => editModel.ImageUrl)" />
+                    </div>
+
+                    <p style="font-size: 12px; margin-bottom: 8px;">
+                        *Instruction for Image Url: Insert a url image and then check if a url is 
+                        valid and able to show image inside box on the left
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group-0">
+                <div class="form-block-row">
+                    <form class="form-floating">
+                        <InputTextArea @bind-Value="editModel.Description"
+                            class="form-control"
+                            style="height: 140px;"
+                            placeholder="Insert description of the image" />
+                        <label>Description</label>
+                    </form>
+                    <ValidationMessage For="@(() => editModel.Description)" />
+                </div>
+
+                <div class="form-flex-row">
+                    <button type="submit" class="btn btn-success">
+                        <span class="bi bi-plus-lg"></span> Add
+                    </button>
+                </div>
+            </div>
+
+            <DataAnnotationsValidator />
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "slug")]
+    public string Slug { get; set; } = "";
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "name")]
+    public string TrackName { get; set; } = "";
+
+    private GalleryEditModel editModel = new();
+    private string previewImageUrl = "";
+
+    private void BackToList()
+    {
+        NavigationManager.NavigateTo("/devmode/list");
+    }
+
+    private void SetPreviewImage()
+    {
+        previewImageUrl = editModel.ImageUrl ?? "";
+    }
+
+    private void SubmitImage()
+    {
+        Console.WriteLine($"name: {editModel.Name}, url: {editModel.ImageUrl}, author: {editModel.Author}, desc: {editModel.Description}");
+    }
+}
