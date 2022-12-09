@@ -44,8 +44,14 @@ public class DevModeService: BaseService
     // sample json: not available;
     private const string DeleteLayoutUrl = $"{_baseUrl}/detail/delete-layout";
 
+    // API Url to use:
+    // local: $"{_baseUrl}/detail/all-images?slug=track-slug";
+    // sample json: not available;
+    private const string GetImagesUrl = $"{_baseUrl}/detail/all-images";
+
     private List<Country> countries = new();
     private List<TrackLayout> layouts = new();
+    private List<TrackImage> images = new();
     private bool isPostSuccess = false;
     private bool isUpdateSuccess = false;
     private string recentError = "";
@@ -295,6 +301,31 @@ public class DevModeService: BaseService
             var msg = "Unable to delete layout information. Please try again at later time";
 
             return msg;
+        }
+    }
+
+    public async Task<List<TrackImage>> GetImagesBySlug(string slug)
+    {
+        images.Clear();
+        recentError = "";
+
+        try
+        {
+            var fetched = await HitRequest<BaseModel<List<TrackImage>>>($"{GetImagesUrl}?slug={slug}");
+
+            if (fetched.NumberOfData == 0)
+            {
+                recentError = "There is no images";
+            }
+            images.AddRange(fetched.Data ?? Enumerable.Empty<TrackImage>().ToList());
+
+            return images;
+        }
+        catch
+        {
+            recentError = "Unable to load images for this track. Please reload this page to try again.";
+
+            return Enumerable.Empty<TrackImage>().ToList();
         }
     }
 

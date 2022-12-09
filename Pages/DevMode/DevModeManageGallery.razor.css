@@ -92,6 +92,12 @@ p {
     width: auto;
 }
 
+.gallery-view {
+    border-top: 2px solid #1e2022;
+    padding-top: 24px;
+    margin-top: 24px;
+}
+
 ::deep .validation-message {
     color: #d72323;
     font-size: 14px;

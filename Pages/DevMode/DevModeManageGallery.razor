@@ -1,5 +1,6 @@
 @page "/devmode/gallery"
 @using GTRouteApp.Data
+@inject DevModeService DevModeService
 @inject NavigationManager NavigationManager
 
 <PageTitle>Dev Mode - Manage Gallery</PageTitle>
@@ -84,6 +85,19 @@
 
             <DataAnnotationsValidator />
         </EditForm>
+
+        <div class="gallery-view">
+            @if (images.Count() > 0)
+            {
+                <DevModeGalleryView Images="@images" />
+            }
+            else
+            {
+                <div class="form-title">
+                    <p><i>Currently, no image for this race track.</i></p>
+                </div>
+            }
+        </div>
     </div>
 </div>
 
@@ -96,8 +110,14 @@
     [SupplyParameterFromQuery(Name = "name")]
     public string TrackName { get; set; } = "";
 
+    private List<TrackImage> images = new();
     private GalleryEditModel editModel = new();
     private string previewImageUrl = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadImages();
+    }
 
     private void BackToList()
     {
@@ -107,6 +127,13 @@
     private void SetPreviewImage()
     {
         previewImageUrl = editModel.ImageUrl ?? "";
+    }
+
+    private async Task LoadImages()
+    {
+        var fetched = await DevModeService.GetImagesBySlug(Slug);
+
+        images.AddRange(fetched);
     }
 
     private void SubmitImage()

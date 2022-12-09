@@ -1,0 +1,78 @@
+@using GTRouteApp.Data
+@inject IJSRuntime JS
+
+<div class="detail-gallery">
+    <div class="gallery-container">
+        <div class="detail-gallery-highlight">
+            <div class="highlight-image-section">
+                <div class="highlight-placeholder">
+                    <span class="bi bi-image-fill"></span>
+                </div>
+                <img src="@Images.ElementAt(selectedImageIndex).ImageUrl" 
+                    alt="@Images.ElementAt(selectedImageIndex).ImageName"
+                    @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
+                <button class="btn btn-secondary full-btn" 
+                    @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
+                    <span class="bi bi-arrows-fullscreen"></span>
+                </button>
+            </div>
+            <div class="highlight-info-section">
+                <div class="info-group-1">
+                    <div class="info-part-1">
+                        <p>@Images.ElementAt(selectedImageIndex).Description</p>
+                    </div>
+                    <div class="info-part-2">
+                        <p><span class="bi bi-camera-fill"></span> by @Images.ElementAt(selectedImageIndex).Author</p>
+                    </div>
+                </div>
+                <div class="info-group-2">
+                    <button class="btn btn-danger">
+                        <span class="bi bi-trash-fill"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="detail-gallery-selection">
+            @foreach (var image in Images.Select((imageData, index) => (imageData, index)))
+            {
+                @if (selectedImageIndex == image.index)
+                {
+                    <div class="gallery-item-selected">
+                        <div class="item-placeholder">
+                            <span class="bi bi-image-fill"></span>
+                        </div>
+                        <img src="@image.imageData.ImageUrl" 
+                            alt="@image.imageData.ImageName" />
+                    </div>
+                }
+                else
+                {
+                    <div class="gallery-item" @onclick="() => SetSelection(image.index)">
+                        <div class="item-placeholder">
+                            <span class="bi bi-image-fill"></span>
+                        </div>
+                        <img src="@image.imageData.ImageUrl" 
+                            alt="@image.imageData.ImageName" />
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<TrackImage> Images { get; set; } = new();
+    private int selectedImageIndex = 0;
+
+    private void SetSelection(int selectedIndex)
+    {
+        selectedImageIndex = selectedIndex;
+    }
+
+    private async Task OpenImageInFullScreen(string? url)
+    {
+        if (url is not null)
+            await JS.InvokeVoidAsync("open", url, "_blank");
+    }
+}
