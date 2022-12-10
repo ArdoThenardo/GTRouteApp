@@ -100,7 +100,10 @@
     justify-content: center;
     border: 1px solid #1e2022;
     border-radius: 8px;
+    opacity: 0;
+    transition: 0.25s;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+    animation: reveal-item .5s forwards calc(var(--delay) * 0.05s);
 }
 
 @keyframes reveal-item {

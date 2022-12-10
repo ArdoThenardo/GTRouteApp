@@ -2,14 +2,11 @@ namespace GTRouteApp.Data;
 
 public class RaceTrackService: BaseService
 {
-    // API Url to use:
-    // local: $"{_baseUrl}/tracks";
-    // sample json: "sample-data/track.json";
+    // remote: /tracks
+    // sample: sample-data/track.json
     private const string GetTracksUrl = $"{_baseUrl}/tracks";
 
-    // API Url to use:
-    // local: $"{_baseUrl}/get-track";
-    // sample json: not available;
+    // remote: /get-track
     private const string GetTrackBySlugUrl = $"{_baseUrl}/get-track";
 
     private List<RaceTrack> tracks = new();
