@@ -85,6 +85,12 @@
 
     private async Task DeleteImage(int index)
     {
-        await OnDelete.InvokeAsync(index);
+        var isDeleteConfirmed = await JS.InvokeAsync<bool>("showConfirmationAlert", $"Do you want to delete {Images.ElementAt(index).ImageName}?");
+        if (isDeleteConfirmed)
+        {
+            selectedImageIndex = 0;
+
+            await OnDelete.InvokeAsync(index);
+        }
     }
 }

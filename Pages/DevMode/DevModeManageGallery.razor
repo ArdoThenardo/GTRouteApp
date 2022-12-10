@@ -161,15 +161,11 @@
 
     private async Task DeleteImage(string? name)
     {
-        var isDeleteConfirmed = await JS.InvokeAsync<bool>("showConfirmationAlert", $"Do you want to delete {name}?");
-        if (isDeleteConfirmed)
-        {
-            var response = await DevModeService.DeleteImage(Slug, name ?? "");
-            await ShowAlert(response);
+        var response = await DevModeService.DeleteImage(Slug, name ?? "");
+        await ShowAlert(response);
 
-            // refresh list of layouts
-            await LoadImages(Slug);
-        }
+        // refresh list of layouts
+        await LoadImages(Slug);
     }
 
     private void ClearForm()
