@@ -4,59 +4,40 @@ namespace GTRouteApp.Data;
 
 public class DevModeService: BaseService
 {
-    // API Url to use:
-    // local: $"{_baseUrl}/get-validation-dev"; 
-    // sample json: "sample-data/passcode.json";
+    // remote: /get-validation-dev 
+    // sample: sample-data/passcode.json
     private const string GetValidationUrl = $"{_baseUrl}/get-validation-dev";
 
-    // API Url to use:
-    // local:  $"{_baseUrl}/countries";
-    // sample json: "sample-data/country.json";
+    // remote: /countries
+    // sample: sample-data/country.json
     private const string GetCountryListUrl = $"{_baseUrl}/countries";
 
-    // API Url to use:
-    // local: $"{_baseUrl}/add-track";
-    // sample json: not available;
+    // remote: /add-track
     private const string PostNewTrackUrl = $"{_baseUrl}/add-track";
 
-    // API Url to use:
-    // local: $"{_baseUrl}/edit-track?slug=track-slug";
-    // sample json: not available;
+    // remote: /edit-track?slug=track-slug
     private const string UpdateTrackUrl = $"{_baseUrl}/edit-track";
 
-    // API Url to use:
-    // local: $"{_baseUrl}/delete-track?slug=track-slug";
-    // sample json: not available;
+    // remote: /delete-track?slug=track-slug
     private const string DeleteTrackUrl = $"{_baseUrl}/delete-track";
 
-    // API Url to use:
-    // local: $"{_baseUrl}/detail/layout?slug=track-slug";
-    // sample json: "sample-data/layouts.json";
+    // remote: /detail/layout?slug=track-slug
+    // sample: sample-data/layouts.json
     private const string GetLayoutsUrl = $"{_baseUrl}/detail/layout";
 
-    // API Url to use:
-    // local: $"{_baseUrl}/detail/add-layout?slug=track-slug";
-    // sample json: not available;
+    // remote: /detail/add-layout?slug=track-slug
     private const string AddLayoutUrl = $"{_baseUrl}/detail/add-layout";
 
-    // API Url to use:
-    // local: $"{_baseUrl}/detail/delete?slug=track-slug&name=layout-name";
-    // sample json: not available;
+    // remote: /detail/delete?slug=track-slug&name=layout-name
     private const string DeleteLayoutUrl = $"{_baseUrl}/detail/delete-layout";
 
-    // API Url to use:
-    // local: $"{_baseUrl}/detail/all-images?slug=track-slug";
-    // sample json: not available;
+    // remote: /detail/all-images?slug=track-slug
     private const string GetImagesUrl = $"{_baseUrl}/detail/all-images";
 
-    // API Url to use:
-    // remote: $"{_baseUrl}/detail/add-image?slug=track-slug";
-    // sample json: not available;
+    // remote: /detail/add-image?slug=track-slug
     private const string AddImageUrl = $"{_baseUrl}/detail/add-image";
 
-    // API Url to use:
-    // remote: $"{_baseUrl}/detail/delete-image?slug=track-slug&name=img-name";
-    // sample json: not available;
+    // remote: /detail/delete-image?slug=track-slug&name=img-name
     private const string DeleteImageUrl = $"{_baseUrl}/detail/delete-image";
 
     private List<Country> countries = new();
