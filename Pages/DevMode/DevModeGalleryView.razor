@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="info-group-2">
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" @onclick="() => DeleteImage(selectedImageIndex)">
                         <span class="bi bi-trash-fill"></span>
                     </button>
                 </div>
@@ -66,6 +66,10 @@
 @code {
     [Parameter]
     public List<TrackImage> Images { get; set; } = new();
+
+    [Parameter]
+    public EventCallback<int> OnDelete { get; set; }
+
     private int selectedImageIndex = 0;
 
     private void SetSelection(int selectedIndex)
@@ -77,5 +81,10 @@
     {
         if (url is not null)
             await JS.InvokeVoidAsync("open", url, "_blank");
+    }
+
+    private async Task DeleteImage(int index)
+    {
+        await OnDelete.InvokeAsync(index);
     }
 }

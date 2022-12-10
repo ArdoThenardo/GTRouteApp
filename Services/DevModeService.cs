@@ -54,6 +54,11 @@ public class DevModeService: BaseService
     // sample json: not available;
     private const string AddImageUrl = $"{_baseUrl}/detail/add-image";
 
+    // API Url to use:
+    // remote: $"{_baseUrl}/detail/delete-image?slug=track-slug&name=img-name";
+    // sample json: not available;
+    private const string DeleteImageUrl = $"{_baseUrl}/detail/delete-image";
+
     private List<Country> countries = new();
     private List<TrackLayout> layouts = new();
     private List<TrackImage> images = new();
@@ -368,6 +373,35 @@ public class DevModeService: BaseService
             isPostSuccess = false;
 
             var msg = "Unable to add new layout. Please try again at later time.";
+
+            return msg;
+        }
+    }
+
+    public async Task<string> DeleteImage(string slug, string name)
+    {
+        try
+        {
+            var response = await DeleteRequest($"{DeleteImageUrl}?slug={slug}&name={name}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var msg = "Image information is successfully deleted.";
+
+                return msg;
+            }
+            else
+            {
+                var contentValue = await response.Content.ReadFromJsonAsync<BaseModel<string>>();
+
+                var msg = $"There is a error from server. Message: {contentValue?.Data}";
+
+                return msg;
+            }
+        }
+        catch
+        {
+            var msg = "Unable to delete image information. Please try again at later time";
 
             return msg;
         }

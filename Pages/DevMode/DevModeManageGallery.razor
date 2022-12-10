@@ -90,7 +90,7 @@
         <div class="gallery-view">
             @if (images.Count() > 0)
             {
-                <DevModeGalleryView Images="@images" />
+                <DevModeGalleryView Images="@images" OnDelete="HandleImageDeletion" />
             }
             else
             {
@@ -147,6 +147,26 @@
         if (isSuccess)
         {
             ClearForm();
+            // refresh list of layouts
+            await LoadImages(Slug);
+        }
+    }
+
+    private async Task HandleImageDeletion(int index)
+    {
+        var imageName = images.ElementAt(index).ImageName;
+
+        await DeleteImage(imageName);
+    }
+
+    private async Task DeleteImage(string? name)
+    {
+        var isDeleteConfirmed = await JS.InvokeAsync<bool>("showConfirmationAlert", $"Do you want to delete {name}?");
+        if (isDeleteConfirmed)
+        {
+            var response = await DevModeService.DeleteImage(Slug, name ?? "");
+            await ShowAlert(response);
+
             // refresh list of layouts
             await LoadImages(Slug);
         }
