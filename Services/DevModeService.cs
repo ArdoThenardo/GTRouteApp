@@ -49,6 +49,11 @@ public class DevModeService: BaseService
     // sample json: not available;
     private const string GetImagesUrl = $"{_baseUrl}/detail/all-images";
 
+    // API Url to use:
+    // remote: $"{_baseUrl}/detail/add-image?slug=track-slug";
+    // sample json: not available;
+    private const string AddImageUrl = $"{_baseUrl}/detail/add-image";
+
     private List<Country> countries = new();
     private List<TrackLayout> layouts = new();
     private List<TrackImage> images = new();
@@ -329,6 +334,45 @@ public class DevModeService: BaseService
         }
     }
 
+    public async Task<string> PostNewImage(GalleryEditModel editModel, string slug)
+    {
+        var encodedContent = GenerateEncodedContent(editModel);
+
+        try
+        {
+            var response = await PostRequest(encodedContent, $"{AddImageUrl}?slug={slug}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                isPostSuccess = true;
+
+                var contentValue = await response.Content.ReadFromJsonAsync<BaseModel<TrackImage>>();
+            
+                var msg = $"{contentValue?.Data?.ImageName} by {contentValue?.Data?.Author} was succesfully added.";
+
+                return msg;
+            }
+            else
+            {
+                isPostSuccess = false;
+
+                var contentValue = await response.Content.ReadFromJsonAsync<BaseModel<string>>();
+
+                var msg = $"There is a error from server. Message: {contentValue?.Data}";
+
+                return msg;
+            }
+        }
+        catch
+        {
+            isPostSuccess = false;
+
+            var msg = "Unable to add new layout. Please try again at later time.";
+
+            return msg;
+        }
+    }
+
     private FormUrlEncodedContent GenerateEncodedContent(RaceTrackEditModel editModel)
     {
         var data = new[]
@@ -360,6 +404,21 @@ public class DevModeService: BaseService
         var encodedContent = new FormUrlEncodedContent(data);
 
         return encodedContent; 
+    }
+
+    private FormUrlEncodedContent GenerateEncodedContent(GalleryEditModel editModel)
+    {
+        var data = new[]
+        {
+            new KeyValuePair<string, string>("image_name", editModel.Name ?? ""),
+            new KeyValuePair<string, string>("image_url", editModel.ImageUrl ?? ""),
+            new KeyValuePair<string, string>("description", editModel.Description ?? ""),
+            new KeyValuePair<string, string>("author", editModel.Author ?? "")
+        };
+
+        var encodedContent = new FormUrlEncodedContent(data);
+
+        return encodedContent;
     }
 
     public bool GetPostStatus()
