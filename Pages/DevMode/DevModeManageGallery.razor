@@ -2,6 +2,7 @@
 @using GTRouteApp.Data
 @inject DevModeService DevModeService
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <PageTitle>Dev Mode - Manage Gallery</PageTitle>
 
@@ -89,7 +90,7 @@
         <div class="gallery-view">
             @if (images.Count() > 0)
             {
-                <DevModeGalleryView Images="@images" />
+                <DevModeGalleryView Images="@images" OnDelete="HandleImageDeletion" />
             }
             else
             {
@@ -116,7 +117,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadImages();
+        await LoadImages(Slug);
     }
 
     private void BackToList()
@@ -129,15 +130,52 @@
         previewImageUrl = editModel.ImageUrl ?? "";
     }
 
-    private async Task LoadImages()
+    private async Task LoadImages(string slug)
     {
-        var fetched = await DevModeService.GetImagesBySlug(Slug);
-
+        images.Clear();
+        
+        var fetched = await DevModeService.GetImagesBySlug(slug);
         images.AddRange(fetched);
     }
 
-    private void SubmitImage()
+    private async Task SubmitImage()
     {
-        Console.WriteLine($"name: {editModel.Name}, url: {editModel.ImageUrl}, author: {editModel.Author}, desc: {editModel.Description}");
+        var response = await DevModeService.PostNewImage(editModel, Slug);
+        await ShowAlert(response);
+
+        var isSuccess = DevModeService.GetPostStatus();
+        if (isSuccess)
+        {
+            ClearForm();
+            // refresh list of layouts
+            await LoadImages(Slug);
+        }
+    }
+
+    private async Task HandleImageDeletion(int index)
+    {
+        var imageName = images.ElementAt(index).ImageName;
+
+        await DeleteImage(imageName);
+    }
+
+    private async Task DeleteImage(string? name)
+    {
+        var response = await DevModeService.DeleteImage(Slug, name ?? "");
+        await ShowAlert(response);
+
+        // refresh list of layouts
+        await LoadImages(Slug);
+    }
+
+    private void ClearForm()
+    {
+        editModel = new();
+        SetPreviewImage();
+    }
+
+    private async Task ShowAlert(string errorMessage)
+    {
+        await JS.InvokeVoidAsync("showAlert", errorMessage);
     }
 }

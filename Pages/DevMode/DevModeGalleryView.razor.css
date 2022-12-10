@@ -78,15 +78,21 @@ p {
     flex-direction: column;
 }
 
-.info-part-1 {
+.info-part-name h4 {
+    color: #f4f4f2;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.info-part-name, .info-part-description {
     border-bottom: 1px solid #f4f4f2;
 }
 
-.info-part-1 p {
-    margin-bottom: 12px;
+.info-part-description p {
+    margin-block: 12px;
 }
 
-.info-part-2 p {
+.info-part-author p {
     margin-top: 12px;
 }
 
