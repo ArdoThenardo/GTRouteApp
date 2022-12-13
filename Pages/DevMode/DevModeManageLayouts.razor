@@ -55,7 +55,7 @@
                         <div class="form-w50">
                             <form class="form-floating">
                                 <InputNumber @bind-Value="editModel.Length" min="0" class="form-control" placeholder="Insert track layout length (km)" />
-                                <label>Length &#40;km&#41;</label>
+                                <label>Length &#40;m&#41;</label>
                             </form>
                             <ValidationMessage For="@(() => editModel.Length)" />
                         </div>
@@ -98,7 +98,7 @@
                         <div class="item-info-row-multi">
                             <div class="form-w50">
                                 <p class="detail-label">Length</p>
-                                <p class="detail-value">@layoutItem.Length</p>
+                                <p class="detail-value">@layoutItem.Length m</p>
                             </div>
                             <div class="form-w50">
                                 <p class="detail-label">Corners</p>
