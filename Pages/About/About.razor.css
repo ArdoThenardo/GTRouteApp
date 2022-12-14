@@ -21,6 +21,7 @@ p {
 }
 
 .about-container {
+    background-image:url(img/gtroad-bg-1.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 88vh;
