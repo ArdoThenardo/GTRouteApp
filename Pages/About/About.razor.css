@@ -21,14 +21,14 @@ p {
 }
 
 .about-container {
-    background-image:url(img/gtroad-bg-1.jpeg);
+    background-image:url(img/gtroad-bg-2.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 88vh;
 }
 
 .about-description {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
     flex-direction: column;
     width: 48%;
