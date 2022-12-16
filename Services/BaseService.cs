@@ -4,7 +4,7 @@ namespace GTRouteApp.Data;
 
 public class BaseService
 {
-    protected const string _baseUrl = "https://localhost:7253"; // local api -> "https://localhost:7253"
+    protected const string _baseUrl = "https://gtroadapi.azurewebsites.net"; // 7253
 
     protected readonly HttpClient _http;
 
