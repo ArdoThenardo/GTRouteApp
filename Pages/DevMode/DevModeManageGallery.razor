@@ -118,6 +118,7 @@
     protected override async Task OnInitializedAsync()
     {
         await LoadImages(Slug);
+        SetDefaultForm();
     }
 
     private void BackToList()
@@ -168,10 +169,17 @@
         await LoadImages(Slug);
     }
 
+    private void SetDefaultForm()
+    {
+        editModel.Author = "gtroad-admin";
+        editModel.Description = "Picture of (track name - layout name(optional)) from Gran Turismo 7 (2022).";
+    }
+
     private void ClearForm()
     {
         editModel = new();
         SetPreviewImage();
+        SetDefaultForm();
     }
 
     private async Task ShowAlert(string errorMessage)
