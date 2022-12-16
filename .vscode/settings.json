@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin/Release/net6.0/publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/e03b5939-7749-44da-97cf-47ae9a8d458e/AppServices/subscriptions/e03b5939-7749-44da-97cf-47ae9a8d458e/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/gtroad"
+}
