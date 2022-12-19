@@ -51,3 +51,28 @@ p {
 .about-modul {
     margin-bottom: 16px;
 }
+
+@media (max-width: 540px) {
+    h2 {
+        font-size: 8vw;
+    }
+
+    h3 {
+        font-size: 5.8vw;
+    }
+
+    p {
+        font-size: 4.2vw;
+    }
+
+    .about-container {
+        background-image:url(img/gtroad-bg-3.jpeg);
+        height: 80vh;
+    }
+
+    .about-description {
+        background-color: rgba(0, 0, 0, 0.75);
+        width: 100%;
+        box-shadow: none;
+    }
+}
