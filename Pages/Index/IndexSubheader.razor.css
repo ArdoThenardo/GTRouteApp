@@ -14,3 +14,9 @@
     font-size: 16px;
     font-weight: 500;
 }
+
+@media (max-width: 540px) {
+    .subheader-info {
+        font-size: 3.8vw;
+    }
+}
