@@ -19,3 +19,21 @@
     font-size: 18px;
     margin-top: 8px;
 }
+
+@media (max-width: 540px) {
+    .in-progress-notice {
+        padding: 24px;
+    }
+
+    .in-progress-notice h4, .in-progress-notice p {
+        text-align: left;
+    }
+
+    .in-progress-notice h4 {
+        font-size: 4.6vw;
+    }
+
+    .in-progress-notice p {
+        font-size: 3.6vw;
+    }
+}

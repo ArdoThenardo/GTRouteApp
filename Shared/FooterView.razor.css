@@ -59,3 +59,32 @@ a, ::deep a {
 .footer-separator {
     height: 24px;
 }
+
+@media (max-width: 540px) {
+    a, ::deep a {
+        font-size: 4.2vw;
+    }
+
+    .footer-row-1 {
+        display: flex;
+        flex-direction: column;
+        padding-top: 64px;
+        padding-bottom: 24px;
+    }
+
+    .footer-column:nth-child(1), .footer-column:nth-child(2) {
+        display: none;
+    }
+
+    .footer-column:nth-child(3) {
+        align-items: flex-end;
+    }
+
+    .footer-column img, .footer-separator {
+        height: 0;
+    }
+
+    .footer-label {
+        font-size: 4.8vw;
+    }
+}
