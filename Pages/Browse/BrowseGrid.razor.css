@@ -115,6 +115,7 @@
 @media (max-width: 540px) {
     .grid-container {
         height: auto;
+        overflow-y: auto;
     }
 
     .item-container, .more-notice-container {
