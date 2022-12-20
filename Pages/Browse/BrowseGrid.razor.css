@@ -33,6 +33,7 @@
 
 .item-content {
     background-size: cover;
+    background-position: center;
     background-blend-mode: overlay;
     height: 100%;
     width: 100%;
@@ -109,4 +110,19 @@
 @keyframes reveal-item {
     from { translate: 0 20px; }
     to { translate: none; opacity: 1; }
+}
+
+@media (max-width: 540px) {
+    .grid-container {
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .item-container, .more-notice-container {
+        width: 50%;
+    }
+
+    .content-section-1 p, .more-notice p, .content-section-2 p {
+        font-size: 3.2vw;
+    }
 }
