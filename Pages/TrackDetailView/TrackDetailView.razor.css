@@ -25,3 +25,13 @@
     border-radius: 12px;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
+
+@media (max-width: 540px) {
+    .detail-nav {
+        margin-bottom: 8%;
+    }
+
+    .inner-container {
+        padding-inline: 8px;
+    }
+}
