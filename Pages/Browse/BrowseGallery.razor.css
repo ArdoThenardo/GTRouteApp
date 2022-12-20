@@ -26,6 +26,7 @@
     height: 100%;
     background-image: radial-gradient(circle, transparent 50%, black 150%), var(--bg-cover);
     background-size: cover;
+    background-position: center;
     transition: .5s;
     z-index: -1;
     animation: reveal-cover .75s ease-in-out forwards;
@@ -224,7 +225,6 @@
 
     .gallery-highlight::before {
         background-image: radial-gradient(circle, transparent 25%, black 150%), var(--bg-cover);
-        background-position: center;
     }
 
     .highlight-section-1 p {
