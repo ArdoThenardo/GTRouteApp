@@ -4,11 +4,11 @@
 @inject TrackDetailService TrackDetailService
 @inject NavigationManager NavigationManager
 
-<PageTitle>Track Detail | GTRoad</PageTitle>
-
 <div class="detail-container">
     @if (detail == null || string.IsNullOrWhiteSpace(detail.Name)) // assume no detail if there is no name 
     {
+        <PageTitle>Track Detail | GTRoad</PageTitle>
+
         @if (showError)
         {
             <p>@errorMessage</p>
@@ -20,6 +20,8 @@
     }
     else
     {
+        <PageTitle>@detail.Name | GTRoad</PageTitle>
+
         <div class="detail-nav">
             @if (!string.IsNullOrWhiteSpace(origin))
             {
