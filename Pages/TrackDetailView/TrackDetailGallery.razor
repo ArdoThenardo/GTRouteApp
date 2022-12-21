@@ -12,21 +12,24 @@
                     <span class="bi bi-image-fill"></span>
                 </div>
                 <img src="@Images.ElementAt(selectedImageIndex).ImageUrl" 
-                    alt="@Images.ElementAt(selectedImageIndex).ImageName"
-                    @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
+                    alt="@Images.ElementAt(selectedImageIndex).ImageName">
                 <button class="btn btn-secondary full-btn" 
                     @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
                     <span class="bi bi-arrows-fullscreen"></span>
                 </button>
-            </div>
-            <div class="highlight-info-section">
-                <div class="info-part-1">
-                    <p>@Images.ElementAt(selectedImageIndex).Description</p>
+                <button class="btn btn-secondary info-visibility-btn">
+                    <p>Show Info<span class="bi bi-chevron-up" style="margin-left: 8px"></span></p>
+                </button>
+                <div class="highlight-info-section">
+                    <div class="info-part-1">
+                        <p>@Images.ElementAt(selectedImageIndex).Description</p>
+                    </div>
+                    <div class="info-part-2">
+                        <p><span class="bi bi-camera-fill"></span> by @Images.ElementAt(selectedImageIndex).Author</p>
+                    </div>
                 </div>
-                <div class="info-part-2">
-                    <p><span class="bi bi-camera-fill"></span> by @Images.ElementAt(selectedImageIndex).Author</p>
-                </div>
             </div>
+            
         </div>
         <div class="detail-gallery-selection">
             @foreach (var image in Images.Select((imageData, index) => (imageData, index)))
