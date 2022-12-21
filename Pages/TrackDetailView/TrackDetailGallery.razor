@@ -12,21 +12,33 @@
                     <span class="bi bi-image-fill"></span>
                 </div>
                 <img src="@Images.ElementAt(selectedImageIndex).ImageUrl" 
-                    alt="@Images.ElementAt(selectedImageIndex).ImageName"
-                    @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
+                    alt="@Images.ElementAt(selectedImageIndex).ImageName">
                 <button class="btn btn-secondary full-btn" 
                     @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
                     <span class="bi bi-arrows-fullscreen"></span>
                 </button>
-            </div>
-            <div class="highlight-info-section">
-                <div class="info-part-1">
-                    <p>@Images.ElementAt(selectedImageIndex).Description</p>
+                <button class="btn btn-secondary info-visibility-btn" 
+                    style="bottom: @infoVisibilityButtonBottomPosition;"
+                    @onclick="() => ToggleInfoVisibility()">
+                    @if (isInfoHidden)
+                    {
+                        <p>Show Info<span class="bi bi-chevron-up" style="margin-left: 8px;"></span></p>
+                    }
+                    else
+                    {
+                        <p>Hide Info<span class="bi bi-chevron-down" style="margin-left: 8px;"></span></p>
+                    }
+                </button>
+                <div class="highlight-info-section" style="visibility: @infoVisibilityStyle;">
+                    <div class="info-part-1">
+                        <p>@Images.ElementAt(selectedImageIndex).Description</p>
+                    </div>
+                    <div class="info-part-2">
+                        <p><span class="bi bi-camera-fill"></span> by @Images.ElementAt(selectedImageIndex).Author</p>
+                    </div>
                 </div>
-                <div class="info-part-2">
-                    <p><span class="bi bi-camera-fill"></span> by @Images.ElementAt(selectedImageIndex).Author</p>
-                </div>
             </div>
+            
         </div>
         <div class="detail-gallery-selection">
             @foreach (var image in Images.Select((imageData, index) => (imageData, index)))
@@ -60,15 +72,34 @@
     [Parameter]
     public List<TrackImage> Images { get; set; } = new();
     private int selectedImageIndex = 0;
+    private bool isInfoHidden = false;
+    private string infoVisibilityStyle = "visible"; // "hidden" and "visible"
+    private string infoVisibilityButtonBottomPosition = "74px"; // "12px" and "74px"
 
     private void SetSelection(int selectedIndex)
     {
         selectedImageIndex = selectedIndex;
+
+        SetDefaultInfoVisibility();
     }
 
     private async Task OpenImageInFullScreen(string? url)
     {
         if (url is not null)
             await JS.InvokeVoidAsync("open", url, "_blank");
+    }
+
+    private void ToggleInfoVisibility()
+    {
+        isInfoHidden = isInfoHidden ? false : true;
+        infoVisibilityStyle = isInfoHidden ? "hidden" : "visible";
+        infoVisibilityButtonBottomPosition = isInfoHidden ? "12px" : "74px";
+    }
+
+    private void SetDefaultInfoVisibility()
+    {
+        isInfoHidden = false;
+        infoVisibilityStyle = "visible";
+        infoVisibilityButtonBottomPosition = "74px";
     }
 }
