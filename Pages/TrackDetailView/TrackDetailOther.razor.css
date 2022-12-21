@@ -87,3 +87,34 @@ p {
     font-size: 14px;
     font-weight: 600;
 }
+
+@media (max-width: 540px) {
+    .other-tracks-list {
+        padding-bottom: 0;
+        column-count: 1;
+    }
+
+    .other-item {
+        height: 80px;
+    }
+
+    .other-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .item-image, .item-info {
+        width: 35%;
+    }
+
+    .item-country {
+        padding-right: 12px;
+    }
+
+    .item-country > .info-primary, .info-secondary {
+        font-size: 2.8vw;
+    }
+
+    .info-primary {
+        font-size: 3.3vw;
+    }
+}
