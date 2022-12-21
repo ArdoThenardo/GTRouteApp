@@ -155,7 +155,38 @@ p {
 }
 
 @media (max-width: 540px) {
+    p {
+        font-size: 10px;
+    }
+
     .gallery-header {
         padding-inline: 8px;
+    }
+
+    .highlight-info-section {
+        padding-inline: 12px;
+        padding-block: 8px;
+    }
+
+    .detail-gallery-highlight {
+        height: 58vw;
+    }
+
+    .info-visibility-btn {
+        display: none;
+    }
+
+    .gallery-item:hover img {
+        filter: grayscale(0.8);
+    }
+
+    .gallery-item, .gallery-item-selected {
+        width: 90px;
+        height: 50px;
+    }
+    
+    .gallery-item img, .gallery-item-selected img {
+        width: 90px;
+        height: 50px;
     }
 }
