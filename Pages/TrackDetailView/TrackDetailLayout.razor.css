@@ -126,6 +126,10 @@ p {
 }
 
 @media (max-width: 540px) {
+    .layout-header {
+        padding-inline: 8px;
+    }
+
     .detail-layout-list {
         flex-direction: column;
         height: 65vh;

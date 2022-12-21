@@ -150,3 +150,9 @@ p {
 .item-placeholder span {
     font-size: 2vw;
 }
+
+@media (max-width: 540px) {
+    .gallery-header {
+        padding-inline: 8px;
+    }
+}

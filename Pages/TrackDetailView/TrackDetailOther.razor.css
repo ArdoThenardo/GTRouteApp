@@ -89,6 +89,10 @@ p {
 }
 
 @media (max-width: 540px) {
+    .other-header {
+        padding-inline: 8px;
+    }
+
     .other-tracks-list {
         padding-bottom: 0;
         column-count: 1;
