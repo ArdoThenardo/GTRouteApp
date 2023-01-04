@@ -4,7 +4,7 @@ public class TrackDetailService: BaseService
 {
     // remote: /detail/{slug}
     // sample: sample-data/track_detail.json
-    private const string GetDetailUrl = $"{_baseUrl}/detail/";
+    private const string GetDetailUrl = $"{_baseUrl}/detail";
 
     private TrackDetail detail = new();
     private string recentError = "";
@@ -18,7 +18,7 @@ public class TrackDetailService: BaseService
 
         try
         {
-            var fetched = await HitRequest<BaseModel<TrackDetail>>($"{GetDetailUrl}{slug}");
+            var fetched = await HitRequest<BaseModel<TrackDetail>>($"{GetDetailUrl}?slug={slug}");
 
             if (fetched.NumberOfData == 0 || fetched.Data == null)
                 recentError = "There is no data";

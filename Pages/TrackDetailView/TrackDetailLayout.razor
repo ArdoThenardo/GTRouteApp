@@ -11,24 +11,24 @@
                 @if (layoutItem.index == selectedLayoutIndex)
                 {
                     <div class="layout-item-selected">
-                        <p>@layoutItem.layoutData.Name</p>
+                        <p>@layoutItem.layoutData.LayoutName</p>
                     </div>
                 }
                 else
                 {
                     <div class="layout-item" @onclick="() => SetSelection(layoutItem.index)">
-                        <p>@layoutItem.layoutData.Name</p>
+                        <p>@layoutItem.layoutData.LayoutName</p>
                     </div>
                 }
             }
         </div>
         <div class="layout-map">
             <img src="@Layouts.ElementAt(selectedLayoutIndex).MapUrl" 
-                alt="@Layouts.ElementAt(selectedLayoutIndex).Name" />
+                alt="@Layouts.ElementAt(selectedLayoutIndex).LayoutName" />
         </div>
         <div class="layout-info">
             <div class="info-group">
-                <p class="info-value">@Layouts.ElementAt(selectedLayoutIndex).Name</p>
+                <p class="info-value">@Layouts.ElementAt(selectedLayoutIndex).LayoutName</p>
             </div>
             <div class="info-group">
                 <p class="info-label">Length</p>

@@ -4,7 +4,7 @@ namespace GTRouteApp.Data;
 
 public class BaseService
 {
-    protected const string _baseUrl = "insert-base-url-here";
+    protected const string _baseUrl = "https://localhost:7182";
 
     protected readonly HttpClient _http;
 
