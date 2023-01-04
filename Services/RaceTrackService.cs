@@ -37,30 +37,7 @@ public class RaceTrackService: BaseService
             return Enumerable.Empty<RaceTrack>().ToList();
         }
     }
-
-    public async Task<RaceTrack> GetTrackDetail(string slug)
-    {
-        recentError = "";
-        
-        try
-        {
-            var fetched = await HitRequest<BaseModel<RaceTrack>>($"{GetTrackBySlugUrl}?slug={slug}");
-
-            if (fetched.NumberOfData == 0) {
-                recentError = "There is no track data.";
-            }
-            var track = fetched.Data ?? new RaceTrack();
-
-            return track;
-        }
-        catch
-        {
-            recentError = "Unable to get track data from server. Please try again at later time.";
-
-            return new RaceTrack();
-        }
-    }
-
+    
     public string GetRecentErrorMessage()
     {
         return recentError;
