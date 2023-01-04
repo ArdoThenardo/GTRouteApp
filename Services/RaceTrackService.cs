@@ -6,9 +6,6 @@ public class RaceTrackService: BaseService
     // sample: sample-data/track.json
     private const string GetTracksUrl = $"{_baseUrl}/tracks";
 
-    // remote: /get-track
-    private const string GetTrackBySlugUrl = $"{_baseUrl}/get-track";
-
     private List<RaceTrack> tracks = new();
     private string recentError = "";
 

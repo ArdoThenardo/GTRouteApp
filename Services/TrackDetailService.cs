@@ -2,7 +2,7 @@ namespace GTRouteApp.Data;
 
 public class TrackDetailService: BaseService
 {
-    // remote: /detail/{slug}
+    // remote: /detail?slug={slug}
     // sample: sample-data/track_detail.json
     private const string GetDetailUrl = $"{_baseUrl}/detail";
 
