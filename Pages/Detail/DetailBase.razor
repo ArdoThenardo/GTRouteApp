@@ -1,0 +1,45 @@
+@page "/browse/newdetail"
+
+@using GTRouteApp.Data;
+@inject NavigationManager NavigationManager;
+
+<PageTitle>New Track Detail | GTRoad</PageTitle>
+
+<div class="detail-container">
+    <DetailSubheader Info="@subheaderInfoText" />
+
+    <div class="detail-row-2">
+        <DetailSidebar OnSubDetailChanged="OnSubDetailChangedHandler" SelectedSubDetail="@chosenSubDetail" />
+        <div>
+            <p>content here {@chosenSubDetail}</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string subheaderInfoText = "View general information of --this race track--";
+    private SubDetail chosenSubDetail = SubDetail.General;
+
+    private void OnSubDetailChangedHandler(SubDetail subDetail)
+    {
+        chosenSubDetail = subDetail;
+
+        ChangeSubheaderInfoText();
+    }
+
+    private void ChangeSubheaderInfoText()
+    {
+        switch (chosenSubDetail)
+        {
+            case SubDetail.General:
+                subheaderInfoText = "View general information of --this race track--";
+                break;
+            case SubDetail.Layouts:
+                subheaderInfoText = "View available layout configurations on --this race track--";
+                break;
+            default:
+                subheaderInfoText = "View gallery of --this race track--";
+                break;
+        }
+    }
+}
