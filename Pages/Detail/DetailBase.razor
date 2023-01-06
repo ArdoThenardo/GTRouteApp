@@ -9,13 +9,18 @@
     <DetailSubheader />
 
     <div class="detail-row-2">
-        <DetailSidebar />
+        <DetailSidebar OnSubDetailChanged="OnSubDetailChangedHandler" SelectedSubDetail="@chosenSubDetail" />
         <div>
-            <p>content here</p>
+            <p>content here {@chosenSubDetail}</p>
         </div>
     </div>
 </div>
 
 @code {
+    private SubDetail chosenSubDetail = SubDetail.General;
 
+    private void OnSubDetailChangedHandler(SubDetail subDetail)
+    {
+        chosenSubDetail = subDetail;
+    }
 }

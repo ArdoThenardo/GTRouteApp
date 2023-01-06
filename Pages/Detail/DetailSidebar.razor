@@ -1,15 +1,60 @@
+@using GTRouteApp.Data;
+
 <div class="sidebar-container">
     <div class="sidebar-logo">
         <img class="img-cover" src="img/sample-cover.jpg" alt="cover" />
         <img class="img-logo" src="img/sample-logo.png" alt="logo" />
     </div>
-    <button class="sidebar-button" type="button">
-        <span class="bi bi-clipboard2-fill" style="margin-right: 6px;"></span> General
-    </button>
-    <button class="sidebar-button" type="button">
-        <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> Layouts
-    </button>
-    <button class="sidebar-button" type="button">
-        <span class="bi bi-images" style="margin-right: 6px;"></span> Images
-    </button>
+
+    @if (SelectedSubDetail == SubDetail.General)
+    {
+        <button class="sidebar-button" type="button" disabled>
+            <span class="bi bi-clipboard2-fill" style="margin-right: 6px;"></span> General
+        </button>
+    }
+    else
+    {
+        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.General)">
+            <span class="bi bi-clipboard2-fill" style="margin-right: 6px;"></span> General
+        </button>
+    }
+
+    @if (SelectedSubDetail == SubDetail.Layouts)
+    {
+        <button class="sidebar-button" type="button" disabled>
+            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> Layouts
+        </button>
+    }
+    else
+    {
+        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Layouts)">
+            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> Layouts
+        </button>
+    }
+    
+    @if (SelectedSubDetail == SubDetail.Images)
+    {
+        <button class="sidebar-button" type="button" disabled>
+            <span class="bi bi-images" style="margin-right: 6px;"></span> Images
+        </button>
+    }
+    else
+    {
+        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Images)">
+            <span class="bi bi-images" style="margin-right: 6px;"></span> Images
+        </button>
+    }
 </div>
+
+@code {
+    [Parameter]
+    public EventCallback<SubDetail> OnSubDetailChanged { get; set; }
+
+    [Parameter]
+    public SubDetail SelectedSubDetail { get; set; } = SubDetail.General;
+
+    private async Task ChangeSubDetail(SubDetail subDetail)
+    {
+        await OnSubDetailChanged.InvokeAsync(subDetail);
+    }
+}

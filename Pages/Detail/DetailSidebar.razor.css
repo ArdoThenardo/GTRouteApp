@@ -46,3 +46,9 @@
     background-color: #ffca2c;
     color: #1e2022;
 }
+
+.sidebar-button:disabled {
+    background-color: #ffc107;
+    color: #1e2022;
+    font-weight: 700;
+}
