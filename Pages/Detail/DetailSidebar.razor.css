@@ -3,7 +3,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    box-shadow: 1px 0px 8px rgba(0, 0, 0, 0.6);
 }
 
 .sidebar-logo {
