@@ -14,42 +14,42 @@
         "layouts": [
             {
                 "slug": "grand-valley-speedway",
-                "name": "Full Course",
+                "layoutName": "Full Course",
                 "mapUrl": "img/sample-map.webp",
                 "length": 5.4,
                 "corners": 18
             },
             {
                 "slug": "grand-valley-speedway",
-                "name": "East Course",
+                "layoutName": "East Course",
                 "mapUrl": "img/sample-map.webp",
                 "length": 3.2,
                 "corners": 12
             },
             {
                 "slug": "grand-valley-speedway",
-                "name": "Full Course Reverse",
+                "layoutName": "Full Course Reverse",
                 "mapUrl": "img/sample-map.webp",
                 "length": 5.4,
                 "corners": 18
             },
             {
                 "slug": "grand-valley-speedway",
-                "name": "East Course Reverse",
+                "layoutName": "East Course Reverse",
                 "mapUrl": "img/sample-map.webp",
                 "length": 3.2,
                 "corners": 12
             },
             {
                 "slug": "grand-valley-speedway",
-                "name": "West Course",
+                "layoutName": "West Course",
                 "mapUrl": "img/sample-map.webp",
                 "length": 2.75,
                 "corners": 8
             },
             {
                 "slug": "grand-valley-speedway",
-                "name": "West Course Reverse",
+                "layoutName": "West Course Reverse",
                 "mapUrl": "img/sample-map.webp",
                 "length": 2.75,
                 "corners": 8

@@ -1,62 +1,64 @@
+@using GTRouteApp.Data
+
 <div class="detail-general-container">
     <div class="general-group-1">
         <p class="detail-track-name">
-            <span class="bi bi-geo-alt-fill" style="margin-right: 6px"></span>Grand Valley Speedway
+            <span class="bi bi-geo-alt-fill" style="margin-right: 6px"></span>@Detail.Name
         </p>
     </div>
     <div class="general-group-2">
         <div class="detail-general-inner">
             <p class="detail-secondary">Category</p>
-            <p class="detail-primary">Original Circuit</p>
+            <p class="detail-primary">@Detail.Category</p>
         </div>
         <div class="detail-general-inner">
             <p class="detail-secondary">Country</p>
-            <p class="detail-primary"><span class="fi fi-be"></span> Belgium</p>
+            <p class="detail-primary"><span class="fi fi-@Detail.Country?.code"></span> @Detail.Country?.name</p>
         </div>
         <div class="detail-general-inner">
             <p class="detail-secondary">Road Type</p>
-            <p class="detail-primary">Tarmac</p>
+            <p class="detail-primary">@Detail.RoadType</p>
         </div>
         <div class="detail-general-inner">
             <p class="detail-secondary">No. of Layouts</p>
-            <p class="detail-primary">4</p>
+            <p class="detail-primary">@Detail.NumberOfLayouts</p>
         </div>
     </div>
     <div class="general-group-3">
         <p class="detail-secondary">Layout Configurations</p>
         <div class="layout-list">
-            <div class="layout-item-container">
-                <div class="layout-item-content">
-                    <div class="layout-item-img">
-                        <img src="img/sample-map.webp" alt="map" />
-                    </div>
-                    <div class="layout-item-name">
-                        <p>Grand Valley Speedway Full Course</p>
-                    </div>
-                </div>
-            </div>
-            <div class="layout-item-container">
-                <div class="layout-item-content">
-                    <div class="layout-item-img">
-                        <img src="img/sample-map.webp" alt="map" />
-                    </div>
-                    <div class="layout-item-name">
-                        <p>Grand Valley East Course</p>
+            @foreach (var layoutData in Detail.Layouts.Take(3))
+            {
+                <div class="layout-item-container">
+                    <div class="layout-item-content">
+                        <div class="layout-item-img">
+                            <img src="@layoutData.MapUrl" alt="@layoutData.LayoutName" />
+                        </div>
+                        <div class="layout-item-name">
+                            <p>@layoutData.LayoutName</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="layout-more-notice-container">
-                <div class="layout-more-notice">
-                    <p>Check '<span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 2px;"></span>Layouts' to see more track layouts</p>
+            }
+            @if (Detail.Layouts.Count() > 3)
+            {
+                <div class="layout-more-notice-container">
+                    <div class="layout-more-notice">
+                        <p>
+                            Check '<span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 2px;"></span>Layouts' to see 
+                            more track layouts
+                        </p>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
     <div class="general-group-4">
-        <img src="img/sample-cover.jpg" alt="cover" />
+        <img src="@Detail.CoverUrl" alt="cover" />
     </div>
 </div>
 
 @code {
-
+    [Parameter]
+    public TrackDetail Detail { get; set; } = new();
 }
