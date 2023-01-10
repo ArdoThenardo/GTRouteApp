@@ -10,7 +10,12 @@
     <DetailSubheader Info="@subheaderInfoText" />
 
     <div class="detail-row-2">
-        <DetailSidebar OnSubDetailChanged="OnSubDetailChangedHandler" SelectedSubDetail="@chosenSubDetail" />
+        <DetailSidebar 
+            OnSubDetailChanged="OnSubDetailChangedHandler" 
+            SelectedSubDetail="@chosenSubDetail"
+            CoverUrl="@detail.CoverUrl"
+            LogoUrl="@detail.LogoUrl"    
+        />
         @if (chosenSubDetail == SubDetail.General)
         {
             <DetailGeneral Detail="detail" />

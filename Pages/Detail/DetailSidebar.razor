@@ -1,9 +1,9 @@
-@using GTRouteApp.Data;
+@using GTRouteApp.Data
 
 <div class="sidebar-container">
     <div class="sidebar-logo">
-        <img class="img-cover" src="img/sample-cover.jpg" alt="cover" />
-        <img class="img-logo" src="img/sample-logo.png" alt="logo" />
+        <img class="img-cover" src="@CoverUrl" alt="cover" />
+        <img class="img-logo" src="@LogoUrl" alt="logo" />
     </div>
 
     @if (SelectedSubDetail == SubDetail.General)
@@ -52,6 +52,12 @@
 
     [Parameter]
     public SubDetail SelectedSubDetail { get; set; } = SubDetail.General;
+
+    [Parameter]
+    public string CoverUrl { get; set; } = "";
+
+    [Parameter]
+    public string LogoUrl { get; set; } = "";
 
     private async Task ChangeSubDetail(SubDetail subDetail)
     {
