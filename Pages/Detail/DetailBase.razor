@@ -1,7 +1,8 @@
-@page "/browse/newdetail"
+@page "/browse/newdetail/{slug}"
 
-@using GTRouteApp.Data;
-@inject NavigationManager NavigationManager;
+@using GTRouteApp.Data
+@inject TrackDetailService TrackDetailService
+@inject NavigationManager NavigationManager
 
 <PageTitle>New Track Detail | GTRoad</PageTitle>
 
@@ -9,37 +10,81 @@
     <DetailSubheader Info="@subheaderInfoText" />
 
     <div class="detail-row-2">
-        <DetailSidebar OnSubDetailChanged="OnSubDetailChangedHandler" SelectedSubDetail="@chosenSubDetail" />
-        <div>
-            <p>content here {@chosenSubDetail}</p>
-        </div>
+        <DetailSidebar 
+            OnSubDetailChanged="OnSubDetailChangedHandler" 
+            SelectedSubDetail="@chosenSubDetail"
+            CoverUrl="@detail.CoverUrl"
+            LogoUrl="@detail.LogoUrl"    
+        />
+        @if (chosenSubDetail == SubDetail.General)
+        {
+            <DetailGeneral Detail="@detail" />
+        }
+        else
+        {
+            <div>
+                <p>content here {@chosenSubDetail}</p>
+            </div>
+        }
     </div>
 </div>
 
 @code {
+    [Parameter]
+    public string slug { get; set; } = "";
+
+    private TrackDetail detail = new();
+    private List<TrackLayout> layouts = new();
+    private List<TrackImage> images = new();
+
     private string subheaderInfoText = "View general information of --this race track--";
     private SubDetail chosenSubDetail = SubDetail.General;
+    
+    private string errorMessage = "";
+    private bool showError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDetail(slug);
+        CheckError();
+    }
+
+    private async Task LoadDetail(string slug)
+    {
+        var data = await TrackDetailService.GetTrackDetail(slug);
+        detail = data;
+        layouts.AddRange(detail.Layouts);
+        images.AddRange(detail.Images);
+
+        ChangeSubheaderInfoText(detail.Name ?? "");
+    }
 
     private void OnSubDetailChangedHandler(SubDetail subDetail)
     {
         chosenSubDetail = subDetail;
 
-        ChangeSubheaderInfoText();
+        ChangeSubheaderInfoText(detail.Name ?? "");
     }
 
-    private void ChangeSubheaderInfoText()
+    private void ChangeSubheaderInfoText(string trackName)
     {
         switch (chosenSubDetail)
         {
             case SubDetail.General:
-                subheaderInfoText = "View general information of --this race track--";
+                subheaderInfoText = $"View general information of {trackName}";
                 break;
             case SubDetail.Layouts:
-                subheaderInfoText = "View available layout configurations on --this race track--";
+                subheaderInfoText = $"View available layout configurations on {trackName}";
                 break;
             default:
-                subheaderInfoText = "View gallery of --this race track--";
+                subheaderInfoText = $"View gallery of {trackName}";
                 break;
         }
+    }
+
+    private void CheckError()
+    {
+        errorMessage = TrackDetailService.GetRecentErrorMessage();
+        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
     }
 }
