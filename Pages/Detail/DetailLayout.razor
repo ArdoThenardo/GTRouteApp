@@ -3,7 +3,7 @@
 <div class="detail-layout-container">
     <div class="layout-header">
         <p class="detail-track-name">
-            <span class="bi bi-geo-alt-fill" style="margin-right: 6px"></span>Grand Valley Speedway
+            <span class="bi bi-geo-alt-fill" style="margin-right: 6px"></span>@Name
         </p>
     </div>
     <div class="layout-highlight">
@@ -48,6 +48,8 @@
 @code {
     [Parameter]
     public List<TrackLayout> Layouts { get; set; } = new();
+    [Parameter]
+    public string Name { get; set; } = "";
     private int selectedIndex = 0;
 
     private void SetSelection(int index)
