@@ -7,6 +7,6 @@ public enum BrowseMode {
 
 public enum SubDetail {
     General,
-    Layouts,
-    Images
+    Layout,
+    Image
 }

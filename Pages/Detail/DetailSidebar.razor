@@ -19,29 +19,29 @@
         </button>
     }
 
-    @if (SelectedSubDetail == SubDetail.Layouts)
+    @if (SelectedSubDetail == SubDetail.Layout)
     {
         <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> Layouts
+            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> Layout
         </button>
     }
     else
     {
-        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Layouts)">
-            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> Layouts
+        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Layout)">
+            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> Layout
         </button>
     }
     
-    @if (SelectedSubDetail == SubDetail.Images)
+    @if (SelectedSubDetail == SubDetail.Image)
     {
         <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-images" style="margin-right: 6px;"></span> Images
+            <span class="bi bi-images" style="margin-right: 6px;"></span> Image
         </button>
     }
     else
     {
-        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Images)">
-            <span class="bi bi-images" style="margin-right: 6px;"></span> Images
+        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Image)">
+            <span class="bi bi-images" style="margin-right: 6px;"></span> Image
         </button>
     }
 </div>

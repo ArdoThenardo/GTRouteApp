@@ -20,6 +20,10 @@
         {
             <DetailGeneral Detail="@detail" />
         }
+        else if (chosenSubDetail == SubDetail.Layout)
+        {
+            <DetailLayout Layouts="@layouts" Name="@detail.Name" />
+        }
         else
         {
             <div>
@@ -73,7 +77,7 @@
             case SubDetail.General:
                 subheaderInfoText = $"View general information of {trackName}";
                 break;
-            case SubDetail.Layouts:
+            case SubDetail.Layout:
                 subheaderInfoText = $"View available layout configurations on {trackName}";
                 break;
             default:
