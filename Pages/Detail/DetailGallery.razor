@@ -13,6 +13,12 @@
                 @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
                 <span class="bi bi-arrows-fullscreen"></span>
             </button>
+            <button class="btn btn-secondary next-btn" disabled="@isNextDisabled">
+                <span class="bi bi-chevron-right"></span>
+            </button>
+            <button class="btn btn-secondary prev-btn" disabled="@isPrevDisabled">
+                <span class="bi bi-chevron-left"></span>
+            </button>
             <button class="btn btn-secondary info-visibility-btn" 
                 style="bottom: @infoVisibilityButtonBottomPosition;"
                 @onclick="() => ToggleInfoVisibility()">
@@ -67,6 +73,8 @@
     [Parameter]
     public List<TrackImage> Images { get; set; } = new();
     private int selectedImageIndex = 0;
+    private bool isNextDisabled = false;
+    private bool isPrevDisabled = false;
     private bool isInfoHidden = false;
     private string infoVisibilityStyle = "visible"; // "hidden" and "visible"
     private string infoVisibilityButtonBottomPosition = "74px"; // "12px" and "74px"
