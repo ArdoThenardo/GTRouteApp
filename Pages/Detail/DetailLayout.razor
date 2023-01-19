@@ -6,6 +6,9 @@
             <span class="bi bi-geo-alt-fill" style="margin-right: 6px"></span>@Name
         </p>
     </div>
+    <div class="layout-cover">
+        <img src="@RandomImageUrl" alt="cover" />
+    </div>
     <div class="layout-highlight">
         <div class="layout-map">
             <img src="@Layouts.ElementAt(selectedIndex).MapUrl" 
@@ -50,6 +53,8 @@
     public List<TrackLayout> Layouts { get; set; } = new();
     [Parameter]
     public string Name { get; set; } = "";
+    [Parameter]
+    public string RandomImageUrl { get; set; } = "";
     private int selectedIndex = 0;
 
     private void SetSelection(int index)

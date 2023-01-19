@@ -19,6 +19,29 @@
     border-bottom: 1px solid #1e2022;
 }
 
+.layout-cover {
+    position: relative;
+    margin-top: 6px;
+    height: 14%;
+}
+
+.layout-cover::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(232, 232, 232, 1.0) 0%, rgba(232, 232, 232, 0.1) 64%);
+}
+
+.layout-cover img {
+    object-fit: cover;
+    object-position: center 30%;
+    width: 100%;
+    height: 100%;
+}
+
 .layout-highlight {
     display: flex;
     flex-direction: row;
