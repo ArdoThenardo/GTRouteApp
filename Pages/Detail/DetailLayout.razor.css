@@ -44,34 +44,43 @@
 
 .layout-selection-area {
     display: grid;
-    grid-template-areas: "label label"
+    grid-template-areas: "label1 label2"
                         "selection info";
     grid-template-columns: 35% 65%;
     grid-template-rows: 5% 95%;
     height: 74.8%;
 }
 
-.layout-selection-label {
-    position: relative;
-    margin-inline: 16px;
+.layout-selection-label-1, .layout-selection-label-2 {
+    padding-inline: 16px;
+    padding-block: 3px;
     color: #1e2022;
     font-size: 14px;
     font-weight: 600;
-    top: 60%;
-    transform: translateY(-50%);
 }
 
-.layout-selection-label span {
+.layout-selection-label-1 {
+    grid-area: label1;
+    background-color: #e8e8e8;
+}
+
+.layout-selection-label-2 {
+    grid-area: label2;
+    background-color: #f4f4f2;
+}
+
+.layout-selection-label1 span, .layout-selection-label-2 span {
     margin-right: 2px;
 }
 
 .layout-highlight {
     grid-area: info;
+    background-color: #f4f4f2;
     display: flex;
     flex-direction: column;
     height: auto;
-    margin-inline: 16px;
-    margin-top: 2px;
+    padding-inline: 16px;
+    padding-top: 2px;
 }
 
 .layout-map {
@@ -124,8 +133,7 @@
 
 .layout-selection {
     grid-area: selection;
-    height: 160px;
-    background-color: #f4f4f2;
+    background-color: #e8e8e8;
     display: flex;
     flex-direction: column;
     height: auto;
@@ -134,18 +142,17 @@
     padding-bottom: 12px;
     overflow-y: scroll;
     gap: 10px;
-    box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
 
 .layout-selection::-webkit-scrollbar {
-    background-color: #f4f4f2;
+    background-color: #e8e8e8;
     width: 8px;
 }
 
 .layout-selection::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: #1e2022;
-    border: 1.2px solid #f4f4f2;
+    border: 1.2px solid #e8e8e8;
 }
 
 .layout-item, .layout-item-selected {
