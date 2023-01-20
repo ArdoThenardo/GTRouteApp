@@ -6,42 +6,58 @@
             <span class="bi bi-geo-alt-fill" style="margin-right: 6px"></span>@Name
         </p>
     </div>
-    <div class="layout-highlight">
-        <div class="layout-map">
-            <img src="@Layouts.ElementAt(selectedIndex).MapUrl" 
-                alt="@Layouts.ElementAt(selectedIndex).LayoutName" />
-        </div>
-        <div class="layout-info">
-            <div class="info-group">
-                <p class="info-label">Name</p>
-                <p class="info-value">@Layouts.ElementAt(selectedIndex).LayoutName</p>
-            </div>
-            <div class="info-group">
-                <p class="info-label">Length</p>
-                <p class="info-value">@Layouts.ElementAt(selectedIndex).Length m</p>
-            </div>
-            <div class="info-group">
-                <p class="info-label">Corners</p>
-                <p class="info-value">@Layouts.ElementAt(selectedIndex).Corners</p>
-            </div>
-        </div>
+
+    <div class="layout-cover">
+        <img src="@RandomImageUrl" alt="cover" />
     </div>
-    <div class="layout-selection">
-        @foreach (var layoutItem in Layouts.Select((data, index) => (data, index)))
-        {
-            @if (selectedIndex == layoutItem.index)
+
+    <div class="layout-selection-area">
+        <div class="layout-selection-label-1">
+            <span class="bi bi-stack"></span> Layout List
+        </div>
+        <div class="layout-selection">
+            @foreach (var layoutItem in Layouts.Select((data, index) => (data, index)))
             {
-                <div class="layout-item-selected">
-                    <img src="@layoutItem.data.MapUrl" alt="@layoutItem.data.LayoutName" />
-                </div>
+                @if (selectedIndex == layoutItem.index)
+                {
+                    <div class="layout-item-selected">
+                        <img src="@layoutItem.data.MapUrl" alt="@layoutItem.data.LayoutName" />
+                        <p>@layoutItem.data.LayoutName</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="layout-item" @onclick="() => SetSelection(layoutItem.index)">
+                        <img src="@layoutItem.data.MapUrl" alt="@layoutItem.data.LayoutName" />
+                        <p>@layoutItem.data.LayoutName</p>
+                    </div>
+                }
             }
-            else
-            {
-                <div class="layout-item" @onclick="() => SetSelection(layoutItem.index)">
-                    <img src="@layoutItem.data.MapUrl" alt="@layoutItem.data.LayoutName" />
+        </div>
+
+        <div class="layout-selection-label-2">
+            <span class="bi bi-info-circle-fill"></span> Layout Information
+        </div>
+        <div class="layout-highlight">
+            <div class="layout-map">
+                <img src="@Layouts.ElementAt(selectedIndex).MapUrl" 
+                    alt="@Layouts.ElementAt(selectedIndex).LayoutName" />
+            </div>
+            <div class="layout-info">
+                <div class="info-group">
+                    <p class="info-label">Name</p>
+                    <p class="info-value">@Layouts.ElementAt(selectedIndex).LayoutName</p>
                 </div>
-            }
-        }
+                <div class="info-group">
+                    <p class="info-label">Length</p>
+                    <p class="info-value">@Layouts.ElementAt(selectedIndex).Length m</p>
+                </div>
+                <div class="info-group">
+                    <p class="info-label">Corners</p>
+                    <p class="info-value">@Layouts.ElementAt(selectedIndex).Corners</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -50,6 +66,8 @@
     public List<TrackLayout> Layouts { get; set; } = new();
     [Parameter]
     public string Name { get; set; } = "";
+    [Parameter]
+    public string RandomImageUrl { get; set; } = "";
     private int selectedIndex = 0;
 
     private void SetSelection(int index)
