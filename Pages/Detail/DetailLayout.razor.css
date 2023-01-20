@@ -139,12 +139,13 @@
 
 .layout-selection::-webkit-scrollbar {
     background-color: #f4f4f2;
-    width: 6px;
+    width: 8px;
 }
 
 .layout-selection::-webkit-scrollbar-thumb {
-    border-radius: 2px;
+    border-radius: 4px;
     background-color: #1e2022;
+    border: 1.2px solid #f4f4f2;
 }
 
 .layout-item, .layout-item-selected {
