@@ -22,12 +22,14 @@
                 {
                     <div class="layout-item-selected">
                         <img src="@layoutItem.data.MapUrl" alt="@layoutItem.data.LayoutName" />
+                        <p>@layoutItem.data.LayoutName</p>
                     </div>
                 }
                 else
                 {
                     <div class="layout-item" @onclick="() => SetSelection(layoutItem.index)">
                         <img src="@layoutItem.data.MapUrl" alt="@layoutItem.data.LayoutName" />
+                        <p>@layoutItem.data.LayoutName</p>
                     </div>
                 }
             }
