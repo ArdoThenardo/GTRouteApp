@@ -37,7 +37,7 @@
 
 .layout-cover img {
     object-fit: cover;
-    object-position: center 30%;
+    object-position: center 65%;
     width: 100%;
     height: 100%;
 }
@@ -202,17 +202,6 @@
     object-fit: cover;
     width: 90px;
     height: 100%;
-}
-
-.layout-item img {
-    filter: grayscale(0.8);
-}
-
-.layout-item:hover img {
-    filter: grayscale(0);
-}
-
-.layout-item img, .layout-item-selected img {
     background-color: #303841;
     border-radius: 6px;
 }
