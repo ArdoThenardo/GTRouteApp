@@ -1,4 +1,7 @@
 .sidebar-container {
+    background-image: url(img/by-tom-verdoot-edited.jpg);
+    background-size: cover;
+    background-blend-mode: overlay;
     background-color: #ebebe8;
     height: 100%;
     display: flex;
