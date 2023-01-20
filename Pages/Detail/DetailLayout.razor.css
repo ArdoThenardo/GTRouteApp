@@ -85,10 +85,8 @@
 }
 
 .layout-map {
-    width: 50%;
-    max-width: 480px;
-    max-height: 295px;
-    aspect-ratio: 360 / 220;
+    width: 448px;
+    height: 460px;
     border-radius: 12px;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
     overflow: hidden;
