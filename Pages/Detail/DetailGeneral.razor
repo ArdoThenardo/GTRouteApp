@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="general-group-4">
-        <img src="@randomImageUrl" alt="cover" />
+        <img src="@RandomImageUrl" alt="cover" />
     </div>
 </div>
 
@@ -62,30 +62,6 @@
     [Parameter]
     public TrackDetail Detail { get; set; } = new();
 
-    private string randomImageUrl = "";
-
-    protected override void OnParametersSet()
-    {
-        randomImageUrl = GetRandomTrackImage();
-        Console.WriteLine($"test terpanggil");
-    }
-
-    private string GetRandomTrackImage()
-    {
-        if (Detail.Images.Count() > 0)
-        {
-            var random = new Random();
-            var randomizedIndex = 0;
-
-            randomizedIndex = random.Next(Detail.Images.Count());
-
-            var randomUrl = Detail.Images.ElementAt(randomizedIndex).ImageUrl;
-            
-            return randomUrl ?? "";
-        }
-        else
-        {
-            return Detail.CoverUrl ?? "";
-        }
-    }
+    [Parameter]
+    public string RandomImageUrl { get; set; } = "";
 }
