@@ -1,4 +1,5 @@
 .detail-container {
+    position: relative;
     background-color: #e8e8e8;
     width: 100%;
     height: 88vh;
@@ -7,9 +8,22 @@
 }
 
 .detail-row-2 {
+    position: relative;
     display: grid;
     grid-template-columns: 20% 80%;
     height: 100%;
     overflow: hidden;
+}
+
+.back-button {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+}
+
+.back-button button {
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
 }
 
