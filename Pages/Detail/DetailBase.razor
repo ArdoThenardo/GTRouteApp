@@ -1,4 +1,4 @@
-@page "/browse/newdetail/{slug}"
+@page "/browse/detail/{slug}"
 
 @using GTRouteApp.Data
 @inject TrackDetailService TrackDetailService
@@ -29,11 +29,30 @@
             <DetailGallery Images=@images />
         }
     </div>
+
+    <div class="back-button">
+        @if (!string.IsNullOrWhiteSpace(origin))
+        {
+            <button type="button" class="btn btn-secondary" @onclick="() => GoBack(origin)">
+                <span class="bi bi-arrow-left-square"></span> Back
+            </button>
+        }
+        else
+        {
+            <button type="button" class="btn btn-secondary" @onclick="() => GoBack()">
+                <span class="bi bi-arrow-left-square"></span> Browse Race Tracks
+            </button>
+        }
+    </div>
 </div>
 
 @code {
     [Parameter]
     public string slug { get; set; } = "";
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "origin")]
+    public string origin { get; set; } = "";
 
     private TrackDetail detail = new();
     private List<TrackLayout> layouts = new();
@@ -93,6 +112,26 @@
             default:
                 subheaderInfoText = $"View gallery of {trackName}";
                 break;
+        }
+    }
+
+    private void GoBack(string originPage = "browse")
+    {
+        if (originPage.Equals("home"))
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        else if (originPage.Equals("browseGallery"))
+        {
+            NavigationManager.NavigateTo("/browse?preselect_mode=gallery");
+        }
+        else if (originPage.Equals("browseGrid"))
+        {
+            NavigationManager.NavigateTo("/browse?preselect_mode=grid");
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/browse");
         }
     }
 
