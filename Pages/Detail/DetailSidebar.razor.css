@@ -56,3 +56,43 @@
     color: #1e2022;
     font-weight: 700;
 }
+
+@media (max-width: 540px) {
+    .sidebar-container {
+        flex-direction: row;
+        padding-inline: 14px;
+        max-height: 60px;
+        gap: 1px;
+        border-bottom: 0.8px solid #e8e8e8;
+    }
+
+    .sidebar-logo {
+        width: 25%;
+        padding-block: 4px;
+        padding-inline: 0;
+    }
+
+    .img-cover {
+        display: none;
+    }
+
+    .img-logo {
+        position: relative;
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 0 4px rgba(30, 32, 34, 0.4));
+    }
+
+    .sidebar-button {
+        background-color: rgba(71, 75, 79, 0.7);
+        width: 25%;
+        height: 100%;
+        text-align: center;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .sidebar-button:first-of-type {
+        margin-left: 4px;
+    }
+}
