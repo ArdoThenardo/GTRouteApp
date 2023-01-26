@@ -16,7 +16,13 @@
 }
 
 @media (max-width: 540px) {
+    .subheader-container {
+        min-height: 44px;
+        max-height: 44px;
+        border-bottom: 0.8px solid #e8e8e8;
+    }
+
     .subheader-info {
-        font-size: 3.8vw;
+        font-size: 12px;
     }
 }
