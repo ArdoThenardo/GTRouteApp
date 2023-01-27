@@ -215,3 +215,32 @@
     background-color: #303841;
     border-radius: 6px;
 }
+
+@media (max-width: 540px), (max-height: 414px) {
+    .detail-layout-container {
+        overflow: scroll;
+        border-top: 1.4px solid #1e2022;
+    }
+
+    .detail-layout-container::after {
+        box-shadow: unset;
+    }
+
+    .layout-header {
+        padding-top: 8px;
+    }
+
+    .layout-cover {
+        display: none;
+    }
+
+    .detail-track-name {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .layout-selection-area {
+        border-top: none;
+        margin-top: 4px;
+    }
+}
