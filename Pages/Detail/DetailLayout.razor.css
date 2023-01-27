@@ -281,6 +281,10 @@
         height: 60%;
     }
 
+    .layout-map img {
+        object-fit: contain;
+    }
+
     .info-label {
         font-size: 12px;
     }
