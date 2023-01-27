@@ -28,11 +28,7 @@
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
 }
 
-@media (max-width: 540px) {
-    .detail-container {
-        height: 88vh;
-    }
-
+@media (max-width: 540px), (max-height: 414px) {
     .detail-row-2 {
         display: flex;
         flex-direction: column;
@@ -46,5 +42,11 @@
 
     .back-button button {
         font-size: 12px;
+    }
+}
+
+@media (max-height: 414px) {
+    .detail-container {
+        height: 140vh;
     }
 }

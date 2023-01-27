@@ -161,7 +161,7 @@
     font-weight: 700;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 540px), (max-height: 414px) {
     .detail-general-container {
         overflow: scroll;
         border-top: 1.4px solid #1e2022;
@@ -209,5 +209,15 @@
     .detail-track-name {
         font-size: 20px;
         font-weight: 700;
+    }
+}
+
+@media (max-height: 414px) {
+    .layout-item-container, .layout-more-notice-container {
+        width: 20%;
+    }
+
+    .general-group-4 {
+        height: 30%;
     }
 }
