@@ -57,7 +57,7 @@
     font-weight: 700;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 540px), (max-height: 414px) {
     .sidebar-container {
         flex-direction: row;
         padding-inline: 14px;
@@ -94,5 +94,15 @@
 
     .sidebar-button:first-of-type {
         margin-left: 4px;
+    }
+}
+
+@media (max-height: 414px) {
+    .sidebar-logo {
+        height: 60px;
+    }
+
+    .img-logo {
+        width: 60%;
     }
 }
