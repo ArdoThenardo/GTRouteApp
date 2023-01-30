@@ -25,7 +25,7 @@ public class RaceTrackService: BaseService
             }
             tracks.AddRange(fetched.Data ?? Enumerable.Empty<RaceTrack>().ToList());
 
-            return tracks;
+            return SortTracksByCategory();
         }
         catch
         {
@@ -33,6 +33,24 @@ public class RaceTrackService: BaseService
 
             return Enumerable.Empty<RaceTrack>().ToList();
         }
+    }
+
+    private List<RaceTrack> SortTracksByCategory()
+    {
+        List <RaceTrack> sortedTracks = new();
+        var originalTracks = tracks.Where(t => t.Category == "Original Circuit").ToList();
+        var realTracks = tracks.Where(t => t.Category == "Real Circuit").ToList();
+        var cityTracks = tracks.Where(t => t.Category == "City Circuit").ToList();
+        var dirtTracks = tracks.Where(t => t.Category == "Dirt Circuit").ToList();
+        var snowTracks = tracks.Where(t => t.Category == "Snow Circuit").ToList();
+
+        sortedTracks.AddRange(originalTracks);
+        sortedTracks.AddRange(realTracks);
+        sortedTracks.AddRange(cityTracks);
+        sortedTracks.AddRange(dirtTracks);
+        sortedTracks.AddRange(snowTracks);
+
+        return sortedTracks;
     }
     
     public string GetRecentErrorMessage()
