@@ -1,79 +1,44 @@
 @using GTRouteApp.Data
-@inject RaceTrackService RaceTrackService
 @inject NavigationManager NavigationManager
 
 <div class="grid-container">
-    @if (tracks == null || tracks.Count == 0)
-    {
-        @if (showError)
+    <div class="grid-list">
+        @foreach (var track in Tracks.Select((trackData, index) => (trackData, index)))
         {
-            <p>@errorMessage</p>
-        }
-        else
-        {
-            <div class="loading-traditional" style="height: 85vh;"></div>
-        }
-    }
-    else
-    {
-        <div class="grid-list">
-            @foreach (var track in tracks.Select((trackData, index) => (trackData, index)))
-            {
-                <div class="item-container">
-                    <div class="item-content"
-                        style="background-image: url(@track.trackData.CoverUrl); --delay: @track.index;"
-                        @onclick="() => AccessTrackDetail(track.trackData.Slug!)">
-                        <div class="content-section-1">
-                            <img 
-                                src="@track.trackData.LogoUrl"
-                                alt="@track.trackData.LogoUrl"
-                            />
-                            <p>@track.trackData.Name</p>
-                        </div>
-                        <div class="content-section-2">
-                            <p>
-                                <span class="fi fi-@track.trackData.Country?.code" style="margin-right: 6px;"></span>
-                                <span>@track.trackData.Category</span>
-                            </p>
-                        </div>
+            <div class="item-container">
+                <div class="item-content"
+                    style="background-image: url(@track.trackData.CoverUrl); --delay: @track.index;"
+                    @onclick="() => AccessTrackDetail(track.trackData.Slug!)">
+                    <div class="content-section-1">
+                        <img 
+                            src="@track.trackData.LogoUrl"
+                            alt="@track.trackData.LogoUrl"
+                        />
+                        <p>@track.trackData.Name</p>
+                    </div>
+                    <div class="content-section-2">
+                        <p>
+                            <span class="fi fi-@track.trackData.Country?.code" style="margin-right: 6px;"></span>
+                            <span>@track.trackData.Category</span>
+                        </p>
                     </div>
                 </div>
-            }
-            <div class="more-notice-container">
-                <div class="more-notice" style="--delay: @tracks.Count();">
-                    <p>More race tracks will be added<br>in the future</p>
-                </div>
+            </div>
+        }
+        <div class="more-notice-container">
+            <div class="more-notice" style="--delay: @Tracks.Count();">
+                <p>More race tracks will be added<br>in the future</p>
             </div>
         </div>
-    }
+    </div>
 </div>
 
 @code {
-    private List<RaceTrack> tracks = new();
-
-    private string errorMessage = "";
-    private bool showError = false;
-
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadTracks();
-        CheckError();
-    }
-
-    private async Task LoadTracks()
-    {
-        var fetched = await RaceTrackService.GetTracks();
-        tracks.AddRange(fetched);
-    }
+    [Parameter]
+    public List<RaceTrack> Tracks { get; set; } = new();
 
     private void AccessTrackDetail(string slug)
     {
         NavigationManager.NavigateTo($"/browse/detail/{slug}?origin=browseGrid");
-    }
-
-    private void CheckError()
-    {
-        errorMessage = RaceTrackService.GetRecentErrorMessage();
-        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
     }
 }
