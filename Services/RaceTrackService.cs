@@ -38,11 +38,11 @@ public class RaceTrackService: BaseService
     private List<RaceTrack> SortTracksByCategory()
     {
         List <RaceTrack> sortedTracks = new();
-        var originalTracks = tracks.Where(t => t.Category == "Original Circuit").ToList();
-        var realTracks = tracks.Where(t => t.Category == "Real Circuit").ToList();
-        var cityTracks = tracks.Where(t => t.Category == "City Circuit").ToList();
-        var dirtTracks = tracks.Where(t => t.Category == "Dirt Circuit").ToList();
-        var snowTracks = tracks.Where(t => t.Category == "Snow Circuit").ToList();
+        var originalTracks = tracks.Where(t => t.Category == RaceTrackCategory.OriginalCircuit).ToList();
+        var realTracks = tracks.Where(t => t.Category == RaceTrackCategory.RealCircuit).ToList();
+        var cityTracks = tracks.Where(t => t.Category == RaceTrackCategory.CityCircuit).ToList();
+        var dirtTracks = tracks.Where(t => t.Category == RaceTrackCategory.DirtCircuit).ToList();
+        var snowTracks = tracks.Where(t => t.Category == RaceTrackCategory.SnowCircuit).ToList();
 
         sortedTracks.AddRange(originalTracks);
         sortedTracks.AddRange(realTracks);
