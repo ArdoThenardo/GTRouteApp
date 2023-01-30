@@ -1,31 +1,69 @@
 @page "/browse"
 @using GTRouteApp.Data
+@inject RaceTrackService RaceTrackService
 
 <PageTitle>Browse | GTRoad</PageTitle>
 
-<BrowseSubheader Info="@info" ChosenBrowseMode="@ChangeBrowseMode" preselect_mode="@preselect_mode" />
-
-@if (_mode == BrowseMode.Gallery)
+@if (tracks == null || tracks.Count == 0)
 {
-    <BrowseGallery />
+    @if (showError)
+    {
+        <p>@errorMessage</p>
+    }
+    else
+    {
+        <div class="loading-traditional"></div>
+    }
 }
-else if (_mode == BrowseMode.Grid)
+else
 {
-    <BrowseGrid />
+    <BrowseSubheader Info="@info" ChosenBrowseMode="@ChangeBrowseMode" preselect_mode="@preselect_mode" />
+
+    @if (_mode == BrowseMode.Gallery)
+    {
+        <BrowseGallery Tracks="@tracks" />
+    }
+    else if (_mode == BrowseMode.Grid)
+    {
+        <BrowseGrid Tracks="@tracks" />
+    }
 }
 
 @code {
+    private List<RaceTrack> tracks = new();
+
     private const string galleryInfo = "Click or tap a track on the bottom to highlight";
     private const string gridInfo = "Click or tap a track to view";
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "preselect_mode")]
     public string preselect_mode { get; set; } = ""; // gallery or grid
-
     private BrowseMode _mode = BrowseMode.Gallery;
     private string info = galleryInfo;
 
-    protected override void OnInitialized()
+    private string errorMessage = "";
+    private bool showError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTracks();
+        CheckError();
+
+        PreselectBrowseMode();
+    }
+
+    private async Task LoadTracks()
+    {
+        tracks = await RaceTrackService.GetTracks();
+    }
+
+    private void CheckError()
+    {
+        errorMessage = RaceTrackService.GetRecentErrorMessage();
+        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
+
+    private void PreselectBrowseMode()
     {
         if (!string.IsNullOrWhiteSpace(preselect_mode))
         {
