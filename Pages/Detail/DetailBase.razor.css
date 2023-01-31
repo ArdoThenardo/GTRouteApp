@@ -35,13 +35,7 @@
     }
 
     .back-button {
-        position: absolute;
-        left: unset;
-        right: 16px;
-    }
-
-    .back-button button {
-        font-size: 12px;
+        display: none;
     }
 }
 

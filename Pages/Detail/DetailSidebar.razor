@@ -1,6 +1,10 @@
 @using GTRouteApp.Data
 
 <div class="sidebar-container">
+    <div class="back-button" type="button" @onclick="() => GoBack()">
+        <span class="bi bi-arrow-left-square"></span>
+    </div>
+
     <div class="sidebar-logo">
         <img class="img-cover" src="@CoverUrl" alt="cover" />
         <img class="img-logo" src="@LogoUrl" alt="logo" />
@@ -51,6 +55,9 @@
     public EventCallback<SubDetail> OnSubDetailChanged { get; set; }
 
     [Parameter]
+    public EventCallback OnBackClicked { get; set; }
+
+    [Parameter]
     public SubDetail SelectedSubDetail { get; set; } = SubDetail.General;
 
     [Parameter]
@@ -58,6 +65,11 @@
 
     [Parameter]
     public string LogoUrl { get; set; } = "";
+
+    private async Task GoBack()
+    {
+        await OnBackClicked.InvokeAsync();
+    }
 
     private async Task ChangeSubDetail(SubDetail subDetail)
     {
