@@ -29,6 +29,7 @@
         <div class="detail-row-2">
             <DetailSidebar 
                 OnSubDetailChanged="OnSubDetailChangedHandler" 
+                OnBackClicked="OnBackSidebarClickedHandler"
                 SelectedSubDetail="@chosenSubDetail"
                 CoverUrl="@detail.CoverUrl"
                 LogoUrl="@detail.LogoUrl"    
@@ -107,6 +108,18 @@
         if (string.IsNullOrWhiteSpace(randomImageUrl))
         {
             randomImageUrl = detail.CoverUrl ?? "";
+        }
+    }
+
+    private void OnBackSidebarClickedHandler()
+    {
+        if (!string.IsNullOrWhiteSpace(origin))
+        {
+            GoBack(origin);
+        }
+        else
+        {
+            GoBack();
         }
     }
 
