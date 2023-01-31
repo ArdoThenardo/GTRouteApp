@@ -34,6 +34,10 @@
     filter: drop-shadow(0 0 4px rgba(30, 32, 34, 0.6));
 }
 
+.back-button {
+    display: none;
+}
+
 .sidebar-button {
     background-color: #1e2022;
     color: #f4f4f2;
@@ -60,7 +64,8 @@
 @media (max-width: 540px), (max-height: 414px) {
     .sidebar-container {
         flex-direction: row;
-        padding-inline: 14px;
+        align-items: center;
+        padding-inline: 13px;
         max-height: 60px;
         gap: 1px;
         border-bottom: 0.8px solid #e8e8e8;
@@ -68,8 +73,10 @@
 
     .sidebar-logo {
         width: 25%;
+        height: 100%;
         padding-block: 4px;
         padding-inline: 0;
+        margin-left: 4px;
     }
 
     .img-cover {
@@ -83,18 +90,29 @@
         filter: drop-shadow(0 0 4px rgba(30, 32, 34, 0.4));
     }
 
-    .sidebar-button {
+    .sidebar-button, .back-button {
         background-color: rgba(71, 75, 79, 0.7);
-        width: 25%;
+        width: 20%;
         height: 100%;
         text-align: center;
         font-size: 15px;
         font-weight: 500;
-        padding-inline: 16px;
+        padding-inline: 6px;
     }
 
     .sidebar-button:first-of-type {
         margin-left: 4px;
+    }
+
+    .back-button {
+        display: flex;
+        width: 12%;
+        height: 70%;
+        color: #f4f4f2;
+        font-size: 22px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
     }
 }
 
