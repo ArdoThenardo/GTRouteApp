@@ -6,16 +6,7 @@
 
 @if (tracks == null || tracks.Count == 0)
 {   
-    <div style="background-color: #e8e8e8; width: 100%; height: 85vh;">
-        @if (showError)
-        {
-            <p>@errorMessage</p>
-        }
-        else
-        {
-            <div class="loading-traditional"></div>
-        }
-    </div>
+    <NoDataView Message="@errorMessage" ShowError="@showError" OnTryAgainClicked="OnTryAgainHandler" />
 }
 else
 {
@@ -48,10 +39,15 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadTracks();
-        CheckError();
+        await LoadData();
 
         PreselectBrowseMode();
+    }
+
+    private async Task LoadData()
+    {
+        await LoadTracks();
+        CheckError();
     }
 
     private async Task LoadTracks()
@@ -92,5 +88,12 @@ else
         {
             info = gridInfo;
         }
+    }
+
+    private async Task OnTryAgainHandler()
+    {
+        showError = false;
+
+        await LoadData();
     }
 }

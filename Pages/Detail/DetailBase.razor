@@ -8,17 +8,7 @@
     @if (detail == null || string.IsNullOrWhiteSpace(detail.Name)) // assume no detail if there is no name 
     {
         <PageTitle>Track Detail | GTRoad</PageTitle>
-
-        @if (showError)
-        {
-            <div>
-                <p>@errorMessage</p>
-            </div>
-        }
-        else
-        {
-            <div class="loading-traditional"></div>
-        }
+        <NoDataView Message="@errorMessage" ShowError="@showError" OnTryAgainClicked="OnTryAgainHandler" />
     }
     else
     {
@@ -85,6 +75,11 @@
     private bool showError = false;
 
     protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
     {
         await LoadDetail(slug);
         CheckError();
@@ -170,5 +165,12 @@
     {
         errorMessage = TrackDetailService.GetRecentErrorMessage();
         showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
+
+    private async Task OnTryAgainHandler()
+    {
+        showError = false;
+
+        await LoadData();
     }
 }
