@@ -10,7 +10,7 @@
                 <span class="bi bi-cloud-slash"></span>
             </p>
             <p>@Message</p>
-            <button type="button" class="btn btn-secondary">
+            <button type="button" class="btn btn-secondary" @onclick="() => TryAgain()">
                 Try Again
             </button>
         </div>
@@ -23,4 +23,12 @@
 
     [Parameter]
     public bool ShowError { get; set; } = false;
+
+    [Parameter]
+    public EventCallback OnTryAgainClicked { get; set; }
+
+    private async Task TryAgain()
+    {
+        await OnTryAgainClicked.InvokeAsync();
+    }
 }

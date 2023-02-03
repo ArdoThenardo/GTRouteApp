@@ -8,7 +8,7 @@
 <div class="home-container">
     @if (featured == null || featured.Count() == 0)
     {
-        <NoDataView Message="@errorMessage" ShowError="@showError" />
+        <NoDataView Message="@errorMessage" ShowError="@showError" OnTryAgainClicked="OnTryAgainHandler" />
     }
     else
     {
@@ -27,6 +27,11 @@
     private bool showError = false;
 
     protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
     {
         await LoadFeatured();
         CheckError();
@@ -47,5 +52,12 @@
     {
         errorMessage = FeaturedService.GetRecentErrorMessage();
         showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
+
+    private async Task OnTryAgainHandler()
+    {
+        showError = false;
+
+        await LoadData();
     }
 }
