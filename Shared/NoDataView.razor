@@ -1,0 +1,23 @@
+<div class="no-data-container">
+    @if (!ShowError)
+    {
+        <div class="loading-traditional"></div>
+    }
+    else
+    {
+        <div class="message-container">
+            <p>@Message</p>
+            <button type="button" class="btn btn-secondary">
+                Try Again
+            </button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string Message { get; set; } = "";
+
+    [Parameter]
+    public bool ShowError { get; set; } = false;
+}

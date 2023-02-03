@@ -6,23 +6,14 @@
 <PageTitle>Home | GTRoad</PageTitle>
 
 <div class="home-container">
-    <IndexSubheader Info="Welcome to GTRoad! Here you can look for information of race tracks that featured on Gran Turismo series." />
-
     @if (featured == null || featured.Count() == 0)
     {
-        @if (showError)
-        {
-            <div style="height: 85vh;">
-                <p>@errorMessage</p>
-            </div>
-        }
-        else
-        {
-            <div class="loading-traditional" style="height: 85vh;"></div>
-        }
+        <NoDataView Message="@errorMessage" ShowError="@showError" />
     }
     else
     {
+        <IndexSubheader Info="Welcome to GTRoad! Here you can look for information of race tracks that featured on Gran Turismo series." />
+
         <IndexFeatured Featured="@featured" />
 
         <IndexNotice />
