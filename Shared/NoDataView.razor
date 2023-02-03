@@ -1,0 +1,34 @@
+<div class="no-data-container">
+    @if (!ShowError)
+    {
+        <div class="loading-traditional"></div>
+    }
+    else
+    {
+        <div class="message-container">
+            <p class="disconnect-icon">
+                <span class="bi bi-cloud-slash"></span>
+            </p>
+            <p>@Message</p>
+            <button type="button" class="btn btn-secondary" @onclick="() => TryAgain()">
+                <span class="bi bi-arrow-clockwise"></span> Try Again
+            </button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string Message { get; set; } = "";
+
+    [Parameter]
+    public bool ShowError { get; set; } = false;
+
+    [Parameter]
+    public EventCallback OnTryAgainClicked { get; set; }
+
+    private async Task TryAgain()
+    {
+        await OnTryAgainClicked.InvokeAsync();
+    }
+}
