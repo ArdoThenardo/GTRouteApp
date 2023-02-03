@@ -16,3 +16,8 @@
     color: #1e2022;
     font-weight: 600;
 }
+
+.disconnect-icon {
+    font-size: 64px;
+    margin-bottom: 0;
+}
