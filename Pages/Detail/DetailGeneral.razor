@@ -24,35 +24,38 @@
             <p class="detail-primary">@Detail.NumberOfLayouts</p>
         </div>
     </div>
-    <div class="general-group-3">
-        <p class="detail-secondary">Layout Configurations</p>
-        <div class="layout-list">
-            @foreach (var layoutData in Detail.Layouts.Take(3))
-            {
-                <div class="layout-item-container">
-                    <div class="layout-item-content">
-                        <div class="layout-item-img">
-                            <img src="@layoutData.MapUrl" alt="@layoutData.LayoutName" />
-                        </div>
-                        <div class="layout-item-name">
-                            <p>@layoutData.LayoutName</p>
+    @if (Detail.Layouts.Count() > 0)
+    {
+        <div class="general-group-3">
+            <p class="detail-secondary">Layout Configurations</p>
+            <div class="layout-list">
+                @foreach (var layoutData in Detail.Layouts.Take(3))
+                {
+                    <div class="layout-item-container">
+                        <div class="layout-item-content">
+                            <div class="layout-item-img">
+                                <img src="@layoutData.MapUrl" alt="@layoutData.LayoutName" />
+                            </div>
+                            <div class="layout-item-name">
+                                <p>@layoutData.LayoutName</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-            @if (Detail.Layouts.Count() > 3)
-            {
-                <div class="layout-more-notice-container">
-                    <div class="layout-more-notice">
-                        <p>
-                            Check '<span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 2px;"></span>Layouts' to see 
-                            more track layouts
-                        </p>
+                }
+                @if (Detail.Layouts.Count() > 3)
+                {
+                    <div class="layout-more-notice-container">
+                        <div class="layout-more-notice">
+                            <p>
+                                Check '<span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 2px;"></span>Layouts' to see 
+                                more track layouts
+                            </p>
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
-    </div>
+    }
     <div class="general-group-4">
         <img src="@RandomImageUrl" alt="cover" />
     </div>
