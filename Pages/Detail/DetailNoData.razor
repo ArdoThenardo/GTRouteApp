@@ -1,0 +1,13 @@
+<div class="no-data-container">
+    <div class="message-container">
+        <p class="empty-icon">
+            <span class="bi bi-database-slash"></span>
+        </p>
+        <p>There is no @Text on this race track.</p>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Text { get; set; } = "";
+}
