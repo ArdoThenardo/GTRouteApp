@@ -14,16 +14,17 @@ else
 
     @if (_mode == BrowseMode.Gallery)
     {
-        <BrowseGallery Tracks="@tracks" />
+        <BrowseGallery Tracks="@tracks" OnLoadMoreClicked="LoadMoreTracks" />
     }
     else if (_mode == BrowseMode.Grid)
     {
-        <BrowseGrid Tracks="@tracks" />
+        <BrowseGrid Tracks="@tracks" OnLoadMoreClicked="LoadMoreTracks" />
     }
 }
 
 @code {
     private List<RaceTrack> tracks = new();
+    private int currentPage = 1;
 
     private const string galleryInfo = "Click or tap a track on the bottom to highlight";
     private const string gridInfo = "Click or tap a track to view";
@@ -52,7 +53,15 @@ else
 
     private async Task LoadTracks()
     {
-        tracks = await RaceTrackService.GetTracks();
+        var data = await RaceTrackService.GetTracksByPage(currentPage);
+
+        tracks.AddRange(data);
+    }
+
+    private async Task LoadMoreTracks()
+    {
+        currentPage = currentPage + 1;
+        await LoadTracks();
     }
 
     private void CheckError()

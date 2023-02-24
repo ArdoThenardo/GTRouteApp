@@ -27,6 +27,15 @@
         }
         <div class="more-notice-container">
             <div class="more-notice" style="--delay: @Tracks.Count();">
+                <button type="button" 
+                    class="btn btn-success"
+                    @onclick="@(() => LoadMoreTracks())">
+                    Load More
+                </button>
+            </div>
+        </div>
+        <div class="more-notice-container">
+            <div class="more-notice" style="--delay: @Tracks.Count();">
                 <p>More race tracks will be added<br>in the future</p>
             </div>
         </div>
@@ -37,8 +46,16 @@
     [Parameter]
     public List<RaceTrack> Tracks { get; set; } = new();
 
+    [Parameter]
+    public EventCallback OnLoadMoreClicked { get; set; }
+
     private void AccessTrackDetail(string slug)
     {
         NavigationManager.NavigateTo($"/browse/detail/{slug}?origin=browseGrid");
+    }
+
+    private async Task LoadMoreTracks()
+    {
+        await OnLoadMoreClicked.InvokeAsync();
     }
 }
