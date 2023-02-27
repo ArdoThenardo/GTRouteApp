@@ -7,6 +7,8 @@ public class RaceTrackService: BaseService
     private const string GetTracksUrl = $"{_baseUrl}/tracks";
     private const int Limit = 8;
     private List<RaceTrack> tracks = new();
+    private int numberOfTotalRaceTracks = 0;
+    private int currentNumberOfRaceTracks = 0;
     private string recentError = "";
 
     public RaceTrackService(HttpClient http): base(http) { }
@@ -26,6 +28,8 @@ public class RaceTrackService: BaseService
                 recentError = "There is no track data.";
             }
             tracks.AddRange(tracksData.Data ?? Enumerable.Empty<RaceTrack>().ToList());
+            currentNumberOfRaceTracks = currentNumberOfRaceTracks + tracks.Count();
+            numberOfTotalRaceTracks = tracksData.NumberOfData;
 
             return SortTracksByCategory();
         }
@@ -77,6 +81,16 @@ public class RaceTrackService: BaseService
         sortedTracks.AddRange(snowTracks);
 
         return sortedTracks;
+    }
+
+    public bool IsRaceTracksReachMaximum()
+    {
+        if (currentNumberOfRaceTracks < numberOfTotalRaceTracks)
+        {
+            return false;
+        }
+        
+        return true;
     }
     
     public string GetRecentErrorMessage()
