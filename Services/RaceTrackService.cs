@@ -5,13 +5,39 @@ public class RaceTrackService: BaseService
     // remote: /tracks
     // sample: sample-data/track.json
     private const string GetTracksUrl = $"{_baseUrl}/tracks";
-
+    private const int Limit = 8;
     private List<RaceTrack> tracks = new();
     private string recentError = "";
 
     public RaceTrackService(HttpClient http): base(http) { }
 
-    public async Task<List<RaceTrack>> GetTracks()
+    public async Task<List<RaceTrack>> GetTracksByPage(int page)
+    {
+        tracks.Clear();
+        recentError = "";
+
+        try
+        {
+            var tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
+                    ($"{GetTracksUrl}/?page={page}&limit={Limit}");
+
+            if (tracksData.NumberOfData == 0)
+            {
+                recentError = "There is no track data.";
+            }
+            tracks.AddRange(tracksData.Data ?? Enumerable.Empty<RaceTrack>().ToList());
+
+            return SortTracksByCategory();
+        }
+        catch
+        {
+            recentError = "Unable to get track data from server. Please try again at later time.";
+
+            return Enumerable.Empty<RaceTrack>().ToList();
+        }
+    }
+
+    public async Task<List<RaceTrack>> GetAllTracks()
     {
         tracks.Clear();
         recentError = "";
