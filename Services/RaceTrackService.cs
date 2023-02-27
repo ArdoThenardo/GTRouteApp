@@ -27,7 +27,7 @@ public class RaceTrackService: BaseService
             }
             tracks.AddRange(tracksData.Data ?? Enumerable.Empty<RaceTrack>().ToList());
 
-            return tracks;
+            return SortTracksByCategory();
         }
         catch
         {

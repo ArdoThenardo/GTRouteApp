@@ -14,11 +14,11 @@ else
 
     @if (_mode == BrowseMode.Gallery)
     {
-        <BrowseGallery Tracks="@tracks" OnLoadMoreClicked="LoadMoreTracks" />
+        <BrowseGallery Tracks="@tracks" IsMaximum="false" OnLoadMoreClicked="LoadMoreTracks" />
     }
     else if (_mode == BrowseMode.Grid)
     {
-        <BrowseGrid Tracks="@tracks" OnLoadMoreClicked="LoadMoreTracks" />
+        <BrowseGrid Tracks="@tracks" IsMaximum="false" OnLoadMoreClicked="LoadMoreTracks" />
     }
 }
 

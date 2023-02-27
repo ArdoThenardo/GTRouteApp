@@ -65,16 +65,22 @@
                 </div>
             }
         }
-        <div class="more-notice">
-            <button type="button" 
-                class="btn btn-success"
-                @onclick="@(() => LoadMoreTracks())">
-                Load More
-            </button>
-        </div>
-        <div class="more-notice">
-            <p>More race tracks will be added<br>in the future</p>
-        </div>
+        @if (!IsMaximum)
+        {
+            <div class="more-notice">
+                <button type="button" 
+                    class="btn btn-success"
+                    @onclick="@(() => LoadMoreTracks())">
+                    Load More
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="more-notice">
+                <p>More race tracks will be added<br>in the future</p>
+            </div>
+        }
     </div>
 </div>
 
@@ -82,6 +88,9 @@
     [Parameter]
     public List<RaceTrack> Tracks { get; set; } = new();
     private int selectedIndex = 0;
+
+    [Parameter]
+    public bool IsMaximum { get; set; } = false;
 
     [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
