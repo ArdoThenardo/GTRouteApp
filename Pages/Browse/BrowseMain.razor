@@ -14,11 +14,16 @@ else
 
     @if (_mode == BrowseMode.Gallery)
     {
-        <BrowseGallery Tracks="@tracks" IsMaximum="@isMaximum" OnLoadMoreClicked="LoadMoreTracks" />
+        <BrowseGallery Tracks="@tracks" 
+            IsMaximum="@isMaximum" 
+            IsLoadMoreError="@isLoadMoreError" 
+            OnLoadMoreClicked="LoadMoreTracks" />
     }
     else if (_mode == BrowseMode.Grid)
     {
-        <BrowseGrid Tracks="@tracks" IsMaximum="@isMaximum" OnLoadMoreClicked="LoadMoreTracks" />
+        <BrowseGrid Tracks="@tracks" 
+            IsMaximum="@isMaximum" 
+            OnLoadMoreClicked="LoadMoreTracks" />
     }
 }
 
@@ -36,6 +41,7 @@ else
     private string info = galleryInfo;
 
     private bool isMaximum = false;
+    private bool isLoadMoreError = false;
     private string errorMessage = "";
     private bool showError = false;
 
@@ -73,6 +79,11 @@ else
 
                 tracks.AddRange(data);
                 isMaximum = RaceTrackService.IsRaceTracksReachMaximum();
+                isLoadMoreError = false;
+            }
+            else
+            {
+                isLoadMoreError = true;
             }
         }
     }

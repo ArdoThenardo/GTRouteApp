@@ -69,10 +69,16 @@
         {
             <div class="more-notice">
                 <button type="button" 
-                    class="btn btn-success"
+                    class="@loadMoreBtnClass"
                     @onclick="@(() => LoadMoreTracks())">
-                    Load More
+                    @loadMoreBtnText
                 </button>
+                @if (IsLoadMoreError)
+                {
+                    <p style="margin-left: 10px;">
+                        There was a problem when trying to load more race tracks. Please try again.
+                    </p>
+                }
             </div>
         }
         else
@@ -93,11 +99,23 @@
     public bool IsMaximum { get; set; } = false;
 
     [Parameter]
+    public bool IsLoadMoreError { get; set; } = false;
+
+    [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
+
+    private string loadMoreBtnClass = "";
+    private string loadMoreBtnText = "";
     
     ElementReference highlightCoverRef, section1CountryRef, section1LogoRef;
     ElementReference section2NameRef, section2CategoryRef, section2LayoutRef;
-    
+
+    protected override void OnParametersSet()
+    {
+        loadMoreBtnClass = !IsLoadMoreError ? "btn btn-success" : "btn btn-warning";
+        loadMoreBtnText = !IsLoadMoreError ? "Load More" : "Try Again";
+    }
+
     private async Task SetSelection(int index)
     {
         selectedIndex = index;
