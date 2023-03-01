@@ -1,3 +1,5 @@
+using GTRouteApp.Helpers;
+
 namespace GTRouteApp.Data;
 
 public class RaceTrackService: BaseService
@@ -25,7 +27,7 @@ public class RaceTrackService: BaseService
 
             if (tracksData.NumberOfData == 0)
             {
-                recentError = "There is no track data.";
+                recentError = ErrorMessage.NoTrack;
             }
             tracks.AddRange(tracksData.Data ?? Enumerable.Empty<RaceTrack>().ToList());
             currentNumberOfRaceTracks = currentNumberOfRaceTracks + tracks.Count();
@@ -35,7 +37,7 @@ public class RaceTrackService: BaseService
         }
         catch
         {
-            recentError = "Unable to get track data from server. Please try again at later time.";
+            recentError = ErrorMessage.LoadTracksFailed;
 
             return Enumerable.Empty<RaceTrack>().ToList();
         }
@@ -51,7 +53,7 @@ public class RaceTrackService: BaseService
             var fetched = await HitRequest<BaseModel<List<RaceTrack>>>(GetTracksUrl);
             
             if (fetched.NumberOfData == 0) {
-                recentError = "There is no track data.";
+                recentError = ErrorMessage.NoTrack;
             }
             tracks.AddRange(fetched.Data ?? Enumerable.Empty<RaceTrack>().ToList());
 
@@ -59,7 +61,7 @@ public class RaceTrackService: BaseService
         }
         catch
         {
-            recentError = "Unable to get track data from server. Please try again at later time.";
+            recentError = ErrorMessage.LoadTracksFailed;
 
             return Enumerable.Empty<RaceTrack>().ToList();
         }

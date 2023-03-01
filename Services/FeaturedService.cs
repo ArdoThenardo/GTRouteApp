@@ -1,3 +1,5 @@
+using GTRouteApp.Helpers;
+
 namespace GTRouteApp.Data;
 
 public class FeaturedService: BaseService
@@ -21,7 +23,7 @@ public class FeaturedService: BaseService
             var fetched = await HitRequest<BaseModel<List<FeaturedTrack>>>(GetFeaturedUrl);
 
             if (fetched.NumberOfData == 0)
-                recentError = "There is no data";
+                recentError = ErrorMessage.NoData;
             
             featured.AddRange(fetched.Data ?? new List<FeaturedTrack>());
 
@@ -29,7 +31,7 @@ public class FeaturedService: BaseService
         }
         catch
         {
-            recentError = "Unable to get data from server. Please try again at later time.";
+            recentError = ErrorMessage.LoadDataFailed;
 
             return new List<FeaturedTrack>();
         }

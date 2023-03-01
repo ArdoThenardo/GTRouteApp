@@ -1,4 +1,4 @@
-namespace GTRouteApp.Data;
+namespace GTRouteApp.Helpers;
 
 public enum BrowseMode {
     Gallery,
