@@ -1,3 +1,5 @@
+using GTRouteApp.Helpers;
+
 namespace GTRouteApp.Data;
 
 public class TrackDetailService: BaseService
@@ -21,7 +23,7 @@ public class TrackDetailService: BaseService
             var fetched = await HitRequest<BaseModel<TrackDetail>>($"{GetDetailUrl}?slug={slug}");
 
             if (fetched.NumberOfData == 0 || fetched.Data == null)
-                recentError = "There is no data";
+                recentError = ErrorMessage.NoData;
 
             detail = fetched.Data ?? new();
 
@@ -29,7 +31,7 @@ public class TrackDetailService: BaseService
         }
         catch
         {
-            recentError = "Unable to get track detail data froms server. Please try again at later time";
+            recentError = ErrorMessage.LoadDetailFailed;
 
             return new TrackDetail();
         }
