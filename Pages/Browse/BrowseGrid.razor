@@ -30,10 +30,16 @@
             <div class="more-notice-container">
                 <div class="more-notice" style="--delay: @Tracks.Count();">
                     <button type="button" 
-                        class="btn btn-success"
+                        class="@loadMoreBtnClass"
                         @onclick="@(() => LoadMoreTracks())">
-                        Load More
+                        @loadMoreBtnText
                     </button>
+                    @if (IsLoadMoreError)
+                    {
+                        <p style="margin-inline: 10px; margin-top: 10px;">
+                            There was a problem when trying to load more race tracks. Please try again.
+                        </p>
+                    }
                 </div>
             </div>
         }
@@ -56,7 +62,19 @@
     public bool IsMaximum { get; set; } = false;
 
     [Parameter]
+    public bool IsLoadMoreError { get; set; } = false;
+
+    [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
+
+    private string loadMoreBtnClass = "";
+    private string loadMoreBtnText = "";
+
+    protected override void OnParametersSet()
+    {
+        loadMoreBtnClass = !IsLoadMoreError ? "btn btn-success" : "btn btn-warning";
+        loadMoreBtnText = !IsLoadMoreError ? "Load More" : "Try Again";
+    }
 
     private void AccessTrackDetail(string slug)
     {
