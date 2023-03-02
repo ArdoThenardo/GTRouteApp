@@ -81,9 +81,9 @@
             }
             @if (loadedImages.Count() < Images.Count())
             {
-                <div class="gallery-item">
+                <div class="button-item">
                     <button type="button" 
-                        class="btn btn-success" 
+                        class="btn btn-primary load-more-btn" 
                         @onclick="() => LoadImages(nextPage)">
                         Load More
                     </button>
