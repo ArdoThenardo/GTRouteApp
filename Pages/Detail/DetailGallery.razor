@@ -13,10 +13,10 @@
                 <div class="highlight-placeholder">
                     <span class="bi bi-image-fill"></span>
                 </div>
-                <img src="@Images.ElementAt(selectedImageIndex).ImageUrl" 
-                    alt="@Images.ElementAt(selectedImageIndex).ImageName">
+                <img src="@loadedImages.ElementAt(selectedImageIndex).ImageUrl" 
+                    alt="@loadedImages.ElementAt(selectedImageIndex).ImageName">
                 <button class="btn btn-secondary full-btn" 
-                    @onclick="() => OpenImageInFullScreen(Images.ElementAt(selectedImageIndex).ImageUrl)">
+                    @onclick="() => OpenImageInFullScreen(loadedImages.ElementAt(selectedImageIndex).ImageUrl)">
                     <span class="bi bi-arrows-fullscreen"></span>
                 </button>
                 <button class="btn btn-secondary next-btn" 
@@ -43,17 +43,20 @@
                 </button>
                 <div class="highlight-info-section" style="visibility: @infoVisibilityStyle;">
                     <div class="info-part-1">
-                        <p>@Images.ElementAt(selectedImageIndex).Description</p>
+                        <p>@loadedImages.ElementAt(selectedImageIndex).Description</p>
                     </div>
                     <div class="info-part-2">
-                        <p><span class="bi bi-camera-fill"></span> by @Images.ElementAt(selectedImageIndex).Author</p>
+                        <p>
+                            <span class="bi bi-camera-fill"></span> by @loadedImages.ElementAt(selectedImageIndex).Author
+                        </p>
                     </div>
                 </div>
             </div>
             
         </div>
         <div class="detail-gallery-selection">
-            @foreach (var image in Images.Select((imageData, index) => (imageData, index)))
+            @foreach (var image in loadedImages
+                                    .Select((imageData, index) => (imageData, index)))
             {
                 @if (selectedImageIndex == image.index)
                 {
@@ -76,6 +79,16 @@
                     </div>
                 }
             }
+            @if (loadedImages.Count() < Images.Count())
+            {
+                <div class="gallery-item">
+                    <button type="button" 
+                        class="btn btn-success" 
+                        @onclick="() => LoadImages(nextPage)">
+                        Load More
+                    </button>
+                </div>
+            }
         </div>
     }
 </div>
@@ -83,15 +96,19 @@
 @code {
     [Parameter]
     public List<TrackImage> Images { get; set; } = new();
+    private List<TrackImage> loadedImages = new();
     private int selectedImageIndex = 0;
     private bool isNextDisabled = false;
     private bool isPrevDisabled = false;
     private bool isInfoHidden = false;
     private string infoVisibilityStyle = "visible"; // "hidden" and "visible"
     private string infoVisibilityButtonBottomPosition = "74px"; // "12px" and "74px"
+    private int nextPage = 1;
+    private const int itemLimit = 6;
 
     protected override void OnParametersSet()
     {
+        LoadImages(nextPage);
         ToggleArrowButton();
     }
 
@@ -103,6 +120,15 @@
         SetDefaultInfoVisibility();
     }
 
+    private void LoadImages(int page)
+    {
+        var images = Images.Skip(itemLimit * (page - 1)).Take(itemLimit).ToList();
+        loadedImages.AddRange(images);
+
+        nextPage += 1;
+        ToggleArrowButton();
+    }
+
     private async Task OpenImageInFullScreen(string? url)
     {
         if (url is not null)
@@ -111,7 +137,7 @@
 
     private void ToggleArrowButton()
     {
-        isNextDisabled = selectedImageIndex == (Images.Count() - 1) ? true : false;
+        isNextDisabled = selectedImageIndex == (loadedImages.Count() - 1) ? true : false;
         isPrevDisabled = selectedImageIndex == 0 ? true : false;
     }
 
