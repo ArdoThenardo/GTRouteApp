@@ -25,25 +25,7 @@
                 </div>
             </div>
         }
-        @if (!IsMaximum)
-        {
-            <div class="more-notice-container">
-                <div class="more-notice" style="--delay: @Tracks.Count();">
-                    <button type="button" 
-                        class="@loadMoreBtnClass"
-                        @onclick="@(() => LoadMoreTracks())">
-                        @loadMoreBtnText
-                    </button>
-                    @if (IsLoadMoreError)
-                    {
-                        <p style="margin-inline: 10px; margin-top: 10px;">
-                            There was a problem when trying to load more race tracks. Please try again.
-                        </p>
-                    }
-                </div>
-            </div>
-        }
-        else
+        @if (IsMaximum)
         {
             <div class="more-notice-container">
                 <div class="more-notice" style="--delay: @Tracks.Count();">
@@ -52,6 +34,22 @@
             </div>
         }
     </div>
+    @if (!IsMaximum)
+    {
+        <div class="load-more-container">
+            <button type="button" 
+                class="@loadMoreBtnClass"
+                @onclick="@(() => LoadMoreTracks())">
+                @loadMoreBtnText
+            </button>
+            @if (IsLoadMoreError)
+            {
+                <p style="margin-inline: 10px; margin-top: 10px;">
+                    There was a problem when trying to load more race tracks. Please try again.
+                </p>
+            }
+        </div>
+    }
 </div>
 
 @code {
@@ -72,7 +70,7 @@
 
     protected override void OnParametersSet()
     {
-        loadMoreBtnClass = !IsLoadMoreError ? "btn btn-primary" : "btn btn-warning";
+        loadMoreBtnClass = !IsLoadMoreError ? "btn btn-primary btn-more" : "btn btn-warning btn-more";
         loadMoreBtnText = !IsLoadMoreError ? "Load More" : "Try Again";
     }
 
