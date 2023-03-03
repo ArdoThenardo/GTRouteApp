@@ -1,6 +1,7 @@
 @page "/browse"
 @using GTRouteApp.Data
 @using GTRouteApp.Helpers
+@inject NavigationManager NavigationManager
 @inject RaceTrackService RaceTrackService
 
 <PageTitle>Browse | GTRoad</PageTitle>
@@ -125,10 +126,14 @@ else
         if (this._mode == BrowseMode.Gallery)
         {
             info = galleryInfo;
+
+            NavigationManager.NavigateTo("/browse?preselect_mode=gallery");
         }
         else if (this._mode == BrowseMode.Grid)
         {
             info = gridInfo;
+
+            NavigationManager.NavigateTo("/browse?preselect_mode=grid");
         }
     }
 
