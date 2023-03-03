@@ -39,6 +39,7 @@
         <div class="load-more-container">
             <button type="button" 
                 class="@loadMoreBtnClass"
+                disabled="@IsLoadMoreDisabled"
                 @onclick="@(() => LoadMoreTracks())">
                 @loadMoreBtnText
             </button>
@@ -61,6 +62,9 @@
 
     [Parameter]
     public bool IsLoadMoreError { get; set; } = false;
+
+    [Parameter]
+    public bool IsLoadMoreDisabled { get; set; } = false;
 
     [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }

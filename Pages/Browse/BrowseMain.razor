@@ -17,7 +17,8 @@ else
     {
         <BrowseGallery Tracks="@tracks" 
             IsMaximum="@isMaximum" 
-            IsLoadMoreError="@isLoadMoreError" 
+            IsLoadMoreError="@isLoadMoreError"
+            IsLoadMoreDisabled="@isLoadMoreDisabled" 
             OnLoadMoreClicked="LoadMoreTracks" />
     }
     else if (_mode == BrowseMode.Grid)
@@ -25,6 +26,7 @@ else
         <BrowseGrid Tracks="@tracks" 
             IsMaximum="@isMaximum" 
             IsLoadMoreError="@isLoadMoreError"
+            IsLoadMoreDisabled="@isLoadMoreDisabled"
             OnLoadMoreClicked="LoadMoreTracks" />
     }
 }
@@ -44,6 +46,7 @@ else
 
     private bool isMaximum = false;
     private bool isLoadMoreError = false;
+    private bool isLoadMoreDisabled = false;
     private string errorMessage = "";
     private bool showError = false;
 
@@ -70,6 +73,8 @@ else
 
     private async Task LoadMoreTracks()
     {
+        isLoadMoreDisabled = true;
+
         if (!isMaximum)
         {
             int nextPage = currentPage + 1;
@@ -87,6 +92,8 @@ else
             {
                 isLoadMoreError = true;
             }
+
+            isLoadMoreDisabled = false;
         }
     }
 
