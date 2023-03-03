@@ -249,6 +249,10 @@
         font-size: 3.6vw;
     }
 
+    .btn-more {
+        width: 160px;
+    }
+
     .section-2-left span {
         font-size: 5vw;
     }
