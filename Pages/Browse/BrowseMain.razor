@@ -25,7 +25,8 @@ else
     else if (_mode == BrowseMode.Grid)
     {
         <BrowseGrid Tracks="@tracks" 
-            IsMaximum="@isMaximum" 
+            IsMaximum="@isMaximum"
+            FirstIndexInCurrentPage="@firstIndexInCurrentPage" 
             IsLoadMoreError="@isLoadMoreError"
             IsLoadMoreDisabled="@isLoadMoreDisabled"
             OnLoadMoreClicked="LoadMoreTracks" />
@@ -38,6 +39,7 @@ else
 
     private const string galleryInfo = "Click or tap a track on the bottom to highlight";
     private const string gridInfo = "Click or tap a track to view";
+    private const int limitPerPage = 8;
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "preselect_mode")]
@@ -46,6 +48,7 @@ else
     private string info = galleryInfo;
 
     private bool isMaximum = false;
+    private int firstIndexInCurrentPage = 0;
     private bool isLoadMoreError = false;
     private bool isLoadMoreDisabled = false;
     private string errorMessage = "";
@@ -87,9 +90,10 @@ else
             if (data.Count() > 0) // fetch success, if data > 0
             {
                 currentPage = nextPage;
-
+                
                 tracks.AddRange(data);
                 isMaximum = RaceTrackService.IsRaceTracksReachMaximum();
+                firstIndexInCurrentPage = limitPerPage * (currentPage - 1);
                 isLoadMoreError = false;
             }
             else
