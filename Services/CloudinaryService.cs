@@ -1,0 +1,24 @@
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+
+namespace GTRouteApp.Services;
+
+public class CloudinaryService
+{
+    private readonly Cloudinary _cloudinary;
+    private const string _cloudinaryUrl = "cloudinary://your-api-url";
+
+    public CloudinaryService()
+    {
+        _cloudinary = new Cloudinary(_cloudinaryUrl);
+        _cloudinary.Api.Secure = true;
+    }
+
+    public string GenerateSmallThumbnailImageUrl(string source)
+    {
+        var transformation = new Transformation().Width(256).Height(128).Crop("fill");
+        var transformedUrl = _cloudinary.Api.UrlImgUp.Source(source).Transform(transformation).BuildUrl();
+
+        return transformedUrl;
+    }
+}

@@ -8,13 +8,17 @@ public class RaceTrackService: BaseService
     // remote: /tracks
     // sample: sample-data/track.json
     private const string GetTracksUrl = $"{_baseUrl}/tracks";
+    private CloudinaryService _cloudinaryService;
     private const int Limit = 8;
     private List<RaceTrack> tracks = new();
     private int numberOfTotalRaceTracks = 0;
     private int currentNumberOfRaceTracks = 0;
     private string recentError = "";
 
-    public RaceTrackService(HttpClient http): base(http) { }
+    public RaceTrackService(HttpClient http): base(http) 
+    { 
+        _cloudinaryService = new CloudinaryService();
+    }
 
     public async Task<List<RaceTrack>> GetTracksByPage(int page)
     {
@@ -30,7 +34,10 @@ public class RaceTrackService: BaseService
             {
                 recentError = ErrorMessage.NoTrack;
             }
-            tracks.AddRange(tracksData.Data ?? Enumerable.Empty<RaceTrack>().ToList());
+            var updatedTracks = new List<RaceTrack>();
+            if (tracksData.Data != null)
+                updatedTracks = GenerateThumbnailsFromCovers(tracksData.Data);
+            tracks.AddRange(updatedTracks ?? Enumerable.Empty<RaceTrack>().ToList());
             currentNumberOfRaceTracks = currentNumberOfRaceTracks + tracks.Count();
             numberOfTotalRaceTracks = tracksData.NumberOfData;
 
@@ -95,7 +102,36 @@ public class RaceTrackService: BaseService
         
         return true;
     }
-    
+
+    private List<RaceTrack> GenerateThumbnailsFromCovers(List<RaceTrack> tracks)
+    {
+        for (int i = 0; i < tracks.Count(); i++)
+        {
+            if (!string.IsNullOrWhiteSpace(tracks[i].CoverUrl))
+            {
+                string imageUrl = tracks[i].CoverUrl ?? "";
+                string urlPartToTrim = "https://res.cloudinary.com/doo5vwi4i/image/upload/";
+                string source = "";
+                if (imageUrl.StartsWith(urlPartToTrim))
+                {
+                    source = imageUrl.Remove(0, urlPartToTrim.Length);
+                    var transformedUrl = _cloudinaryService.GenerateSmallThumbnailImageUrl(source);
+                    tracks[i].ThumbnailUrl = transformedUrl;
+                }
+                else
+                {
+                    tracks[i].ThumbnailUrl = imageUrl; // revert to original url, if url is not from cloudinary
+                }
+            }
+            else
+            {
+                tracks[i].ThumbnailUrl = "";
+            }
+        }
+
+        return tracks;
+    }
+
     public string GetRecentErrorMessage()
     {
         return recentError;
