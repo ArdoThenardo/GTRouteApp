@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GTRouteApp.Data;
+namespace GTRouteApp.Models;
 
 public class LayoutEditModel
 {

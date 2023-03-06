@@ -1,6 +1,7 @@
+using GTRouteApp.Models;
 using GTRouteApp.Helpers;
 
-namespace GTRouteApp.Data;
+namespace GTRouteApp.Services;
 
 public class RaceTrackService: BaseService
 {
