@@ -6,7 +6,7 @@ namespace GTRouteApp.Services;
 public class CloudinaryService
 {
     private readonly Cloudinary _cloudinary;
-    private const string _cloudinaryUrl = "cloudinary://423466551733793:GPePr1ZfMQVdereR6P7XjqNt5Jw@doo5vwi4i";
+    private const string _cloudinaryUrl = "cloudinary://your-api-url";
 
     public CloudinaryService()
     {
