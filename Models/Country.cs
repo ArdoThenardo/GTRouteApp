@@ -1,4 +1,4 @@
-namespace GTRouteApp.Data;
+namespace GTRouteApp.Models;
 
 public class Country
 {
