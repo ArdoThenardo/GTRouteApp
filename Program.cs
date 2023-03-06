@@ -21,4 +21,6 @@ builder.Services.AddHttpClient<TrackDetailService>(client => {
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
 
+builder.Services.AddSingleton<CloudinaryService>();
+
 await builder.Build().RunAsync();
