@@ -1,6 +1,6 @@
 using System.Net.Http.Json;
 
-namespace GTRouteApp.Data;
+namespace GTRouteApp.Services;
 
 public class BaseService
 {
