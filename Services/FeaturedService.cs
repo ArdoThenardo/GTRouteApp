@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using GTRouteApp.Models;
 using GTRouteApp.Helpers;
 
@@ -7,12 +8,15 @@ public class FeaturedService: BaseService
 {
     // remote: /featured
     // sample: sample-data/featured.json
-    private const string GetFeaturedUrl = $"{_baseUrl}/featured";
+    private readonly string GetFeaturedUrl;
 
     private List<FeaturedTrack> featured = new();
     private string recentError = "";
 
-    public FeaturedService(HttpClient http): base(http) { }
+    public FeaturedService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
+    {   
+        this.GetFeaturedUrl = $"{_baseUrl}/featured";
+    }
 
     public async Task<List<FeaturedTrack>> GetFeatured()
     {
