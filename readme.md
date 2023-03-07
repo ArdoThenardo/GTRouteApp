@@ -2,7 +2,7 @@
 ---
 **GTRouteApp** is an web application project made with ASP Net Core and Blazor framework. This project contains **GTRoad**, the fan-made website where motorsport racing video games fans could find information about iconic race tracks or circuits featured on Gran Turismo series.
 
-GTRoad does not affliated with Sony Interactive Entertainment Inc. and Polyphony Digital. This project is fan-made project and was created as the way to appreciate original race tracks from Gran Turismo series.
+**GTRoad does not affliated with Sony Interactive Entertainment Inc. and Polyphony Digital.** This website is fan-made project and was created as the way to appreciate original race tracks from Gran Turismo series.
 
 ### About Development enviroment
 *to be added at later time*
