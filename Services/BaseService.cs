@@ -13,7 +13,6 @@ public class BaseService
     public BaseService(HttpClient http, IOptions<GTRouteAppSettings> settings)
     {
         this._baseUrl = settings.Value.BaseApi;
-        Console.WriteLine($"base url is {_baseUrl}");
         this._http = http;
     }
 
