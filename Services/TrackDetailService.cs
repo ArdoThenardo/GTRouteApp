@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using GTRouteApp.Models;
 using GTRouteApp.Helpers;
 
@@ -7,12 +8,15 @@ public class TrackDetailService: BaseService
 {
     // remote: /detail?slug={slug}
     // sample: sample-data/track_detail.json
-    private const string GetDetailUrl = $"{_baseUrl}/detail";
+    private readonly string GetDetailUrl;
 
     private TrackDetail detail = new();
     private string recentError = "";
 
-    public TrackDetailService(HttpClient http): base(http) { }
+    public TrackDetailService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
+    { 
+        this.GetDetailUrl = $"{_baseUrl}/detail";
+    }
 
     public async Task<TrackDetail> GetTrackDetail(string slug)
     {

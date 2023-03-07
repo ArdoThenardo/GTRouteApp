@@ -1,15 +1,18 @@
+using Microsoft.Extensions.Options;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using GTRouteApp.Models;
 
 namespace GTRouteApp.Services;
 
 public class CloudinaryService
 {
     private readonly Cloudinary _cloudinary;
-    private const string _cloudinaryUrl = "cloudinary://your-api-url";
+    private readonly string _cloudinaryUrl;
 
-    public CloudinaryService()
+    public CloudinaryService(IOptions<GTRouteAppSettings> settings)
     {
+        _cloudinaryUrl = settings.Value.CloudinaryApi;
         _cloudinary = new Cloudinary(_cloudinaryUrl);
         _cloudinary.Api.Secure = true;
     }

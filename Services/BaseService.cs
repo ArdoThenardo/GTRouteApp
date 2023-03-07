@@ -1,15 +1,18 @@
+using Microsoft.Extensions.Options;
 using System.Net.Http.Json;
+using GTRouteApp.Models;
 
 namespace GTRouteApp.Services;
 
 public class BaseService
 {
-    protected const string _baseUrl = "https://localhost:7182";
+    protected readonly string _baseUrl;
 
     protected readonly HttpClient _http;
 
-    public BaseService(HttpClient http)
+    public BaseService(HttpClient http, IOptions<GTRouteAppSettings> settings)
     {
+        this._baseUrl = settings.Value.BaseApi;
         this._http = http;
     }
 

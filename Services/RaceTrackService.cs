@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using GTRouteApp.Models;
 using GTRouteApp.Helpers;
 
@@ -7,17 +8,18 @@ public class RaceTrackService: BaseService
 {
     // remote: /tracks
     // sample: sample-data/track.json
-    private const string GetTracksUrl = $"{_baseUrl}/tracks";
-    private CloudinaryService _cloudinaryService;
+    private readonly string GetTracksUrl;
+    private readonly CloudinaryService _cloudinaryService;
     private const int Limit = 8;
     private List<RaceTrack> tracks = new();
     private int numberOfTotalRaceTracks = 0;
     private int currentNumberOfRaceTracks = 0;
     private string recentError = "";
 
-    public RaceTrackService(HttpClient http): base(http) 
+    public RaceTrackService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
     { 
-        _cloudinaryService = new CloudinaryService();
+        this.GetTracksUrl = $"{_baseUrl}/tracks";
+        this._cloudinaryService = new CloudinaryService(settings);
     }
 
     public async Task<List<RaceTrack>> GetTracksByPage(int page)
