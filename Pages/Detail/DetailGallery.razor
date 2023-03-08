@@ -11,12 +11,12 @@
         <div class="detail-gallery-highlight">
             <div class="highlight-image-section">
                 <div class="highlight-placeholder">
-                    <span class="bi bi-image-fill"></span>
+                    <span class="bi bi-image"></span>
                 </div>
-                <img src="@loadedImages.ElementAt(selectedImageIndex).ImageUrl" 
+                <img src="@selectedImageUrl" 
                     alt="@loadedImages.ElementAt(selectedImageIndex).ImageName">
                 <button class="btn btn-secondary full-btn" 
-                    @onclick="() => OpenImageInFullScreen(loadedImages.ElementAt(selectedImageIndex).ImageUrl)">
+                    @onclick="() => OpenImageInFullScreen(selectedImageUrl)">
                     <span class="bi bi-arrows-fullscreen"></span>
                 </button>
                 <button class="btn btn-secondary next-btn" 
@@ -64,7 +64,7 @@
                         <div class="item-placeholder">
                             <span class="bi bi-image-fill"></span>
                         </div>
-                        <img src="@image.imageData.ImageUrl" 
+                        <img src="@image.imageData.ThumbnailUrl" 
                             alt="@image.imageData.ImageName" />
                     </div>
                 }
@@ -74,7 +74,7 @@
                         <div class="item-placeholder">
                             <span class="bi bi-image-fill"></span>
                         </div>
-                        <img src="@image.imageData.ImageUrl" 
+                        <img src="@image.imageData.ThumbnailUrl" 
                             alt="@image.imageData.ImageName" />
                     </div>
                 }
@@ -98,6 +98,8 @@
     public List<TrackImage> Images { get; set; } = new();
     private List<TrackImage> loadedImages = new();
     private int selectedImageIndex = 0;
+    private string selectedImageUrl = "";
+    private const string placeholderImageUrl = "img/empty720.png";
     private bool isNextDisabled = false;
     private bool isPrevDisabled = false;
     private bool isInfoHidden = false;
@@ -106,15 +108,20 @@
     private int nextPage = 1;
     private const int itemLimit = 6;
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
         LoadImages(nextPage);
-        ToggleArrowButton();
+        if (Images.Count() > 0)
+            await SetSelection(selectedImageIndex);
     }
 
-    private void SetSelection(int selectedIndex)
+    private async Task SetSelection(int selectedIndex)
     {
+        selectedImageUrl = placeholderImageUrl; // switch to placeholder image temporarily
+        await Task.Delay(10);
+
         selectedImageIndex = selectedIndex;
+        selectedImageUrl = loadedImages.ElementAt(selectedImageIndex).ImageUrl ?? "";
 
         ToggleArrowButton();
         SetDefaultInfoVisibility();

@@ -8,7 +8,7 @@
 *to be added at later time*
 
 ### Configure appsettings.json
-Before you can build and run this project, you have to create 2 files for application setting:
+Before you can build and run this project, you have to create 2 files for application setting and put these files inside `wwwroot` folder:
 - appsettings.json
 - appsettings.Development.json
 
