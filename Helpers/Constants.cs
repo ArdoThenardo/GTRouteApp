@@ -18,3 +18,10 @@ public static class ErrorMessage
     public const string LoadMoreTracksFailed = "There was a problem when trying to load more race tracks. Please try again.";
     public const string LoadDetailFailed = "Unable to get track detail data froms server. Please try again.";
 }
+
+public static class DetailSidebarMenu
+{
+    public const string General = "General";
+    public const string Layout = "Track Layouts";
+    public const string Gallery = "Image Gallery";
+}

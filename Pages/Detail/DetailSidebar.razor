@@ -13,39 +13,39 @@
     @if (SelectedSubDetail == SubDetail.General)
     {
         <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-clipboard2-fill" style="margin-right: 6px;"></span> General
+            <span class="bi bi-clipboard2-fill" style="margin-right: 6px;"></span> @DetailSidebarMenu.General
         </button>
     }
     else
     {
         <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.General)">
-            <span class="bi bi-clipboard2-fill" style="margin-right: 6px;"></span> General
+            <span class="bi bi-clipboard2-fill" style="margin-right: 6px;"></span> @DetailSidebarMenu.General
         </button>
     }
 
     @if (SelectedSubDetail == SubDetail.Layout)
     {
         <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> Layout
+            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> @DetailSidebarMenu.Layout
         </button>
     }
     else
     {
         <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Layout)">
-            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> Layout
+            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> @DetailSidebarMenu.Layout
         </button>
     }
     
     @if (SelectedSubDetail == SubDetail.Image)
     {
         <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-images" style="margin-right: 6px;"></span> Image Gallery
+            <span class="bi bi-images" style="margin-right: 6px;"></span> @DetailSidebarMenu.Gallery
         </button>
     }
     else
     {
         <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Image)">
-            <span class="bi bi-images" style="margin-right: 6px;"></span> Image Gallery
+            <span class="bi bi-images" style="margin-right: 6px;"></span> @DetailSidebarMenu.Gallery
         </button>
     }
 </div>
