@@ -14,7 +14,8 @@
                     <span class="bi bi-image"></span>
                 </div>
                 <img src="@selectedImageUrl" 
-                    alt="@loadedImages.ElementAt(selectedImageIndex).ImageName">
+                    alt="@loadedImages.ElementAt(selectedImageIndex).ImageName"
+                    @ref="@highlightImageRef">
                 <button class="btn btn-secondary full-btn" 
                     @onclick="() => OpenImageInFullScreen(selectedImageUrl)">
                     <span class="bi bi-arrows-fullscreen"></span>
@@ -107,6 +108,8 @@
     private string infoVisibilityButtonBottomPosition = "74px"; // "12px" and "74px"
     private int nextPage = 1;
     private const int itemLimit = 6;
+    
+    ElementReference highlightImageRef;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -125,6 +128,8 @@
 
         ToggleArrowButton();
         SetDefaultInfoVisibility();
+
+        await ResetHighlightAnimationWithJS();
     }
 
     private void LoadImages(int page)
@@ -160,5 +165,10 @@
         isInfoHidden = false;
         infoVisibilityStyle = "visible";
         infoVisibilityButtonBottomPosition = "74px";
+    }
+
+    private async Task ResetHighlightAnimationWithJS()
+    {
+        await JS.InvokeVoidAsync("resetAnimationByStyle", highlightImageRef);
     }
 }
