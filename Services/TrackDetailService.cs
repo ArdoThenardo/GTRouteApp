@@ -53,23 +53,8 @@ public class TrackDetailService: BaseService
         {
             if (!string.IsNullOrWhiteSpace(images[i].ImageUrl))
             {
-                string imageUrl = images[i].ImageUrl ?? "";
-                string urlPartToTrim = "https://res.cloudinary.com/doo5vwi4i/image/upload/";
-                string source = "";
-                if (imageUrl.StartsWith(urlPartToTrim))
-                {
-                    source = imageUrl.Remove(0, urlPartToTrim.Length);
-                    var transformedUrl = _cloudinaryService.GenerateSmallThumbnailImageUrl(source);
-                    images[i].ThumbnailUrl = transformedUrl;
-                }
-                else
-                {
-                    images[i].ThumbnailUrl = imageUrl; // revert to original url, if url is not from cloudinary
-                }
-            }
-            else
-            {
-                images[i].ThumbnailUrl = "";
+                var url = images[i].ImageUrl;
+                images[i].ThumbnailUrl = GenerateThumbnail(url); 
             }
         }
 
@@ -82,27 +67,30 @@ public class TrackDetailService: BaseService
         {
             if (!string.IsNullOrWhiteSpace(layouts[i].MapUrl))
             {
-                string imageUrl = layouts[i].MapUrl ?? "";
-                string urlPartToTrim = "https://res.cloudinary.com/doo5vwi4i/image/upload/";
-                string source = "";
-                if (imageUrl.StartsWith(urlPartToTrim))
-                {
-                    source = imageUrl.Remove(0, urlPartToTrim.Length);
-                    var transformedUrl = _cloudinaryService.GenerateSmallThumbnailImageUrl(source);
-                    layouts[i].ThumbnailUrl = transformedUrl;
-                }
-                else
-                {
-                    layouts[i].ThumbnailUrl = imageUrl; // revert to original url, if url is not from cloudinary
-                }
-            }
-            else
-            {
-                layouts[i].ThumbnailUrl = "";
+                var url = layouts[i].MapUrl;
+                layouts[i].ThumbnailUrl = GenerateThumbnail(url);
             }
         }
 
         detail.Layouts = layouts;
+    }
+
+    public string GenerateThumbnail(string? url)
+    {
+        string imageUrl = url ?? "";
+        string urlPartToTrim = GeneralConstants.CloudinaryBase;
+        string source = "";
+        if (imageUrl.StartsWith(urlPartToTrim))
+        {
+            source = imageUrl.Remove(0, urlPartToTrim.Length);
+            var transformedUrl = _cloudinaryService.GenerateSmallThumbnailImageUrl(source);
+
+            return transformedUrl;
+        }
+        else
+        {
+            return imageUrl; // revert to original url, if url is not from cloudinary
+        }
     }
 
     public string GetRecentErrorMessage()

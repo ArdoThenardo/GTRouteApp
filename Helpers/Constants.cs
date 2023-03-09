@@ -1,5 +1,10 @@
 namespace GTRouteApp.Helpers;
 
+public static class GeneralConstants
+{
+    public const string CloudinaryBase = "https://res.cloudinary.com/doo5vwi4i/image/upload/";
+}
+
 public static class RaceTrackCategory
 {
     public const string OriginalCircuit = "Original Circuit";
