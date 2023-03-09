@@ -28,11 +28,13 @@
             />
             @if (chosenSubDetail == SubDetail.General)
             {
-                <DetailGeneral Detail="@detail" RandomImageUrl="@randomImageUrl" />
+                <DetailGeneral Detail="@detail" />
             }
             else if (chosenSubDetail == SubDetail.Layout)
             {
-                <DetailLayout Layouts="@layouts" Name="@detail.Name" RandomImageUrl="@randomImageUrl" />
+                <DetailLayout Layouts="@layouts" 
+                    Name="@detail.Name" 
+                    CoverImageUrl="@detail.CoverUrl" />
             }
             else
             {
@@ -71,7 +73,6 @@
 
     private string subheaderInfoText = "View general information of --this race track--";
     private SubDetail chosenSubDetail = SubDetail.General;
-    private string randomImageUrl = "";
     
     private string errorMessage = "";
     private bool showError = false;
@@ -95,17 +96,6 @@
         images.AddRange(detail.Images);
 
         ChangeSubheaderInfoText(detail.Name ?? "");
-        GetRandomTrackImage();
-    }
-
-    private void GetRandomTrackImage()
-    {
-        randomImageUrl = TrackDetailService.GetRandomTrackImage(images);
-
-        if (string.IsNullOrWhiteSpace(randomImageUrl))
-        {
-            randomImageUrl = detail.CoverUrl ?? "";
-        }
     }
 
     private void OnBackSidebarClickedHandler()

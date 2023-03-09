@@ -57,14 +57,11 @@
         </div>
     }
     <div class="general-group-4">
-        <img src="@RandomImageUrl" alt="cover" />
+        <img src="@Detail.CoverUrl" alt="@Detail.Name" />
     </div>
 </div>
 
 @code {
     [Parameter]
     public TrackDetail Detail { get; set; } = new();
-
-    [Parameter]
-    public string RandomImageUrl { get; set; } = "";
 }
