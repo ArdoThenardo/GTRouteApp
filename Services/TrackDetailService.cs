@@ -32,6 +32,8 @@ public class TrackDetailService: BaseService
                 recentError = ErrorMessage.NoData;
 
             detail = fetched.Data ?? new();
+            if (detail.Layouts.Count() > 0)
+                GenerateThumbnailsForLayouts(detail.Layouts);
             if (detail.Images.Count() > 0)
                 GenerateThumbnailsForImages(detail.Images);
 
@@ -72,6 +74,35 @@ public class TrackDetailService: BaseService
         }
 
         detail.Images = images;
+    }
+
+    public void GenerateThumbnailsForLayouts(List<TrackLayout> layouts)
+    {
+        for (int i = 0; i < layouts.Count(); i++)
+        {
+            if (!string.IsNullOrWhiteSpace(layouts[i].MapUrl))
+            {
+                string imageUrl = layouts[i].MapUrl ?? "";
+                string urlPartToTrim = "https://res.cloudinary.com/doo5vwi4i/image/upload/";
+                string source = "";
+                if (imageUrl.StartsWith(urlPartToTrim))
+                {
+                    source = imageUrl.Remove(0, urlPartToTrim.Length);
+                    var transformedUrl = _cloudinaryService.GenerateSmallThumbnailImageUrl(source);
+                    layouts[i].ThumbnailUrl = transformedUrl;
+                }
+                else
+                {
+                    layouts[i].ThumbnailUrl = imageUrl; // revert to original url, if url is not from cloudinary
+                }
+            }
+            else
+            {
+                layouts[i].ThumbnailUrl = "";
+            }
+        }
+
+        detail.Layouts = layouts;
     }
 
     public string GetRecentErrorMessage()
