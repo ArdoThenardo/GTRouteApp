@@ -8,7 +8,7 @@
     </div>
 
     <div class="layout-cover">
-        <img src="@RandomImageUrl" alt="cover" />
+        <img src="@CoverImageUrl" alt="@Name" />
     </div>
 
     @if (Layouts.Count() < 1)
@@ -74,7 +74,7 @@
     [Parameter]
     public string Name { get; set; } = "";
     [Parameter]
-    public string RandomImageUrl { get; set; } = "";
+    public string CoverImageUrl { get; set; } = "";
     private int selectedIndex = 0;
 
     private void SetSelection(int index)

@@ -74,25 +74,6 @@ public class TrackDetailService: BaseService
         detail.Images = images;
     }
 
-    public string GetRandomTrackImage(List<TrackImage> images)
-    {
-        if (images.Count() > 0)
-        {
-            var random = new Random();
-            var randomizedIndex = 0;
-
-            randomizedIndex = random.Next(images.Count());
-
-            var randomUrl = images.ElementAt(randomizedIndex).ImageUrl;
-            
-            return randomUrl ?? "";
-        }
-        else
-        {
-            return "";
-        }
-    }
-
     public string GetRecentErrorMessage()
     {
         return recentError;
