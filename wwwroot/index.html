@@ -45,13 +45,15 @@
         }
 
         function resetAnimationByStyle(element) {
-            element.style.animation = "none";
-            
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    element.style.animation = "";
-                }, 0);
-            });
+            if (element != null) {
+                element.style.animation = "none";
+                
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        element.style.animation = "";
+                    }, 0);
+                });
+            }
         }
 
         function resetAnimationByReinsertClassName(element, elementClassName) {

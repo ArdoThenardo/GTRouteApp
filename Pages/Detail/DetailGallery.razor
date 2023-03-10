@@ -14,7 +14,8 @@
                     <span class="bi bi-image"></span>
                 </div>
                 <img src="@selectedImageUrl" 
-                    alt="@loadedImages.ElementAt(selectedImageIndex).ImageName">
+                    alt="@loadedImages.ElementAt(selectedImageIndex).ImageName"
+                    @ref="@highlightImageRef">
                 <button class="btn btn-secondary full-btn" 
                     @onclick="() => OpenImageInFullScreen(selectedImageUrl)">
                     <span class="bi bi-arrows-fullscreen"></span>
@@ -34,11 +35,17 @@
                     @onclick="() => ToggleInfoVisibility()">
                     @if (isInfoHidden)
                     {
-                        <p>Show Info<span class="bi bi-chevron-up" style="margin-left: 8px;"></span></p>
+                        <p>
+                            <span class="bi bi-info-circle"></span>
+                            Show Info<span class="bi bi-chevron-up" style="margin-left: 6px;"></span>
+                        </p>
                     }
                     else
                     {
-                        <p>Hide Info<span class="bi bi-chevron-down" style="margin-left: 8px;"></span></p>
+                        <p>
+                            <span class="bi bi-info-circle"></span>
+                            Hide Info<span class="bi bi-chevron-down" style="margin-left: 6px;"></span>
+                        </p>
                     }
                 </button>
                 <div class="highlight-info-section" style="visibility: @infoVisibilityStyle;">
@@ -107,6 +114,8 @@
     private string infoVisibilityButtonBottomPosition = "74px"; // "12px" and "74px"
     private int nextPage = 1;
     private const int itemLimit = 6;
+    
+    ElementReference highlightImageRef;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -125,6 +134,8 @@
 
         ToggleArrowButton();
         SetDefaultInfoVisibility();
+
+        await ResetHighlightAnimationWithJS();
     }
 
     private void LoadImages(int page)
@@ -160,5 +171,10 @@
         isInfoHidden = false;
         infoVisibilityStyle = "visible";
         infoVisibilityButtonBottomPosition = "74px";
+    }
+
+    private async Task ResetHighlightAnimationWithJS()
+    {
+        await JS.InvokeVoidAsync("resetAnimationByStyle", highlightImageRef);
     }
 }
