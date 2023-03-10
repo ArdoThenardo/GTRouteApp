@@ -1,4 +1,5 @@
 @using GTRouteApp.Models
+@inject IJSRuntime JS
 
 <div class="detail-layout-container">
     <div class="layout-header">
@@ -50,7 +51,8 @@
                         <span class="bi bi-card-image"></span>
                     </div>
                     <img src="@Layouts.ElementAt(selectedIndex).MapUrl" 
-                        alt="@Layouts.ElementAt(selectedIndex).LayoutName" />
+                        alt="@Layouts.ElementAt(selectedIndex).LayoutName"
+                        @ref="@highlightMapRef" />
                 </div>
                 <div class="layout-info">
                     <div class="info-group">
@@ -80,8 +82,17 @@
     public string CoverImageUrl { get; set; } = "";
     private int selectedIndex = 0;
 
-    private void SetSelection(int index)
+    ElementReference highlightMapRef;
+
+    private async Task SetSelection(int index)
     {
         selectedIndex = index;
+
+        await ResetHighlightAnimationWithJS();
+    }
+
+    private async Task ResetHighlightAnimationWithJS()
+    {
+        await JS.InvokeVoidAsync("resetAnimationByStyle", highlightMapRef);
     }
 }
