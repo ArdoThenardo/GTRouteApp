@@ -97,6 +97,7 @@
 }
 
 .layout-map {
+    position: relative;
     width: 448px;
     height: 460px;
     border-radius: 12px;
@@ -104,7 +105,20 @@
     overflow: hidden;
 }
 
+.map-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.map-placeholder span {
+    font-size: 4.6vw;
+    color: #303841;
+}
+
 .layout-map img {
+    position: relative;
     background-color: #303841;
     object-fit: cover;
     object-position: center;
@@ -283,6 +297,10 @@
 
     .layout-map img {
         object-fit: contain;
+    }
+
+    .map-placeholder span {
+        font-size: 10vw;
     }
 
     .info-label {
