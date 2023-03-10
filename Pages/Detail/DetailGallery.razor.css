@@ -52,7 +52,8 @@ p {
     height: 100%;
     filter: drop-shadow(1px 1px 10px rgba(30, 32, 34, 0.8));
     box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
-    animation: reveal .75s ease-in-out forwards;
+    opacity: 0;
+    animation: reveal .5s ease-in-out forwards;
 }
 
 .full-btn {
