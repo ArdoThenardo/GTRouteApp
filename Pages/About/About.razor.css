@@ -21,9 +21,11 @@ p {
 }
 
 .about-container {
-    background-image:url(img/gtroad-bg-2.jpeg);
+    background-image: url(https://res.cloudinary.com/doo5vwi4i/image/upload/v1678417734/gtroad-bg-4_vfrwwh.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    background-color: #ebebe8;
     height: 88vh;
 }
 
@@ -66,7 +68,6 @@ p {
     }
 
     .about-container {
-        background-image:url(img/gtroad-bg-3.jpeg);
         height: 80vh;
     }
 
