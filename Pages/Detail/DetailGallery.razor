@@ -35,11 +35,17 @@
                     @onclick="() => ToggleInfoVisibility()">
                     @if (isInfoHidden)
                     {
-                        <p>Show Info<span class="bi bi-chevron-up" style="margin-left: 8px;"></span></p>
+                        <p>
+                            <span class="bi bi-info-circle"></span>
+                            Show Info<span class="bi bi-chevron-up" style="margin-left: 6px;"></span>
+                        </p>
                     }
                     else
                     {
-                        <p>Hide Info<span class="bi bi-chevron-down" style="margin-left: 8px;"></span></p>
+                        <p>
+                            <span class="bi bi-info-circle"></span>
+                            Hide Info<span class="bi bi-chevron-down" style="margin-left: 6px;"></span>
+                        </p>
                     }
                 </button>
                 <div class="highlight-info-section" style="visibility: @infoVisibilityStyle;">
