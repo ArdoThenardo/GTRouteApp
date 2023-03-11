@@ -61,6 +61,10 @@
     font-weight: 700;
 }
 
+.button-menu-name {
+    margin-left: 6px;
+}
+
 @media (max-width: 540px), (max-height: 414px) {
     .sidebar-container {
         flex-direction: row;
@@ -95,13 +99,20 @@
         width: 20%;
         height: 100%;
         text-align: center;
-        font-size: 15px;
         font-weight: 500;
         padding-inline: 6px;
     }
 
+    .sidebar-button {
+        font-size: 24px;
+    }
+
     .sidebar-button:first-of-type {
         margin-left: 4px;
+    }
+
+    .button-menu-name {
+        display: none;
     }
 
     .back-button {

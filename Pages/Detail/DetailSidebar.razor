@@ -13,39 +13,45 @@
     @if (SelectedSubDetail == SubDetail.General)
     {
         <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-clipboard2-fill" style="margin-right: 6px;"></span> @DetailSidebarMenu.General
+            <span class="bi bi-clipboard2-fill"></span> 
+            <span class="button-menu-name">@DetailSidebarMenu.General</span>
         </button>
     }
     else
     {
         <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.General)">
-            <span class="bi bi-clipboard2-fill" style="margin-right: 6px;"></span> @DetailSidebarMenu.General
+            <span class="bi bi-clipboard2-fill"></span> 
+            <span class="button-menu-name">@DetailSidebarMenu.General</span>
         </button>
     }
 
     @if (SelectedSubDetail == SubDetail.Layout)
     {
         <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> @DetailSidebarMenu.Layout
+            <span class="bi bi-sign-turn-slight-right-fill"></span> 
+            <span class="button-menu-name">@DetailSidebarMenu.Layout</span>
         </button>
     }
     else
     {
         <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Layout)">
-            <span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 6px;"></span> @DetailSidebarMenu.Layout
+            <span class="bi bi-sign-turn-slight-right-fill"></span> 
+            <span class="button-menu-name">@DetailSidebarMenu.Layout</span>
         </button>
     }
     
     @if (SelectedSubDetail == SubDetail.Image)
     {
         <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-images" style="margin-right: 6px;"></span> @DetailSidebarMenu.Gallery
+            <span class="bi bi-images"></span> 
+            <span class="button-menu-name">@DetailSidebarMenu.Gallery</span>
         </button>
     }
     else
     {
         <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Image)">
-            <span class="bi bi-images" style="margin-right: 6px;"></span> @DetailSidebarMenu.Gallery
+            <span class="bi bi-images"></span> 
+            <span class="button-menu-name">@DetailSidebarMenu.Gallery</span>
         </button>
     }
 </div>
