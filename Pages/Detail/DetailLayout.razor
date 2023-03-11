@@ -1,4 +1,6 @@
 @using GTRouteApp.Models
+@using GTRouteApp.Helpers
+@inject IJSRuntime JS
 
 <div class="detail-layout-container">
     <div class="layout-header">
@@ -46,8 +48,12 @@
             </div>
             <div class="layout-highlight">
                 <div class="layout-map">
-                    <img src="@Layouts.ElementAt(selectedIndex).MapUrl" 
-                        alt="@Layouts.ElementAt(selectedIndex).LayoutName" />
+                    <div class="map-placeholder">
+                        <span class="bi bi-card-image"></span>
+                    </div>
+                    <img src="@selectedMapLayoutUrl" 
+                        alt="@Layouts.ElementAt(selectedIndex).LayoutName"
+                        @ref="@highlightMapRef" />
                 </div>
                 <div class="layout-info">
                     <div class="info-group">
@@ -76,9 +82,29 @@
     [Parameter]
     public string CoverImageUrl { get; set; } = "";
     private int selectedIndex = 0;
+    private string selectedMapLayoutUrl = "";
 
-    private void SetSelection(int index)
+    ElementReference highlightMapRef;
+
+    protected override async Task OnParametersSetAsync()
     {
+        if (Layouts.Count() > 0)
+            await SetSelection(selectedIndex);
+    }
+
+    private async Task SetSelection(int index)
+    {
+        selectedMapLayoutUrl = GeneralConstants.PlaceholderImageUrl; // switch to placeholder image temporarily
+        await Task.Delay(10);
+
         selectedIndex = index;
+        selectedMapLayoutUrl = Layouts.ElementAt(selectedIndex).MapUrl ?? "";
+
+        await ResetHighlightAnimationWithJS();
+    }
+
+    private async Task ResetHighlightAnimationWithJS()
+    {
+        await JS.InvokeVoidAsync("resetAnimationByStyle", highlightMapRef);
     }
 }

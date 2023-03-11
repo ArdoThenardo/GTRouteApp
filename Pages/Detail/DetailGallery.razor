@@ -1,4 +1,5 @@
 @using GTRouteApp.Models
+@using GTRouteApp.Helpers
 @inject IJSRuntime JS
 
 <div class="gallery-container">
@@ -106,7 +107,6 @@
     private List<TrackImage> loadedImages = new();
     private int selectedImageIndex = 0;
     private string selectedImageUrl = "";
-    private const string placeholderImageUrl = "img/empty720.png";
     private bool isNextDisabled = false;
     private bool isPrevDisabled = false;
     private bool isInfoHidden = false;
@@ -126,7 +126,7 @@
 
     private async Task SetSelection(int selectedIndex)
     {
-        selectedImageUrl = placeholderImageUrl; // switch to placeholder image temporarily
+        selectedImageUrl = GeneralConstants.PlaceholderImageUrl; // switch to placeholder image temporarily
         await Task.Delay(10);
 
         selectedImageIndex = selectedIndex;
