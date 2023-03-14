@@ -67,6 +67,10 @@
     [SupplyParameterFromQuery(Name = "origin")]
     public string origin { get; set; } = "";
 
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "selected_subdetail")]
+    public string selected_subdetail { get; set; } = "";
+
     private TrackDetail detail = new();
     private List<TrackLayout> layouts = new();
     private List<TrackImage> images = new();
@@ -80,6 +84,7 @@
     protected override async Task OnInitializedAsync()
     {
         await LoadData();
+        PreselectSubdetail(selected_subdetail);
     }
 
     private async Task LoadData()
@@ -115,6 +120,7 @@
         chosenSubDetail = subDetail;
 
         ChangeSubheaderInfoText(detail.Name ?? "");
+        ChangeSelectedSubdetailLink();
     }
 
     private void ChangeSubheaderInfoText(string trackName)
@@ -129,6 +135,46 @@
                 break;
             default:
                 subheaderInfoText = $"View gallery of {trackName}";
+                break;
+        }
+    }
+
+    private void ChangeSelectedSubdetailLink()
+    {
+        var defaultNavigation = $"/browse/detail/{slug}?origin={origin}";
+
+        switch (chosenSubDetail)
+        {
+            case SubDetail.General:
+                NavigationManager
+                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.General}");
+                break;
+            case SubDetail.Layout:
+                NavigationManager
+                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.Layout}");
+                break;
+            case SubDetail.Image:
+                NavigationManager
+                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.Gallery}");
+                break;
+            default:
+                NavigationManager.NavigateTo(defaultNavigation);
+                break;
+        }
+    }
+
+    private void PreselectSubdetail(string subdetail)
+    {
+        switch (selected_subdetail)
+        {
+            case SelectedSubdetail.General:
+                chosenSubDetail = SubDetail.General;
+                break;
+            case SelectedSubdetail.Layout:
+                chosenSubDetail = SubDetail.Layout;
+                break;
+            case SelectedSubdetail.Gallery:
+                chosenSubDetail = SubDetail.Image;
                 break;
         }
     }

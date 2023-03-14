@@ -31,3 +31,10 @@ public static class DetailSidebarMenu
     public const string Layout = "Track Layouts";
     public const string Gallery = "Image Gallery";
 }
+
+public static class SelectedSubdetail
+{
+    public const string General = "general";
+    public const string Layout = "layout";
+    public const string Gallery = "image";
+}
