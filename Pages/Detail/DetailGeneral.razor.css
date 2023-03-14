@@ -165,6 +165,7 @@
     .detail-general-container {
         overflow: scroll;
         border-top: 1.4px solid #1e2022;
+        height: 100%;
     }
 
     .detail-general-container::after {
