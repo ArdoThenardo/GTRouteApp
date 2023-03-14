@@ -146,13 +146,16 @@
         switch (chosenSubDetail)
         {
             case SubDetail.General:
-                NavigationManager.NavigateTo($"{defaultNavigation}&selected_subdetail=general");
+                NavigationManager
+                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.General}");
                 break;
             case SubDetail.Layout:
-                NavigationManager.NavigateTo($"{defaultNavigation}&selected_subdetail=layout");
+                NavigationManager
+                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.Layout}");
                 break;
             case SubDetail.Image:
-                NavigationManager.NavigateTo($"{defaultNavigation}&selected_subdetail=image");
+                NavigationManager
+                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.Gallery}");
                 break;
             default:
                 NavigationManager.NavigateTo(defaultNavigation);
@@ -164,13 +167,13 @@
     {
         switch (selected_subdetail)
         {
-            case "general":
+            case SelectedSubdetail.General:
                 chosenSubDetail = SubDetail.General;
                 break;
-            case "layout":
+            case SelectedSubdetail.Layout:
                 chosenSubDetail = SubDetail.Layout;
                 break;
-            case "image":
+            case SelectedSubdetail.Gallery:
                 chosenSubDetail = SubDetail.Image;
                 break;
         }
