@@ -68,6 +68,12 @@ p {
     color: #f4f4f2;
 }
 
+.full-btn-text {
+    display: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
 .next-btn, .prev-btn {
     position: absolute;
     background-color: rgba(30, 32, 34, 0.7);
@@ -220,6 +226,18 @@ p {
 
     .info-visibility-btn {
         display: none;
+    }
+
+    .full-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        padding-inline: 12px;
+    }
+
+    .full-btn-text {
+        display: block;
     }
 
     .highlight-placeholder span {
