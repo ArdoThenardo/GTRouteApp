@@ -9,14 +9,14 @@ public class TrackDetailService: BaseService
     // remote: /detail?slug={slug}
     // sample: sample-data/track_detail.json
     private readonly string GetDetailUrl;
-    private readonly CloudinaryService _cloudinaryService;
+    private readonly ImageTransformers imageTransformers;
     private TrackDetail detail = new();
     private string recentError = "";
 
     public TrackDetailService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
     { 
         this.GetDetailUrl = $"{_baseUrl}/detail";
-        this._cloudinaryService = new CloudinaryService(settings);
+        this.imageTransformers = new ImageTransformers(settings);
     }
 
     public async Task<TrackDetail> GetTrackDetail(string slug)
@@ -54,8 +54,8 @@ public class TrackDetailService: BaseService
             var url = images[i].ImageUrl; 
             if (!string.IsNullOrWhiteSpace(url))
             {
-                images[i].ThumbnailUrl = GenerateThumbnail(url); 
-                images[i].ImageUrl = GenerateProgressive(url);
+                images[i].ThumbnailUrl = imageTransformers.GenerateThumbnail(url); 
+                images[i].ImageUrl = imageTransformers.GenerateProgressive(url);
             }
         }
 
@@ -69,47 +69,11 @@ public class TrackDetailService: BaseService
             if (!string.IsNullOrWhiteSpace(layouts[i].MapUrl))
             {
                 var url = layouts[i].MapUrl;
-                layouts[i].ThumbnailUrl = GenerateThumbnail(url);
+                layouts[i].ThumbnailUrl = imageTransformers.GenerateThumbnail(url);
             }
         }
 
         detail.Layouts = layouts;
-    }
-
-    public string GenerateThumbnail(string? url)
-    {
-        string imageUrl = url ?? "";
-        string urlPartToTrim = GeneralConstants.CloudinaryBase;
-        string source = "";
-        if (imageUrl.StartsWith(urlPartToTrim))
-        {
-            source = imageUrl.Remove(0, urlPartToTrim.Length);
-            var transformedUrl = _cloudinaryService.GenerateSmallThumbnailImageUrl(source);
-
-            return transformedUrl;
-        }
-        else
-        {
-            return imageUrl; // revert to original url, if url is not from cloudinary
-        }
-    }
-
-    public string GenerateProgressive(string? url)
-    {
-        string imageUrl = url ?? "";
-        string urlPartToTrim = GeneralConstants.CloudinaryBase;
-        string source = "";
-        if (imageUrl.StartsWith(urlPartToTrim))
-        {
-            source = imageUrl.Remove(0, urlPartToTrim.Length);
-            var transformedUrl = _cloudinaryService.GenerateProgressiveImageUrl(source);
-
-            return transformedUrl;
-        }
-        else
-        {
-            return imageUrl; // revert to original url, if url is not from cloudinary or others
-        }
     }
 
     public string GetRecentErrorMessage()
