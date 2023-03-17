@@ -187,7 +187,8 @@
 .layout-item, .layout-item-selected {
     display: flex;
     flex-direction: row;
-    min-height: 64px;
+    min-height: 68px;
+    max-height: 68px;
     border-radius: 10px;
     padding: 8px;
     overflow: hidden;
