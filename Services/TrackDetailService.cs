@@ -9,14 +9,14 @@ public class TrackDetailService: BaseService
     // remote: /detail?slug={slug}
     // sample: sample-data/track_detail.json
     private readonly string GetDetailUrl;
-    private readonly CloudinaryService _cloudinaryService;
+    private readonly ImageTransformers imageTransformers;
     private TrackDetail detail = new();
     private string recentError = "";
 
     public TrackDetailService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
     { 
         this.GetDetailUrl = $"{_baseUrl}/detail";
-        this._cloudinaryService = new CloudinaryService(settings);
+        this.imageTransformers = new ImageTransformers(settings);
     }
 
     public async Task<TrackDetail> GetTrackDetail(string slug)
@@ -33,9 +33,9 @@ public class TrackDetailService: BaseService
 
             detail = fetched.Data ?? new();
             if (detail.Layouts.Count() > 0)
-                GenerateThumbnailsForLayouts(detail.Layouts);
+                TransformMapLayouts(detail.Layouts);
             if (detail.Images.Count() > 0)
-                GenerateThumbnailsForImages(detail.Images);
+                TransformImages(detail.Images);
 
             return detail;
         }
@@ -47,50 +47,33 @@ public class TrackDetailService: BaseService
         }
     }
 
-    public void GenerateThumbnailsForImages(List<TrackImage> images)
+    public void TransformImages(List<TrackImage> images)
     {
         for (int i = 0; i < images.Count(); i++)
         {
-            if (!string.IsNullOrWhiteSpace(images[i].ImageUrl))
+            var url = images[i].ImageUrl; 
+            if (!string.IsNullOrWhiteSpace(url))
             {
-                var url = images[i].ImageUrl;
-                images[i].ThumbnailUrl = GenerateThumbnail(url); 
+                images[i].ThumbnailUrl = imageTransformers.GenerateThumbnail(url); 
+                images[i].ImageUrl = imageTransformers.GenerateProgressive(url);
             }
         }
 
         detail.Images = images;
     }
 
-    public void GenerateThumbnailsForLayouts(List<TrackLayout> layouts)
+    public void TransformMapLayouts(List<TrackLayout> layouts)
     {
         for (int i = 0; i < layouts.Count(); i++)
         {
             if (!string.IsNullOrWhiteSpace(layouts[i].MapUrl))
             {
                 var url = layouts[i].MapUrl;
-                layouts[i].ThumbnailUrl = GenerateThumbnail(url);
+                layouts[i].ThumbnailUrl = imageTransformers.GenerateThumbnail(url);
             }
         }
 
         detail.Layouts = layouts;
-    }
-
-    public string GenerateThumbnail(string? url)
-    {
-        string imageUrl = url ?? "";
-        string urlPartToTrim = GeneralConstants.CloudinaryBase;
-        string source = "";
-        if (imageUrl.StartsWith(urlPartToTrim))
-        {
-            source = imageUrl.Remove(0, urlPartToTrim.Length);
-            var transformedUrl = _cloudinaryService.GenerateSmallThumbnailImageUrl(source);
-
-            return transformedUrl;
-        }
-        else
-        {
-            return imageUrl; // revert to original url, if url is not from cloudinary
-        }
     }
 
     public string GetRecentErrorMessage()
