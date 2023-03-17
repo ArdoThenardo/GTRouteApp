@@ -125,7 +125,7 @@
     
     ElementReference highlightImageRef;
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         LoadImages(nextPage);
         if (Images.Count() > 0)

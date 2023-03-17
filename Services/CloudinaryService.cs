@@ -24,4 +24,12 @@ public class CloudinaryService
 
         return transformedUrl;
     }
+
+    public string GenerateProgressiveImageUrl(string source)
+    {
+        var transformation = new Transformation().Flags("progressive:steep");
+        var transformedUrl = _cloudinary.Api.UrlImgUp.Source(source).Transform(transformation).BuildUrl();
+
+        return transformedUrl;
+    }
 }

@@ -33,9 +33,9 @@ public class TrackDetailService: BaseService
 
             detail = fetched.Data ?? new();
             if (detail.Layouts.Count() > 0)
-                GenerateThumbnailsForLayouts(detail.Layouts);
+                TransformMapLayouts(detail.Layouts);
             if (detail.Images.Count() > 0)
-                GenerateThumbnailsForImages(detail.Images);
+                TransformImages(detail.Images);
 
             return detail;
         }
@@ -47,21 +47,22 @@ public class TrackDetailService: BaseService
         }
     }
 
-    public void GenerateThumbnailsForImages(List<TrackImage> images)
+    public void TransformImages(List<TrackImage> images)
     {
         for (int i = 0; i < images.Count(); i++)
         {
-            if (!string.IsNullOrWhiteSpace(images[i].ImageUrl))
+            var url = images[i].ImageUrl; 
+            if (!string.IsNullOrWhiteSpace(url))
             {
-                var url = images[i].ImageUrl;
                 images[i].ThumbnailUrl = GenerateThumbnail(url); 
+                images[i].ImageUrl = GenerateProgressive(url);
             }
         }
 
         detail.Images = images;
     }
 
-    public void GenerateThumbnailsForLayouts(List<TrackLayout> layouts)
+    public void TransformMapLayouts(List<TrackLayout> layouts)
     {
         for (int i = 0; i < layouts.Count(); i++)
         {
@@ -90,6 +91,24 @@ public class TrackDetailService: BaseService
         else
         {
             return imageUrl; // revert to original url, if url is not from cloudinary
+        }
+    }
+
+    public string GenerateProgressive(string? url)
+    {
+        string imageUrl = url ?? "";
+        string urlPartToTrim = GeneralConstants.CloudinaryBase;
+        string source = "";
+        if (imageUrl.StartsWith(urlPartToTrim))
+        {
+            source = imageUrl.Remove(0, urlPartToTrim.Length);
+            var transformedUrl = _cloudinaryService.GenerateProgressiveImageUrl(source);
+
+            return transformedUrl;
+        }
+        else
+        {
+            return imageUrl; // revert to original url, if url is not from cloudinary or others
         }
     }
 
