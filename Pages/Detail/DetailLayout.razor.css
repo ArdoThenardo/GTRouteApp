@@ -329,13 +329,13 @@
         width: 100%;
     }
 
-    .layout-map {
+    .layout-item-thumbnail {
         width: 100%;
-        height: 60%;
     }
 
-    .layout-map img {
-        object-fit: contain;
+    .layout-map {
+        width: 100%;
+        height: 35%;
     }
 
     .map-placeholder span {
