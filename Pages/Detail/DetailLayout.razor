@@ -54,9 +54,13 @@
             </div>
             <div class="layout-highlight">
                 <div class="layout-map">
-                    <div class="map-placeholder">
-                        <span class="bi bi-card-image"></span>
-                    </div>
+                    <div class="layout-item-shimmer"></div>
+                    @if (string.IsNullOrWhiteSpace(selectedMapLayoutUrl))
+                    {
+                        <div class="map-placeholder">
+                            <span class="bi bi-card-image"></span>
+                        </div>
+                    }
                     <img src="@selectedMapLayoutUrl" 
                         alt="@Layouts.ElementAt(selectedIndex).LayoutName"
                         @ref="@highlightMapRef" />
