@@ -12,6 +12,7 @@
         <div class="detail-gallery-highlight">
             <div class="highlight-image-section">
                 <div class="highlight-placeholder">
+                    <div class="highlight-shimmer"></div>
                     <span class="bi bi-image"></span>
                 </div>
                 <img src="@selectedImageUrl" 
@@ -77,6 +78,7 @@
                 @if (selectedImageIndex == image.index)
                 {
                     <div class="gallery-item-selected">
+                        <div class="item-shimmer"></div>
                         <div class="item-placeholder">
                             <span class="bi bi-image-fill"></span>
                         </div>
@@ -87,6 +89,7 @@
                 else
                 {
                     <div class="gallery-item" @onclick="() => SetSelection(image.index)">
+                        <div class="item-shimmer"></div>
                         <div class="item-placeholder">
                             <span class="bi bi-image-fill"></span>
                         </div>
