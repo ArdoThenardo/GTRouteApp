@@ -1,4 +1,5 @@
 @using GTRouteApp.Models
+@using GTRouteApp.Helpers
 
 <div class="detail-general-container">
     <div class="general-group-1">
@@ -33,6 +34,7 @@
                 {
                     <div class="layout-item-container">
                         <div class="layout-item-content">
+                            <div class="layout-item-shimmer"></div>
                             <div class="layout-item-img">
                                 <img src="@layoutData.ThumbnailUrl" alt="@layoutData.LayoutName" />
                             </div>
@@ -47,7 +49,7 @@
                     <div class="layout-more-notice-container">
                         <div class="layout-more-notice">
                             <p>
-                                Check '<span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 2px;"></span>Layouts' to see 
+                                Check '<span class="bi bi-sign-turn-slight-right-fill" style="margin-right: 2px;"></span>@DetailSidebarMenu.Layout' to see 
                                 more track layouts
                             </p>
                         </div>
