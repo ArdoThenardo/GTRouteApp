@@ -78,15 +78,19 @@ p {
     position: absolute;
     top: 12px;
     right: 12px;
-    width: 45px;
+    width: auto;
     height: 45px;
     padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 12px;
     background-color: rgba(30, 32, 34, 0.7);
     color: #f4f4f2;
 }
 
 .full-btn-text {
-    display: none;
+    display: block;
     font-size: 14px;
     font-weight: 600;
 }
@@ -283,18 +287,6 @@ p {
         display: none;
     }
 
-    .full-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: auto;
-        padding-inline: 12px;
-    }
-
-    .full-btn-text {
-        display: block;
-    }
-
     .highlight-placeholder span {
         font-size: 14vw;
     }
@@ -323,7 +315,7 @@ p {
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
     .highlight-image-section img {
         object-fit: cover;
     }
