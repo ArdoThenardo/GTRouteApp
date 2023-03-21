@@ -146,7 +146,7 @@
 .gallery-item-content {
     background-color: rgba(244, 244, 242, 0.7);
     backdrop-filter: blur(1px);
-    width: 270px;
+    width: 24vh;
     height: 100%;
     color: #1e2022;
     border: 1px solid #1e2022;
@@ -165,7 +165,7 @@
 .gallery-item-content-selected {
     background-color: rgba(30, 32, 34, 0.7);
     backdrop-filter: blur(1px);
-    width: 270px;
+    width: 24vh;
     height: 100%;
     color: #f4f4f2;
     border: 2px solid #ffc107;
@@ -178,7 +178,7 @@
 
 .gallery-item-content img, .gallery-item-content-selected img {
     object-fit: contain;
-    width: 50%;
+    width: 64%;
     height: 80%;
     filter: drop-shadow(0 0 3px rgba(30, 32, 34, 0.4));
 }
@@ -266,7 +266,7 @@
     }
 
     .gallery-item-content, .gallery-item-content-selected {
-        width: 240px;
+        width: 26vh;
     }
 
     .gallery-item-content img, .gallery-item-content-selected img {
