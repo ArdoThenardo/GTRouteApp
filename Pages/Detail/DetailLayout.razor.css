@@ -101,6 +101,7 @@
     width: 448px;
     height: 460px;
     border-radius: 12px;
+    isolation: isolate;
     background-color: #e8e8e8;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.5);
     overflow: hidden;
@@ -231,6 +232,7 @@
     width: 90px;
     height: 100%;
     background-color: #e8e8e8;
+    isolation: isolate;
     border-radius: 6px;
     overflow: hidden;
 }
