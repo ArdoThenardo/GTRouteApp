@@ -9,9 +9,11 @@
     </div>
 
     <div class="subheader-options">
+        <span class="bi bi-gear-fill setting-icon"></span>
+
         <div class="subheader-category-selection">
             <span class="bi bi-tags-fill"></span>
-            <select class="form-select form-select-sm">
+            <select class="form-select form-select-sm" @onchange="@ApplyCategory">
                 @foreach (var category in BrowseCategory.Categories)
                 {
                     <option value="@category">@category</option>
@@ -52,6 +54,8 @@
     [Parameter]
     public string preselect_mode { get; set; } = ""; // gallery or grid
 
+    private string selectedCategory = "All";
+
     private bool disableGallery = true;
     private bool disableGrid = false;
 
@@ -83,6 +87,18 @@
         {
             subheaderJS = new(await JS.InvokeAsync<IJSObjectReference>("import", subheaderJSPath));
             await subheaderJS.Value.InvokeVoidAsync("initializeTooltips", galleryRef, gridRef);
+        }
+    }
+
+    private void ApplyCategory(ChangeEventArgs args)
+    {
+        if (args.Value != null)
+        {
+            if (!string.IsNullOrWhiteSpace(args.Value.ToString()))
+            {
+                selectedCategory = args.Value.ToString() ?? "";
+                Console.WriteLine($"current category: {selectedCategory}");
+            }
         }
     }
 
