@@ -11,11 +11,11 @@
     <div class="subheader-options">
         <div class="subheader-category-selection">
             <span class="bi bi-tags-fill"></span>
-            <select class="form-select form-select-sm" style="border-radius: 0;">
-                <option>Original Circuit</option>
-                <option>Real Circuit</option>
-                <option>City Circuit</option>
-                <option>Dirt / Snow</option>
+            <select class="form-select form-select-sm">
+                @foreach (var category in BrowseCategory.Categories)
+                {
+                    <option value="@category">@category</option>
+                }
             </select>
         </div>
 

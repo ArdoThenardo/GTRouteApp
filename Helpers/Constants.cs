@@ -15,6 +15,17 @@ public static class RaceTrackCategory
     public const string SnowCircuit = "Snow Circuit";
 }
 
+public static class BrowseCategory
+{
+    public static readonly string[] Categories = {
+        "All",
+        "Original Circuits",
+        "Real Circuits",
+        "City Circuits",
+        "Dirt / Snow"
+    };
+}
+
 public static class ErrorMessage
 {
     public const string NoData = "There is no data.";
