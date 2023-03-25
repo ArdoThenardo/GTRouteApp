@@ -48,6 +48,8 @@ public class RaceTrackService: BaseService
         }
     }
 
+    // TO-DO: GetTracksByCategory
+
     public async Task<List<RaceTrack>> GetAllTracks()
     {
         tracks.Clear();
@@ -98,6 +100,13 @@ public class RaceTrackService: BaseService
         }
         
         return true;
+    }
+
+    public void ResetRaceTracksList()
+    {
+        tracks.Clear();
+        currentNumberOfRaceTracks = 0;
+        numberOfTotalRaceTracks = 0;
     }
 
     public string GetRecentErrorMessage()

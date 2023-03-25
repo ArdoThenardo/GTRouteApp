@@ -13,7 +13,7 @@
 
         <div class="subheader-category-selection">
             <span class="bi bi-tags-fill"></span>
-            <select class="form-select form-select-sm" @onchange="@ApplyCategory">
+            <select class="form-select form-select-sm" value="@selectedCategory" @onchange="@ApplyCategory">
                 @foreach (var category in BrowseCategory.Categories)
                 {
                     <option value="@category">@category</option>
@@ -49,12 +49,16 @@
     public string Info { get; set; } = "";
 
     [Parameter]
+    public EventCallback<string> OnCategoryChanged { get; set; }
+
+    [Parameter]
     public EventCallback<BrowseMode> ChosenBrowseMode { get; set; }
 
     [Parameter]
     public string preselect_mode { get; set; } = ""; // gallery or grid
 
-    private string selectedCategory = "All";
+    [Parameter]
+    public string selectedCategory { get; set; } = "";
 
     private bool disableGallery = true;
     private bool disableGrid = false;
@@ -90,14 +94,14 @@
         }
     }
 
-    private void ApplyCategory(ChangeEventArgs args)
+    private async Task ApplyCategory(ChangeEventArgs args)
     {
         if (args.Value != null)
         {
             if (!string.IsNullOrWhiteSpace(args.Value.ToString()))
             {
                 selectedCategory = args.Value.ToString() ?? "";
-                Console.WriteLine($"current category: {selectedCategory}");
+                await OnCategoryChanged.InvokeAsync(selectedCategory);
             }
         }
     }

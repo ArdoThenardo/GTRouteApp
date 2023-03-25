@@ -13,7 +13,11 @@
 }
 else
 {
-    <BrowseSubheader Info="@info" ChosenBrowseMode="@ChangeBrowseMode" preselect_mode="@preselect_mode" />
+    <BrowseSubheader Info="@info" 
+        OnCategoryChanged="@OnCategoryChangedHandler" 
+        ChosenBrowseMode="@ChangeBrowseMode" 
+        preselect_mode="@preselect_mode" 
+        selectedCategory="@selectedCategory" />
 
     @if (_mode == BrowseMode.Gallery)
     {
@@ -41,6 +45,8 @@ else
     private const string galleryInfo = "Click or tap a track on the bottom to highlight";
     private const string gridInfo = "Click or tap a track to view";
     private const int limitPerPage = 8;
+
+    private string selectedCategory = BrowseCategory.Categories[0];
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "preselect_mode")]
@@ -104,6 +110,18 @@ else
 
             isLoadMoreDisabled = false;
         }
+    }
+
+    private async Task OnCategoryChangedHandler(string category)
+    {
+        tracks.Clear();
+        currentPage = 1;
+        isMaximum = false;
+        RaceTrackService.ResetRaceTracksList();
+
+        selectedCategory = category;
+
+        await LoadData();
     }
 
     private void CheckError()
