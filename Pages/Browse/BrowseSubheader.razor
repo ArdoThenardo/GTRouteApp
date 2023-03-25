@@ -8,25 +8,39 @@
         <span class="bi bi-info-square-fill" style="margin-right: 6px;"></span>@Info
     </div>
 
-    <div class="subheader-view-options">
-        <button type="button" class="btn btn-selection" 
-            @onclick="() => SwitchMode(BrowseMode.Gallery)"
-            data-bs-toggle="tooltip"
-            data-bs-placement="left"
-            title="Switch to Gallery View"
-            @ref="galleryRef"
-            disabled=@disableGallery>
-            <span class="bi bi-image-fill"></span>
-        </button>
-        <button type="button" class="btn btn-selection" 
-            @onclick="() => SwitchMode(BrowseMode.Grid)"
-            data-bs-toggle="tooltip"
-            data-bs-placement="left"
-            title="Switch to Grid View"
-            @ref="gridRef"
-            disabled=@disableGrid>
-            <span class="bi bi-grid-3x3-gap-fill"></span>
-        </button>
+    <div class="subheader-options">
+        <span class="bi bi-gear-fill setting-icon"></span>
+
+        <div class="subheader-category-selection">
+            <span class="bi bi-tags-fill"></span>
+            <select class="form-select form-select-sm" @onchange="@ApplyCategory">
+                @foreach (var category in BrowseCategory.Categories)
+                {
+                    <option value="@category">@category</option>
+                }
+            </select>
+        </div>
+
+        <div class="subheader-view-options">
+            <button type="button" class="btn btn-selection" 
+                @onclick="() => SwitchMode(BrowseMode.Gallery)"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                title="Switch to Gallery View"
+                @ref="galleryRef"
+                disabled=@disableGallery>
+                <span class="bi bi-image-fill"></span>
+            </button>
+            <button type="button" class="btn btn-selection" 
+                @onclick="() => SwitchMode(BrowseMode.Grid)"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                title="Switch to Grid View"
+                @ref="gridRef"
+                disabled=@disableGrid>
+                <span class="bi bi-grid-3x3-gap-fill"></span>
+            </button>
+        </div>
     </div>
 </div>
 
@@ -39,6 +53,8 @@
 
     [Parameter]
     public string preselect_mode { get; set; } = ""; // gallery or grid
+
+    private string selectedCategory = "All";
 
     private bool disableGallery = true;
     private bool disableGrid = false;
@@ -71,6 +87,18 @@
         {
             subheaderJS = new(await JS.InvokeAsync<IJSObjectReference>("import", subheaderJSPath));
             await subheaderJS.Value.InvokeVoidAsync("initializeTooltips", galleryRef, gridRef);
+        }
+    }
+
+    private void ApplyCategory(ChangeEventArgs args)
+    {
+        if (args.Value != null)
+        {
+            if (!string.IsNullOrWhiteSpace(args.Value.ToString()))
+            {
+                selectedCategory = args.Value.ToString() ?? "";
+                Console.WriteLine($"current category: {selectedCategory}");
+            }
         }
     }
 
