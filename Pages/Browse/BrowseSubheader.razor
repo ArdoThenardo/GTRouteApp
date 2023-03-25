@@ -8,25 +8,37 @@
         <span class="bi bi-info-square-fill" style="margin-right: 6px;"></span>@Info
     </div>
 
-    <div class="subheader-view-options">
-        <button type="button" class="btn btn-selection" 
-            @onclick="() => SwitchMode(BrowseMode.Gallery)"
-            data-bs-toggle="tooltip"
-            data-bs-placement="left"
-            title="Switch to Gallery View"
-            @ref="galleryRef"
-            disabled=@disableGallery>
-            <span class="bi bi-image-fill"></span>
-        </button>
-        <button type="button" class="btn btn-selection" 
-            @onclick="() => SwitchMode(BrowseMode.Grid)"
-            data-bs-toggle="tooltip"
-            data-bs-placement="left"
-            title="Switch to Grid View"
-            @ref="gridRef"
-            disabled=@disableGrid>
-            <span class="bi bi-grid-3x3-gap-fill"></span>
-        </button>
+    <div class="subheader-options">
+        <div class="subheader-category-selection">
+            <span class="bi bi-tags-fill"></span>
+            <select class="form-select form-select-sm" style="border-radius: 0;">
+                <option>Original Circuit</option>
+                <option>Real Circuit</option>
+                <option>City Circuit</option>
+                <option>Dirt / Snow</option>
+            </select>
+        </div>
+
+        <div class="subheader-view-options">
+            <button type="button" class="btn btn-selection" 
+                @onclick="() => SwitchMode(BrowseMode.Gallery)"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                title="Switch to Gallery View"
+                @ref="galleryRef"
+                disabled=@disableGallery>
+                <span class="bi bi-image-fill"></span>
+            </button>
+            <button type="button" class="btn btn-selection" 
+                @onclick="() => SwitchMode(BrowseMode.Grid)"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                title="Switch to Grid View"
+                @ref="gridRef"
+                disabled=@disableGrid>
+                <span class="bi bi-grid-3x3-gap-fill"></span>
+            </button>
+        </div>
     </div>
 </div>
 
