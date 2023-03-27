@@ -13,7 +13,11 @@
 }
 else
 {
-    <BrowseSubheader Info="@info" ChosenBrowseMode="@ChangeBrowseMode" preselect_mode="@preselect_mode" />
+    <BrowseSubheader Info="@info" 
+        OnCategoryChanged="@OnCategoryChangedHandler" 
+        ChosenBrowseMode="@ChangeBrowseMode" 
+        preselect_mode="@preselect_mode" 
+        selectedCategory="@selectedCategory" />
 
     @if (_mode == BrowseMode.Gallery)
     {
@@ -41,6 +45,8 @@ else
     private const string galleryInfo = "Click or tap a track on the bottom to highlight";
     private const string gridInfo = "Click or tap a track to view";
     private const int limitPerPage = 8;
+
+    private string selectedCategory = BrowseCategory.Categories[0];
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "preselect_mode")]
@@ -73,7 +79,7 @@ else
 
     private async Task LoadTracks()
     {
-        var data = await RaceTrackService.GetTracksByPage(currentPage);
+        var data = await LoadBySelectedCategory(currentPage);
 
         tracks.AddRange(data);
         isMaximum = RaceTrackService.IsRaceTracksReachMaximum();
@@ -87,7 +93,8 @@ else
         {
             int nextPage = currentPage + 1;
             
-            var data = await RaceTrackService.GetTracksByPage(nextPage);
+            var data = await LoadBySelectedCategory(nextPage);
+
             if (data.Count() > 0) // fetch success, if data > 0
             {
                 currentPage = nextPage;
@@ -104,6 +111,38 @@ else
 
             isLoadMoreDisabled = false;
         }
+    }
+
+    private async Task<List<RaceTrack>> LoadBySelectedCategory(int page)
+    {
+        var data = new List<RaceTrack>();
+        if (selectedCategory.Equals(BrowseCategory.Categories[4])) // Category: Dirt / Snow
+        {
+            data = await RaceTrackService.GetOffroadTracks(page);
+        }
+        else if (selectedCategory.Equals(BrowseCategory.Categories[0])) // Category: All
+        {
+            data = await RaceTrackService.GetTracksByPage(page);
+        }
+        else // Category: Original Circuits, Real Circuits, City Circuits
+        {
+            data = await RaceTrackService.GetTracksByCategory(page);
+        }
+
+        return data;
+    }
+
+    private async Task OnCategoryChangedHandler(string category)
+    {
+        tracks.Clear();
+        currentPage = 1;
+        isMaximum = false;
+        RaceTrackService.ResetRaceTracksList();
+
+        selectedCategory = category;
+        RaceTrackService.SetRaceTracksCategory(category);
+
+        await LoadData();
     }
 
     private void CheckError()
