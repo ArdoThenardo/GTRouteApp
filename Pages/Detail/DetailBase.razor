@@ -141,24 +141,25 @@
 
     private void ChangeSelectedSubdetailLink()
     {
-        var defaultNavigation = $"/browse/detail/{slug}?origin={origin}";
-
         switch (chosenSubDetail)
         {
             case SubDetail.General:
                 NavigationManager
-                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.General}");
+                    .NavigateTo(NavigationManager.GetUriWithQueryParameter(
+                        "selected_subdetail", SelectedSubdetail.General));
                 break;
             case SubDetail.Layout:
                 NavigationManager
-                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.Layout}");
+                    .NavigateTo(NavigationManager.GetUriWithQueryParameter(
+                        "selected_subdetail", SelectedSubdetail.Layout));
                 break;
             case SubDetail.Image:
                 NavigationManager
-                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.Gallery}");
+                    .NavigateTo(NavigationManager.GetUriWithQueryParameter(
+                        "selected_subdetail", SelectedSubdetail.Gallery));
                 break;
             default:
-                NavigationManager.NavigateTo(defaultNavigation);
+                NavigationManager.NavigateTo(NavigationManager.Uri);
                 break;
         }
     }
