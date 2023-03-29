@@ -141,6 +141,8 @@ else
 
         selectedCategory = category;
         RaceTrackService.SetRaceTracksCategory(category);
+        NavigationManager.NavigateTo(
+            NavigationManager.GetUriWithQueryParameter("category", selectedCategory)); // update url
 
         await LoadData();
     }
@@ -169,18 +171,23 @@ else
     private void ChangeBrowseMode(BrowseMode mode)
     {
         this._mode = mode;
+        var updatedUrl = "";
 
         if (this._mode == BrowseMode.Gallery)
         {
             info = galleryInfo;
 
-            NavigationManager.NavigateTo("/browse?preselect_mode=gallery");
+            updatedUrl = NavigationManager.GetUriWithQueryParameter(
+                "preselect_mode", "gallery");
+            NavigationManager.NavigateTo(updatedUrl);
         }
         else if (this._mode == BrowseMode.Grid)
         {
             info = gridInfo;
 
-            NavigationManager.NavigateTo("/browse?preselect_mode=grid");
+            updatedUrl = NavigationManager.GetUriWithQueryParameter(
+                "preselect_mode", "grid");
+            NavigationManager.NavigateTo(updatedUrl);
         }
     }
 
