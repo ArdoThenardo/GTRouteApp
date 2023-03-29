@@ -46,7 +46,10 @@ else
     private const string gridInfo = "Click or tap a track to view";
     private const int limitPerPage = 8;
 
-    private string selectedCategory = BrowseCategory.Categories[0];
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "category")]
+    public string preselect_category { get; set; } = "";
+    public string selectedCategory { get; set; } = BrowseCategory.Categories[0];
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "preselect_mode")]
@@ -63,12 +66,10 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadData();
-    }
-
-    protected override void OnParametersSet()
-    {
         PreselectBrowseMode();
+        PreselectCategory();
+        
+        await LoadData();
     }
 
     private async Task LoadData()
@@ -140,11 +141,20 @@ else
         RaceTrackService.ResetRaceTracksList();
 
         selectedCategory = category;
-        RaceTrackService.SetRaceTracksCategory(category);
+        RaceTrackService.SetRaceTracksCategory(selectedCategory);
         NavigationManager.NavigateTo(
             NavigationManager.GetUriWithQueryParameter("category", selectedCategory)); // update url
 
         await LoadData();
+    }
+
+    private void PreselectCategory()
+    {
+        selectedCategory = string.IsNullOrWhiteSpace(preselect_category) ? 
+            BrowseCategory.Categories[0] : 
+            preselect_category;
+
+        RaceTrackService.SetRaceTracksCategory(selectedCategory);
     }
 
     private void CheckError()
