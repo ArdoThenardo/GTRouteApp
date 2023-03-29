@@ -109,6 +109,9 @@
     [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
 
+    [Parameter]
+    public EventCallback<string> OnViewClickHandler { get; set; }
+
     private string loadMoreBtnClass = "";
     private string loadMoreBtnText = "";
     
@@ -128,9 +131,9 @@
         await ResetHighlightAnimationWithJS();
     }
 
-    private void AccessTrackDetail(string slug)
+    private async Task AccessTrackDetail(string slug)
     {
-        NavigationManager.NavigateTo($"/browse/detail/{slug}?origin=browseGallery");
+        await OnViewClickHandler.InvokeAsync(slug);
     }
 
     private async Task LoadMoreTracks()
