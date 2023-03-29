@@ -54,7 +54,7 @@ else
     public string selectedCategory { get; set; } = BrowseCategory.Categories[0];
 
     [Parameter]
-    [SupplyParameterFromQuery(Name = "preselect_mode")]
+    [SupplyParameterFromQuery(Name = "mode")]
     public string preselect_mode { get; set; } = ""; // gallery or grid
     private BrowseMode _mode = BrowseMode.Gallery;
     private string info = galleryInfo;
@@ -190,7 +190,7 @@ else
             info = galleryInfo;
 
             updatedUrl = NavigationManager.GetUriWithQueryParameter(
-                "preselect_mode", "gallery");
+                "mode", "gallery");
             NavigationManager.NavigateTo(updatedUrl);
         }
         else if (this._mode == BrowseMode.Grid)
@@ -198,7 +198,7 @@ else
             info = gridInfo;
 
             updatedUrl = NavigationManager.GetUriWithQueryParameter(
-                "preselect_mode", "grid");
+                "mode", "grid");
             NavigationManager.NavigateTo(updatedUrl);
         }
     }
