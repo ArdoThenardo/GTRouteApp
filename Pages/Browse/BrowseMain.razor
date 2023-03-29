@@ -216,7 +216,8 @@ else
                 break;
         }
 
-        NavigationManager.NavigateTo($"/browse/detail/{slug}?origin={origin}");
+        NavigationManager.NavigateTo($"/browse/detail/{slug}?"
+            +$"category={selectedCategory}&origin={origin}");
     }
 
     private async Task OnTryAgainHandler()
