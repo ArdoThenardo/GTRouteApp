@@ -25,7 +25,8 @@ else
             IsMaximum="@isMaximum" 
             IsLoadMoreError="@isLoadMoreError"
             IsLoadMoreDisabled="@isLoadMoreDisabled" 
-            OnLoadMoreClicked="LoadMoreTracks" />
+            OnLoadMoreClicked="LoadMoreTracks"
+            OnViewClickHandler="AccessTrackDetail" />
     }
     else if (_mode == BrowseMode.Grid)
     {
@@ -34,7 +35,8 @@ else
             FirstIndexInCurrentPage="@firstIndexInCurrentPage" 
             IsLoadMoreError="@isLoadMoreError"
             IsLoadMoreDisabled="@isLoadMoreDisabled"
-            OnLoadMoreClicked="LoadMoreTracks" />
+            OnLoadMoreClicked="LoadMoreTracks"
+            OnViewClickHandler="AccessTrackDetail" />
     }
 }
 
@@ -199,6 +201,23 @@ else
                 "preselect_mode", "grid");
             NavigationManager.NavigateTo(updatedUrl);
         }
+    }
+
+    private void AccessTrackDetail(string slug)
+    {
+        var origin = "";
+        switch (_mode)
+        {
+            case BrowseMode.Gallery:
+                origin = "browseGallery";
+                break;
+            case BrowseMode.Grid:
+                origin = "browseGrid";
+                break;
+        }
+
+        NavigationManager.NavigateTo($"/browse/detail/{slug}?"
+            +$"category={selectedCategory}&origin={origin}");
     }
 
     private async Task OnTryAgainHandler()

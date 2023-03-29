@@ -75,6 +75,9 @@
     [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
 
+    [Parameter]
+    public EventCallback<string> OnViewClickHandler { get; set; }
+
     private string loadMoreBtnClass = "";
     private string loadMoreBtnText = "";
 
@@ -84,9 +87,9 @@
         loadMoreBtnText = !IsLoadMoreError ? "Load More" : "Try Again";
     }
 
-    private void AccessTrackDetail(string slug)
+    private async Task AccessTrackDetail(string slug)
     {
-        NavigationManager.NavigateTo($"/browse/detail/{slug}?origin=browseGrid");
+        await OnViewClickHandler.InvokeAsync(slug);
     }
 
     private async Task LoadMoreTracks()

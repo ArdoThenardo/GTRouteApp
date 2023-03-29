@@ -64,6 +64,10 @@
     public string slug { get; set; } = "";
 
     [Parameter]
+    [SupplyParameterFromQuery(Name = "category")]
+    public string category { get; set; } = "";
+
+    [Parameter]
     [SupplyParameterFromQuery(Name = "origin")]
     public string origin { get; set; } = "";
 
@@ -141,24 +145,25 @@
 
     private void ChangeSelectedSubdetailLink()
     {
-        var defaultNavigation = $"/browse/detail/{slug}?origin={origin}";
-
         switch (chosenSubDetail)
         {
             case SubDetail.General:
                 NavigationManager
-                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.General}");
+                    .NavigateTo(NavigationManager.GetUriWithQueryParameter(
+                        "selected_subdetail", SelectedSubdetail.General));
                 break;
             case SubDetail.Layout:
                 NavigationManager
-                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.Layout}");
+                    .NavigateTo(NavigationManager.GetUriWithQueryParameter(
+                        "selected_subdetail", SelectedSubdetail.Layout));
                 break;
             case SubDetail.Image:
                 NavigationManager
-                    .NavigateTo($"{defaultNavigation}&selected_subdetail={SelectedSubdetail.Gallery}");
+                    .NavigateTo(NavigationManager.GetUriWithQueryParameter(
+                        "selected_subdetail", SelectedSubdetail.Gallery));
                 break;
             default:
-                NavigationManager.NavigateTo(defaultNavigation);
+                NavigationManager.NavigateTo(NavigationManager.Uri);
                 break;
         }
     }
@@ -187,11 +192,11 @@
         }
         else if (originPage.Equals("browseGallery"))
         {
-            NavigationManager.NavigateTo("/browse?preselect_mode=gallery");
+            NavigationManager.NavigateTo($"/browse?preselect_mode=gallery&category={category}");
         }
         else if (originPage.Equals("browseGrid"))
         {
-            NavigationManager.NavigateTo("/browse?preselect_mode=grid");
+            NavigationManager.NavigateTo($"/browse?preselect_mode=grid&category={category}");
         }
         else
         {
