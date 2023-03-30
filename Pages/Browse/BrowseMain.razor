@@ -68,10 +68,14 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        PreselectBrowseMode();
         PreselectCategory();
         
         await LoadData();
+    }
+
+    protected override void OnParametersSet()
+    {
+        PreselectBrowseMode();
     }
 
     private async Task LoadData()
@@ -82,7 +86,7 @@ else
 
     private async Task LoadTracks()
     {
-        var data = await LoadBySelectedCategory(currentPage);
+        var data = await RaceTrackService.GetTracks(currentPage);
 
         tracks.AddRange(data);
         isMaximum = RaceTrackService.IsRaceTracksReachMaximum();
@@ -96,7 +100,7 @@ else
         {
             int nextPage = currentPage + 1;
             
-            var data = await LoadBySelectedCategory(nextPage);
+            var data = await RaceTrackService.GetTracks(nextPage);
 
             if (data.Count() > 0) // fetch success, if data > 0
             {
@@ -114,25 +118,6 @@ else
 
             isLoadMoreDisabled = false;
         }
-    }
-
-    private async Task<List<RaceTrack>> LoadBySelectedCategory(int page)
-    {
-        var data = new List<RaceTrack>();
-        if (selectedCategory.Equals(BrowseCategory.Categories[4])) // Category: Dirt / Snow
-        {
-            data = await RaceTrackService.GetOffroadTracks(page);
-        }
-        else if (selectedCategory.Equals(BrowseCategory.Categories[0])) // Category: All
-        {
-            data = await RaceTrackService.GetTracksByPage(page);
-        }
-        else // Category: Original Circuits, Real Circuits, City Circuits
-        {
-            data = await RaceTrackService.GetTracksByCategory(page);
-        }
-
-        return data;
     }
 
     private async Task OnCategoryChangedHandler(string category)

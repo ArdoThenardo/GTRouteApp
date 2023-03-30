@@ -15,7 +15,7 @@ public class RaceTrackService: BaseService
     private List<RaceTrack> tracks = new();
     private int numberOfTotalRaceTracks = 0;
     private int currentNumberOfRaceTracks = 0;
-    private string raceTracksCategory = "";
+    private string raceTracksCategory = BrowseCategory.Categories[0];
     private string recentError = "";
 
     public RaceTrackService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
@@ -24,72 +24,31 @@ public class RaceTrackService: BaseService
         this.GetOffroadsUrl = $"{_baseUrl}/offroads";
     }
 
-    public async Task<List<RaceTrack>> GetTracksByPage(int page)
+    public async Task<List<RaceTrack>> GetTracks(int page)
     {
         tracks.Clear();
         recentError = "";
 
+        BaseModel<List<RaceTrack>> tracksData = new();
+
         try
         {
-            var tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
-                    ($"{GetTracksUrl}/?page={page}&limit={Limit}");
-
-            if (tracksData.NumberOfData == 0)
+            if (raceTracksCategory.Equals(BrowseCategory.Categories[4])) // Category: Dirt / Snow
             {
-                recentError = ErrorMessage.NoTrack;
-            }
-            tracks.AddRange(tracksData.Data ?? Enumerable.Empty<RaceTrack>().ToList());
-            currentNumberOfRaceTracks = currentNumberOfRaceTracks + tracks.Count();
-            numberOfTotalRaceTracks = tracksData.NumberOfData;
-
-            return SortTracksByCategory();
-        }
-        catch
-        {
-            recentError = ErrorMessage.LoadTracksFailed;
-
-            return Enumerable.Empty<RaceTrack>().ToList();
-        }
-    }
-
-    public async Task<List<RaceTrack>> GetTracksByCategory(int page)
-    {
-        tracks.Clear();
-        recentError = "";
-        var singularCategoryString = raceTracksCategory.Remove(raceTracksCategory.Length - 1, 1);
-
-        try
-        {
-            var tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
-                    ($"{GetTracksUrl}/?page={page}&limit={Limit}&category={singularCategoryString}");
-
-            if (tracksData.NumberOfData == 0)
-            {
-                recentError = ErrorMessage.NoTrack;
-            }
-            tracks.AddRange(tracksData.Data ?? Enumerable.Empty<RaceTrack>().ToList());
-            currentNumberOfRaceTracks = currentNumberOfRaceTracks + tracks.Count();
-            numberOfTotalRaceTracks = tracksData.NumberOfData;
-
-            return tracks;
-        }
-        catch
-        {
-            recentError = ErrorMessage.LoadTracksFailed;
-
-            return Enumerable.Empty<RaceTrack>().ToList();
-        }
-    }
-
-    public async Task<List<RaceTrack>> GetOffroadTracks(int page)
-    {
-        tracks.Clear();
-        recentError = "";
-
-        try
-        {
-            var tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
+                tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
                     ($"{GetOffroadsUrl}/?page={page}&limit={Limit}");
+            }
+            else if (raceTracksCategory.Equals(BrowseCategory.Categories[0])) // Category: All
+            {
+                tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
+                    ($"{GetTracksUrl}/?page={page}&limit={Limit}");
+            }
+            else // Category: Original Circuits || Real Circuits || City Circuits
+            {
+                var singularCategoryString = raceTracksCategory.Remove(raceTracksCategory.Length - 1, 1);
+                tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
+                    ($"{GetTracksUrl}/?page={page}&limit={Limit}&category={singularCategoryString}");
+            }
 
             if (tracksData.NumberOfData == 0)
             {
@@ -99,31 +58,7 @@ public class RaceTrackService: BaseService
             currentNumberOfRaceTracks = currentNumberOfRaceTracks + tracks.Count();
             numberOfTotalRaceTracks = tracksData.NumberOfData;
 
-            return tracks;
-        }
-        catch
-        {
-            recentError = ErrorMessage.LoadTracksFailed;
-
-            return Enumerable.Empty<RaceTrack>().ToList();
-        }
-    }
-
-    public async Task<List<RaceTrack>> GetAllTracks()
-    {
-        tracks.Clear();
-        recentError = "";
-
-        try
-        {
-            var fetched = await HitRequest<BaseModel<List<RaceTrack>>>(GetTracksUrl);
-            
-            if (fetched.NumberOfData == 0) {
-                recentError = ErrorMessage.NoTrack;
-            }
-            tracks.AddRange(fetched.Data ?? Enumerable.Empty<RaceTrack>().ToList());
-
-            return SortTracksByCategory();
+            return raceTracksCategory.Equals(BrowseCategory.Categories[0]) ? SortTracksByCategory() : tracks;
         }
         catch
         {
