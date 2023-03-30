@@ -82,7 +82,7 @@ else
 
     private async Task LoadTracks()
     {
-        var data = await LoadBySelectedCategory(currentPage);
+        var data = await RaceTrackService.GetTracks(currentPage);
 
         tracks.AddRange(data);
         isMaximum = RaceTrackService.IsRaceTracksReachMaximum();
@@ -96,7 +96,7 @@ else
         {
             int nextPage = currentPage + 1;
             
-            var data = await LoadBySelectedCategory(nextPage);
+            var data = await RaceTrackService.GetTracks(nextPage);
 
             if (data.Count() > 0) // fetch success, if data > 0
             {

@@ -24,6 +24,50 @@ public class RaceTrackService: BaseService
         this.GetOffroadsUrl = $"{_baseUrl}/offroads";
     }
 
+    public async Task<List<RaceTrack>> GetTracks(int page)
+    {
+        tracks.Clear();
+        recentError = "";
+
+        BaseModel<List<RaceTrack>> tracksData = new();
+
+        try
+        {
+            if (raceTracksCategory.Equals(BrowseCategory.Categories[4])) // Category: Dirt / Snow
+            {
+                tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
+                    ($"{GetOffroadsUrl}/?page={page}&limit={Limit}");
+            }
+            else if (raceTracksCategory.Equals(BrowseCategory.Categories[0])) // Category: All
+            {
+                tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
+                    ($"{GetTracksUrl}/?page={page}&limit={Limit}");
+            }
+            else // Category: Original Circuits || Real Circuits || City Circuits
+            {
+                var singularCategoryString = raceTracksCategory.Remove(raceTracksCategory.Length - 1, 1);
+                tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
+                    ($"{GetTracksUrl}/?page={page}&limit={Limit}&category={singularCategoryString}");
+            }
+
+            if (tracksData.NumberOfData == 0)
+            {
+                recentError = ErrorMessage.NoTrack;
+            }
+            tracks.AddRange(tracksData.Data ?? Enumerable.Empty<RaceTrack>().ToList());
+            currentNumberOfRaceTracks = currentNumberOfRaceTracks + tracks.Count();
+            numberOfTotalRaceTracks = tracksData.NumberOfData;
+
+            return raceTracksCategory.Equals(BrowseCategory.Categories[0]) ? SortTracksByCategory() : tracks;
+        }
+        catch
+        {
+            recentError = ErrorMessage.LoadTracksFailed;
+
+            return Enumerable.Empty<RaceTrack>().ToList();
+        }
+    }
+
     public async Task<List<RaceTrack>> GetTracksByPage(int page)
     {
         tracks.Clear();
