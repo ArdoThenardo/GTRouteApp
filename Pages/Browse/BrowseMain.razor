@@ -116,25 +116,6 @@ else
         }
     }
 
-    private async Task<List<RaceTrack>> LoadBySelectedCategory(int page)
-    {
-        var data = new List<RaceTrack>();
-        if (selectedCategory.Equals(BrowseCategory.Categories[4])) // Category: Dirt / Snow
-        {
-            data = await RaceTrackService.GetOffroadTracks(page);
-        }
-        else if (selectedCategory.Equals(BrowseCategory.Categories[0])) // Category: All
-        {
-            data = await RaceTrackService.GetTracksByPage(page);
-        }
-        else // Category: Original Circuits, Real Circuits, City Circuits
-        {
-            data = await RaceTrackService.GetTracksByCategory(page);
-        }
-
-        return data;
-    }
-
     private async Task OnCategoryChangedHandler(string category)
     {
         tracks.Clear();
