@@ -68,10 +68,14 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        PreselectBrowseMode();
         PreselectCategory();
         
         await LoadData();
+    }
+
+    protected override void OnParametersSet()
+    {
+        PreselectBrowseMode();
     }
 
     private async Task LoadData()
