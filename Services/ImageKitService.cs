@@ -16,13 +16,19 @@ public class ImageKitService
             settings.Value.ImageKitEndpointUrl);
     }
 
-    public void GenerateSmallThumbnailImageUrl(string source)
+    public string GenerateSmallThumbnailImageUrl(string source)
     {
+        var transformation = new Transformation().Width(256).Height(128).Crop("maintain_ratio");
+        string transformedUrl = _imageKitClient.Url(transformation).Src(source).Generate();
         
+        return transformedUrl;
     }
 
-    public void GenerateProgressiveImageUrl(string source)
+    public string GenerateProgressiveImageUrl(string source)
     {
-        
+        var transformation = new Transformation().Progressive(true);
+        string transformedUrl = _imageKitClient.Url(transformation).Src(source).Generate();
+
+        return transformedUrl;
     }
 }
