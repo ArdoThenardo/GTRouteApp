@@ -35,6 +35,7 @@
 .subheader-category-selection > select {
     font-weight: 600;
     border-radius: 0;
+    background-color: #f4f4f2;
 }
 
 .subheader-category-selection {
