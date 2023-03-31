@@ -19,7 +19,7 @@ public class CloudinaryService
 
     public string GenerateSmallThumbnailImageUrl(string source)
     {
-        var transformation = new Transformation().Width(256).Height(128).Crop("fill");
+        var transformation = new CloudinaryDotNet.Transformation().Width(256).Height(128).Crop("fill");
         var transformedUrl = _cloudinary.Api.UrlImgUp.Source(source).Transform(transformation).BuildUrl();
 
         return transformedUrl;
@@ -27,7 +27,7 @@ public class CloudinaryService
 
     public string GenerateProgressiveImageUrl(string source)
     {
-        var transformation = new Transformation().Flags("progressive:steep");
+        var transformation = new CloudinaryDotNet.Transformation().Flags("progressive:steep");
         var transformedUrl = _cloudinary.Api.UrlImgUp.Source(source).Transform(transformation).BuildUrl();
 
         return transformedUrl;

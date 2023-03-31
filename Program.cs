@@ -25,5 +25,6 @@ builder.Services.AddHttpClient<TrackDetailService>(client => {
 });
 
 builder.Services.AddSingleton<CloudinaryService>();
+builder.Services.AddSingleton<ImageKitService>();
 
 await builder.Build().RunAsync();

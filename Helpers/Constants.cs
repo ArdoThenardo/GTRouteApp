@@ -3,6 +3,7 @@ namespace GTRouteApp.Helpers;
 public static class GeneralConstants
 {
     public const string CloudinaryBase = "https://res.cloudinary.com/doo5vwi4i/image/upload/";
+    public const string ImageKitBase = "https://ik.imagekit.io/gtrouteapp";
     public const string PlaceholderImageUrl = "img/empty720.png";
 }
 
