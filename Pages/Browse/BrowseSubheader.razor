@@ -18,7 +18,7 @@
                 <button type="button" 
                     class="btn btn-category-change" 
                     title="Change Category"
-                    @onclick="@(() => CategorySelectionModal.Show<NoDataView>("Test", modalOptions))"> <!-- Show NoDataView for testing purpose -->
+                    @onclick="@(() => CategorySelectionModal.Show<BrowseCategorySelection>("Category Selection", modalOptions))">
                     <span class="bi bi-caret-down-fill"></span><p>Select</p>
                 </button>
             </div>
@@ -87,7 +87,8 @@
 
     private ModalOptions modalOptions = new ModalOptions()
     {
-        Size = ModalSize.Medium,
+        Class = "custom-blazored-modal",
+        Size = ModalSize.Automatic,
         Position = ModalPosition.Middle,
         HideHeader = true
     };
