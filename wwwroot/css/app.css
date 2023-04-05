@@ -109,4 +109,12 @@ a, .btn-link {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    transform: translateY(40px);
+    animation: reveal-modal .15s ease-out forwards;
+}
+
+@keyframes reveal-modal {
+    100% {
+        transform: translateY(0px);
+    }
 }
