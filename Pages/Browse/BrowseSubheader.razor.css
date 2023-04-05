@@ -20,11 +20,12 @@
     flex-direction: row;
     align-items: center;
     gap: 12px;
-    border-left: 1px solid #e8e8e8;
 }
 
 .setting-icon {
-    display: none;
+    color: #f4f4f2;
+    border-right: 1px solid #e8e8e8;
+    padding-right: 8px;
 }
 
 .subheader-category-selection span {
@@ -39,15 +40,37 @@
 }
 
 .subheader-category-selection {
-    background-color: #2b2b28;
+    background-color: #303841;
     display: flex;
     flex-direction: row;
     align-items: center;
     border-radius: 16px;
     overflow: hidden;
-    width: 190px;
+    width: 240px;
+    height: 30px;
     gap: 6px;
-    margin-left: 18px;
+}
+
+.subheader-category-value {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f2;
+    width: 100%;
+    height: 100%;
+    padding-inline: 2px;
+}
+
+.subheader-category-value > p {
+    width: 60%;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 8px;
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .subheader-view-options {
@@ -68,16 +91,35 @@
         margin-left: 1px;
     }
 
-.btn-selection {
+.btn-selection, .btn-category-change {
     color: #1e2022;
     background-color: #ffc107;
     border-color: #ffc107;
 }
 
-.btn-selection:hover {
+.btn-selection:hover, .btn-category-change:hover {
     color: #1e2022;
     background-color: #ffca2c;
     border-color: #ffc720;
+}
+
+.btn-category-change {
+    width: 64px;
+    height: 26px;
+    border-radius: 12px;
+    padding: 0;
+    padding-inline: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.btn-category-change span {
+    color: #1e2022;
+    display: none;
+}
+
+.btn-category-change p {
+    margin-bottom: 0;
 }
 
 @media (max-width: 540px) {
@@ -98,20 +140,17 @@
         border-left: 0;
     }
 
-    .setting-icon {
-        display: unset;
-        color: #f4f4f2;
-        border-right: 1px solid #f4f4f2;
-        padding-right: 8px;
-    }
-
     .subheader-category-selection {
-        margin-left: 0;
         width: 70%;
     }
 
     .subheader-category-selection > select {
         height: 32px;
+    }
+
+    .subheader-category-value > p {
+        font-size: 12.5px;
+        font-weight: 700;
     }
 
     .subheader-view-options {
@@ -121,5 +160,17 @@
 
     .subheader-view-options button {
         width: 54px;
+    }
+
+    .btn-category-change {
+        width: 46px;
+    }
+
+    .btn-category-change span {
+        display: contents;
+    }
+
+    .btn-category-change p {
+        display: none;
     }
 }

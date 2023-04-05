@@ -13,6 +13,17 @@
 
         <div class="subheader-category-selection">
             <span class="bi bi-tags-fill"></span>
+            <div class="subheader-category-value">
+                <p>@selectedCategory</p>
+                <button type="button" class="btn btn-category-change" title="Change Category">
+                    <span class="bi bi-caret-down-fill"></span><p>Select</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- TO BE DELETED IN THE FUTURE -->
+        <div class="subheader-category-selection" style="display: none; width: 80px;">
+            <span class="bi bi-tags-fill"></span>
             <select class="form-select form-select-sm" value="@selectedCategory" @onchange="@ApplyCategory">
                 @foreach (var category in BrowseCategory.Categories)
                 {
@@ -20,6 +31,7 @@
                 }
             </select>
         </div>
+        <!-- TO BE DELETED IN THE FUTURE -->
 
         <div class="subheader-view-options">
             <button type="button" class="btn btn-selection" 
