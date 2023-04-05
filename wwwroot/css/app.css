@@ -94,3 +94,19 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.custom-blazored-modal {
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f2;
+    border-radius: 12px;
+    border: 1px solid #fff;
+    padding: 0;
+    box-shadow: 0 2px 2px rgba(0,0,0,.25);
+    margin: 1.75rem;
+    overflow: hidden;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
