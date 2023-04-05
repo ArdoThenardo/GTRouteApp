@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Blazored.Modal;
 using GTRouteApp;
 using GTRouteApp.Models;
 using GTRouteApp.Services;
@@ -11,6 +12,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 builder.Services.Configure<GTRouteAppSettings>(builder.Configuration.GetSection("GTRouteAppSettings"));
+
+builder.Services.AddBlazoredModal();
 
 builder.Services.AddHttpClient<FeaturedService>(client => {
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);

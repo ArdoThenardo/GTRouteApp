@@ -15,7 +15,10 @@
             <span class="bi bi-tags-fill"></span>
             <div class="subheader-category-value">
                 <p>@selectedCategory</p>
-                <button type="button" class="btn btn-category-change" title="Change Category">
+                <button type="button" 
+                    class="btn btn-category-change" 
+                    title="Change Category"
+                    @onclick="@(() => CategorySelectionModal.Show<NoDataView>("Test", modalOptions))"> <!-- Show NoDataView for testing purpose -->
                     <span class="bi bi-caret-down-fill"></span><p>Select</p>
                 </button>
             </div>
@@ -79,6 +82,15 @@
     private Lazy<IJSObjectReference> subheaderJS = new();
     ElementReference galleryRef;
     ElementReference gridRef;
+
+    [CascadingParameter] public IModalService CategorySelectionModal { get; set; } = default!;
+
+    private ModalOptions modalOptions = new ModalOptions()
+    {
+        Size = ModalSize.Medium,
+        Position = ModalPosition.Middle,
+        HideHeader = true
+    };
 
     protected override void OnParametersSet()
     {
