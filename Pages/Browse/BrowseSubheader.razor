@@ -22,7 +22,7 @@
         </div>
 
         <!-- TO BE DELETED IN THE FUTURE -->
-        <div class="subheader-category-selection" style="width: 80px;">
+        <div class="subheader-category-selection" style="display: none; width: 80px;">
             <span class="bi bi-tags-fill"></span>
             <select class="form-select form-select-sm" value="@selectedCategory" @onchange="@ApplyCategory">
                 @foreach (var category in BrowseCategory.Categories)
