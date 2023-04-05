@@ -34,6 +34,11 @@
     border-radius: 0;
 }
 
+.category-item-hr {
+    border: 1px solid var(--lineColor);
+    opacity: 1;
+}
+
 .selection-footer {
     display: flex;
     justify-content: center;
