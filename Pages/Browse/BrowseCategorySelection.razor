@@ -1,7 +1,9 @@
 <div class="selection-container">
     <div class="selection-header">
         <p>Category Selection</p>
-        <button type="button" class="btn btn-danger">
+        <button type="button" 
+            @onclick="DismissModal" 
+            class="btn btn-danger">
             <span class="bi bi-x-square-fill"></span>
         </button>
     </div>
@@ -34,3 +36,13 @@
     </div>
     <div class="small-footer"></div>
 </div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance CategorySelectionInstance { get; set; } = default!;
+
+    private async Task DismissModal()
+    {
+        await CategorySelectionInstance.CancelAsync();
+    }
+}

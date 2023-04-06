@@ -83,7 +83,8 @@
     ElementReference galleryRef;
     ElementReference gridRef;
 
-    [CascadingParameter] public IModalService CategorySelectionModal { get; set; } = default!;
+    [CascadingParameter] 
+    public IModalService CategorySelectionModal { get; set; } = default!;
 
     private ModalOptions modalOptions = new ModalOptions()
     {
