@@ -12,36 +12,68 @@
     <div class="selection-category">
         <div class="category-row">
             <button type="button" 
-                class="btn category-item" 
+                class="btn category-item"
+                disabled="@(CurrentCategory.Equals(BrowseCategory.Categories[2]) ? true : false)" 
                 @onclick="() => ChooseCategory(BrowseCategory.Categories[2])">
                 <p>@BrowseCategory.Categories[2]</p>
                 <hr class="category-item-hr" style="--lineColor: red">
+                @if (CurrentCategory.Equals(BrowseCategory.Categories[2]) ? true : false)
+                {
+                    <div class="item-checkmark">
+                        <span class="bi bi-check-square-fill"></span>
+                    </div>
+                }
             </button>
+
             <button type="button" 
                 class="btn category-item"
+                disabled="@(CurrentCategory.Equals(BrowseCategory.Categories[1]) ? true : false)"
                 @onclick="() => ChooseCategory(BrowseCategory.Categories[1])">
                 <p>@BrowseCategory.Categories[1]</p>
                 <hr class="category-item-hr" style="--lineColor: blue">
+                @if (CurrentCategory.Equals(BrowseCategory.Categories[1]) ? true : false)
+                {
+                    <div class="item-checkmark">
+                        <span class="bi bi-check-square-fill"></span>
+                    </div>
+                }
             </button>
         </div>
+
         <div class="category-row">
             <button type="button" 
                 class="btn category-item"
+                disabled="@(CurrentCategory.Equals(BrowseCategory.Categories[3]) ? true : false)"
                 @onclick="() => ChooseCategory(BrowseCategory.Categories[3])">
                 <p>@BrowseCategory.Categories[3]</p>
                 <hr class="category-item-hr" style="--lineColor: green">
+                @if (CurrentCategory.Equals(BrowseCategory.Categories[3]) ? true : false)
+                {
+                    <div class="item-checkmark">
+                        <span class="bi bi-check-square-fill"></span>
+                    </div>
+                }
             </button>
+
             <button type="button" 
                 class="btn category-item"
+                disabled="@(CurrentCategory.Equals(BrowseCategory.Categories[4]) ? true : false)"
                 @onclick="() => ChooseCategory(BrowseCategory.Categories[4])">
                 <p>@BrowseCategory.Categories[4]</p>
                 <hr class="category-item-hr" style="--lineColor: orange">
+                @if (CurrentCategory.Equals(BrowseCategory.Categories[4]) ? true : false)
+                {
+                    <div class="item-checkmark">
+                        <span class="bi bi-check-square-fill"></span>
+                    </div>
+                }
             </button>
         </div>
     </div>
     <div class="selection-footer">
         <button type="button" 
             class="btn btn-warning"
+            disabled="@(CurrentCategory.Equals(BrowseCategory.Categories[0]) ? true : false)"
             @onclick="() => ChooseCategory(BrowseCategory.Categories[0])">
             Show All Race Tracks
         </button>
@@ -52,6 +84,9 @@
 @code {
     [CascadingParameter]
     public BlazoredModalInstance CategorySelectionInstance { get; set; } = default!;
+
+    [Parameter]
+    public string CurrentCategory { get; set; } = BrowseCategory.Categories[0];
 
     private async Task ChooseCategory(string category)
     {

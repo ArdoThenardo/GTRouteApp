@@ -122,7 +122,10 @@
 
     private async Task SelectCategory()
     {
-        var modal = CategorySelectionModal.Show<BrowseCategorySelection>("Category Selection", modalOptions);
+        var modal = CategorySelectionModal.Show<BrowseCategorySelection>(
+            "Category Selection", 
+            new ModalParameters().Add(nameof(BrowseCategorySelection.CurrentCategory), selectedCategory), 
+            modalOptions);
         var result = await modal.Result;
 
         if (result.Confirmed && result.Data != null)
