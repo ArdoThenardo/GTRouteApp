@@ -1,3 +1,5 @@
+@using GTRouteApp.Helpers;
+
 <div class="selection-container">
     <div class="selection-header">
         <p>Category Selection</p>
@@ -9,28 +11,38 @@
     </div>
     <div class="selection-category">
         <div class="category-row">
-            <button type="button" class="btn category-item">
-                <p>Real Circuits</p>
+            <button type="button" 
+                class="btn category-item" 
+                @onclick="() => ChooseCategory(BrowseCategory.Categories[2])">
+                <p>@BrowseCategory.Categories[2]</p>
                 <hr class="category-item-hr" style="--lineColor: red">
             </button>
-            <button type="button" class="btn category-item">
-                <p>Original Circuits</p>
+            <button type="button" 
+                class="btn category-item"
+                @onclick="() => ChooseCategory(BrowseCategory.Categories[1])">
+                <p>@BrowseCategory.Categories[1]</p>
                 <hr class="category-item-hr" style="--lineColor: blue">
             </button>
         </div>
         <div class="category-row">
-            <button type="button" class="btn category-item">
-                <p>City Circuits</p>
+            <button type="button" 
+                class="btn category-item"
+                @onclick="() => ChooseCategory(BrowseCategory.Categories[3])">
+                <p>@BrowseCategory.Categories[3]</p>
                 <hr class="category-item-hr" style="--lineColor: green">
             </button>
-            <button type="button" class="btn category-item">
-                <p>Dirt / Snow</p>
+            <button type="button" 
+                class="btn category-item"
+                @onclick="() => ChooseCategory(BrowseCategory.Categories[4])">
+                <p>@BrowseCategory.Categories[4]</p>
                 <hr class="category-item-hr" style="--lineColor: orange">
             </button>
         </div>
     </div>
     <div class="selection-footer">
-        <button type="button" class="btn btn-warning">
+        <button type="button" 
+            class="btn btn-warning"
+            @onclick="() => ChooseCategory(BrowseCategory.Categories[0])">
             Show All Race Tracks
         </button>
     </div>
@@ -40,6 +52,11 @@
 @code {
     [CascadingParameter]
     public BlazoredModalInstance CategorySelectionInstance { get; set; } = default!;
+
+    private async Task ChooseCategory(string category)
+    {
+        await CategorySelectionInstance.CloseAsync(ModalResult.Ok(category));
+    }
 
     private async Task DismissModal()
     {
