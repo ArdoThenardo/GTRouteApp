@@ -30,6 +30,7 @@
 }
 
 .category-item {
+    position: relative;
     border: 1px solid #1e2022;
     border-radius: 0;
 }
@@ -41,6 +42,17 @@
 .category-item-hr {
     border: 1px solid var(--lineColor);
     opacity: 1;
+}
+
+.item-checkmark {
+    position: absolute;
+    bottom: 4px;
+    right: 12px;
+}
+
+.item-checkmark span {
+    color: green;
+    font-size: 32px;
 }
 
 .selection-footer {
