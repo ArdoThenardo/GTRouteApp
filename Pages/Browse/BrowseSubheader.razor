@@ -18,7 +18,7 @@
                 <button type="button" 
                     class="btn btn-category-change" 
                     title="Change Category"
-                    @onclick="@(() => CategorySelectionModal.Show<BrowseCategorySelection>("Category Selection", modalOptions))">
+                    @onclick="() => SelectCategory()">
                     <span class="bi bi-caret-down-fill"></span><p>Select</p>
                 </button>
             </div>
@@ -117,6 +117,18 @@
         {
             subheaderJS = new(await JS.InvokeAsync<IJSObjectReference>("import", subheaderJSPath));
             await subheaderJS.Value.InvokeVoidAsync("initializeTooltips", galleryRef, gridRef);
+        }
+    }
+
+    private async Task SelectCategory()
+    {
+        var modal = CategorySelectionModal.Show<BrowseCategorySelection>("Category Selection", modalOptions);
+        var result = await modal.Result;
+
+        if (result.Confirmed && result.Data != null)
+        {
+            selectedCategory = result.Data.ToString() ?? "";
+            await OnCategoryChanged.InvokeAsync(selectedCategory);
         }
     }
 
