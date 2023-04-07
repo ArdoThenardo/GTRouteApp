@@ -34,6 +34,10 @@
     border-radius: 0;
 }
 
+.category-item:disabled {
+    border: 4px solid #ffc107;
+}
+
 .category-item-hr {
     border: 1px solid var(--lineColor);
     opacity: 1;
