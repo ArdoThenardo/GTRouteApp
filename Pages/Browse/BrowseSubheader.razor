@@ -1,7 +1,6 @@
 @using GTRouteApp.Helpers
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JS
-@implements IAsyncDisposable
 
 <div class="subheader-container">
     <div class="subheader-info">
@@ -39,19 +38,13 @@
         <div class="subheader-view-options">
             <button type="button" class="btn btn-selection" 
                 @onclick="() => SwitchMode(BrowseMode.Gallery)"
-                data-bs-toggle="tooltip"
-                data-bs-placement="left"
                 title="Switch to Gallery View"
-                @ref="galleryRef"
                 disabled=@disableGallery>
                 <span class="bi bi-image-fill"></span>
             </button>
             <button type="button" class="btn btn-selection" 
                 @onclick="() => SwitchMode(BrowseMode.Grid)"
-                data-bs-toggle="tooltip"
-                data-bs-placement="left"
                 title="Switch to Grid View"
-                @ref="gridRef"
                 disabled=@disableGrid>
                 <span class="bi bi-grid-3x3-gap-fill"></span>
             </button>
@@ -78,11 +71,6 @@
     private bool disableGallery = true;
     private bool disableGrid = false;
 
-    private const string subheaderJSPath = "./Pages/Browse/BrowseSubheader.razor.js";
-    private Lazy<IJSObjectReference> subheaderJS = new();
-    ElementReference galleryRef;
-    ElementReference gridRef;
-
     [CascadingParameter] 
     public IModalService CategorySelectionModal { get; set; } = default!;
 
@@ -108,15 +96,6 @@
                 disableGallery = false;
                 disableGrid = true;
             }
-        }
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            subheaderJS = new(await JS.InvokeAsync<IJSObjectReference>("import", subheaderJSPath));
-            await subheaderJS.Value.InvokeVoidAsync("initializeTooltips", galleryRef, gridRef);
         }
     }
 
@@ -151,19 +130,7 @@
     {
         disableGallery = disableGallery ? false : true;
         disableGrid = disableGrid ? false : true;
-        await HideTooltips();
 
         await ChosenBrowseMode.InvokeAsync(mode);
-    }
-
-    private async Task HideTooltips()
-    {
-        await subheaderJS.Value.InvokeVoidAsync("hideTooltips");
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (subheaderJS.IsValueCreated)
-            await subheaderJS.Value.DisposeAsync();
     }
 }
