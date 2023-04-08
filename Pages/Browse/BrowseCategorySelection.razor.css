@@ -30,9 +30,21 @@
 }
 
 .category-item {
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.12);
+    background-blend-mode: overlay;
     position: relative;
-    border: 1px solid #1e2022;
+    border: 0.1px solid #e8e8e8;
     border-radius: 0;
+}
+
+.category-item p {
+    margin-bottom: 0;
+    color: #f4f4f2;
+    font-size: 18px;
+    font-weight: 600;
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.9);
 }
 
 .category-item:disabled {
