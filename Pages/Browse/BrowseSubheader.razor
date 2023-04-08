@@ -23,18 +23,6 @@
             </div>
         </div>
 
-        <!-- TO BE DELETED IN THE FUTURE -->
-        <div class="subheader-category-selection" style="display: none; width: 80px;">
-            <span class="bi bi-tags-fill"></span>
-            <select class="form-select form-select-sm" value="@selectedCategory" @onchange="@ApplyCategory">
-                @foreach (var category in BrowseCategory.Categories)
-                {
-                    <option value="@category">@category</option>
-                }
-            </select>
-        </div>
-        <!-- TO BE DELETED IN THE FUTURE -->
-
         <div class="subheader-view-options">
             <button type="button" class="btn btn-selection" 
                 @onclick="() => SwitchMode(BrowseMode.Gallery)"
@@ -111,18 +99,6 @@
         {
             selectedCategory = result.Data.ToString() ?? "";
             await OnCategoryChanged.InvokeAsync(selectedCategory);
-        }
-    }
-
-    private async Task ApplyCategory(ChangeEventArgs args)
-    {
-        if (args.Value != null)
-        {
-            if (!string.IsNullOrWhiteSpace(args.Value.ToString()))
-            {
-                selectedCategory = args.Value.ToString() ?? "";
-                await OnCategoryChanged.InvokeAsync(selectedCategory);
-            }
         }
     }
 
