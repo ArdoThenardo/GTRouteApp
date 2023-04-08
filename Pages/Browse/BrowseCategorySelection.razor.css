@@ -68,6 +68,14 @@
 
 .category-item:disabled {
     border: 4px solid #ffc107;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.category-item:disabled::before {
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: inset 1px 1px 24px 8px rgba(30, 32, 34, 0.8);
 }
 
 .category-item-hr {
