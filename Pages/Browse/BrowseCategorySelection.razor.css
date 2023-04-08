@@ -132,3 +132,29 @@
     background-color: #303841;
     height: 14px;
 }
+
+@media (max-width: 540px) {
+    .category-row {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .category-item {
+        height: 50%;
+    }
+
+    .category-item p {
+        font-size: 16px;
+    }
+
+    .category-item-hr {
+        margin-inline: 24%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .selection-container {
+        width: 80vw;
+    }
+}
