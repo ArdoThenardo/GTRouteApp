@@ -5,17 +5,30 @@
 }
 
 .selection-header {
+    background-color: #303841;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding-inline: 16px;
+    padding-block: 8px;
 }
 
 .selection-header > p {
     margin-bottom: 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: #1e2022;
+    font-size: 16px;
+    font-weight: 700;
+    color: #f4f4f2;
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.9);
+}
+
+.selection-header > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 40px;
+    box-shadow: 1px 0px 8px rgba(30, 32, 34, 0.9);
 }
 
 .selection-category {
@@ -102,7 +115,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-block: 8px;
+    padding-block: 10px;
+    box-shadow: inset 1px 1px 24px 8px rgba(30, 32, 34, 0.4);
 }
 
 .selection-footer > button {

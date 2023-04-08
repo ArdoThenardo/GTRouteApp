@@ -3,7 +3,8 @@
 <div class="selection-container">
     <div class="selection-header">
         <p>Category Selection</p>
-        <button type="button" 
+        <button type="button"
+            title="Close" 
             @onclick="DismissModal" 
             class="btn btn-danger">
             <span class="bi bi-x-square-fill"></span>
@@ -11,7 +12,8 @@
     </div>
     <div class="selection-category">
         <div class="category-row">
-            <button type="button" 
+            <button type="button"
+                title="Change to Real Circuits" 
                 class="btn category-item"
                 style="--bgImage: url('img/real-circuits-thumbnail.JPG');"
                 disabled="@(CurrentCategory.Equals(BrowseCategory.Categories[2]) ? true : false)" 
@@ -20,7 +22,8 @@
                 <hr class="category-item-hr" style="--lineColor: red">
             </button>
 
-            <button type="button" 
+            <button type="button"
+                title="Change to Original Circuits"  
                 class="btn category-item"
                 style="--bgImage: url('img/original-circuits-thumbnail.JPG');"
                 disabled="@(CurrentCategory.Equals(BrowseCategory.Categories[1]) ? true : false)"
@@ -31,7 +34,8 @@
         </div>
 
         <div class="category-row">
-            <button type="button" 
+            <button type="button"
+                title="Change to City Circuits"  
                 class="btn category-item"
                 style="--bgImage: url('img/city-circuits-thumbnail.JPG');"
                 disabled="@(CurrentCategory.Equals(BrowseCategory.Categories[3]) ? true : false)"
@@ -40,7 +44,8 @@
                 <hr class="category-item-hr" style="--lineColor: green">
             </button>
 
-            <button type="button" 
+            <button type="button"
+                title="Change to Dirt / Snow"  
                 class="btn category-item"
                 style="--bgImage: url('img/dirt-snow-thumbnail.jpg');"
                 disabled="@(CurrentCategory.Equals(BrowseCategory.Categories[4]) ? true : false)"
@@ -52,6 +57,7 @@
     </div>
     <div class="selection-footer">
         <button type="button" 
+            title="Show All"
             class="btn btn-warning"
             disabled="@(CurrentCategory.Equals(BrowseCategory.Categories[0]) ? true : false)"
             @onclick="() => ChooseCategory(BrowseCategory.Categories[0])">
