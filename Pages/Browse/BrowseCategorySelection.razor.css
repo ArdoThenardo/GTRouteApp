@@ -30,13 +30,32 @@
 }
 
 .category-item {
+    position: relative;
+    border: 0.1px solid #e8e8e8;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.category-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--bgImage);
     background-size: cover;
     background-position: center;
     background-color: rgba(0, 0, 0, 0.12);
     background-blend-mode: overlay;
-    position: relative;
-    border: 0.1px solid #e8e8e8;
-    border-radius: 0;
+    transition: .5s;
+    transform: scale(1.1) translateY(4px);
+    z-index: -1;
+}
+
+.category-item:hover::before {
+    transform: translateY(0);
+    box-shadow: inset 1px 1px 24px 8px rgba(30, 32, 34, 0.8);
 }
 
 .category-item p {
@@ -52,8 +71,12 @@
 }
 
 .category-item-hr {
-    border: 1px solid var(--lineColor);
+    background-color: var(--lineColor);
     opacity: 1;
+    height: 3px;
+    margin-block: 4px;
+    margin-inline: 20%;
+    box-shadow: 1px 0px 8px rgba(30, 32, 34, 0.9);
 }
 
 .item-checkmark {
