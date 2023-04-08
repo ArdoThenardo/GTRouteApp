@@ -115,7 +115,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-block: 8px;
+    padding-block: 10px;
+    box-shadow: inset 1px 1px 24px 8px rgba(30, 32, 34, 0.4);
 }
 
 .selection-footer > button {
