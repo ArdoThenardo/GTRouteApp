@@ -7,6 +7,24 @@ p {
     margin-bottom: 0;
 }
 
+a {
+    color: rgba(30, 32, 34, 0.9);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgba(30, 32, 34, 0.7);
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 24px;
+    padding-block: 10px;
+    padding-inline: 24px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
+}
+
 .media-container {
     background-color: #f4f4f2;
     display: flex;
@@ -125,9 +143,10 @@ p {
     box-shadow: 1px 0px 8px rgba(30, 32, 34, 0.4);
 }
 
-.track-logo-and-name {
+.track-logo-and-name, .track-country-and-category {
     display: flex;
     flex-direction: row;
+    gap: 4px;
 }
 
 .track-logo-and-name img {
@@ -142,9 +161,13 @@ p {
     margin-left: 8px;
 }
 
-.track-name p:first-of-type {
+.track-name > .clickable-text {
     font-size: 20px;
     font-weight: 700;
+}
+
+.track-country-and-category {
+    gap: 6px;
 }
 
 @keyframes reveal {
