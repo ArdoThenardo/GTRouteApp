@@ -16,6 +16,15 @@ a:hover {
     color: rgba(30, 32, 34, 0.7);
 }
 
+.btn {
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 24px;
+    padding-block: 10px;
+    padding-inline: 24px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
+}
+
 .media-container {
     background-color: #f4f4f2;
     display: flex;
