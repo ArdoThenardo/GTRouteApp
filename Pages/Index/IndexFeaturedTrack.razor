@@ -1,4 +1,4 @@
-@using GTRouteApp.Models;
+@using GTRouteApp.Models
 @inject NavigationManager NavigationManager
 
 <div class="home-featured">
@@ -24,6 +24,11 @@
             </div>
         </div>
     </div>
+
+    <div class="featured-media">
+        <IndexFeaturedMedia />
+    </div>
+
     <div class="featured-row-2">
         <div class="row-2-featured-item" 
             style="--bg-cover: url(@Featured.ElementAt(2).CoverUrl); --delay: .2s;"

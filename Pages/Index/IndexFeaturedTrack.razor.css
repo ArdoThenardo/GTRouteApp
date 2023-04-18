@@ -1,13 +1,24 @@
 .home-featured {
     width: 100%;
-    height: 85vh;
     display: flex;
     flex-direction: column;
 }
 
+.featured-media {
+    display: none;
+}
+
+    ::deep .media-container {
+        border-top: none;
+    }
+
+    ::deep .image-section {
+        height: 28vh;
+    }
+
 .featured-row-1, .featured-row-2 {
     width: 100%;
-    height: 50%;
+    height: 42.5vh;
     display: flex;
     flex-direction: row;
 }
@@ -94,6 +105,10 @@
 @media (max-width: 540px) {
     .home-featured {
         height: 100%;
+    }
+
+    .featured-media {
+        display: block;
     }
 
     .featured-row-1, .featured-row-2 {
