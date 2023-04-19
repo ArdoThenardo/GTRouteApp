@@ -26,7 +26,7 @@
     </div>
 
     <div class="featured-media">
-        <IndexFeaturedMedia />
+        <IndexFeaturedMedia Image="@Image" />
     </div>
 
     <div class="featured-row-2">
@@ -66,6 +66,9 @@
 @code {
     [Parameter]
     public List<FeaturedTrack> Featured { get; set; } = new();
+
+    [Parameter]
+    public FeaturedImage Image { get; set; } = new();
     
     private void AccessTrackDetail(string slug)
     {

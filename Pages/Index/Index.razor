@@ -15,9 +15,9 @@
     {
         <IndexSubheader Info="Welcome to GTRoad! Here you can look for information of race tracks that featured on Gran Turismo series." />
 
-        <IndexFeaturedTrack Featured="@featured" />
+        <IndexFeaturedTrack Featured="@featured" Image="@featuredImage" />
 
-        <IndexFeaturedMedia />
+        <IndexFeaturedMedia Image="@featuredImage" />
 
         <IndexNotice />
     }
@@ -25,6 +25,7 @@
 
 @code {
     private List<FeaturedTrack> featured = new();
+    private FeaturedImage featuredImage = new();
 
     private string errorMessage = "";
     private bool showError = false;
@@ -42,8 +43,11 @@
 
     private async Task LoadFeatured()
     {
-        var fetched = await FeaturedService.GetFeatured();
-        featured.AddRange(fetched);
+        var featuredTracksData = await FeaturedService.GetFeatured();
+        featured.AddRange(featuredTracksData);
+
+        var featuredImageData = await FeaturedService.GetFeaturedImage();
+        featuredImage = featuredImageData;
     }
 
     private void AccessTrackDetail(string slug)
