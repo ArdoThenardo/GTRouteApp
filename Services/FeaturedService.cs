@@ -9,6 +9,9 @@ public class FeaturedService: BaseService
     // remote: /featured
     // sample: sample-data/featured.json
     private readonly string GetFeaturedUrl;
+    // remote: /featured/media
+    // sample: sample-data/featured_image.json
+    private readonly string GetFeaturedImageUrl;
 
     private List<FeaturedTrack> featured = new();
     private string recentError = "";
@@ -16,6 +19,7 @@ public class FeaturedService: BaseService
     public FeaturedService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
     {   
         this.GetFeaturedUrl = $"{_baseUrl}/featured";
+        this.GetFeaturedImageUrl = $"{_baseUrl}/featured/media";
     }
 
     public async Task<List<FeaturedTrack>> GetFeatured()
@@ -39,6 +43,20 @@ public class FeaturedService: BaseService
             recentError = ErrorMessage.LoadDataFailed;
 
             return new List<FeaturedTrack>();
+        }
+    }
+
+    public async Task<FeaturedImage> GetFeaturedImage()
+    {
+        try
+        {
+            var data = await HitRequest<BaseModel<FeaturedImage>>(GetFeaturedImageUrl);
+
+            return data.Data ?? new FeaturedImage();
+        }
+        catch
+        {
+            return new FeaturedImage();
         }
     }
 

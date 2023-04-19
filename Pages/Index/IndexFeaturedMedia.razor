@@ -11,8 +11,8 @@
             <div class="image-shimmer"></div>
             <span class="bi bi-image"></span>
         </div>
-        <img src="img/sample-cover.jpg" 
-            alt="Picture of randomly selected track">
+        <img src="@Image.ImageUrl" 
+            alt="@Image.ImageName">
         <button type="button" 
             title="See Image in Full Screen"
             class="btn btn-secondary full-btn">
@@ -21,11 +21,11 @@
         </button>
         <div class="image-info-section">
             <div class="image-info-part-1">
-                <p>Placeholder of track image description.</p>
+                <p>@Image.Description</p>
             </div>
             <div class="image-info-part-2">
                 <p>
-                    <span class="bi bi-camera-fill"></span> by source
+                    <span class="bi bi-camera-fill"></span> by @Image.Author
                 </p>
             </div>
         </div>
@@ -33,36 +33,39 @@
 
     <div class="track-info-section">
         <div class="track-logo-and-name">
-            <img src="img/sample-logo.png" 
-                alt="track logo" />
+            <img src="@Image.LogoUrl" 
+                alt="@Image.TrackName" />
             <div class="track-name">
                 <a 
                     class="clickable-text"
                     href="@hrefTrack">
-                    Trial Mountain
+                    @Image.TrackName
                 </a>
                 <div class="track-country-and-category">
-                    <p><span class="fi fi-jp"></span> USA</p>
+                    <p><span class="fi fi-@Image.Country.code"></span> @Image.Country.name</p>
                     <p>|</p>
-                    <p>Original Circuit</p>
+                    <p>@Image.Category</p>
                 </div>
             </div>
         </div>
         <button type="button" 
             class="btn btn-success"
-            @onclick="@(() => AccessTrackDetail(tempSlug))">
+            @onclick="@(() => AccessTrackDetail(Image.Slug!))">
             View Track
         </button>
     </div>
 </div>
 
 @code {
-    private string tempSlug = "trial-mountain-circuit-1666685272";
+    [Parameter]
+    public FeaturedImage Image { get; set; } = new();
+
     private string hrefTrack = "";
 
     protected override void OnParametersSet()
     {
-        hrefTrack = $"/browse/detail/{tempSlug}?origin=home";
+        var slug = Image.Slug;
+        hrefTrack = $"/browse/detail/{slug}?origin=home";
     }
 
     private void AccessTrackDetail(string slug)
