@@ -7,7 +7,7 @@
 <PageTitle>Home | GTRoad</PageTitle>
 
 <div class="home-container">
-    @if (featured == null || featured.Count() == 0)
+    @if (featuredTracks == null || featuredTracks.Count() == 0)
     {
         <NoDataView Message="@errorMessage" ShowError="@showError" OnTryAgainClicked="OnTryAgainHandler" />
     }
@@ -15,7 +15,7 @@
     {
         <IndexSubheader Info="Welcome to GTRoad! Here you can look for information of race tracks that featured on Gran Turismo series." />
 
-        <IndexFeaturedTrack Featured="@featured" Image="@featuredImage" />
+        <IndexFeaturedTrack Tracks="@featuredTracks" Image="@featuredImage" />
 
         <IndexFeaturedMedia Image="@featuredImage" />
 
@@ -24,7 +24,7 @@
 </div>
 
 @code {
-    private List<FeaturedTrack> featured = new();
+    private List<FeaturedTrack> featuredTracks = new();
     private FeaturedImage featuredImage = new();
 
     private string errorMessage = "";
@@ -43,8 +43,8 @@
 
     private async Task LoadFeatured()
     {
-        var featuredTracksData = await FeaturedService.GetFeatured();
-        featured.AddRange(featuredTracksData);
+        var featuredTracksData = await FeaturedService.GetFeaturedTracks();
+        featuredTracks.AddRange(featuredTracksData);
 
         var featuredImageData = await FeaturedService.GetFeaturedImage();
         featuredImage = featuredImageData;
