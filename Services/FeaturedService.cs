@@ -19,7 +19,7 @@ public class FeaturedService: BaseService
     public FeaturedService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
     {   
         this.GetFeaturedUrl = $"{_baseUrl}/featured";
-        this.GetFeaturedImageUrl = "sample-data/featured_image.json";
+        this.GetFeaturedImageUrl = $"{_baseUrl}/featured/media";
     }
 
     public async Task<List<FeaturedTrack>> GetFeatured()
