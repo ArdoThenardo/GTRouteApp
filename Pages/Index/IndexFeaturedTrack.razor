@@ -25,9 +25,12 @@
         </div>
     </div>
 
-    <div class="featured-media">
-        <IndexFeaturedMedia Image="@Image" />
-    </div>
+    @if (!string.IsNullOrWhiteSpace(Image.Slug))
+    {
+        <div class="featured-media">
+            <IndexFeaturedMedia Image="@Image" />
+        </div>
+    }
 
     <div class="featured-row-2">
         <div class="row-2-featured-item" 
