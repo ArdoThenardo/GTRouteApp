@@ -49,7 +49,7 @@
         var featuredTracksData = await FeaturedService.GetFeaturedTracks();
         featuredTracks.AddRange(featuredTracksData);
 
-        var featuredMediaData = await FeaturedService.GetFeaturedMedias(4);
+        var featuredMediaData = await FeaturedService.GetFeaturedMedia(4);
         featuredMedia.AddRange(featuredMediaData);
     }
 

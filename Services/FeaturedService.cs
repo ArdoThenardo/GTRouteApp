@@ -47,7 +47,7 @@ public class FeaturedService: BaseService
         }
     }
 
-    public async Task<List<FeaturedImage>> GetFeaturedMedias(int numberOfMedia)
+    public async Task<List<FeaturedImage>> GetFeaturedMedia(int numberOfMedia)
     {
         featuredMedia.Clear();
 

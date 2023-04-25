@@ -6,57 +6,61 @@
         <h4><span class="bi bi-card-image"></span> Featured Media</h4>
     </div>
 
+    <div class="media-inner-container">
     @foreach (var media in Media)
-    {
-        <div class="image-section">
-            <div class="image-placeholder">
-                <div class="image-shimmer"></div>
-                <span class="bi bi-image"></span>
-            </div>
-            <img src="@media.ImageUrl" 
-                alt="@media.ImageName">
-            <button type="button" 
-                title="See Image in Full Screen"
-                class="btn btn-secondary full-btn">
-                <span class="bi bi-arrows-fullscreen"></span> 
-                <span class="full-btn-text" style="margin-left: 6px">See Image in Full Screen</span>
-            </button>
-            <div class="image-info-section">
-                <div class="image-info-part-1">
-                    <p>@media.Description</p>
-                </div>
-                <div class="image-info-part-2">
-                    <p>
-                        <span class="bi bi-camera-fill"></span> by @media.Author
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="track-info-section">
-            <div class="track-logo-and-name">
-                <img src="@media.LogoUrl" 
-                    alt="@media.TrackName" />
-                <div class="track-name">
-                    <a 
-                        class="clickable-text"
-                        href="@media.TrackUrl">
-                        @media.TrackName
-                    </a>
-                    <div class="track-country-and-category">
-                        <p><span class="fi fi-@media.Country.code"></span> @media.Country.name</p>
-                        <p>|</p>
-                        <p>@media.Category</p>
+        {
+            <div class="media-item">
+                <div class="image-section">
+                    <div class="image-placeholder">
+                        <div class="image-shimmer"></div>
+                        <span class="bi bi-image"></span>
+                    </div>
+                    <img src="@media.ImageUrl" 
+                        alt="@media.ImageName">
+                    <button type="button" 
+                        title="See Image in Full Screen"
+                        class="btn btn-secondary full-btn">
+                        <span class="bi bi-arrows-fullscreen"></span> 
+                        <span class="full-btn-text" style="margin-left: 6px">See Image in Full Screen</span>
+                    </button>
+                    <div class="image-info-section">
+                        <div class="image-info-part-1">
+                            <p>@media.Description</p>
+                        </div>
+                        <div class="image-info-part-2">
+                            <p>
+                                <span class="bi bi-camera-fill"></span> by @media.Author
+                            </p>
+                        </div>
                     </div>
                 </div>
+
+                <div class="track-info-section">
+                    <div class="track-logo-and-name">
+                        <img src="@media.LogoUrl" 
+                            alt="@media.TrackName" />
+                        <div class="track-name">
+                            <a 
+                                class="clickable-text"
+                                href="@media.TrackUrl">
+                                @media.TrackName
+                            </a>
+                            <div class="track-country-and-category">
+                                <p><span class="fi fi-@media.Country.code"></span> @media.Country.name</p>
+                                <p>|</p>
+                                <p>@media.Category</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" 
+                        class="btn btn-success"
+                        @onclick="@(() => AccessTrackDetail(media.Slug!))">
+                        View Track Detail
+                    </button>
+                </div>
             </div>
-            <button type="button" 
-                class="btn btn-success"
-                @onclick="@(() => AccessTrackDetail(media.Slug!))">
-                View Track Detail
-            </button>
-        </div>
-    }
+        }
+    </div>
 </div>
 
 @code {
