@@ -9,7 +9,9 @@ p {
 
 a {
     color: rgba(30, 32, 34, 0.9);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
 }
 
 a:hover {
