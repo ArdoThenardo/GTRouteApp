@@ -25,10 +25,10 @@
         </div>
     </div>
 
-    @if (!string.IsNullOrWhiteSpace(Image.Slug))
+    @if (Media.Count() > 0)
     {
         <div class="featured-media">
-            <IndexFeaturedMedia Image="@Image" />
+            <IndexFeaturedMedia Media="@Media" />
         </div>
     }
 
@@ -71,7 +71,7 @@
     public List<FeaturedTrack> Tracks { get; set; } = new();
 
     [Parameter]
-    public FeaturedImage Image { get; set; } = new();
+    public List<FeaturedImage> Media { get; set; } = new();
     
     private void AccessTrackDetail(string slug)
     {
