@@ -20,7 +20,7 @@ public class FeaturedService: BaseService
     public FeaturedService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
     {   
         this.GetFeaturedTracksUrl = $"{_baseUrl}/featured";
-        this.GetFeaturedMediaUrl = $"sample-data/featured_media.json";
+        this.GetFeaturedMediaUrl = $"{_baseUrl}/featured/media";
     }
 
     public async Task<List<FeaturedTrack>> GetFeaturedTracks()
@@ -53,9 +53,8 @@ public class FeaturedService: BaseService
 
         try 
         {
-            //var data = await HitRequest<BaseModel<List<FeaturedImage>>>(
-            //    $"{GetFeaturedMediasUrl}?numberOfMedias={numberOfMedia}");
-            var data = await HitRequest<BaseModel<List<FeaturedImage>>>($"{GetFeaturedMediaUrl}");
+            var data = await HitRequest<BaseModel<List<FeaturedImage>>>(
+                $"{GetFeaturedMediaUrl}?numberOfMedia={numberOfMedia}");
             
             featuredMedia.AddRange(data.Data ?? new List<FeaturedImage>());
 

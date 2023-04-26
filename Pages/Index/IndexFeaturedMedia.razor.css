@@ -182,6 +182,10 @@ a:hover {
     gap: 4px;
 }
 
+.track-logo-and-name {
+    max-height: 64px;
+}
+
 .track-logo-and-name img {
     object-fit: contain;
     width: 120px;
