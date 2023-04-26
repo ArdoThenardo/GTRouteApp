@@ -15,11 +15,11 @@
     {
         <IndexSubheader Info="Welcome to GTRoad! Here you can look for information of race tracks that featured on Gran Turismo series." />
 
-        <IndexFeaturedTrack Tracks="@featuredTracks" Image="@featuredImage" />
+        <IndexFeaturedTrack Tracks="@featuredTracks" Media="@featuredMedia"  />
 
-        @if(!string.IsNullOrWhiteSpace(featuredImage.Slug))
+        @if(featuredMedia.Count() > 0)
         {
-            <IndexFeaturedMedia Image="@featuredImage" />
+            <IndexFeaturedMedia Media="@featuredMedia" />
         }
 
         <IndexNotice />
@@ -28,7 +28,7 @@
 
 @code {
     private List<FeaturedTrack> featuredTracks = new();
-    private FeaturedImage featuredImage = new();
+    private List<FeaturedImage> featuredMedia = new();
 
     private string errorMessage = "";
     private bool showError = false;
@@ -49,8 +49,8 @@
         var featuredTracksData = await FeaturedService.GetFeaturedTracks();
         featuredTracks.AddRange(featuredTracksData);
 
-        var featuredImageData = await FeaturedService.GetFeaturedImage();
-        featuredImage = featuredImageData;
+        var featuredMediaData = await FeaturedService.GetFeaturedMedia(4);
+        featuredMedia.AddRange(featuredMediaData);
     }
 
     private void AccessTrackDetail(string slug)
