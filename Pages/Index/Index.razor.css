@@ -5,3 +5,13 @@
     display: flex;
     flex-direction: column;
 }
+
+.index-featured-media {
+    display: block;
+}
+
+@media (max-width: 540px) {
+    .index-featured-media {
+        display: none;
+    }
+}
