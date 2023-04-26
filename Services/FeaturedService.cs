@@ -9,7 +9,7 @@ public class FeaturedService: BaseService
     // remote: /featured
     // sample: sample-data/featured.json
     private readonly string GetFeaturedTracksUrl;
-    // remote: /featured/medias
+    // remote: /featured/media
     // sample: sample-data/featured_media.json
     private readonly string GetFeaturedMediaUrl;
 
