@@ -19,7 +19,9 @@
 
         @if(featuredMedia.Count() > 0)
         {
-            <IndexFeaturedMedia Media="@featuredMedia" />
+            <div class="index-featured-media">
+                <IndexFeaturedMedia Media="@featuredMedia" />
+            </div>
         }
 
         <IndexNotice />
