@@ -65,6 +65,7 @@ a:hover {
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
+    isolation: isolate;
 }
 
 .image-section p {
