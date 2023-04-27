@@ -35,6 +35,7 @@ a:hover {
     padding-inline: 16px;
     padding-bottom: 12px;
     border-top: 12px solid #303841;
+    box-shadow: inset 1px 1px 24px rgba(30, 32, 34, 0.2);
 }
 
 .header-section {
@@ -140,6 +141,7 @@ a:hover {
     padding-inline: 12px;
     background-color: rgba(30, 32, 34, 0.7);
     color: #f4f4f2;
+    border-radius: 12px;
 }
 
 .image-info-section {
@@ -229,5 +231,71 @@ a:hover {
 
     .btn-success {
         display: none;
+    }
+}
+
+@media (max-width: 540px) {
+    .media-container {
+        padding-inline: 0;
+        padding-bottom: 2px;
+    }
+
+    .media-inner-container {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        padding-left: 8px;
+    }
+
+    .header-section {
+        padding-inline: 16px;
+        padding-top: 8px;
+        padding-bottom: 2px;
+    }
+
+    .media-item {
+        min-width: 320px;
+    }
+
+    .image-info-section {
+        padding-inline: 16px;
+        padding-block: 8px;
+    }
+
+    .image-info-part-1 {
+        display: none;
+    }
+
+    .full-btn {
+        height: 40px;
+    }
+
+    .full-btn-text {
+        display: none;
+    }
+
+    .track-info-section {
+        height: 60px;
+        padding-inline: 4px;
+    }
+
+    .track-logo-and-name img {
+        width: 80px;
+    }
+
+    .track-name {
+        margin-left: 4px;
+        row-gap: 2px;
+    }
+
+    .track-name > .clickable-text {
+        font-size: 14px;
+    }
+
+    .track-info-section p, .image-section p {
+        font-size: 12px;
+    }
+
+    .track-country-and-category {
+        gap: 2px;
     }
 }
