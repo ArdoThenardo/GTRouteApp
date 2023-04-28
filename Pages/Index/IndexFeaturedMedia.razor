@@ -1,5 +1,6 @@
 @using GTRouteApp.Models
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <div class="media-container">
     <div class="header-section">
@@ -19,7 +20,8 @@
                         alt="@media.ImageName">
                     <button type="button" 
                         title="See Image in Full Screen"
-                        class="btn btn-secondary full-btn">
+                        class="btn btn-secondary full-btn"
+                        @onclick="() => OpenImageInFullScreen(media.ImageUrl)">
                         <span class="bi bi-arrows-fullscreen"></span> 
                         <span class="full-btn-text" style="margin-left: 6px">See Image in Full Screen</span>
                     </button>
@@ -78,5 +80,11 @@
     private void AccessTrackDetail(string slug)
     {
         NavigationManager.NavigateTo($"/browse/detail/{slug}?origin=home");
+    }
+
+    private async Task OpenImageInFullScreen(string? url)
+    {
+        if (url is not null)
+            await JS.InvokeVoidAsync("open", url, "_blank");
     }
 }
