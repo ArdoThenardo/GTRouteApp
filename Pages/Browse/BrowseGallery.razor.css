@@ -54,6 +54,8 @@
     display: inline-block;
     max-width: 0%;
     overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
     animation: span-max-width 0.5s ease-out forwards;
 }
 
