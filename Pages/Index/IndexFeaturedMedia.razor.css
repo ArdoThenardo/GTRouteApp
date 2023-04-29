@@ -35,7 +35,6 @@ a:hover {
     padding-inline: 16px;
     padding-bottom: 12px;
     border-top: 12px solid #303841;
-    box-shadow: inset 1px 1px 24px rgba(30, 32, 34, 0.2);
 }
 
 .header-section {
