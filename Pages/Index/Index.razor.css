@@ -10,6 +10,38 @@
     display: block;
 }
 
+.index-alert-container {
+    background-color: #f4f4f2;
+    padding: 16px;
+}
+
+.alert {
+    border-radius: 12px;
+    margin-bottom: 0;
+    box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.2);
+}
+
+.index-banner {
+    position: relative;
+    background-image: url("img/gtroad-sample-banner.JPG");
+    background-size: cover;
+    background-position: center;
+    height: 20vh;
+}
+
+.index-banner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+                        to bottom, 
+                        rgba(244, 244, 242, 1.0) 12%, 
+                        rgba(244, 244, 242, 0.1) 70%);
+}
+
 @media (max-width: 540px) {
     .index-featured-media {
         display: none;
