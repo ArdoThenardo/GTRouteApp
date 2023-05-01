@@ -1,0 +1,79 @@
+h2, h3, p {
+    color: #f4f4f2;
+}
+
+h2, h3 {
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+.credits-container {
+    background-image: url(https://res.cloudinary.com/doo5vwi4i/image/upload/v1678417734/gtroad-bg-4_vfrwwh.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #ebebe8;
+    height: 88vh;
+}
+
+.credits-description {
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    height: 100%;
+    padding-inline: 16px;
+    padding-block: 24px;
+    overflow-y: scroll;
+    box-shadow: 1px 0px 12px rgba(0, 0, 0, 0.7);
+}
+
+.credits-description::-webkit-scrollbar {
+    width: 4px;
+}
+
+.credits-description::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #e8e8e8;
+}
+
+.credits-modul {
+    margin-bottom: 16px;
+}
+
+@media (max-width: 540px) {
+    h2 {
+        font-size: 8vw;
+    }
+
+    h3 {
+        font-size: 5.8vw;
+    }
+
+    p {
+        font-size: 4.2vw;
+    }
+
+    .credits-container {
+        height: 80vh;
+    }
+
+    .credits-description {
+        background-color: rgba(0, 0, 0, 0.75);
+        width: 100%;
+        box-shadow: none;
+    }
+}
