@@ -60,6 +60,10 @@ a, ::deep a {
     height: 24px;
 }
 
+.credits-mobile {
+    display: none;
+}
+
 @media (max-width: 540px) {
     a, ::deep a {
         font-size: 4.2vw;
@@ -86,5 +90,9 @@ a, ::deep a {
 
     .footer-label {
         font-size: 4.8vw;
+    }
+
+    .credits-mobile {
+        display: block;
     }
 }
