@@ -8,5 +8,6 @@ public enum BrowseMode {
 public enum SubDetail {
     General,
     Layout,
+    Video,
     Image
 }

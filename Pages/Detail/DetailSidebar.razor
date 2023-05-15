@@ -39,6 +39,21 @@
             <span class="button-menu-name">@DetailSidebarMenu.Layout</span>
         </button>
     }
+
+    @if (SelectedSubDetail == SubDetail.Video)
+    {
+        <button class="sidebar-button" type="button" disabled>
+            <span class="bi bi-collection-play-fill"></span> 
+            <span class="button-menu-name">@DetailSidebarMenu.Showcase</span>
+        </button>
+    }
+    else
+    {
+        <button class="sidebar-button" type="button">
+            <span class="bi bi-collection-play-fill"></span> 
+            <span class="button-menu-name">@DetailSidebarMenu.Showcase</span>
+        </button>
+    }
     
     @if (SelectedSubDetail == SubDetail.Image)
     {

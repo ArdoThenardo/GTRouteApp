@@ -41,6 +41,7 @@ public static class DetailSidebarMenu
 {
     public const string General = "General";
     public const string Layout = "Track Layouts";
+    public const string Showcase = "Video Showcase";
     public const string Gallery = "Image Gallery";
 }
 
@@ -48,5 +49,6 @@ public static class SelectedSubdetail
 {
     public const string General = "general";
     public const string Layout = "layout";
+    public const string Showcase = "video";
     public const string Gallery = "image";
 }
