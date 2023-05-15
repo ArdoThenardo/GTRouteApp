@@ -36,6 +36,10 @@
                     Name="@detail.Name" 
                     CoverImageUrl="@detail.CoverUrl" />
             }
+            else if (chosenSubDetail == SubDetail.Video)
+            {
+                <DetailVideoShowcase />
+            }
             else
             {
                 <DetailGallery Images=@images />
@@ -137,6 +141,9 @@
             case SubDetail.Layout:
                 subheaderInfoText = $"View available layout configurations on {trackName}";
                 break;
+            case SubDetail.Video:
+                subheaderInfoText = $"View race video(s), time trial video(s), or other driving actions on {trackName}";
+                break;
             default:
                 subheaderInfoText = $"View gallery of {trackName}";
                 break;
@@ -156,6 +163,11 @@
                 NavigationManager
                     .NavigateTo(NavigationManager.GetUriWithQueryParameter(
                         "selected_subdetail", SelectedSubdetail.Layout));
+                break;
+            case SubDetail.Video:
+                NavigationManager
+                    .NavigateTo(NavigationManager.GetUriWithQueryParameter(
+                        "selected_subdetail", SelectedSubdetail.Showcase));
                 break;
             case SubDetail.Image:
                 NavigationManager
@@ -177,6 +189,9 @@
                 break;
             case SelectedSubdetail.Layout:
                 chosenSubDetail = SubDetail.Layout;
+                break;
+            case SelectedSubdetail.Showcase:
+                chosenSubDetail = SubDetail.Video;
                 break;
             case SelectedSubdetail.Gallery:
                 chosenSubDetail = SubDetail.Image;
