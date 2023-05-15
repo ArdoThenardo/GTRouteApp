@@ -1,0 +1,11 @@
+@page "/videotest"
+
+<div class="container">
+    <BlazoredVideo controls="controls">
+        <source src="@videoUrl">
+    </BlazoredVideo>
+</div>
+
+@code {
+    private string videoUrl = "img/gtroad-video-test.mov";
+}
