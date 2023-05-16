@@ -55,6 +55,38 @@
                 "corners": 8
             }
         ],
+        "videos": [
+            {
+                "slug": "grand-valley-speedway",
+                "videoName": "Grand Valley GT3 Race",
+                "videoUrl": "video/pexels-abed-ismail-1.mp4",
+                "thumbnailUrl": "img/original-circuits-thumbnail.JPG",
+                "durationInSeconds": 19,
+                "videoType": "Race",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque non purus nec sem varius sodales. Sed nec tortor arcu. Donec aliquet auctor porta. Duis.",
+                "author": "gtroad-admin"
+            },
+            {
+                "slug": "grand-valley-speedway",
+                "videoName": "Grand Valley Hot Lap Onboard",
+                "videoUrl": "video/pexels-abed-ismail-1.mp4",
+                "thumbnailUrl": "img/original-circuits-thumbnail.JPG",
+                "durationInSeconds": 19,
+                "videoType": "Time Trial",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque non purus nec sem varius sodales. Sed nec tortor arcu. Donec aliquet auctor porta. Duis.",
+                "author": "gtroad-admin"
+            },
+            {
+                "slug": "grand-valley-speedway",
+                "videoName": "Grand Valley Reverse Hot Lap Onboard",
+                "videoUrl": "video/pexels-abed-ismail-1.mp4",
+                "thumbnailUrl": "img/original-circuits-thumbnail.JPG",
+                "durationInSeconds": 19,
+                "videoType": "Time Trial",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque non purus nec sem varius sodales. Sed nec tortor arcu. Donec aliquet auctor porta. Duis.",
+                "author": "gtroad-admin"
+            }
+        ],
         "images": [
             {
                 "slug": "grand-valley-speedway",

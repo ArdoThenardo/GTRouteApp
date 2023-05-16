@@ -26,7 +26,8 @@ public class TrackDetailService: BaseService
 
         try
         {
-            var fetched = await HitRequest<BaseModel<TrackDetail>>($"{GetDetailUrl}?slug={slug}");
+            //var fetched = await HitRequest<BaseModel<TrackDetail>>($"{GetDetailUrl}?slug={slug}");
+            var fetched = await HitRequest<BaseModel<TrackDetail>>($"sample-data/track_detail.json");
 
             if (fetched.NumberOfData == 0 || fetched.Data == null)
                 recentError = ErrorMessage.NoData;

@@ -1,9 +1,22 @@
-<div class="container">
-    <BlazoredVideo controls="controls">
-        <source src="@videoUrl">
-    </BlazoredVideo>
+@using GTRouteApp.Models
+
+<div class="detail-showcase-container">
+    <div class="showcase-group-1">
+        <p class="detail-track-name">
+            <span class="bi bi-geo-alt-fill" style="margin-right: 6px"></span>@Name
+        </p>
+    </div>
+    <div class="showcase-group-2">
+        @foreach (var video in Videos)
+        {
+            <p>@video.VideoName</p><br>
+        }
+    </div>
 </div>
 
 @code {
-    private string videoUrl = "img/gtroad-video-test.mov";
+    [Parameter]
+    public string Name { get; set; } = "";
+    [Parameter]
+    public List<TrackVideo> Videos { get; set; } = new();
 }

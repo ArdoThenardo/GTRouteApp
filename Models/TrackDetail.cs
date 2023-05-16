@@ -10,6 +10,6 @@ public class TrackDetail
     public int NumberOfLayouts { get; set; } = 0;
     public Country? Country { get; set; }
     public List<TrackLayout> Layouts { get; set; } = new();
+    public List<TrackVideo> Videos { get; set; } = new();
     public List<TrackImage> Images { get; set; } = new();
-    public List<RaceTrack> OtherTracks { get; set; } = new();
 }

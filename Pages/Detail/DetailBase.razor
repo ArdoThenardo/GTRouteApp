@@ -38,7 +38,8 @@
             }
             else if (chosenSubDetail == SubDetail.Video)
             {
-                <DetailVideoShowcase />
+                <DetailVideoShowcase Videos="@videos" 
+                    Name="@detail.Name" />
             }
             else
             {
@@ -81,6 +82,7 @@
 
     private TrackDetail detail = new();
     private List<TrackLayout> layouts = new();
+    private List<TrackVideo> videos = new();
     private List<TrackImage> images = new();
 
     private string subheaderInfoText = "View general information of --this race track--";
@@ -107,6 +109,7 @@
         detail = data;
         layouts.AddRange(detail.Layouts);
         images.AddRange(detail.Images);
+        videos.AddRange(detail.Videos);
 
         ChangeSubheaderInfoText(detail.Name ?? "");
     }
