@@ -51,9 +51,9 @@ p {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: bisque;
+    background-color: #f4f4f2;
     width: 24vw;
-    border: 2px solid transparent;
+    border: 1px solid #1e2022;
     border-radius: 16px;
     overflow: hidden;
     isolation: isolate;
@@ -92,8 +92,27 @@ p {
     transform: translate(-50%, -50%);
 }
 
-.item-name {
+.item-properties {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    row-gap: 8px;
+    margin-top: 8px;
+    margin-inline: 8px;
+}
+
+.item-properties p {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e2022;
+}
+
+.item-properties span {
+    background-color: #303841;
+    color: #f4f4f2;
+    font-size: 12px;
+    font-weight: 500;
+    padding-block: 6px;
+    padding-inline: 10px;
+    border-radius: 6px;
 }
