@@ -12,14 +12,12 @@
             <article class="video-item">
                 <div class="item-thumbnail">
                     <img src="@video.ThumbnailUrl" alt="@video.VideoName">
-                    <span>@video.DurationInSeconds</span>
+                    <span><i class="bi bi-stopwatch"></i> @video.DurationInSeconds</span>
+                    <span>@video.VideoType</span>
                     <span class="bi bi-play-circle"></span>
                 </div>
                 <div class="item-properties property-row-1">
-                    <p>
-                        @video.VideoName 
-                        <span>@video.VideoType</span>
-                    </p>
+                    <p>@video.VideoName</p>
                 </div>
                 <div class="item-properties property-row-2">
                     <p>

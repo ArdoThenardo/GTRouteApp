@@ -57,6 +57,7 @@ p {
     border-radius: 16px;
     overflow: hidden;
     isolation: isolate;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
 }
 
 .item-thumbnail {
@@ -71,12 +72,16 @@ p {
     width: 100%;
 }
 
-.item-thumbnail span:first-of-type {
+.item-thumbnail span:first-of-type, 
+.item-thumbnail span:nth-of-type(2) {
     position: absolute;
     background-color: rgba(30, 32, 34, 0.8);
     color: #f4f4f2;
     font-size: 12px;
     font-weight: 500;
+}
+
+.item-thumbnail span:first-of-type {
     right: 12px;
     bottom: 12px;
     padding: 6px;
@@ -84,6 +89,17 @@ p {
 }
 
 .item-thumbnail span:nth-of-type(2) {
+    background-color: #ffc107;
+    color: #1e2022;
+    padding-block: 6px;
+    padding-inline: 10px;
+    border-radius: 6px;
+    bottom: 12px;
+    left: 12px;
+    font-weight: 700;
+}
+
+.item-thumbnail span:nth-of-type(3) {
     position: absolute;
     color: rgba(244, 244, 242, 0.9);
     font-size: 64px;
