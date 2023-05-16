@@ -10,10 +10,15 @@
         @foreach (var video in Videos)
         {
             <article class="video-item">
-                <span>@video.ThumbnailUrl</span>
-                <p>@video.DurationInSeconds</p>
-                <p>@video.VideoName</p>
-                <p>@video.VideoType</p>
+                <div class="item-thumbnail">
+                    <img src="@video.ThumbnailUrl" alt="@video.VideoName">
+                    <span>@video.DurationInSeconds</span>
+                    <span class="bi bi-play-circle"></span>
+                </div>
+                <div class="item-name">
+                    <p>@video.VideoName</p>
+                    <p>@video.VideoType</p>
+                </div>
                 <p>@video.Author</p>
                 <p>@video.Description</p>
             </article>

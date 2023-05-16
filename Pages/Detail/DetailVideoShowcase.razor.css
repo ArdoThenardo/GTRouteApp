@@ -40,14 +40,60 @@ p {
     display: flex;
     margin-top: 16px;
     margin-inline: 16px;
+    padding-bottom: 16px;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 12px;
+    overflow: scroll;
 }
 
 .video-item {
+    position: relative;
     display: flex;
     flex-direction: column;
     background-color: bisque;
     width: 24vw;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.item-thumbnail {
+    position: relative;
+    height: 210px;
+}
+
+.item-thumbnail img {
+    position: relative;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.item-thumbnail span:first-of-type {
+    position: absolute;
+    background-color: rgba(30, 32, 34, 0.8);
+    color: #f4f4f2;
+    font-size: 12px;
+    font-weight: 500;
+    right: 12px;
+    bottom: 12px;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.item-thumbnail span:nth-of-type(2) {
+    position: absolute;
+    color: rgba(244, 244, 242, 0.9);
+    font-size: 64px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.item-name {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
