@@ -9,7 +9,14 @@
     <div class="showcase-group-2">
         @foreach (var video in Videos)
         {
-            <p>@video.VideoName</p><br>
+            <article class="video-item">
+                <span>@video.ThumbnailUrl</span>
+                <p>@video.DurationInSeconds</p>
+                <p>@video.VideoName</p>
+                <p>@video.VideoType</p>
+                <p>@video.Author</p>
+                <p>@video.Description</p>
+            </article>
         }
     </div>
 </div>
