@@ -95,19 +95,18 @@ p {
 .item-properties {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     row-gap: 8px;
     margin-top: 8px;
     margin-inline: 8px;
 }
 
-.item-properties p {
+.property-row-1 p {
     font-size: 18px;
     font-weight: 700;
-    color: #1e2022;
 }
 
-.item-properties span {
+.property-row-1 span {
+    display: inline-block;
     background-color: #303841;
     color: #f4f4f2;
     font-size: 12px;
@@ -115,4 +114,15 @@ p {
     padding-block: 6px;
     padding-inline: 10px;
     border-radius: 6px;
+}
+
+.property-row-2 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.property-row-3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 16px;
 }

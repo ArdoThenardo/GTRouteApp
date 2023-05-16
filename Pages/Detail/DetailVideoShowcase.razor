@@ -15,14 +15,21 @@
                     <span>@video.DurationInSeconds</span>
                     <span class="bi bi-play-circle"></span>
                 </div>
-                <div class="item-properties">
+                <div class="item-properties property-row-1">
                     <p>
-                        @video.VideoName
+                        @video.VideoName 
                         <span>@video.VideoType</span>
                     </p>
                 </div>
-                <p>@video.Author</p>
-                <p>@video.Description</p>
+                <div class="item-properties property-row-2">
+                    <p>
+                        <span class="bi bi-person-fill"></span>
+                        @video.Author
+                    </p>
+                </div>
+                <div class="item-properties property-row-3">
+                    <p>@video.Description</p>
+                </div>
             </article>
         }
     </div>
