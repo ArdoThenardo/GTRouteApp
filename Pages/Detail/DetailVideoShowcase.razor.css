@@ -44,7 +44,19 @@ p {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 12px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-anchor: none;
+}
+
+.showcase-group-2::-webkit-scrollbar {
+    background-color: #e8e8e8;
+    width: 8px;
+}
+
+.showcase-group-2::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #1e2022;
+    border: 1.2px solid #e8e8e8;
 }
 
 .video-item {
