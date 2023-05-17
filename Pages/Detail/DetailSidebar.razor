@@ -49,10 +49,13 @@
     }
     else
     {
-        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Video)">
-            <span class="bi bi-collection-play-fill"></span> 
-            <span class="button-menu-name">@DetailSidebarMenu.Showcase</span>
-        </button>
+        @if (ShowVideoMenu)
+        {
+            <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Video)">
+                <span class="bi bi-collection-play-fill"></span> 
+                <span class="button-menu-name">@DetailSidebarMenu.Showcase</span>
+            </button>
+        }
     }
     
     @if (SelectedSubDetail == SubDetail.Image)
@@ -80,6 +83,9 @@
 
     [Parameter]
     public SubDetail SelectedSubDetail { get; set; } = SubDetail.General;
+
+    [Parameter]
+    public bool ShowVideoMenu { get; set; } = true;
 
     [Parameter]
     public string CoverUrl { get; set; } = "";

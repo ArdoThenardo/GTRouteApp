@@ -8,6 +8,11 @@
         </p>
     </div>
     <div class="showcase-group-2">
+        @if (Videos.Count() < 1)
+        {
+            <DetailNoData Text="video" />
+        }
+        
         @foreach (var video in Videos)
         {
             <article class="video-item">
