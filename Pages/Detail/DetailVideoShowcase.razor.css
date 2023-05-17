@@ -38,9 +38,8 @@ p {
 
 .showcase-group-2 {
     display: flex;
-    margin-top: 16px;
     margin-inline: 16px;
-    padding-bottom: 16px;
+    padding-block: 16px;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 12px;
@@ -63,6 +62,7 @@ p {
     position: relative;
     display: flex;
     flex-direction: column;
+    transition: .25s;
     background-color: #f4f4f2;
     width: 24vw;
     border: 1px solid #1e2022;
@@ -70,6 +70,12 @@ p {
     overflow: hidden;
     isolation: isolate;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+}
+
+.video-item:hover {
+    cursor: pointer;
+    border: 1px solid #ffc107;
+    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
 .item-thumbnail {
