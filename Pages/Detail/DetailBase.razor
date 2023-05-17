@@ -23,6 +23,7 @@
                 OnSubDetailChanged="OnSubDetailChangedHandler" 
                 OnBackClicked="OnBackSidebarClickedHandler"
                 SelectedSubDetail="@chosenSubDetail"
+                ShowVideoMenu="@showVideoMenu"
                 CoverUrl="@detail.CoverUrl"
                 LogoUrl="@detail.LogoUrl"    
             />
@@ -88,6 +89,7 @@
     private string subheaderInfoText = "View general information of --this race track--";
     private SubDetail chosenSubDetail = SubDetail.General;
     
+    private bool showVideoMenu = true;
     private string errorMessage = "";
     private bool showError = false;
 
@@ -95,6 +97,7 @@
     {
         await LoadData();
         PreselectSubdetail(selected_subdetail);
+        ValidateSubdetailMenuActivation();
     }
 
     private async Task LoadData()
@@ -109,8 +112,6 @@
         detail = data;
         layouts.AddRange(detail.Layouts);
         images.AddRange(detail.Images);
-        videos.AddRange(detail.Videos);
-        // for testing purpose, will be removed later
         videos.AddRange(detail.Videos);
 
         ChangeSubheaderInfoText(detail.Name ?? "");
@@ -202,6 +203,11 @@
                 chosenSubDetail = SubDetail.Image;
                 break;
         }
+    }
+
+    private void ValidateSubdetailMenuActivation()
+    {
+        showVideoMenu = videos.Count() > 0 ? true : false;
     }
 
     private void GoBack(string originPage = "browse")
