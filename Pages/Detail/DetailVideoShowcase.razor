@@ -3,7 +3,7 @@
 
 @if (showVideoPlayer)
 {
-    <DetailVideoPlayer />
+    <DetailVideoPlayer Video="@selectedVideo" OnBackClicked="OnBackClickedHandler" />
 }
 else
 {
@@ -21,7 +21,7 @@ else
             
             @foreach (var video in Videos)
             {
-                <article class="video-item">
+                <article class="video-item" @onclick="() => OpenPlayer(video)">
                     <div class="item-thumbnail">
                         <img src="@video.ThumbnailUrl" alt="@video.VideoName">
                         <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(video.DurationInSeconds)</span>
@@ -53,5 +53,20 @@ else
     [Parameter]
     public List<TrackVideo> Videos { get; set; } = new();
 
-    private bool showVideoPlayer = true;
+    private bool showVideoPlayer = false;
+    private TrackVideo selectedVideo = new();
+
+    private void OpenPlayer(TrackVideo video)
+    {
+        selectedVideo = video;
+
+        showVideoPlayer = true;
+    }
+
+    private void OnBackClickedHandler()
+    {
+        showVideoPlayer = false;
+
+        selectedVideo = new();
+    }
 }
