@@ -1,0 +1,37 @@
+@using GTRouteApp.Models
+
+<div class="detail-player-container">
+    <div class="detail-player-row-1">
+        <button type="button" class="btn btn-secondary">
+            <span class="bi bi-arrow-left-square"></span> Back to Selection
+        </button>
+    </div>
+
+    <div class="detail-player-row-2">
+        <div class="player-column">
+            <div class="detail-player">
+                <BlazoredVideo style="width: inherit" controls="controls">
+                    <source src="video/pexels-abed-ismail-1.mp4" />
+                </BlazoredVideo>
+            </div>
+        </div>
+
+        <div class="information-column">
+            <span>Time Trial</span>
+            <p>Apricot Hill Hot Lap Run</p>
+            <p>
+                <span class="bi bi-person-fill"></span> Cabaret
+            </p>
+            <p>
+                <span class="bi bi-card-text"></span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed convallis orci eget purus suscipit porta. 
+                Aenean eleifend molestie neque vel semper. Maecenas lobortis ligula a sapien commodo sodales. 
+                Pellentesque eget lacus nunc. Aliquam erat volutpat. Suspendisse vel hendrerit justo. 
+                Proin ac finibus leo, id dignissim turpis. In lacinia finibus velit, vitae congue orci laoreet vel.
+            </p>
+        </div>
+    </div>
+</div>
+
+@code {
+    public TrackVideo video = new();
+}
