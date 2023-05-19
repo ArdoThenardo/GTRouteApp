@@ -59,11 +59,14 @@ p {
 }
 
 .video-item {
+    background-image: var(--bgImage);
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-color: #f4f4f2;
     position: relative;
     display: flex;
     flex-direction: column;
     transition: .25s;
-    background-color: #f4f4f2;
     width: 24vw;
     border: 1px solid #1e2022;
     border-radius: 16px;
