@@ -4,6 +4,10 @@ p {
 }
 
 .detail-player-container {
+    background-image: url('img/gtroad-sample-bg-01.jpg');
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-color: #e8e8e8;
     position: relative;
     display: flex;
     flex-direction: column;
