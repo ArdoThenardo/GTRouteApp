@@ -4,6 +4,10 @@ p {
 }
 
 .detail-player-container {
+    background-image: url('img/gtroad-sample-bg-01.jpg');
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-color: #e8e8e8;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -19,6 +23,20 @@ p {
     height: 100%;
     pointer-events: none;
     box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
+}
+
+.detail-player-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #1e2022;
+}
+
+.detail-track-name {
+    font-size: 32px;
+    font-weight: 700;
 }
 
 .detail-player-row-1 button {

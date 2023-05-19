@@ -1,6 +1,12 @@
 @using GTRouteApp.Models
 
 <div class="detail-player-container">
+    <div class="detail-player-header">
+        <p class="detail-track-name">
+            <span class="bi bi-geo-alt-fill" style="margin-right: 6px"></span>@TrackName
+        </p>
+    </div>
+
     <div class="detail-player-row-1">
         <button type="button" 
             class="btn btn-secondary" 
@@ -34,6 +40,9 @@
 </div>
 
 @code {
+    [Parameter]
+    public string TrackName { get; set; } = "";
+
     [Parameter]
     public TrackVideo Video { get; set; } = new();
 
