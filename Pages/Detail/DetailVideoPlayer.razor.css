@@ -25,6 +25,20 @@ p {
     box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
 
+.detail-player-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #1e2022;
+}
+
+.detail-track-name {
+    font-size: 32px;
+    font-weight: 700;
+}
+
 .detail-player-row-1 button {
     font-size: 14px;
     font-weight: 500;
