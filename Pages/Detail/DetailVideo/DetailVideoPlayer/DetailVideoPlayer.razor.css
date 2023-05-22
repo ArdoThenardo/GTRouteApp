@@ -9,8 +9,9 @@ p {
     background-blend-mode: overlay;
     background-color: #e8e8e8;
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    overflow: hidden;
     padding: 16px;
 }
 
@@ -25,18 +26,10 @@ p {
     box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
 
-.detail-player-header {
+.player-side-sub-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding-bottom: 8px;
-    margin-bottom: 16px;
-    border-bottom: 1px solid #1e2022;
-}
-
-.detail-track-name {
-    font-size: 32px;
-    font-weight: 700;
+    padding-right: 16px;
 }
 
 .detail-player-row-1 button {
@@ -49,9 +42,8 @@ p {
 
 .detail-player-row-2 {
     display: flex;
-    flex-direction: row;
-    padding-top: 16px;
-    gap: 12px;
+    flex-direction: column;
+    padding-top: 12px;
 }
 
 .player-column {
@@ -59,14 +51,14 @@ p {
 }
 
 .detail-player {
-    width: 640px;
+    width: 100%;
 }
 
 .information-column {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 8px;
+    padding-top: 4px;
 }
 
 .information-column > span {
@@ -80,7 +72,7 @@ p {
 }
 
 .information-column p:first-of-type {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
 }
 
@@ -99,20 +91,8 @@ p {
     font-weight: 500;
 }
 
-@media (max-width: 1280px) {
-    .detail-player-container {
-        background-position: center;
-        overflow-y: scroll;
-        padding-bottom: 32px;
-    }
-
-    .detail-player-row-2 {
-        flex-direction: column;
-    }
-
-    .detail-player {
-        width: 100%;
-    }
+.related-side-sub-container {
+    background-color: rgba(30, 32, 34, 0.4);
 }
 
 @media (max-width: 540px) {
@@ -125,11 +105,6 @@ p {
 
     .detail-player-header {
         padding-top: 8px;
-    }
-
-    .detail-track-name {
-        font-size: 20px;
-        font-weight: 700;
     }
 }
 
