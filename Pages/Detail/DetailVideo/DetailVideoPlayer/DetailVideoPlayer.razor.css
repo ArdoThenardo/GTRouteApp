@@ -9,8 +9,8 @@ p {
     background-blend-mode: overlay;
     background-color: #e8e8e8;
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 65% 35%;
     height: 100%;
     padding: 16px;
 }
@@ -43,7 +43,6 @@ p {
     display: flex;
     flex-direction: column;
     padding-top: 16px;
-    gap: 8px;
 }
 
 .player-column {
@@ -51,14 +50,14 @@ p {
 }
 
 .detail-player {
-    width: 640px;
+    width: 100%;
 }
 
 .information-column {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 8px;
+    padding-top: 4px;
 }
 
 .information-column > span {
