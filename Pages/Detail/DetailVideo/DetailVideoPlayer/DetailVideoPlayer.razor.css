@@ -10,8 +10,8 @@ p {
     background-color: #e8e8e8;
     position: relative;
     display: grid;
-    grid-template-columns: 65% 35%;
-    height: 100%;
+    grid-template-columns: 60% 40%;
+    overflow: hidden;
     padding: 16px;
 }
 
@@ -29,6 +29,7 @@ p {
 .player-side-sub-container {
     display: flex;
     flex-direction: column;
+    padding-right: 16px;
 }
 
 .detail-player-row-1 button {
@@ -42,7 +43,7 @@ p {
 .detail-player-row-2 {
     display: flex;
     flex-direction: column;
-    padding-top: 16px;
+    padding-top: 12px;
 }
 
 .player-column {
@@ -71,7 +72,7 @@ p {
 }
 
 .information-column p:first-of-type {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
 }
 
@@ -90,20 +91,8 @@ p {
     font-weight: 500;
 }
 
-@media (max-width: 1280px) {
-    .detail-player-container {
-        background-position: center;
-        overflow-y: scroll;
-        padding-bottom: 32px;
-    }
-
-    .detail-player-row-2 {
-        flex-direction: column;
-    }
-
-    .detail-player {
-        width: 100%;
-    }
+.related-side-sub-container {
+    background-color: rgba(30, 32, 34, 0.4);
 }
 
 @media (max-width: 540px) {
@@ -116,11 +105,6 @@ p {
 
     .detail-player-header {
         padding-top: 8px;
-    }
-
-    .detail-track-name {
-        font-size: 20px;
-        font-weight: 700;
     }
 }
 
