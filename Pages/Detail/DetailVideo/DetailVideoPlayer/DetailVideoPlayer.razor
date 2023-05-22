@@ -2,48 +2,41 @@
 @namespace GTRouteApp.DetailComponents
 
 <div class="detail-player-container">
-    <div class="detail-player-header">
-        <p class="detail-track-name">
-            <span class="bi bi-geo-alt-fill" style="margin-right: 6px"></span>@TrackName
-        </p>
-    </div>
-
-    <div class="detail-player-row-1">
-        <button type="button" 
-            class="btn btn-secondary" 
-            @onclick="() => BackToVideoSelection()">
-            <span class="bi bi-arrow-left-square"></span> Back to Selection
-        </button>
-    </div>
-
-    <div class="detail-player-row-2">
-        <div class="player-column">
-            <div class="detail-player">
-                <BlazoredVideo 
-                    style="width: inherit; box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
-                    controls="controls">
-                    <source src="@Video.VideoUrl" />
-                </BlazoredVideo>
-            </div>
+    <div class="player-side-sub-container">
+        <div class="detail-player-row-1">
+            <button type="button" 
+                class="btn btn-secondary" 
+                @onclick="() => BackToVideoSelection()">
+                <span class="bi bi-arrow-left-square"></span> Back to Selection
+            </button>
         </div>
 
-        <div class="information-column">
-            <span>@Video.VideoType</span>
-            <p>@Video.VideoName</p>
-            <p>
-                <span class="bi bi-person-fill"></span> @Video.Author
-            </p>
-            <p>
-                <span class="bi bi-card-text"></span> @Video.Description
-            </p>
+        <div class="detail-player-row-2">
+            <div class="player-column">
+                <div class="detail-player">
+                    <BlazoredVideo 
+                        style="width: inherit; box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
+                        controls="controls">
+                        <source src="@Video.VideoUrl" />
+                    </BlazoredVideo>
+                </div>
+            </div>
+
+            <div class="information-column">
+                <span>@Video.VideoType</span>
+                <p>@Video.VideoName</p>
+                <p>
+                    <span class="bi bi-person-fill"></span> @Video.Author
+                </p>
+                <p>
+                    <span class="bi bi-card-text"></span> @Video.Description
+                </p>
+            </div>
         </div>
     </div>
 </div>
 
 @code {
-    [Parameter]
-    public string TrackName { get; set; } = "";
-
     [Parameter]
     public TrackVideo Video { get; set; } = new();
 
