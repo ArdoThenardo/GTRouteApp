@@ -150,6 +150,7 @@ p {
     cursor: pointer;
     background-color: #f4f4f2;
     border: 1px solid #ffc107;
+    transform: scale(0.95);
     box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
