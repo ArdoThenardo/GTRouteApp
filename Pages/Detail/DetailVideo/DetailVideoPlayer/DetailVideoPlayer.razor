@@ -37,7 +37,44 @@
     </div>
 
     <div class="related-side-sub-container">
-        <p>In-Progress...</p>
+        <div class="related-header">
+            <span><i class="bi bi-film"></i> Related Video&#40;s&#41;</span>
+        </div>
+
+        <!-- using currently selected video as example for temporary -->
+        <div class="related-video-item">
+            <div class="related-thumbnail-area">
+                <img alt="@Video.VideoName" src="@Video.ThumbnailUrl" />
+                <span class="bi bi-play-circle"></span>
+            </div>
+
+            <div class="related-info-area">
+                <span>@Video.VideoType</span>
+                <p>@Video.VideoName</p>
+                <p>
+                    <span class="bi bi-person-fill"></span>
+                    @Video.Author
+                </p>
+            </div>
+        </div>
+
+        
+        <div class="related-video-item">
+            <div class="related-thumbnail-area">
+                <img alt="@Video.VideoName" src="@Video.ThumbnailUrl" />
+                <span class="bi bi-play-circle"></span>
+            </div>
+
+            <div class="related-info-area">
+                <span>@Video.VideoType</span>
+                <p>@Video.VideoName</p>
+                <p>
+                    <span class="bi bi-person-fill"></span>
+                    @Video.Author
+                </p>
+            </div>
+        </div>
+        <!-- using currently selected video as example for temporary -->
     </div>
 </div>
 
