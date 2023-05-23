@@ -111,6 +111,28 @@ p {
     color: #1e2022;
 }
 
+.related-videos {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    overflow-y: scroll;
+    overflow-anchor: none;
+    height: 68vh;
+}
+
+.related-videos::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+}
+
+.related-videos::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #1e2022;
+    border: 1.2px solid transparent;
+}
+
 .related-video-item {
     position: relative;
     display: grid;
@@ -120,6 +142,21 @@ p {
     overflow: hidden;
     isolation: isolate;
     border-radius: 12px;
+    border: 1px solid transparent;
+    transition: .25s;
+}
+
+.related-video-item:hover {
+    cursor: pointer;
+    background-color: #f4f4f2;
+    border: 1px solid #ffc107;
+    transform: scale(0.95);
+    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
+}
+
+.related-video-item:hover > .related-thumbnail-area span {
+    text-shadow: 1px 1px 8px rgba(255, 193, 7, 0.8);
+    transition: .25s;
 }
 
 .related-thumbnail-area {
