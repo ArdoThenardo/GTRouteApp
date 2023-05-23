@@ -101,6 +101,7 @@ p {
 
 .related-header {
     padding-block: 6px;
+    margin-bottom: 12px;
     border-bottom: 1.8px solid #1e2022;
 }
 
@@ -108,6 +109,67 @@ p {
     font-size: 16px;
     font-weight: 600;
     color: #1e2022;
+}
+
+.related-video-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin-bottom: 8px;
+    padding: 12px;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 12px;
+}
+
+.related-thumbnail-area {
+    position: relative;
+}
+
+.related-thumbnail-area img {
+    position: relative;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+}
+
+.related-thumbnail-area span {
+    position: absolute;
+    color: rgba(244, 244, 242, 0.9);
+    font-size: 48px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.related-info-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 8px;
+}
+
+.related-info-area > span {
+    display: inline-block;
+    background-color: #ffc107;
+    color: #1e2022;
+    padding-block: 4px;
+    padding-inline: 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.related-info-area p:first-of-type {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.related-info-area p:last-of-type {
+    font-size: 14px;
+    font-weight: 600;
 }
 
 @media (max-width: 540px) {
