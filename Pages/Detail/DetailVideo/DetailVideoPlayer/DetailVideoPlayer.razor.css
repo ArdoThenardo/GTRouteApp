@@ -111,6 +111,28 @@ p {
     color: #1e2022;
 }
 
+.related-videos {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    overflow-y: scroll;
+    overflow-anchor: none;
+    height: 68vh;
+}
+
+.related-videos::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+}
+
+.related-videos::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #1e2022;
+    border: 1.2px solid transparent;
+}
+
 .related-video-item {
     position: relative;
     display: grid;
