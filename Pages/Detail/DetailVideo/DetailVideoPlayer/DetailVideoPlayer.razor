@@ -1,4 +1,5 @@
 @using GTRouteApp.Models
+@using GTRouteApp.Helpers
 @namespace GTRouteApp.DetailComponents
 
 <div class="detail-player-container">
@@ -42,40 +43,37 @@
         </div>
 
         <div class="related-videos">
-            <!-- using currently selected video as example for temporary -->
-            <div class="related-video-item">
-                <div class="related-thumbnail-area">
-                    <img alt="@Video.VideoName" src="@Video.ThumbnailUrl" />
-                    <span class="bi bi-play-circle"></span>
-                </div>
+            @if (RelatedVideos.Count() < 1)
+            {
+                <DetailNoData OverrideText="@noRelatedVideosMessage" 
+                    IconDisplayCssValue="none" />
+            }
+            else
+            {
+                foreach (var relatedVideo in RelatedVideos)
+                {
+                    @if (!string.IsNullOrWhiteSpace(relatedVideo.Id) 
+                        && !relatedVideo.Id.Equals(Video.Id))
+                    {
+                        <div class="related-video-item">
+                            <div class="related-thumbnail-area">
+                                <img alt="@relatedVideo.VideoName" 
+                                    src="@relatedVideo.ThumbnailUrl" />
+                                <span class="bi bi-play-circle"></span>
+                            </div>
 
-                <div class="related-info-area">
-                    <span>@Video.VideoType</span>
-                    <p>@Video.VideoName</p>
-                    <p>
-                        <span class="bi bi-person-fill"></span>
-                        @Video.Author
-                    </p>
-                </div>
-            </div>
-
-            
-            <div class="related-video-item">
-                <div class="related-thumbnail-area">
-                    <img alt="@Video.VideoName" src="@Video.ThumbnailUrl" />
-                    <span class="bi bi-play-circle"></span>
-                </div>
-
-                <div class="related-info-area">
-                    <span>@Video.VideoType</span>
-                    <p>@Video.VideoName</p>
-                    <p>
-                        <span class="bi bi-person-fill"></span>
-                        @Video.Author
-                    </p>
-                </div>
-            </div>
-            <!-- using currently selected video as example for temporary -->
+                            <div class="related-info-area">
+                                <span>@relatedVideo.VideoType</span>
+                                <p>@relatedVideo.VideoName</p>
+                                <p>
+                                    <span class="bi bi-person-fill"></span>
+                                    @relatedVideo.Author
+                                </p>
+                            </div>
+                        </div>
+                    }
+                }
+            }
         </div>
     </div>
 </div>
@@ -85,7 +83,12 @@
     public TrackVideo Video { get; set; } = new();
 
     [Parameter]
+    public List<TrackVideo> RelatedVideos { get; set; } = new();
+
+    [Parameter]
     public EventCallback OnBackClicked { get; set; }
+
+    private string noRelatedVideosMessage = ErrorMessage.NoRelatedVideos;
 
     private async Task BackToVideoSelection()
     {
