@@ -1,4 +1,5 @@
 @using GTRouteApp.Models
+@using GTRouteApp.Helpers
 @namespace GTRouteApp.DetailComponents
 
 <div class="detail-player-container">
@@ -44,7 +45,8 @@
         <div class="related-videos">
             @if (RelatedVideos.Count() < 1)
             {
-                <DetailNoData Text="other video" />
+                <DetailNoData OverrideText="@noRelatedVideosMessage" 
+                    IconDisplayCssValue="none" />
             }
             else
             {
@@ -85,6 +87,8 @@
 
     [Parameter]
     public EventCallback OnBackClicked { get; set; }
+
+    private string noRelatedVideosMessage = ErrorMessage.NoRelatedVideos;
 
     private async Task BackToVideoSelection()
     {
