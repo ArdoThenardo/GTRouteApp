@@ -3,7 +3,8 @@
 
 @if (showVideoPlayer)
 {
-    <DetailVideoPlayer Video="@selectedVideo" 
+    <DetailVideoPlayer Video="@selectedVideo"
+        RelatedVideos="@Videos"
         OnBackClicked="OnBackClickedHandler" />
 }
 else
