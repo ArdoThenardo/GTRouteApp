@@ -1,8 +1,9 @@
 @using GTRouteApp.Models
 @using GTRouteApp.Helpers
 @namespace GTRouteApp.DetailComponents
+@inject IJSRuntime JS
 
-<div class="detail-player-container">
+<div class="detail-player-container" @ref="detailPlayerRef">
     <div class="player-side-sub-container">
         <div class="detail-player-row-1">
             <button type="button" 
@@ -91,12 +92,16 @@
 
     BlazoredVideo? videoRef;
     private string noRelatedVideosMessage = ErrorMessage.NoRelatedVideos;
+    ElementReference detailPlayerRef;
 
     private async Task ChangeVideo(TrackVideo video)
     {
         Video = video;
         if (videoRef != null)
             await videoRef.ReloadControl();
+
+        await JS.InvokeVoidAsync("scrollToTop");
+        await JS.InvokeVoidAsync("scrollElementToTop", detailPlayerRef);
     }
 
     private async Task BackToVideoSelection()

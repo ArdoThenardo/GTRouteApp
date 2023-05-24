@@ -44,6 +44,14 @@
             }
         }
 
+        function scrollToTop() {
+            document.documentElement.scrollTop = 0;
+        }
+
+        function scrollElementToTop(element) {
+            element.scrollTop = 0;
+        }
+
         function resetAnimationByStyle(element) {
             if (element != null) {
                 element.style.animation = "none";
