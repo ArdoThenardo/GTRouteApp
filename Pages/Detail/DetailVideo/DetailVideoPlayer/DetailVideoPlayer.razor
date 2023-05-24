@@ -15,7 +15,7 @@
         <div class="detail-player-row-2">
             <div class="player-column">
                 <div class="detail-player">
-                    <BlazoredVideo 
+                    <BlazoredVideo @ref="videoRef"
                         style="width: inherit;
                             box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
                         controls="controls">
@@ -55,7 +55,8 @@
                     @if (!string.IsNullOrWhiteSpace(relatedVideo.Id) 
                         && !relatedVideo.Id.Equals(Video.Id))
                     {
-                        <div class="related-video-item">
+                        <article class="related-video-item" 
+                            @onclick="() => ChangeVideo(relatedVideo)">
                             <div class="related-thumbnail-area">
                                 <img alt="@relatedVideo.VideoName" 
                                     src="@relatedVideo.ThumbnailUrl" />
@@ -70,7 +71,7 @@
                                     @relatedVideo.Author
                                 </p>
                             </div>
-                        </div>
+                        </article>
                     }
                 }
             }
@@ -88,10 +89,22 @@
     [Parameter]
     public EventCallback OnBackClicked { get; set; }
 
+    BlazoredVideo? videoRef;
     private string noRelatedVideosMessage = ErrorMessage.NoRelatedVideos;
+
+    private async Task ChangeVideo(TrackVideo video)
+    {
+        Video = video;
+        if (videoRef != null)
+            await videoRef.ReloadControl();
+    }
 
     private async Task BackToVideoSelection()
     {
+        Video = new();
+        if (videoRef != null)
+            await videoRef.ReloadControl();
+
         await OnBackClicked.InvokeAsync();
     }
 }
