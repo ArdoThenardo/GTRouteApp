@@ -9,18 +9,18 @@ public class FeaturedService: BaseService
     // remote: /featured
     // sample: sample-data/featured.json
     private readonly string GetFeaturedTracksUrl;
-    // remote: /featured/media
+    // remote: /featured/media/image
     // sample: sample-data/featured_media.json
-    private readonly string GetFeaturedMediaUrl;
+    private readonly string GetFeaturedMediaImageUrl;
 
     private List<FeaturedTrack> featuredTracks = new();
-    private List<FeaturedImage> featuredMedia = new();
+    private List<FeaturedImage> featuredMediaImage = new();
     private string recentError = "";
 
     public FeaturedService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
     {   
         this.GetFeaturedTracksUrl = $"{_baseUrl}/featured";
-        this.GetFeaturedMediaUrl = $"{_baseUrl}/featured/media";
+        this.GetFeaturedMediaImageUrl = $"{_baseUrl}/featured/media/image";
     }
 
     public async Task<List<FeaturedTrack>> GetFeaturedTracks()
@@ -47,18 +47,18 @@ public class FeaturedService: BaseService
         }
     }
 
-    public async Task<List<FeaturedImage>> GetFeaturedMedia(int numberOfMedia)
+    public async Task<List<FeaturedImage>> GetFeaturedMediaImage(int numberOfMedia)
     {
-        featuredMedia.Clear();
+        featuredMediaImage.Clear();
 
         try 
         {
             var data = await HitRequest<BaseModel<List<FeaturedImage>>>(
-                $"{GetFeaturedMediaUrl}?numberOfMedia={numberOfMedia}");
+                $"{GetFeaturedMediaImageUrl}?numberOfMedia={numberOfMedia}");
             
-            featuredMedia.AddRange(data.Data ?? new List<FeaturedImage>());
+            featuredMediaImage.AddRange(data.Data ?? new List<FeaturedImage>());
 
-            return featuredMedia;
+            return featuredMediaImage;
         }
         catch
         {
