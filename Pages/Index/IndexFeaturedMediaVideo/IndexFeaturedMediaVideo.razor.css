@@ -1,0 +1,14 @@
+.media-container {
+    background-color: #f4f4f2;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 16px;
+    padding-bottom: 12px;
+    border-top: 12px solid #303841;
+}
+
+.media-inner-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
