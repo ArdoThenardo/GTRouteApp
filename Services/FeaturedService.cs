@@ -10,7 +10,7 @@ public class FeaturedService: BaseService
     // sample: sample-data/featured.json
     private readonly string GetFeaturedTracksUrl;
     // remote: /featured/media/image
-    // sample: sample-data/featured_media.json
+    // sample: sample-data/featured_media_image.json
     private readonly string GetFeaturedMediaImageUrl;
 
     private List<FeaturedTrack> featuredTracks = new();
