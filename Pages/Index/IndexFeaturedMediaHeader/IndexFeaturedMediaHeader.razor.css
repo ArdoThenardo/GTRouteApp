@@ -1,0 +1,15 @@
+.header-container {
+    border-top: 12px solid #303841;
+}
+
+.header-contents {
+    padding-inline: 32px;
+    padding-top: 16px;
+    padding-bottom: 8px;
+    color: #1e2022;
+}
+
+.header-contents h4 {
+    font-weight: 700;
+    margin-bottom: 0;
+}

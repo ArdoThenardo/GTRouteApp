@@ -8,7 +8,6 @@ p {
     flex-direction: column;
     padding-inline: 16px;
     padding-bottom: 12px;
-    border-top: 12px solid transparent;
 }
 
 .media-inner-container {
@@ -18,7 +17,7 @@ p {
 }
 
 .media-item-container {
-    height: 46vh;
+    height: 48vh;
     width: 50%;
     padding: 8px;
 }
