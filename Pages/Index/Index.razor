@@ -21,6 +21,15 @@
         @if(featuredMediaImage.Count() > 0)
         {
             <div class="index-featured-media">
+                <div class="header-section">
+                    <h4>
+                        <span class="bi bi-play-btn"></span>
+                        <span class="bi bi-card-image"></span>
+                        <span style="margin-right: 4px"></span> 
+                        Featured Media
+                    </h4>
+                </div>
+                <IndexFeaturedMediaVideo />
                 <IndexFeaturedMediaImage Media="@featuredMediaImage" />
             </div>
         }

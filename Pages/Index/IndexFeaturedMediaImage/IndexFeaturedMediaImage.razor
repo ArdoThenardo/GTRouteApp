@@ -4,12 +4,8 @@
 @inject IJSRuntime JS
 
 <div class="media-container">
-    <div class="header-section">
-        <h4><span class="bi bi-card-image"></span> Featured Media</h4>
-    </div>
-
     <div class="media-inner-container">
-    @foreach (var media in Media)
+        @foreach (var media in Media)
         {
             <div class="media-item">
                 <div class="image-section">
