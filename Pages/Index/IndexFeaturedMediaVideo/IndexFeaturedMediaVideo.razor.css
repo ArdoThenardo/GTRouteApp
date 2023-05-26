@@ -7,7 +7,7 @@ p {
     display: flex;
     flex-direction: column;
     padding-inline: 16px;
-    padding-bottom: 12px;
+    padding-bottom: 8px;
 }
 
 .media-inner-container {
