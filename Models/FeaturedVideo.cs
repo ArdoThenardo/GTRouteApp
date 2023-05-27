@@ -8,6 +8,7 @@ public class FeaturedVideo
     public string? Category { get; set; }
     public Country Country { get; set; } = new Country();
     public string? VideoName { get; set; }
+    public string? VideoType { get; set; }
     public string? VideoUrl { get; set; }
     public string? ThumbnailUrl { get; set; }
     public int? DurationInSeconds { get; set; }

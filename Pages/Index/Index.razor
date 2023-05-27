@@ -18,15 +18,18 @@
 
         <IndexFeaturedTrack Tracks="@featuredTracks" Media="@featuredMediaImage"  />
 
-        @if(featuredMediaImage.Count() > 0)
-        {
-            <div class="index-featured-media">
-                <IndexFeaturedMediaHeader />
-                <IndexFeaturedMediaVideo />
+        <div class="index-featured-media">
+            <IndexFeaturedMediaHeader />
+            @if (featuredMediaVideo.Count() > 0)
+            {
+                <IndexFeaturedMediaVideo Media="@featuredMediaVideo" />
+            }
+            @if (featuredMediaImage.Count() > 0)
+            {
                 <hr class="mx-5 my-2">
                 <IndexFeaturedMediaImage Media="@featuredMediaImage" />
-            </div>
-        }
+            }
+        </div>
 
         <div class="index-callout-container">
             <div class="index-callout">
@@ -40,6 +43,7 @@
 
 @code {
     private List<FeaturedTrack> featuredTracks = new();
+    private List<FeaturedVideo> featuredMediaVideo = new(); 
     private List<FeaturedImage> featuredMediaImage = new();
 
     private string errorMessage = "";
@@ -60,6 +64,9 @@
     {
         var featuredTracksData = await FeaturedService.GetFeaturedTracks();
         featuredTracks.AddRange(featuredTracksData);
+
+        var featuredMediaVideoData = await FeaturedService.GetFeaturedMediaVideo(2);
+        featuredMediaVideo.AddRange(featuredMediaVideoData);
 
         var featuredMediaImageData = await FeaturedService.GetFeaturedMediaImage(4);
         featuredMediaImage.AddRange(featuredMediaImageData);

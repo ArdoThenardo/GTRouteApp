@@ -4,58 +4,38 @@
 
 <div class="media-container">
     <div class="media-inner-container">
-
-        <article class="media-item-container">
-            <div class="media-item" style="background-image:url('img/sample-cover.jpg');">
-                <div class="item-section-top">
-                    <span>Race Replay</span>
-                    <img src="img/sample-logo.png" alt="track logo" />
-                </div>
-                <div class="item-section-middle">
-                    <span class="bi bi-play-circle"></span>
-                </div>
-                <div class="item-section-bottom">
-                    <div class="bottom-section-1">
-                        <p>Apricot Hill GT3 Race Clip</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            DriverName
-                        </p>
+        @foreach (var media in Media)
+        {
+            <article class="media-item-container">
+                <div class="media-item" style="background-image:url(@media.ThumbnailUrl);">
+                    <div class="item-section-top">
+                        <span>@media.VideoType</span>
+                        <img src="@media.LogoUrl" alt="@media.TrackName" />
                     </div>
-                    <div class="bottom-section-2">
-                        <span>
-                            <i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(128)
-                        </span>
+                    <div class="item-section-middle">
+                        <span class="bi bi-play-circle"></span>
                     </div>
-                </div>
-            </div>
-        </article>
-
-        <article class="media-item-container">
-            <div class="media-item" style="background-image:url('img/sample-cover.jpg');">
-                <div class="item-section-top">
-                    <span>Race Replay</span>
-                    <img src="img/sample-logo.png" alt="track logo" />
-                </div>
-                <div class="item-section-middle">
-                    <span class="bi bi-play-circle"></span>
-                </div>
-                <div class="item-section-bottom">
-                    <div class="bottom-section-1">
-                        <p>Apricot Hill GT3 Race Clip</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            DriverName
-                        </p>
-                    </div>
-                    <div class="bottom-section-2">
-                        <span>
-                            <i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(128)
-                        </span>
+                    <div class="item-section-bottom">
+                        <div class="bottom-section-1">
+                            <p>@media.VideoName</p>
+                            <p>
+                                <span class="bi bi-person-fill"></span>
+                                @media.Author
+                            </p>
+                        </div>
+                        <div class="bottom-section-2">
+                            <span>
+                                <i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(media.DurationInSeconds ?? 0)
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </article>
-
+            </article>
+        }
     </div>
 </div>
+
+@code {
+    [Parameter]
+    public List<FeaturedVideo> Media { get; set; } = new();
+}
