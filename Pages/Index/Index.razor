@@ -18,15 +18,18 @@
 
         <IndexFeaturedTrack Tracks="@featuredTracks" Media="@featuredMediaImage"  />
 
-        @if(featuredMediaImage.Count() > 0)
-        {
-            <div class="index-featured-media">
-                <IndexFeaturedMediaHeader />
+        <div class="index-featured-media">
+            <IndexFeaturedMediaHeader />
+            @if (featuredMediaVideo.Count() > 0)
+            {
                 <IndexFeaturedMediaVideo Media="@featuredMediaVideo" />
+            }
+            @if (featuredMediaImage.Count() > 0)
+            {
                 <hr class="mx-5 my-2">
                 <IndexFeaturedMediaImage Media="@featuredMediaImage" />
-            </div>
-        }
+            }
+        </div>
 
         <div class="index-callout-container">
             <div class="index-callout">

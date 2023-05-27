@@ -58,10 +58,8 @@ public class FeaturedService: BaseService
 
         try
         {
-            //var data = await HitRequest<BaseModel<List<FeaturedVideo>>>(
-            //    $"{GetFeaturedMediaVideoUrl}?numberOfMedia={numberOfMedia}");
-            
-            var data = await HitRequest<BaseModel<List<FeaturedVideo>>>($"sample-data/featured_media_video.json");
+            var data = await HitRequest<BaseModel<List<FeaturedVideo>>>(
+                $"{GetFeaturedMediaVideoUrl}?numberOfMedia={numberOfMedia}");
 
             featuredMediaVideo.AddRange(data.Data ?? new List<FeaturedVideo>());
 
