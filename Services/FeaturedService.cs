@@ -9,17 +9,22 @@ public class FeaturedService: BaseService
     // remote: /featured
     // sample: sample-data/featured.json
     private readonly string GetFeaturedTracksUrl;
+    // remote: /featured/media/video
+    // sample: sample-data/featured_media_video.json
+    private readonly string GetFeaturedMediaVideoUrl;
     // remote: /featured/media/image
     // sample: sample-data/featured_media_image.json
     private readonly string GetFeaturedMediaImageUrl;
 
     private List<FeaturedTrack> featuredTracks = new();
+    private List<FeaturedVideo> featuredMediaVideo = new();
     private List<FeaturedImage> featuredMediaImage = new();
     private string recentError = "";
 
     public FeaturedService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
     {   
         this.GetFeaturedTracksUrl = $"{_baseUrl}/featured";
+        this.GetFeaturedMediaVideoUrl = $"{_baseUrl}/featured/media/video";
         this.GetFeaturedMediaImageUrl = $"{_baseUrl}/featured/media/image";
     }
 
@@ -44,6 +49,27 @@ public class FeaturedService: BaseService
             recentError = ErrorMessage.LoadDataFailed;
 
             return new List<FeaturedTrack>();
+        }
+    }
+
+    public async Task<List<FeaturedVideo>> GetFeaturedMediaVideo(int numberOfMedia)
+    {
+        featuredMediaVideo.Clear();
+
+        try
+        {
+            //var data = await HitRequest<BaseModel<List<FeaturedVideo>>>(
+            //    $"{GetFeaturedMediaVideoUrl}?numberOfMedia={numberOfMedia}");
+            
+            var data = await HitRequest<BaseModel<List<FeaturedVideo>>>($"sample-data/featured_media_video.json");
+
+            featuredMediaVideo.AddRange(data.Data ?? new List<FeaturedVideo>());
+
+            return featuredMediaVideo;
+        }
+        catch
+        {
+            return Enumerable.Empty<FeaturedVideo>().ToList();
         }
     }
 
