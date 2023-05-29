@@ -19,7 +19,7 @@
             <article class="video-item" @onclick="() => OpenPlayer(video)">
                 <div class="item-thumbnail">
                     <img src="@video.ThumbnailUrl" alt="@video.VideoName">
-                    <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(video.DurationInSeconds)</span>
+                    <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(video.DurationInSeconds ?? 0)</span>
                     <span>@video.VideoType</span>
                     <span class="bi bi-play-circle"></span>
                 </div>
