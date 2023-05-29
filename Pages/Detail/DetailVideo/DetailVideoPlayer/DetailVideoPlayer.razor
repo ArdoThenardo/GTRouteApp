@@ -62,6 +62,7 @@
                                 <img alt="@relatedVideo.VideoName" 
                                     src="@relatedVideo.ThumbnailUrl" />
                                 <span class="bi bi-play-circle"></span>
+                                <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(relatedVideo.DurationInSeconds ?? 0)</span>
                             </div>
 
                             <div class="related-info-area">
