@@ -66,6 +66,14 @@
             </div>
         </div>
     </div>
+    <!-- To be revised in the next task -->
+    @if (Media.Count() > 0)
+    {
+        <div class="featured-media">
+            <IndexFeaturedMediaHeader IsImageIconHidden="true" />
+            <IndexFeaturedMediaImage Media="@Media" />
+        </div>
+    }
 </div>
 
 @code {
