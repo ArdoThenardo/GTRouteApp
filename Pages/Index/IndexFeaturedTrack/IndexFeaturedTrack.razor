@@ -26,11 +26,11 @@
         </div>
     </div>
 
-    @if (Media.Count() > 0)
+    @if (FeaturedImages.Count() > 0)
     {
         <div class="featured-media">
             <IndexFeaturedMediaHeader IsVideoIconHidden="true" />
-            <IndexFeaturedMediaImage Media="@Media" />
+            <IndexFeaturedMediaImage Media="@FeaturedImages" />
         </div>
     }
 
@@ -67,11 +67,11 @@
         </div>
     </div>
     <!-- To be revised in the next task -->
-    @if (Media.Count() > 0)
+    @if (FeaturedVideos.Count() > 0)
     {
         <div class="featured-media">
             <IndexFeaturedMediaHeader IsImageIconHidden="true" />
-            <IndexFeaturedMediaImage Media="@Media" />
+            <IndexFeaturedMediaVideo Media="@FeaturedVideos" />
         </div>
     }
 </div>
@@ -81,7 +81,10 @@
     public List<FeaturedTrack> Tracks { get; set; } = new();
 
     [Parameter]
-    public List<FeaturedImage> Media { get; set; } = new();
+    public List<FeaturedImage> FeaturedImages { get; set; } = new();
+
+    [Parameter]
+    public List<FeaturedVideo> FeaturedVideos { get; set; } = new();
     
     private void AccessTrackDetail(string slug)
     {
