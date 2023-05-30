@@ -3,10 +3,27 @@
 <div class="header-container">
     <div class="header-contents">
         <h4>
-            <span class="bi bi-play-btn"></span>
-            <span class="bi bi-card-image"></span>
+            <span class="bi bi-play-btn" style="display: @videoIconCssValue;"></span>
+            <span class="bi bi-card-image" style="display: @imageIconCssValue;"></span>
             <span style="margin-right: 4px"></span> 
             Featured Media
         </h4>
     </div>
 </div>
+
+@code {
+    [Parameter]
+    public bool IsVideoIconHidden { get; set; } = false;
+
+    [Parameter]
+    public bool IsImageIconHidden { get; set; } = false;
+
+    private string videoIconCssValue = "unset";
+    private string imageIconCssValue = "unset";
+
+    protected override void OnParametersSet()
+    {
+        videoIconCssValue = IsVideoIconHidden ? "none" : "unset";
+        imageIconCssValue = IsImageIconHidden ? "none" : "unset";
+    }
+}
