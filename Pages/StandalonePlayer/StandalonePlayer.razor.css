@@ -220,6 +220,48 @@ p {
     font-weight: 600;
 }
 
+.track-info-box {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    background-color: #1e2022;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.6);
+}
+
+.track-info-row {
+    display: grid;
+    grid-template-columns: 40% 58%;
+    gap: 8px;
+    padding-bottom: 10px;
+}
+
+.track-info-box img {
+    width: 100%;
+    object-fit: contain;
+    box-shadow: 1px 1px 6px rgba(244, 244, 242, 0.4);
+}
+
+.track-info-property p {
+    color: #f4f4f2;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 1.2px;
+}
+
+.track-info-property p:first-of-type {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.track-info-box button {
+    padding: 8px;
+    border-radius: 18px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
 @media (max-width: 540px) {
     .player-container {
         display: flex;
