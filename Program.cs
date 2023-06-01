@@ -27,6 +27,10 @@ builder.Services.AddHttpClient<TrackDetailService>(client => {
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
 
+builder.Services.AddHttpClient<VideoPlayerService>(client => {
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
 builder.Services.AddSingleton<CloudinaryService>();
 builder.Services.AddSingleton<ImageKitService>();
 

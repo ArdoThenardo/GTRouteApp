@@ -1,6 +1,9 @@
 @page "/player/{VideoId}"
+@using GTRouteApp.Services
 @using GTRouteApp.Models
 @using GTRouteApp.Helpers
+@inject VideoPlayerService VideoPlayerService
+@implements IAsyncDisposable
 
 <div class="player-container" @ref="playerRef">
     <div class="player-side-sub-container">
@@ -12,29 +15,28 @@
         </div>
 
         <div class="player-row-2">
-            <div class="player-column">
-                <div class="standalone-player">
-                    <BlazoredVideo @ref="videoRef"
-                        style="width: inherit;
-                            box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
-                        controls="controls">
-                        <source src="video/pexels-abed-ismail-1.mp4" />
-                    </BlazoredVideo>
+            @if (!string.IsNullOrWhiteSpace(videoData.VideoUrl))
+            {
+                <div class="player-column">
+                    <div class="standalone-player">
+                        <BlazoredVideo @ref="videoRef"
+                            style="width: inherit;
+                                box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
+                            controls="controls">
+                            <source src="@videoData.VideoUrl" />
+                        </BlazoredVideo>
+                    </div>
                 </div>
-            </div>
+            }
 
             <div class="information-column">
-                <span>Duel Race</span>
-                <p>@VideoId Supra vs GT-R GT500 Duel on Deep Forest</p>
+                <span>@videoData.VideoType</span>
+                <p>@videoData.VideoName</p>
                 <p>
-                    <span class="bi bi-person-fill"></span> zeroind233
+                    <span class="bi bi-person-fill"></span> @videoData.Author
                 </p>
                 <p>
-                    <span class="bi bi-card-text"></span>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin ipsum id sollicitudin vehicula. 
-                    Aenean luctus laoreet nulla. Nam pharetra mattis mollis. Orci varius natoque penatibus et magnis dis parturient montes, 
-                    nascetur ridiculus mus. Aliquam erat volutpat. Curabitur est sapien, egestas id tempus quis, vestibulum dictum sem. 
-                    In vestibulum vehicula.
+                    <span class="bi bi-card-text"></span> @videoData.Description
                 </p>
             </div>
         </div>
@@ -156,7 +158,20 @@
 @code {
     [Parameter]
     public string VideoId { get; set; } = "";
+    private TrackVideo videoData = new();
 
     BlazoredVideo? videoRef;
     ElementReference playerRef;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var data = await VideoPlayerService.GetVideoDataById(VideoId);
+        videoData = data;
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (videoRef != null)
+            await videoRef.SetSrcAsync("");
+    }
 }
