@@ -3,6 +3,7 @@
 @using GTRouteApp.Models
 @using GTRouteApp.Helpers
 @inject VideoPlayerService VideoPlayerService
+@inject NavigationManager NavigationManager
 @implements IAsyncDisposable
 
 @if (string.IsNullOrWhiteSpace(videoData.Slug)) // assume no video data if slug is empty
@@ -23,7 +24,8 @@ else
         <div class="player-side-sub-container">
             <div class="player-row-1">
                 <button type="button" 
-                    class="btn btn-secondary">
+                    class="btn btn-secondary"
+                    @onclick="() => BackToHome()">
                     <span class="bi bi-arrow-left-square"></span> Back to Home
                 </button>
             </div>
@@ -207,6 +209,11 @@ else
         showError = false;
 
         await LoadData();
+    }
+
+    private void BackToHome()
+    {
+        NavigationManager.NavigateTo("/");
     }
 
     public async ValueTask DisposeAsync()
