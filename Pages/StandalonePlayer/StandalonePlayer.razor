@@ -3,6 +3,7 @@
 @using GTRouteApp.Models
 @using GTRouteApp.Helpers
 @inject VideoPlayerService VideoPlayerService
+@inject TrackDetailService TrackDetailService
 @inject NavigationManager NavigationManager
 @implements IAsyncDisposable
 
@@ -61,11 +62,11 @@ else
         <div class="related-side-sub-container">
             <div class="track-info-box">
                 <div class="track-info-row">
-                    <img src="img/sample-logo.png" alt="logo track" />
+                    <img src="@trackData.LogoUrl" alt="@trackData.Name" />
                     <div class="track-info-property">
-                        <p>Track Name Speedway</p>
-                        <p>Original Circuit</p>
-                        <p><span class="fi fi-us"></span> USA</p>
+                        <p>@trackData.Name</p>
+                        <p>@trackData.Category</p>
+                        <p><span class="fi fi-@trackData.Country?.code"></span> @trackData.Country?.name</p>
                     </div>
                 </div>
                 <button type="button" class="btn btn-success">
@@ -176,6 +177,8 @@ else
     [Parameter]
     public string VideoId { get; set; } = "";
     private TrackVideo videoData = new();
+    private TrackDetail trackData = new();
+
     BlazoredVideo? videoRef;
     ElementReference playerRef;
     private string errorMessage = "";
@@ -189,6 +192,7 @@ else
     private async Task LoadData()
     {
         await LoadVideoData();
+        await LoadTrackData();
         CheckError();
     }
 
@@ -196,6 +200,15 @@ else
     {
         var data = await VideoPlayerService.GetVideoDataById(VideoId);
         videoData = data;
+    }
+
+    private async Task LoadTrackData()
+    {
+        if (!string.IsNullOrWhiteSpace(videoData.Slug))
+        {
+            var data = await TrackDetailService.GetTrackDetail(videoData.Slug);
+            trackData = data;
+        }
     }
 
     private void CheckError()

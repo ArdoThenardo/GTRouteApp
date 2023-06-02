@@ -241,6 +241,8 @@ p {
     width: 100%;
     object-fit: contain;
     box-shadow: 1px 1px 6px rgba(244, 244, 242, 0.4);
+    border-radius: 8px;
+    isolation: isolate;
 }
 
 .track-info-property p {
