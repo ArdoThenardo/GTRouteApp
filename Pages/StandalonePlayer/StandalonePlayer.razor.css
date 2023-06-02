@@ -264,6 +264,27 @@ p {
     font-weight: 600;
 }
 
+.track-info-placeholder {
+    height: 120px;
+}
+
+.track-info-placeholder ::deep .no-data-container {
+    background-color: transparent;
+    height: 100%;
+}
+
+.track-info-placeholder ::deep .loading-container {
+    width: 46px;
+    height: 46px;
+}
+
+.track-info-placeholder ::deep .loading-container > .loading-traditional::before {
+    width: 100%;
+    height: 100%;
+    -webkit-box-shadow: inset -2px 0 0 0px #f4f4f2;
+    box-shadow: inset -2px 0 0 0px #f4f4f2;
+}
+
 @media (max-width: 540px) {
     .player-container {
         display: flex;

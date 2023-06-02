@@ -61,19 +61,29 @@ else
 
         <div class="related-side-sub-container">
             <div class="track-info-box">
-                <div class="track-info-row">
-                    <img src="@trackData.LogoUrl" alt="@trackData.Name" />
-                    <div class="track-info-property">
-                        <p>@trackData.Name</p>
-                        <p>@trackData.Category</p>
-                        <p><span class="fi fi-@trackData.Country?.code"></span> @trackData.Country?.name</p>
+                @if (!string.IsNullOrWhiteSpace(trackData.Name)) // assume no track data if name is empty
+                {
+                    <div class="track-info-row">
+                        <img src="@trackData.LogoUrl" alt="@trackData.Name" />
+                        <div class="track-info-property">
+                            <p>@trackData.Name</p>
+                            <p>@trackData.Category</p>
+                            <p><span class="fi fi-@trackData.Country?.code"></span> @trackData.Country?.name</p>
+                        </div>
                     </div>
-                </div>
-                <button type="button" 
-                    class="btn btn-success"
-                    @onclick="() => AccessTrackDetail(videoData.Slug)">
-                    View Track
-                </button>
+                    <button type="button" 
+                        class="btn btn-success"
+                        @onclick="() => AccessTrackDetail(videoData.Slug)">
+                        View Track
+                    </button>
+                }
+                else
+                {
+                    <div class="track-info-placeholder">
+                        <NoDataView Message="Failed to fetch" 
+                            ShowError="false" />
+                    </div>
+                }
             </div>
 
             <div class="related-header">
