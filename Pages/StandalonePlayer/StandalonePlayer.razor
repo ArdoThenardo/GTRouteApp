@@ -1,158 +1,224 @@
-@page "/player"
+@page "/player/{VideoId}"
+@using GTRouteApp.Services
+@using GTRouteApp.Models
 @using GTRouteApp.Helpers
+@inject VideoPlayerService VideoPlayerService
+@inject NavigationManager NavigationManager
+@implements IAsyncDisposable
 
-<div class="player-container" @ref="playerRef">
-    <div class="player-side-sub-container">
-        <div class="player-row-1">
-            <button type="button" 
-                class="btn btn-secondary">
-                <span class="bi bi-arrow-left-square"></span> Back to Home
-            </button>
-        </div>
+@if (string.IsNullOrWhiteSpace(videoData.Slug)) // assume no video data if slug is empty
+{
+    <PageTitle>Video Player | GTRoad</PageTitle>
 
-        <div class="player-row-2">
-            <div class="player-column">
-                <div class="standalone-player">
-                    <BlazoredVideo @ref="videoRef"
-                        style="width: inherit;
-                            box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
-                        controls="controls">
-                        <source src="video/pexels-abed-ismail-1.mp4" />
-                    </BlazoredVideo>
-                </div>
+    <div style="height: 88vh; background-color: #f4f4f2;">
+        <NoDataView Message="@errorMessage" 
+            ShowError="@showError" 
+            OnTryAgainClicked="OnTryAgainHandler" />
+    </div>
+}
+else
+{
+    <div class="player-container" @ref="playerRef">
+        <PageTitle>@videoData.VideoName | GTRoad</PageTitle>
+
+        <div class="player-side-sub-container">
+            <div class="player-row-1">
+                <button type="button" 
+                    class="btn btn-secondary"
+                    @onclick="() => BackToHome()">
+                    <span class="bi bi-arrow-left-square"></span> Back to Home
+                </button>
             </div>
 
-            <div class="information-column">
-                <span>Duel Race</span>
-                <p>Supra vs GT-R GT500 Duel on Deep Forest</p>
-                <p>
-                    <span class="bi bi-person-fill"></span> zeroind233
-                </p>
-                <p>
-                    <span class="bi bi-card-text"></span>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin ipsum id sollicitudin vehicula. 
-                    Aenean luctus laoreet nulla. Nam pharetra mattis mollis. Orci varius natoque penatibus et magnis dis parturient montes, 
-                    nascetur ridiculus mus. Aliquam erat volutpat. Curabitur est sapien, egestas id tempus quis, vestibulum dictum sem. 
-                    In vestibulum vehicula.
-                </p>
+            <div class="player-row-2">
+                @if (!string.IsNullOrWhiteSpace(videoData.VideoUrl))
+                {
+                    <div class="player-column">
+                        <div class="standalone-player">
+                            <BlazoredVideo @ref="videoRef"
+                                style="width: inherit;
+                                    box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
+                                controls="controls">
+                                <source src="@videoData.VideoUrl" />
+                            </BlazoredVideo>
+                        </div>
+                    </div>
+                }
+
+                <div class="information-column">
+                    <span>@videoData.VideoType</span>
+                    <p>@videoData.VideoName</p>
+                    <p>
+                        <span class="bi bi-person-fill"></span> @videoData.Author
+                    </p>
+                    <p>
+                        <span class="bi bi-card-text"></span> @videoData.Description
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="related-side-sub-container">
+            <div class="track-info-box">
+                <div class="track-info-row">
+                    <img src="img/sample-logo.png" alt="logo track" />
+                    <div class="track-info-property">
+                        <p>Track Name Speedway</p>
+                        <p>Original Circuit</p>
+                        <p><span class="fi fi-us"></span> USA</p>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success">
+                    View Track
+                </button>
+            </div>
+
+            <div class="related-header">
+                <span><i class="bi bi-film"></i> Related Video&#40;s&#41;</span>
+            </div>
+
+            <div class="related-videos">
+                <article class="related-video-item">
+                    <div class="related-thumbnail-area">
+                        <img alt="video name here" 
+                            src="img/sample-cover.jpg" />
+                        <span class="bi bi-play-circle"></span>
+                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
+                    </div>
+
+                    <div class="related-info-area">
+                        <span>Race Replay</span>
+                        <p>Group 3 Race on Deep Forest Reverse</p>
+                        <p>
+                            <span class="bi bi-person-fill"></span>
+                            zeroind233
+                        </p>
+                    </div>
+                </article>
+
+                <article class="related-video-item">
+                    <div class="related-thumbnail-area">
+                        <img alt="video name here" 
+                            src="img/sample-cover.jpg" />
+                        <span class="bi bi-play-circle"></span>
+                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
+                    </div>
+
+                    <div class="related-info-area">
+                        <span>Race Replay</span>
+                        <p>Group 3 Race on Deep Forest Reverse</p>
+                        <p>
+                            <span class="bi bi-person-fill"></span>
+                            zeroind233
+                        </p>
+                    </div>
+                </article>
+
+                <article class="related-video-item">
+                    <div class="related-thumbnail-area">
+                        <img alt="video name here" 
+                            src="img/sample-cover.jpg" />
+                        <span class="bi bi-play-circle"></span>
+                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
+                    </div>
+
+                    <div class="related-info-area">
+                        <span>Race Replay</span>
+                        <p>Group 3 Race on Deep Forest Reverse</p>
+                        <p>
+                            <span class="bi bi-person-fill"></span>
+                            zeroind233
+                        </p>
+                    </div>
+                </article>
+
+                <article class="related-video-item">
+                    <div class="related-thumbnail-area">
+                        <img alt="video name here" 
+                            src="img/sample-cover.jpg" />
+                        <span class="bi bi-play-circle"></span>
+                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
+                    </div>
+
+                    <div class="related-info-area">
+                        <span>Race Replay</span>
+                        <p>Group 3 Race on Deep Forest Reverse</p>
+                        <p>
+                            <span class="bi bi-person-fill"></span>
+                            zeroind233
+                        </p>
+                    </div>
+                </article>
+
+                <article class="related-video-item">
+                    <div class="related-thumbnail-area">
+                        <img alt="video name here" 
+                            src="img/sample-cover.jpg" />
+                        <span class="bi bi-play-circle"></span>
+                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
+                    </div>
+
+                    <div class="related-info-area">
+                        <span>Race Replay</span>
+                        <p>Group 3 Race on Deep Forest Reverse</p>
+                        <p>
+                            <span class="bi bi-person-fill"></span>
+                            zeroind233
+                        </p>
+                    </div>
+                </article>
             </div>
         </div>
     </div>
-
-    <div class="related-side-sub-container">
-        <div class="track-info-box">
-            <div class="track-info-row">
-                <img src="img/sample-logo.png" alt="logo track" />
-                <div class="track-info-property">
-                    <p>Track Name Speedway</p>
-                    <p>Original Circuit</p>
-                    <p><span class="fi fi-us"></span> USA</p>
-                </div>
-            </div>
-            <button type="button" class="btn btn-success">
-                View Track
-            </button>
-        </div>
-
-        <div class="related-header">
-            <span><i class="bi bi-film"></i> Related Video&#40;s&#41;</span>
-        </div>
-
-        <div class="related-videos">
-            <article class="related-video-item">
-                <div class="related-thumbnail-area">
-                    <img alt="video name here" 
-                        src="img/sample-cover.jpg" />
-                    <span class="bi bi-play-circle"></span>
-                    <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                </div>
-
-                <div class="related-info-area">
-                    <span>Race Replay</span>
-                    <p>Group 3 Race on Deep Forest Reverse</p>
-                    <p>
-                        <span class="bi bi-person-fill"></span>
-                        zeroind233
-                    </p>
-                </div>
-            </article>
-
-            <article class="related-video-item">
-                <div class="related-thumbnail-area">
-                    <img alt="video name here" 
-                        src="img/sample-cover.jpg" />
-                    <span class="bi bi-play-circle"></span>
-                    <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                </div>
-
-                <div class="related-info-area">
-                    <span>Race Replay</span>
-                    <p>Group 3 Race on Deep Forest Reverse</p>
-                    <p>
-                        <span class="bi bi-person-fill"></span>
-                        zeroind233
-                    </p>
-                </div>
-            </article>
-
-            <article class="related-video-item">
-                <div class="related-thumbnail-area">
-                    <img alt="video name here" 
-                        src="img/sample-cover.jpg" />
-                    <span class="bi bi-play-circle"></span>
-                    <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                </div>
-
-                <div class="related-info-area">
-                    <span>Race Replay</span>
-                    <p>Group 3 Race on Deep Forest Reverse</p>
-                    <p>
-                        <span class="bi bi-person-fill"></span>
-                        zeroind233
-                    </p>
-                </div>
-            </article>
-
-            <article class="related-video-item">
-                <div class="related-thumbnail-area">
-                    <img alt="video name here" 
-                        src="img/sample-cover.jpg" />
-                    <span class="bi bi-play-circle"></span>
-                    <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                </div>
-
-                <div class="related-info-area">
-                    <span>Race Replay</span>
-                    <p>Group 3 Race on Deep Forest Reverse</p>
-                    <p>
-                        <span class="bi bi-person-fill"></span>
-                        zeroind233
-                    </p>
-                </div>
-            </article>
-
-            <article class="related-video-item">
-                <div class="related-thumbnail-area">
-                    <img alt="video name here" 
-                        src="img/sample-cover.jpg" />
-                    <span class="bi bi-play-circle"></span>
-                    <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                </div>
-
-                <div class="related-info-area">
-                    <span>Race Replay</span>
-                    <p>Group 3 Race on Deep Forest Reverse</p>
-                    <p>
-                        <span class="bi bi-person-fill"></span>
-                        zeroind233
-                    </p>
-                </div>
-            </article>
-        </div>
-    </div>
-</div>
+}
 
 @code {
+    [Parameter]
+    public string VideoId { get; set; } = "";
+    private TrackVideo videoData = new();
     BlazoredVideo? videoRef;
     ElementReference playerRef;
+    private string errorMessage = "";
+    private bool showError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        await LoadVideoData();
+        CheckError();
+    }
+
+    private async Task LoadVideoData()
+    {
+        var data = await VideoPlayerService.GetVideoDataById(VideoId);
+        videoData = data;
+    }
+
+    private void CheckError()
+    {
+        errorMessage = VideoPlayerService.GetRecentErrorMessage();
+        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
+
+    private async Task OnTryAgainHandler()
+    {
+        showError = false;
+
+        await LoadData();
+    }
+
+    private void BackToHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (videoRef != null)
+            await videoRef.SetSrcAsync("");
+    }
 }
