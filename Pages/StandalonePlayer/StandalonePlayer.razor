@@ -3,6 +3,7 @@
 @using GTRouteApp.Models
 @using GTRouteApp.Helpers
 @inject VideoPlayerService VideoPlayerService
+@inject TrackDetailService TrackDetailService
 @inject NavigationManager NavigationManager
 @implements IAsyncDisposable
 
@@ -11,9 +12,9 @@
     <PageTitle>Video Player | GTRoad</PageTitle>
 
     <div style="height: 88vh; background-color: #f4f4f2;">
-        <NoDataView Message="@errorMessage" 
-            ShowError="@showError" 
-            OnTryAgainClicked="OnTryAgainHandler" />
+        <NoDataView Message="@errorMessageForVideoData" 
+            ShowError="@showErrorForVideoData" 
+            OnTryAgainClicked="OnTryAgainGetVideoHandler" />
     </div>
 }
 else
@@ -60,17 +61,30 @@ else
 
         <div class="related-side-sub-container">
             <div class="track-info-box">
-                <div class="track-info-row">
-                    <img src="img/sample-logo.png" alt="logo track" />
-                    <div class="track-info-property">
-                        <p>Track Name Speedway</p>
-                        <p>Original Circuit</p>
-                        <p><span class="fi fi-us"></span> USA</p>
+                @if (!string.IsNullOrWhiteSpace(trackData.Name)) // assume no track data if name is empty
+                {
+                    <div class="track-info-row">
+                        <img src="@trackData.LogoUrl" alt="@trackData.Name" />
+                        <div class="track-info-property">
+                            <p>@trackData.Name</p>
+                            <p>@trackData.Category</p>
+                            <p><span class="fi fi-@trackData.Country?.code"></span> @trackData.Country?.name</p>
+                        </div>
                     </div>
-                </div>
-                <button type="button" class="btn btn-success">
-                    View Track
-                </button>
+                    <button type="button" 
+                        class="btn btn-success"
+                        @onclick="() => AccessTrackDetail(videoData.Slug)">
+                        View Track
+                    </button>
+                }
+                else
+                {
+                    <div class="track-info-placeholder">
+                        <NoDataView Message="@errorMessageForTrackInfo" 
+                            ShowError="@showErrorForTrackInfo"
+                            OnTryAgainClicked="OnTryAgainGetTrackInfo" />
+                    </div>
+                }
             </div>
 
             <div class="related-header">
@@ -176,10 +190,14 @@ else
     [Parameter]
     public string VideoId { get; set; } = "";
     private TrackVideo videoData = new();
+    private TrackDetail trackData = new();
+
     BlazoredVideo? videoRef;
     ElementReference playerRef;
-    private string errorMessage = "";
-    private bool showError = false;
+    private string errorMessageForVideoData = "";
+    private string errorMessageForTrackInfo = "";
+    private bool showErrorForVideoData = false;
+    private bool showErrorForTrackInfo = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -189,6 +207,7 @@ else
     private async Task LoadData()
     {
         await LoadVideoData();
+        await LoadTrackData();
         CheckError();
     }
 
@@ -198,22 +217,47 @@ else
         videoData = data;
     }
 
-    private void CheckError()
+    private async Task LoadTrackData()
     {
-        errorMessage = VideoPlayerService.GetRecentErrorMessage();
-        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+        if (!string.IsNullOrWhiteSpace(videoData.Slug))
+        {
+            var data = await TrackDetailService.GetTrackDetail(videoData.Slug);
+            trackData = data;
+        }
     }
 
-    private async Task OnTryAgainHandler()
+    private void CheckError()
     {
-        showError = false;
+        errorMessageForVideoData = VideoPlayerService.GetRecentErrorMessage();
+        showErrorForVideoData = string.IsNullOrWhiteSpace(errorMessageForVideoData) ? false : true;
+
+        errorMessageForTrackInfo = TrackDetailService.GetRecentErrorMessage();
+        showErrorForTrackInfo = string.IsNullOrWhiteSpace(errorMessageForTrackInfo) ? false : true;
+    }
+
+    private async Task OnTryAgainGetVideoHandler()
+    {
+        showErrorForVideoData = false;
 
         await LoadData();
+    }
+
+    private async Task OnTryAgainGetTrackInfo()
+    {
+        showErrorForTrackInfo = false;
+
+        await LoadVideoData();
+        CheckError();
     }
 
     private void BackToHome()
     {
         NavigationManager.NavigateTo("/");
+    }
+
+    private void AccessTrackDetail(string slug)
+    {
+        NavigationManager.NavigateTo($"/browse/detail/{slug}");
     }
 
     public async ValueTask DisposeAsync()
