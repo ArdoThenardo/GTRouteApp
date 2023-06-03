@@ -12,9 +12,9 @@
     <PageTitle>Video Player | GTRoad</PageTitle>
 
     <div style="height: 88vh; background-color: #f4f4f2;">
-        <NoDataView Message="@errorMessage" 
-            ShowError="@showError" 
-            OnTryAgainClicked="OnTryAgainHandler" />
+        <NoDataView Message="@errorMessageForVideoData" 
+            ShowError="@showErrorForVideoData" 
+            OnTryAgainClicked="OnTryAgainGetVideoHandler" />
     </div>
 }
 else
@@ -80,8 +80,9 @@ else
                 else
                 {
                     <div class="track-info-placeholder">
-                        <NoDataView Message="Failed to fetch" 
-                            ShowError="false" />
+                        <NoDataView Message="@errorMessageForTrackInfo" 
+                            ShowError="@showErrorForTrackInfo"
+                            OnTryAgainClicked="OnTryAgainGetTrackInfo" />
                     </div>
                 }
             </div>
@@ -193,8 +194,10 @@ else
 
     BlazoredVideo? videoRef;
     ElementReference playerRef;
-    private string errorMessage = "";
-    private bool showError = false;
+    private string errorMessageForVideoData = "";
+    private string errorMessageForTrackInfo = "";
+    private bool showErrorForVideoData = false;
+    private bool showErrorForTrackInfo = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -225,15 +228,26 @@ else
 
     private void CheckError()
     {
-        errorMessage = VideoPlayerService.GetRecentErrorMessage();
-        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+        errorMessageForVideoData = VideoPlayerService.GetRecentErrorMessage();
+        showErrorForVideoData = string.IsNullOrWhiteSpace(errorMessageForVideoData) ? false : true;
+
+        errorMessageForTrackInfo = TrackDetailService.GetRecentErrorMessage();
+        showErrorForTrackInfo = string.IsNullOrWhiteSpace(errorMessageForTrackInfo) ? false : true;
     }
 
-    private async Task OnTryAgainHandler()
+    private async Task OnTryAgainGetVideoHandler()
     {
-        showError = false;
+        showErrorForVideoData = false;
 
         await LoadData();
+    }
+
+    private async Task OnTryAgainGetTrackInfo()
+    {
+        showErrorForTrackInfo = false;
+
+        await LoadVideoData();
+        CheckError();
     }
 
     private void BackToHome()

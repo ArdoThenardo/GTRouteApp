@@ -285,6 +285,21 @@ p {
     box-shadow: inset -2px 0 0 0px #f4f4f2;
 }
 
+.track-info-placeholder ::deep .message-container > .disconnect-icon {
+    font-size: 24px;
+}
+
+.track-info-placeholder ::deep .message-container p {
+    color: #f4f4f2;
+    font-size: 14px;
+}
+
+.track-info-placeholder ::deep .btn {
+    font-size: 12px;
+    padding-block: 4px;
+    padding-inline: 8px;
+}
+
 @media (max-width: 540px) {
     .player-container {
         display: flex;
