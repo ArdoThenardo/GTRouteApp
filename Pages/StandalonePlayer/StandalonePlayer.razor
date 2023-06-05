@@ -92,25 +92,32 @@ else
             </div>
 
             <div class="related-videos">
-                @foreach (var video in otherVideos)
+                @if (otherVideos.Count() < 1)
                 {
-                    <article class="related-video-item">
-                        <div class="related-thumbnail-area">
-                            <img alt="@video.VideoName" 
-                                src="@video.ThumbnailUrl" />
-                            <span class="bi bi-play-circle"></span>
-                            <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(video.DurationInSeconds ?? 0)</span>
-                        </div>
+                    <NoDataView />
+                }
+                else
+                {
+                    @foreach (var video in otherVideos)
+                    {
+                        <article class="related-video-item">
+                            <div class="related-thumbnail-area">
+                                <img alt="@video.VideoName" 
+                                    src="@video.ThumbnailUrl" />
+                                <span class="bi bi-play-circle"></span>
+                                <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(video.DurationInSeconds ?? 0)</span>
+                            </div>
 
-                        <div class="related-info-area">
-                            <span>@video.VideoType</span>
-                            <p>@video.VideoName</p>
-                            <p>
-                                <span class="bi bi-person-fill"></span>
-                                @video.Author
-                            </p>
-                        </div>
-                    </article>
+                            <div class="related-info-area">
+                                <span>@video.VideoType</span>
+                                <p>@video.VideoName</p>
+                                <p>
+                                    <span class="bi bi-person-fill"></span>
+                                    @video.Author
+                                </p>
+                            </div>
+                        </article>
+                    }
                 }
             </div>
         </div>
