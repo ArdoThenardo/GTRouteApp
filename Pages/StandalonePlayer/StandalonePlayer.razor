@@ -92,95 +92,26 @@ else
             </div>
 
             <div class="related-videos">
-                <article class="related-video-item">
-                    <div class="related-thumbnail-area">
-                        <img alt="video name here" 
-                            src="img/sample-cover.jpg" />
-                        <span class="bi bi-play-circle"></span>
-                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                    </div>
+                @foreach (var video in otherVideos)
+                {
+                    <article class="related-video-item">
+                        <div class="related-thumbnail-area">
+                            <img alt="@video.VideoName" 
+                                src="@video.ThumbnailUrl" />
+                            <span class="bi bi-play-circle"></span>
+                            <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(video.DurationInSeconds ?? 0)</span>
+                        </div>
 
-                    <div class="related-info-area">
-                        <span>Race Replay</span>
-                        <p>Group 3 Race on Deep Forest Reverse</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            zeroind233
-                        </p>
-                    </div>
-                </article>
-
-                <article class="related-video-item">
-                    <div class="related-thumbnail-area">
-                        <img alt="video name here" 
-                            src="img/sample-cover.jpg" />
-                        <span class="bi bi-play-circle"></span>
-                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                    </div>
-
-                    <div class="related-info-area">
-                        <span>Race Replay</span>
-                        <p>Group 3 Race on Deep Forest Reverse</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            zeroind233
-                        </p>
-                    </div>
-                </article>
-
-                <article class="related-video-item">
-                    <div class="related-thumbnail-area">
-                        <img alt="video name here" 
-                            src="img/sample-cover.jpg" />
-                        <span class="bi bi-play-circle"></span>
-                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                    </div>
-
-                    <div class="related-info-area">
-                        <span>Race Replay</span>
-                        <p>Group 3 Race on Deep Forest Reverse</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            zeroind233
-                        </p>
-                    </div>
-                </article>
-
-                <article class="related-video-item">
-                    <div class="related-thumbnail-area">
-                        <img alt="video name here" 
-                            src="img/sample-cover.jpg" />
-                        <span class="bi bi-play-circle"></span>
-                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                    </div>
-
-                    <div class="related-info-area">
-                        <span>Race Replay</span>
-                        <p>Group 3 Race on Deep Forest Reverse</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            zeroind233
-                        </p>
-                    </div>
-                </article>
-
-                <article class="related-video-item">
-                    <div class="related-thumbnail-area">
-                        <img alt="video name here" 
-                            src="img/sample-cover.jpg" />
-                        <span class="bi bi-play-circle"></span>
-                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                    </div>
-
-                    <div class="related-info-area">
-                        <span>Race Replay</span>
-                        <p>Group 3 Race on Deep Forest Reverse</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            zeroind233
-                        </p>
-                    </div>
-                </article>
+                        <div class="related-info-area">
+                            <span>@video.VideoType</span>
+                            <p>@video.VideoName</p>
+                            <p>
+                                <span class="bi bi-person-fill"></span>
+                                @video.Author
+                            </p>
+                        </div>
+                    </article>
+                }
             </div>
         </div>
     </div>
@@ -191,6 +122,7 @@ else
     public string VideoId { get; set; } = "";
     private TrackVideo videoData = new();
     private BasicTrackDetail trackData = new();
+    private List<TrackVideo> otherVideos = new();
 
     BlazoredVideo? videoRef;
     ElementReference playerRef;
@@ -208,6 +140,8 @@ else
     {
         await LoadVideoData();
         await LoadTrackData();
+        await LoadListOfOtherVideos();
+        
         CheckError();
     }
 
@@ -224,6 +158,12 @@ else
             var data = await TrackDetailService.GetBasicTrackDetail(videoData.Slug);
             trackData = data;
         }
+    }
+
+    private async Task LoadListOfOtherVideos()
+    {
+        var data = await VideoPlayerService.GetOtherVideosById(this.VideoId);
+        otherVideos = data;
     }
 
     private void CheckError()

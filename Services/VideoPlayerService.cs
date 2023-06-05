@@ -34,6 +34,23 @@ public class VideoPlayerService: BaseService
         }
     }
 
+    public async Task<List<TrackVideo>> GetOtherVideosById(string videoId)
+    {
+        List<TrackVideo> videos = new();
+
+        try
+        {
+            var data = await HitRequest<BaseModel<List<TrackVideo>>>($"{GetVideoByIdUrl}/{videoId}/other");
+            var otherVideos = data.Data ?? Enumerable.Empty<TrackVideo>().ToList();
+
+            return otherVideos;
+        }
+        catch
+        {
+            return Enumerable.Empty<TrackVideo>().ToList();
+        }
+    }
+
     public string GetRecentErrorMessage()
     {
         return recentError;
