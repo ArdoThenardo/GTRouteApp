@@ -190,7 +190,7 @@ else
     [Parameter]
     public string VideoId { get; set; } = "";
     private TrackVideo videoData = new();
-    private TrackDetail trackData = new();
+    private BasicTrackDetail trackData = new();
 
     BlazoredVideo? videoRef;
     ElementReference playerRef;
@@ -221,7 +221,7 @@ else
     {
         if (!string.IsNullOrWhiteSpace(videoData.Slug))
         {
-            var data = await TrackDetailService.GetTrackDetail(videoData.Slug);
+            var data = await TrackDetailService.GetBasicTrackDetail(videoData.Slug);
             trackData = data;
         }
     }

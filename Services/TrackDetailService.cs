@@ -9,6 +9,8 @@ public class TrackDetailService: BaseService
     // remote: /detail?slug={slug}
     // sample: sample-data/track_detail.json
     private readonly string GetDetailUrl;
+    // remote: /detail/basic?slug={slug}
+    private readonly string GetBasicDetailUrl;
     private readonly ImageTransformers imageTransformers;
     private TrackDetail detail = new();
     private string recentError = "";
@@ -16,7 +18,32 @@ public class TrackDetailService: BaseService
     public TrackDetailService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
     { 
         this.GetDetailUrl = $"{_baseUrl}/detail";
+        this.GetBasicDetailUrl = $"{_baseUrl}/detail/basic";
         this.imageTransformers = new ImageTransformers(settings);
+    }
+
+    public async Task<BasicTrackDetail> GetBasicTrackDetail(string slug)
+    {
+        BasicTrackDetail detail = new();
+        recentError = "";
+
+        try
+        {
+            var data = await HitRequest<BaseModel<BasicTrackDetail>>($"{GetBasicDetailUrl}?slug={slug}");
+
+            if (data.NumberOfData == 0 || data.Data == null)
+                recentError = ErrorMessage.NoData;
+
+            detail = data.Data ?? new BasicTrackDetail();
+
+            return detail;
+        }
+        catch
+        {
+            recentError = ErrorMessage.LoadDetailFailed;
+
+            return new BasicTrackDetail();
+        }
     }
 
     public async Task<TrackDetail> GetTrackDetail(string slug)
