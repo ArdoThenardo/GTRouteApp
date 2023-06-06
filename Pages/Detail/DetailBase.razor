@@ -163,23 +163,34 @@
         {
             case SubDetail.General:
                 NavigationManager
-                    .NavigateTo(NavigationManager.GetUriWithQueryParameter(
-                        "selected_subdetail", SelectedSubdetail.General));
+                    .NavigateTo(
+                        NavigationManager.GetUriWithQueryParameter(
+                        "selected_subdetail", SelectedSubdetail.General), 
+                        false, 
+                        true);
                 break;
             case SubDetail.Layout:
                 NavigationManager
-                    .NavigateTo(NavigationManager.GetUriWithQueryParameter(
-                        "selected_subdetail", SelectedSubdetail.Layout));
+                    .NavigateTo(
+                        NavigationManager.GetUriWithQueryParameter(
+                        "selected_subdetail", SelectedSubdetail.Layout), 
+                        false, 
+                        true);
                 break;
             case SubDetail.Video:
                 NavigationManager
-                    .NavigateTo(NavigationManager.GetUriWithQueryParameter(
-                        "selected_subdetail", SelectedSubdetail.Showcase));
+                    .NavigateTo(
+                        NavigationManager.GetUriWithQueryParameter(
+                        "selected_subdetail", SelectedSubdetail.Showcase), 
+                        false, 
+                        true);
                 break;
             case SubDetail.Image:
                 NavigationManager
                     .NavigateTo(NavigationManager.GetUriWithQueryParameter(
-                        "selected_subdetail", SelectedSubdetail.Gallery));
+                        "selected_subdetail", SelectedSubdetail.Gallery), 
+                        false, 
+                        true);
                 break;
             default:
                 NavigationManager.NavigateTo(NavigationManager.Uri);
