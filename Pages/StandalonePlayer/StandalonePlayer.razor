@@ -2,6 +2,7 @@
 @using GTRouteApp.Services
 @using GTRouteApp.Models
 @using GTRouteApp.Helpers
+@using GTRouteApp.DetailComponents
 @inject VideoPlayerService VideoPlayerService
 @inject TrackDetailService TrackDetailService
 @inject NavigationManager NavigationManager
@@ -88,99 +89,47 @@ else
             </div>
 
             <div class="related-header">
-                <span><i class="bi bi-film"></i> Related Video&#40;s&#41;</span>
+                <span><i class="bi bi-film"></i> Suggested Video&#40;s&#41;</span>
             </div>
 
             <div class="related-videos">
-                <article class="related-video-item">
-                    <div class="related-thumbnail-area">
-                        <img alt="video name here" 
-                            src="img/sample-cover.jpg" />
-                        <span class="bi bi-play-circle"></span>
-                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                    </div>
+                @if (otherVideos.Count() < 1)
+                {
+                    @if (showErrorForOtherVideos)
+                    {
+                        <NoDataView Message="@errorMessageForOtherVideos"
+                            ShowError="@showErrorForOtherVideos"
+                            OnTryAgainClicked="OnTryAgainGetOtherVideos" />
+                    }
+                    else
+                    {
+                        <DetailNoData OverrideText="@noOtherVideosMessage"
+                            IconDisplayCssValue="none" />
+                    }
+                }
+                else
+                {
+                    @foreach (var video in otherVideos)
+                    {
+                        <article class="related-video-item">
+                            <div class="related-thumbnail-area">
+                                <img alt="@video.VideoName" 
+                                    src="@video.ThumbnailUrl" />
+                                <span class="bi bi-play-circle"></span>
+                                <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(video.DurationInSeconds ?? 0)</span>
+                            </div>
 
-                    <div class="related-info-area">
-                        <span>Race Replay</span>
-                        <p>Group 3 Race on Deep Forest Reverse</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            zeroind233
-                        </p>
-                    </div>
-                </article>
-
-                <article class="related-video-item">
-                    <div class="related-thumbnail-area">
-                        <img alt="video name here" 
-                            src="img/sample-cover.jpg" />
-                        <span class="bi bi-play-circle"></span>
-                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                    </div>
-
-                    <div class="related-info-area">
-                        <span>Race Replay</span>
-                        <p>Group 3 Race on Deep Forest Reverse</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            zeroind233
-                        </p>
-                    </div>
-                </article>
-
-                <article class="related-video-item">
-                    <div class="related-thumbnail-area">
-                        <img alt="video name here" 
-                            src="img/sample-cover.jpg" />
-                        <span class="bi bi-play-circle"></span>
-                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                    </div>
-
-                    <div class="related-info-area">
-                        <span>Race Replay</span>
-                        <p>Group 3 Race on Deep Forest Reverse</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            zeroind233
-                        </p>
-                    </div>
-                </article>
-
-                <article class="related-video-item">
-                    <div class="related-thumbnail-area">
-                        <img alt="video name here" 
-                            src="img/sample-cover.jpg" />
-                        <span class="bi bi-play-circle"></span>
-                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                    </div>
-
-                    <div class="related-info-area">
-                        <span>Race Replay</span>
-                        <p>Group 3 Race on Deep Forest Reverse</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            zeroind233
-                        </p>
-                    </div>
-                </article>
-
-                <article class="related-video-item">
-                    <div class="related-thumbnail-area">
-                        <img alt="video name here" 
-                            src="img/sample-cover.jpg" />
-                        <span class="bi bi-play-circle"></span>
-                        <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(168)</span>
-                    </div>
-
-                    <div class="related-info-area">
-                        <span>Race Replay</span>
-                        <p>Group 3 Race on Deep Forest Reverse</p>
-                        <p>
-                            <span class="bi bi-person-fill"></span>
-                            zeroind233
-                        </p>
-                    </div>
-                </article>
+                            <div class="related-info-area">
+                                <span>@video.VideoType</span>
+                                <p>@video.VideoName</p>
+                                <p>
+                                    <span class="bi bi-person-fill"></span>
+                                    @video.Author
+                                </p>
+                            </div>
+                        </article>
+                    }
+                }
             </div>
         </div>
     </div>
@@ -191,13 +140,17 @@ else
     public string VideoId { get; set; } = "";
     private TrackVideo videoData = new();
     private BasicTrackDetail trackData = new();
+    private List<TrackVideo> otherVideos = new();
 
     BlazoredVideo? videoRef;
     ElementReference playerRef;
     private string errorMessageForVideoData = "";
     private string errorMessageForTrackInfo = "";
+    private string errorMessageForOtherVideos = "";
     private bool showErrorForVideoData = false;
     private bool showErrorForTrackInfo = false;
+    private bool showErrorForOtherVideos = false;
+    private string noOtherVideosMessage = ErrorMessage.NoRelatedVideos;
 
     protected override async Task OnInitializedAsync()
     {
@@ -208,6 +161,8 @@ else
     {
         await LoadVideoData();
         await LoadTrackData();
+        await LoadListOfOtherVideos();
+
         CheckError();
     }
 
@@ -226,6 +181,12 @@ else
         }
     }
 
+    private async Task LoadListOfOtherVideos()
+    {
+        var data = await VideoPlayerService.GetOtherVideosById(this.VideoId);
+        otherVideos = data;
+    }
+
     private void CheckError()
     {
         errorMessageForVideoData = VideoPlayerService.GetRecentErrorMessage();
@@ -233,6 +194,9 @@ else
 
         errorMessageForTrackInfo = TrackDetailService.GetRecentErrorMessage();
         showErrorForTrackInfo = string.IsNullOrWhiteSpace(errorMessageForTrackInfo) ? false : true;
+
+        errorMessageForOtherVideos = VideoPlayerService.GetRecentErrorForOtherVideos();
+        showErrorForOtherVideos = string.IsNullOrWhiteSpace(errorMessageForOtherVideos) ? false : true;
     }
 
     private async Task OnTryAgainGetVideoHandler()
@@ -247,6 +211,14 @@ else
         showErrorForTrackInfo = false;
 
         await LoadVideoData();
+        CheckError();
+    }
+
+    private async Task OnTryAgainGetOtherVideos()
+    {
+        showErrorForOtherVideos = false;
+
+        await LoadListOfOtherVideos();
         CheckError();
     }
 

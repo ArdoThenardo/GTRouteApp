@@ -36,7 +36,8 @@ public static class ErrorMessage
     public const string LoadMoreTracksFailed = "There was a problem when trying to load more race tracks. Please try again.";
     public const string LoadDetailFailed = "Unable to get track detail data. Please try again.";
     public const string LoadVideoFailed = "Unable to load video data. Please try again.";
-    public const string NoRelatedVideos = "There is no other video available related to this race track.";
+    public const string LoadOtherVideoFailed = "Unable to load other video. Please try again.";
+    public const string NoRelatedVideos = "There is no other video available.";
 }
 
 public static class DetailSidebarMenu
