@@ -111,7 +111,8 @@ else
                 {
                     @foreach (var video in otherVideos)
                     {
-                        <article class="related-video-item">
+                        <article class="related-video-item" 
+                            @onclick="() => AccessOtherVideo(video.Id)">
                             <div class="related-thumbnail-area">
                                 <img alt="@video.VideoName" 
                                     src="@video.ThumbnailUrl" />
@@ -152,7 +153,7 @@ else
     private bool showErrorForOtherVideos = false;
     private string noOtherVideosMessage = ErrorMessage.NoRelatedVideos;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         await LoadData();
     }
@@ -170,6 +171,10 @@ else
     {
         var data = await VideoPlayerService.GetVideoDataById(VideoId);
         videoData = data;
+
+        // reload player to make sure player play right video after data is assigned
+        if (videoRef != null)
+            await videoRef.ReloadControl();
     }
 
     private async Task LoadTrackData()
@@ -230,6 +235,14 @@ else
     private void AccessTrackDetail(string slug)
     {
         NavigationManager.NavigateTo($"/browse/detail/{slug}");
+    }
+
+    private void AccessOtherVideo(string? videoId)
+    {
+        if (!string.IsNullOrWhiteSpace(videoId))
+        {
+            NavigationManager.NavigateTo($"/player/{videoId}");
+        }
     }
 
     public async ValueTask DisposeAsync()
