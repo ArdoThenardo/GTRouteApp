@@ -2,6 +2,7 @@
 @using GTRouteApp.Services
 @using GTRouteApp.Models
 @using GTRouteApp.Helpers
+@using GTRouteApp.DetailComponents
 @inject VideoPlayerService VideoPlayerService
 @inject TrackDetailService TrackDetailService
 @inject NavigationManager NavigationManager
@@ -94,7 +95,17 @@ else
             <div class="related-videos">
                 @if (otherVideos.Count() < 1)
                 {
-                    <NoDataView />
+                    @if (showErrorForOtherVideos)
+                    {
+                        <NoDataView Message="@errorMessageForOtherVideos"
+                            ShowError="@showErrorForOtherVideos"
+                            OnTryAgainClicked="OnTryAgainGetOtherVideos" />
+                    }
+                    else
+                    {
+                        <DetailNoData OverrideText="@noOtherVideosMessage"
+                            IconDisplayCssValue="none" />
+                    }
                 }
                 else
                 {
@@ -135,8 +146,11 @@ else
     ElementReference playerRef;
     private string errorMessageForVideoData = "";
     private string errorMessageForTrackInfo = "";
+    private string errorMessageForOtherVideos = "";
     private bool showErrorForVideoData = false;
     private bool showErrorForTrackInfo = false;
+    private bool showErrorForOtherVideos = false;
+    private string noOtherVideosMessage = ErrorMessage.NoRelatedVideos;
 
     protected override async Task OnInitializedAsync()
     {
@@ -180,6 +194,9 @@ else
 
         errorMessageForTrackInfo = TrackDetailService.GetRecentErrorMessage();
         showErrorForTrackInfo = string.IsNullOrWhiteSpace(errorMessageForTrackInfo) ? false : true;
+
+        errorMessageForOtherVideos = VideoPlayerService.GetRecentErrorForOtherVideos();
+        showErrorForOtherVideos = string.IsNullOrWhiteSpace(errorMessageForOtherVideos) ? false : true;
     }
 
     private async Task OnTryAgainGetVideoHandler()
@@ -194,6 +211,14 @@ else
         showErrorForTrackInfo = false;
 
         await LoadVideoData();
+        CheckError();
+    }
+
+    private async Task OnTryAgainGetOtherVideos()
+    {
+        showErrorForOtherVideos = false;
+
+        await LoadListOfOtherVideos();
         CheckError();
     }
 

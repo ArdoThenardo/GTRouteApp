@@ -9,6 +9,7 @@ public class VideoPlayerService: BaseService
     // remote: /video/{id}
     private readonly string GetVideoByIdUrl;
     private string recentError = "";
+    private string recentErrorForOtherVideos = "";
 
     public VideoPlayerService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings)
     {
@@ -43,10 +44,15 @@ public class VideoPlayerService: BaseService
             var data = await HitRequest<BaseModel<List<TrackVideo>>>($"{GetVideoByIdUrl}/{videoId}/other");
             var otherVideos = data.Data ?? Enumerable.Empty<TrackVideo>().ToList();
 
+            if (otherVideos.Count() < 1)
+                recentErrorForOtherVideos = ErrorMessage.NoRelatedVideos;
+
             return otherVideos;
         }
         catch
         {
+            recentErrorForOtherVideos = ErrorMessage.LoadOtherVideoFailed;
+
             return Enumerable.Empty<TrackVideo>().ToList();
         }
     }
@@ -54,5 +60,10 @@ public class VideoPlayerService: BaseService
     public string GetRecentErrorMessage()
     {
         return recentError;
+    }
+
+    public string GetRecentErrorForOtherVideos()
+    {
+        return recentErrorForOtherVideos;
     }
 }
