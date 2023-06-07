@@ -20,7 +20,10 @@
                     </div>
                     <div class="item-section-bottom">
                         <div class="bottom-section-1">
-                            <p>@media.VideoName</p>
+                            <p>
+                                <span class="bi bi-film"></span>
+                                @media.VideoName
+                            </p>
                             <p>
                                 <span class="bi bi-person-fill"></span>
                                 @media.Author
@@ -33,6 +36,11 @@
                         </div>
                     </div>
                 </div>
+                <button type="button" 
+                    class="btn btn-success"
+                    @onclick="() => OpenFeaturedVideo(media.VideoId)">
+                    Watch Video
+                </button>
             </article>
         }
     </div>
