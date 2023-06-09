@@ -70,7 +70,7 @@
         flex-direction: row;
         align-items: center;
         padding-inline: 13px;
-        max-height: 60px;
+        height: 60px;
         gap: 1px;
         border-bottom: 0.8px solid #e8e8e8;
     }
