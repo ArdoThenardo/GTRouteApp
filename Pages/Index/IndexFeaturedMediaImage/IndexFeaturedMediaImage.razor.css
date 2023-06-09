@@ -53,7 +53,7 @@ a:hover {
     position: relative;
     background-color: #2b2b28;
     height: 46vh;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
     isolation: isolate;
