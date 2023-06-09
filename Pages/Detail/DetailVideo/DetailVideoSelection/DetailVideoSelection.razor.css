@@ -70,7 +70,7 @@ p {
     transition: .25s;
     width: 24vw;
     border: 1px solid #1e2022;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     isolation: isolate;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
