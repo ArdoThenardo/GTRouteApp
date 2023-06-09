@@ -38,7 +38,7 @@ p {
 
 .showcase-group-2 {
     display: flex;
-    margin-inline: 16px;
+    padding-inline: 16px;
     padding-block: 16px;
     flex-direction: row;
     flex-wrap: wrap;
@@ -59,27 +59,14 @@ p {
 }
 
 .video-item {
-    background-image: url('img/gtroad-sample-thumbnail.jpg');
-    background-size: cover;
-    background-blend-mode: overlay;
-    background-color: #f4f4f2;
-    background-position: center;
     position: relative;
     display: flex;
     flex-direction: column;
-    transition: .25s;
     width: 24vw;
-    border: 1px solid #1e2022;
-    border-radius: 12px;
-    overflow: hidden;
-    isolation: isolate;
-    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
 }
 
 .video-item:hover {
     cursor: pointer;
-    border: 1px solid #ffc107;
-    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
 .item-thumbnail {
@@ -92,6 +79,14 @@ p {
     object-fit: cover;
     height: 100%;
     width: 100%;
+    border-radius: 12px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+    transition: .25s;
+}
+
+.video-item:hover > .item-thumbnail img {
+    border: 1.5px solid #ffc107;
+    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
 .item-thumbnail span:first-of-type, 
@@ -128,45 +123,42 @@ p {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: .25s;
 }
 
 .video-item:hover > .item-thumbnail span:nth-of-type(3) {
-    transition: .25s;
     text-shadow: 1px 1px 8px rgba(255, 193, 7, 0.8);
 }
 
 .item-properties {
     display: flex;
     flex-direction: row;
-    row-gap: 8px;
-    margin-top: 8px;
-    margin-inline: 8px;
+    margin-top: 4px;
+    margin-inline: 12px;
+}
+
+.property-row-1 {
+    transition: .25s;
 }
 
 .property-row-1 p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
 }
 
 .property-row-1 span {
     display: inline-block;
-    background-color: #303841;
-    color: #f4f4f2;
-    font-size: 12px;
-    font-weight: 500;
-    padding-block: 6px;
-    padding-inline: 10px;
-    border-radius: 6px;
+    font-size: 16px;
+}
+
+.video-item:hover > .property-row-1 p {
+    text-decoration: underline;
 }
 
 .property-row-2 {
     font-size: 14px;
     font-weight: 600;
-}
-
-.property-row-3 {
-    font-size: 15px;
-    font-weight: 500;
+    margin-top: 2px;
     margin-bottom: 16px;
 }
 
