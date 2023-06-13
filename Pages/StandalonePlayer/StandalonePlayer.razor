@@ -39,7 +39,8 @@ else
                         <div class="standalone-player">
                             @if (!showPlayer)
                             {
-                                <div>
+                                <div class="play-confirmation" 
+                                    style="--bg-thumbnail: url(@videoData.ThumbnailUrl);">
                                     <button type="button" 
                                         class="btn btn-success"
                                         @onclick="() => ShowVideo()">
