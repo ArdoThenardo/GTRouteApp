@@ -37,12 +37,26 @@ else
                 {
                     <div class="player-column">
                         <div class="standalone-player">
-                            <BlazoredVideo @ref="videoRef"
-                                style="width: inherit;
-                                    box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
-                                controls="controls">
-                                <source src="@videoData.VideoUrl" />
-                            </BlazoredVideo>
+                            @if (!showPlayer)
+                            {
+                                <div class="play-confirmation" 
+                                    style="--bg-thumbnail: url(@videoData.ThumbnailUrl);">
+                                    <button type="button" 
+                                        class="btn btn-success"
+                                        @onclick="() => ShowVideo()">
+                                        <span><i class="bi bi-play-fill"></i>Play Video</span>
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <BlazoredVideo @ref="videoRef"
+                                    style="width: inherit;
+                                        box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
+                                    controls="controls">
+                                    <source src="@videoData.VideoUrl" />
+                                </BlazoredVideo>
+                            }
                         </div>
                     </div>
                 }
@@ -152,8 +166,9 @@ else
     private bool showErrorForTrackInfo = false;
     private bool showErrorForOtherVideos = false;
     private string noOtherVideosMessage = ErrorMessage.NoRelatedVideos;
+    private bool showPlayer = false;
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         await LoadData();
     }
@@ -232,6 +247,11 @@ else
         NavigationManager.NavigateTo("/");
     }
 
+    private void ShowVideo()
+    {
+        showPlayer = true;
+    }
+
     private void AccessTrackDetail(string slug)
     {
         NavigationManager.NavigateTo($"/browse/detail/{slug}");
@@ -240,9 +260,7 @@ else
     private void AccessOtherVideo(string? videoId)
     {
         if (!string.IsNullOrWhiteSpace(videoId))
-        {
-            NavigationManager.NavigateTo($"/player/{videoId}");
-        }
+            NavigationManager.NavigateTo($"/player/{videoId}", true);
     }
 
     public async ValueTask DisposeAsync()
