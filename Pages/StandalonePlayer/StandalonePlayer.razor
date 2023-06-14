@@ -168,7 +168,7 @@ else
     private string noOtherVideosMessage = ErrorMessage.NoRelatedVideos;
     private bool showPlayer = false;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         await LoadData();
     }
@@ -188,8 +188,7 @@ else
         videoData = data;
 
         // reload player to make sure player play right video after data is assigned
-        if (videoRef != null)
-            await videoRef.ReloadControl();
+        await ReloadVideoRefControl();
     }
 
     private async Task LoadTrackData()
@@ -252,6 +251,20 @@ else
         showPlayer = true;
     }
 
+    private async Task ReloadVideoRefControl()
+    {
+        // Prevent component not disposed correctly warning message
+        try
+        {
+            if (videoRef != null)
+                await videoRef.ReloadControl();
+        }
+        catch
+        {
+            Console.WriteLine("Catched Blazored Video ref not disposed correctly warning message");  
+        }
+    }
+
     private void AccessTrackDetail(string slug)
     {
         NavigationManager.NavigateTo($"/browse/detail/{slug}");
@@ -259,8 +272,10 @@ else
 
     private void AccessOtherVideo(string? videoId)
     {
+        showPlayer = false;
+
         if (!string.IsNullOrWhiteSpace(videoId))
-            NavigationManager.NavigateTo($"/player/{videoId}", true);
+            NavigationManager.NavigateTo($"/player/{videoId}");
     }
 
     public async ValueTask DisposeAsync()
