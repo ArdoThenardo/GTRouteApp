@@ -162,7 +162,8 @@ p {
     border: 1.2px solid transparent;
 }
 
-.related-video-item {
+.related-video-item,
+.current-video-item {
     position: relative;
     display: grid;
     grid-template-columns: 40% 60%;
@@ -188,11 +189,21 @@ p {
     transition: .25s;
 }
 
-.related-thumbnail-area {
+.current-video-item {
+    pointer-events: none;
+    background-color: #1e2022;
+    border: 1px solid #ffc107;
+    transform: scale(0.95);
+    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.4);
+}
+
+.related-thumbnail-area, 
+.current-thumbnail-area {
     position: relative;
 }
 
-.related-thumbnail-area img {
+.related-thumbnail-area img,
+.current-thumbnail-area img {
     position: relative;
     object-fit: cover;
     height: 100%;
@@ -201,7 +212,8 @@ p {
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
 }
 
-.related-thumbnail-area span:first-of-type {
+.related-thumbnail-area span:first-of-type,
+.current-thumbnail-area span:first-of-type {
     position: absolute;
     color: rgba(244, 244, 242, 0.9);
     font-size: 48px;
@@ -210,7 +222,8 @@ p {
     transform: translate(-50%, -50%);
 }
 
-.related-thumbnail-area span:nth-of-type(2) {
+.related-thumbnail-area span:nth-of-type(2),
+.current-thumbnail-area span:nth-of-type(2) {
     position: absolute;
     right: 4px;
     bottom: 4px;
@@ -222,14 +235,16 @@ p {
     border-radius: 4px;
 }
 
-.related-info-area {
+.related-info-area,
+.current-info-area {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-left: 8px;
 }
 
-.related-info-area > span {
+.related-info-area > span,
+.current-info-area > span {
     display: inline-block;
     background-color: #ffc107;
     color: #1e2022;
@@ -240,14 +255,20 @@ p {
     font-weight: 700;
 }
 
-.related-info-area p:first-of-type {
+.related-info-area p:first-of-type,
+.current-info-area p:first-of-type {
     font-size: 15px;
     font-weight: 700;
 }
 
-.related-info-area p:last-of-type {
+.related-info-area p:last-of-type,
+.current-info-area p:last-of-type {
     font-size: 14px;
     font-weight: 600;
+}
+
+.current-info-area p {
+    color: #f4f4f2;
 }
 
 @media (max-width: 540px) {
