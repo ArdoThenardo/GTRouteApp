@@ -124,7 +124,8 @@
                 await videoRef.ReloadControl();
         }
         catch
-        {  
+        {
+            Console.WriteLine("Catched Blazored Video ref not disposed correctly warning message");    
         }
     }
 
