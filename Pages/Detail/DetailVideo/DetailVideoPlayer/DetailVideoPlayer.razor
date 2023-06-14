@@ -23,7 +23,7 @@
                             <button type="button" 
                                 class="btn btn-success"
                                 @onclick="() => ShowVideo()">
-                                <span><i class="bi bi-play-fill"></i>Play Video</span>
+                                <span><i class="bi bi-play-fill"></i> Play Video</span>
                             </button>
                         </div>
                     }
@@ -80,6 +80,26 @@
                             </div>
 
                             <div class="related-info-area">
+                                <span>@relatedVideo.VideoType</span>
+                                <p>@relatedVideo.VideoName</p>
+                                <p>
+                                    <span class="bi bi-person-fill"></span>
+                                    @relatedVideo.Author
+                                </p>
+                            </div>
+                        </article>
+                    }
+                    else
+                    {
+                        <article class="current-video-item">
+                            <div class="current-thumbnail-area">
+                                <img alt="@relatedVideo.VideoName" 
+                                    src="@relatedVideo.ThumbnailUrl" />
+                                <span class="bi bi-play-circle"></span>
+                                <span><i class="bi bi-stopwatch"></i> @TimeConverters.ConvertSecondsToMinutes(relatedVideo.DurationInSeconds ?? 0)</span>
+                            </div>
+
+                            <div class="current-info-area">
                                 <span>@relatedVideo.VideoType</span>
                                 <p>@relatedVideo.VideoName</p>
                                 <p>
