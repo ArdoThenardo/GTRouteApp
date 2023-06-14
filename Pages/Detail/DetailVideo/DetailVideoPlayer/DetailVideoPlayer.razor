@@ -16,12 +16,26 @@
         <div class="detail-player-row-2">
             <div class="player-column">
                 <div class="detail-player">
-                    <BlazoredVideo @ref="videoRef"
-                        style="width: inherit;
-                            box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
-                        controls="controls">
-                        <source src="@Video.VideoUrl" />
-                    </BlazoredVideo>
+                    @if (!showPlayer)
+                    {
+                        <div class="play-confirmation" 
+                            style="--bg-thumbnail: url(@Video.ThumbnailUrl);">
+                            <button type="button" 
+                                class="btn btn-success"
+                                @onclick="() => ShowVideo()">
+                                <span><i class="bi bi-play-fill"></i>Play Video</span>
+                            </button>
+                        </div>
+                    }
+                    else
+                    {
+                        <BlazoredVideo @ref="videoRef"
+                            style="width: inherit;
+                                box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.6);" 
+                            controls="controls">
+                            <source src="@Video.VideoUrl" />
+                        </BlazoredVideo>
+                    }
                 </div>
             </div>
 
@@ -94,12 +108,32 @@
     BlazoredVideo? videoRef;
     private string noRelatedVideosMessage = ErrorMessage.NoRelatedVideos;
     ElementReference detailPlayerRef;
+    private bool showPlayer = false;
+
+    private void ShowVideo()
+    {
+        showPlayer = true;
+    }
+
+    private async Task ReloadVideoRefControl()
+    {
+        // Prevent component not disposed correctly error message
+        try
+        {
+            if (videoRef != null)
+                await videoRef.ReloadControl();
+        }
+        catch
+        {  
+        }
+    }
 
     private async Task ChangeVideo(TrackVideo video)
     {
+        showPlayer = false;
+
         Video = video;
-        if (videoRef != null)
-            await videoRef.ReloadControl();
+        await ReloadVideoRefControl();
 
         await JS.InvokeVoidAsync("scrollToTop");
         await JS.InvokeVoidAsync("scrollElementToTop", detailPlayerRef);
@@ -107,9 +141,10 @@
 
     private async Task BackToVideoSelection()
     {
+        showPlayer = false;
+
         Video = new();
-        if (videoRef != null)
-            await videoRef.ReloadControl();
+        await ReloadVideoRefControl();
 
         await OnBackClicked.InvokeAsync();
     }
