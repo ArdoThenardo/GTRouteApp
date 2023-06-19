@@ -57,6 +57,11 @@ public class VideoPlayerService: BaseService
         }
     }
 
+    public void ResetRecentErrorMessage()
+    {
+        recentError = "";
+    }
+
     public string GetRecentErrorMessage()
     {
         return recentError;
