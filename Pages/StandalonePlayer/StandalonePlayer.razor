@@ -6,9 +6,8 @@
 @inject VideoPlayerService VideoPlayerService
 @inject TrackDetailService TrackDetailService
 @inject NavigationManager NavigationManager
-@implements IAsyncDisposable
 
-@if (string.IsNullOrWhiteSpace(videoData.Slug)) // assume no video data if slug is empty
+@if (string.IsNullOrWhiteSpace(videoData.Slug) || isLoading) // assume no video data if slug is empty
 {
     <PageTitle>Video Player | GTRoad</PageTitle>
 
@@ -169,6 +168,7 @@ else
     private bool showErrorForOtherVideos = false;
     private string noOtherVideosMessage = ErrorMessage.NoRelatedVideos;
     private bool showPlayer = false;
+    private bool isLoading = true;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -191,6 +191,8 @@ else
 
         // reload player to make sure player play right video after data is assigned
         await ReloadVideoRefControl();
+
+        isLoading = false;
     }
 
     private async Task LoadTrackData()
@@ -210,12 +212,33 @@ else
 
     private void CheckError()
     {
-        errorMessageForVideoData = VideoPlayerService.GetRecentErrorMessage();
-        showErrorForVideoData = string.IsNullOrWhiteSpace(errorMessageForVideoData) ? false : true;
+        CheckErrorForVideoData();
+        CheckErrorForTrackInfo();
+        CheckErrorForOtherVideos();
+    }
 
+    private void CheckErrorForVideoData()
+    {
+        // assume no video data if slug is empty
+        if (!string.IsNullOrWhiteSpace(videoData.Slug))
+        {
+            VideoPlayerService.ResetRecentErrorMessage();
+        }
+        else
+        {
+            errorMessageForVideoData = VideoPlayerService.GetRecentErrorMessage();
+            showErrorForVideoData = string.IsNullOrWhiteSpace(errorMessageForVideoData) ? false : true;
+        }
+    }
+
+    private void CheckErrorForTrackInfo()
+    {
         errorMessageForTrackInfo = TrackDetailService.GetRecentErrorMessage();
         showErrorForTrackInfo = string.IsNullOrWhiteSpace(errorMessageForTrackInfo) ? false : true;
+    }
 
+    private void CheckErrorForOtherVideos()
+    {
         errorMessageForOtherVideos = VideoPlayerService.GetRecentErrorForOtherVideos();
         showErrorForOtherVideos = string.IsNullOrWhiteSpace(errorMessageForOtherVideos) ? false : true;
     }
@@ -274,15 +297,10 @@ else
 
     private void AccessOtherVideo(string? videoId)
     {
+        isLoading = true;
         showPlayer = false;
 
         if (!string.IsNullOrWhiteSpace(videoId))
             NavigationManager.NavigateTo($"/player/{videoId}");
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (videoRef != null)
-            await videoRef.SetSrcAsync("");
     }
 }
