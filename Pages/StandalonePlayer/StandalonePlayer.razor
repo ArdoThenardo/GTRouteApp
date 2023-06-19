@@ -212,6 +212,13 @@ else
 
     private void CheckError()
     {
+        CheckErrorForVideoData();
+        CheckErrorForTrackInfo();
+        CheckErrorForOtherVideos();
+    }
+
+    private void CheckErrorForVideoData()
+    {
         // assume no video data if slug is empty
         if (!string.IsNullOrWhiteSpace(videoData.Slug))
         {
@@ -222,10 +229,16 @@ else
             errorMessageForVideoData = VideoPlayerService.GetRecentErrorMessage();
             showErrorForVideoData = string.IsNullOrWhiteSpace(errorMessageForVideoData) ? false : true;
         }
+    }
 
+    private void CheckErrorForTrackInfo()
+    {
         errorMessageForTrackInfo = TrackDetailService.GetRecentErrorMessage();
         showErrorForTrackInfo = string.IsNullOrWhiteSpace(errorMessageForTrackInfo) ? false : true;
+    }
 
+    private void CheckErrorForOtherVideos()
+    {
         errorMessageForOtherVideos = VideoPlayerService.GetRecentErrorForOtherVideos();
         showErrorForOtherVideos = string.IsNullOrWhiteSpace(errorMessageForOtherVideos) ? false : true;
     }
