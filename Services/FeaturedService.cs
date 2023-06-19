@@ -7,13 +7,10 @@ namespace GTRouteApp.Services;
 public class FeaturedService: BaseService
 {
     // remote: /featured
-    // sample: sample-data/featured.json
     private readonly string GetFeaturedTracksUrl;
     // remote: /featured/media/video
-    // sample: sample-data/featured_media_video.json
     private readonly string GetFeaturedMediaVideoUrl;
     // remote: /featured/media/image
-    // sample: sample-data/featured_media_image.json
     private readonly string GetFeaturedMediaImageUrl;
 
     private List<FeaturedTrack> featuredTracks = new();

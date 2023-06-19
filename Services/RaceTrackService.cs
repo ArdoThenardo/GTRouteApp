@@ -7,7 +7,6 @@ namespace GTRouteApp.Services;
 public class RaceTrackService: BaseService
 {
     // remote: /tracks
-    // sample: sample-data/track.json
     private readonly string GetTracksUrl;
     // remote: /offroads
     private readonly string GetOffroadsUrl;

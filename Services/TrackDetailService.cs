@@ -7,7 +7,6 @@ namespace GTRouteApp.Services;
 public class TrackDetailService: BaseService
 {
     // remote: /detail?slug={slug}
-    // sample: sample-data/track_detail.json
     private readonly string GetDetailUrl;
     // remote: /detail/basic?slug={slug}
     private readonly string GetBasicDetailUrl;
