@@ -317,6 +317,10 @@ p {
     .related-video-item:hover > .related-thumbnail-area span {
         text-shadow: unset;
     }
+
+    .current-video-item {
+        transform: scale(1);
+    }
 }
 
 @media (max-height: 414px) {
