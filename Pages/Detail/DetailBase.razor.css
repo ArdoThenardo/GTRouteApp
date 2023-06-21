@@ -29,6 +29,10 @@
 }
 
 @media (max-width: 540px), (max-height: 414px) {
+    .detail-container {
+        height: auto;
+    }
+
     .detail-row-2 {
         display: flex;
         flex-direction: column;

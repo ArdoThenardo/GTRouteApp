@@ -70,7 +70,7 @@
         flex-direction: row;
         align-items: center;
         padding-inline: 13px;
-        height: 60px;
+        height: 56px;
         gap: 1px;
         border-bottom: 0.8px solid #e8e8e8;
     }
@@ -80,7 +80,7 @@
         height: 100%;
         padding-block: 4px;
         padding-inline: 0;
-        margin-left: 4px;
+        margin: 4px;
     }
 
     .img-cover {
@@ -117,13 +117,14 @@
 
     .back-button {
         display: flex;
-        width: 12%;
+        width: 15%;
         height: 70%;
         color: #f4f4f2;
         font-size: 22px;
         align-items: center;
         justify-content: center;
         border-radius: 8px;
+        border: 0;
     }
 }
 

@@ -138,6 +138,7 @@
 @media (max-width: 540px) {
     .grid-container {
         height: auto;
+        min-height: 88vh;
         overflow-y: auto;
     }
 
