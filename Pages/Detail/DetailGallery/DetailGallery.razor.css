@@ -270,7 +270,7 @@ p {
     }
 
     .gallery-container {
-        height: 100%;
+        height: 88vh;
     }
 
     .gallery-container::after {
