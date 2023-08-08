@@ -12,6 +12,10 @@ a, ::deep a {
     text-decoration: none;
 }
 
+a:hover, ::deep a:hover {
+    text-decoration: underline;
+}
+
 .footer-container {
     display: flex;
     flex-direction: column;
