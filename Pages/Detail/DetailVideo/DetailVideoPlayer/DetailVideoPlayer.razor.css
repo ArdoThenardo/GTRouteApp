@@ -302,8 +302,8 @@ p {
         border-left: 0;
     }
 
-    .related-videos {
-        height: 100%;
+    .related-header, .related-videos {
+        display: none;
     }
 
     .related-video-item {

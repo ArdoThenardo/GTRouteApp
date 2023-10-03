@@ -380,6 +380,12 @@ p {
     }
 }
 
+@media (max-width: 540px) {
+    .related-header, .related-videos {
+        display: none;
+    }
+}
+
 @media (max-height: 414px) {
     .player-side-sub-container {
         overflow-y: auto;
