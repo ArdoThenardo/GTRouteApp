@@ -12,16 +12,19 @@
 }
 
 .index-callout-container {
+    display: none;
     background-color: #f4f4f2;
     padding: 16px;
 }
 
 .index-callout {
     padding: 1.25rem;
-    color: #055160;
-    background-color: #cff4fc;
-    border-left: 0.25rem solid rgba(5, 81, 96, 0.7);
-    box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.2);
+    color: #1e2022;
+    background-color: #f4f4f2;
+    border-left: 0.25rem solid rgba(30, 32, 34, 0.7);
+    border-right: 0.05rem solid rgba(30, 32, 34, 0.4);
+    border-block: 0.05rem solid rgba(30, 32, 34, 0.4);
+    box-shadow: 1px 1px 16px rgba(30, 32, 34, 0.3);
 }
 
 .alert {
@@ -54,5 +57,9 @@
 @media (max-width: 540px) {
     .index-featured-media {
         display: none;
+    }
+
+    .index-callout-container {
+        display: block;
     }
 }
