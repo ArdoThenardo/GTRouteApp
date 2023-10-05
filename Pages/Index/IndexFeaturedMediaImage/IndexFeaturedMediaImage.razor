@@ -15,12 +15,28 @@
                     </div>
                     <img src="@media.ImageUrl" 
                         alt="@media.ImageName">
+                    <div class="track-information-container">
+                        <div class="track-logo-and-name">
+                            <img src="@media.LogoUrl" 
+                                alt="@media.TrackName" />
+                            <div class="track-name">
+                                <a 
+                                    class="clickable-text"
+                                    href="@media.TrackUrl">
+                                    @media.TrackName
+                                </a>
+                                <div class="track-country-and-category">
+                                    <p><span class="fi fi-@media.Country.code"></span></p>
+                                    <p>@media.Category</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <button type="button" 
                         title="See Image in Full Screen"
                         class="btn btn-secondary full-btn"
                         @onclick="() => OpenImageInFullScreen(media.ImageUrl)">
-                        <span class="bi bi-arrows-fullscreen"></span> 
-                        <span class="full-btn-text" style="margin-left: 6px">See Image in Full Screen</span>
+                        <span class="bi bi-arrows-fullscreen"></span>
                     </button>
                     <div class="image-info-section">
                         <div class="image-info-part-1">
@@ -32,30 +48,6 @@
                             </p>
                         </div>
                     </div>
-                </div>
-
-                <div class="track-info-section">
-                    <div class="track-logo-and-name">
-                        <img src="@media.LogoUrl" 
-                            alt="@media.TrackName" />
-                        <div class="track-name">
-                            <a 
-                                class="clickable-text"
-                                href="@media.TrackUrl">
-                                @media.TrackName
-                            </a>
-                            <div class="track-country-and-category">
-                                <p><span class="fi fi-@media.Country.code"></span> @media.Country.name</p>
-                                <p>|</p>
-                                <p>@media.Category</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" 
-                        class="btn btn-success"
-                        @onclick="@(() => AccessTrackDetail(media.Slug!))">
-                        View Track Detail
-                    </button>
                 </div>
             </div>
         }
