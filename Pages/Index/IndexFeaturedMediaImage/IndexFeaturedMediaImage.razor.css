@@ -8,14 +8,14 @@ p {
 }
 
 a {
-    color: rgba(30, 32, 34, 0.9);
+    color: #f4f4f2;
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
 }
 
 a:hover {
-    color: rgba(30, 32, 34, 0.7);
+    color: #e8e8e8;
 }
 
 .btn-success {
@@ -53,7 +53,7 @@ a:hover {
     position: relative;
     background-color: #2b2b28;
     height: 46vh;
-    border-radius: 12px;
+    border-radius: 6px;
     overflow: hidden;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
     isolation: isolate;
@@ -62,12 +62,6 @@ a:hover {
 .image-section p {
     color: #f4f4f2;
     font-size: 14px;
-    font-weight: 600;
-}
-
-.full-btn-text {
-    display: block;
-    font-size: 12px;
     font-weight: 600;
 }
 
@@ -143,7 +137,7 @@ a:hover {
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding-inline: 24px;
+    padding-inline: 14px;
     padding-block: 12px;
 }
 
@@ -151,29 +145,17 @@ a:hover {
     margin-bottom: 2px;
 }
 
-.track-info-section {
-    display: flex;
-    flex-direction: row;
-    height: 80px;
-    align-items: center;
-    justify-content: space-between;
-    padding-inline: 16px;
-}
-
-.track-info-section p {
-    color: #1e2022;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.track-info-section span {
-    box-shadow: 1px 0px 8px rgba(30, 32, 34, 0.4);
+.track-information-container {
+    position: absolute;
+    top: 12px;
+    left: 12px;
 }
 
 .track-logo-and-name, .track-country-and-category {
     display: flex;
     flex-direction: row;
     gap: 4px;
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 1);
 }
 
 .track-logo-and-name {
@@ -189,16 +171,16 @@ a:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-left: 8px;
+    margin-left: 4px;
 }
 
-.track-name > .clickable-text {
-    font-size: 20px;
+.clickable-text {
+    font-size: 16px;
     font-weight: 700;
 }
 
 .track-country-and-category {
-    gap: 6px;
+    gap: 4px;
 }
 
 @keyframes reveal {
@@ -213,10 +195,6 @@ a:hover {
 }
 
 @media (max-width: 1024px) {
-    .track-info-section {
-        padding-inline: 12px;
-    }
-
     .image-section {
         height: 32vh;
     }
@@ -229,7 +207,8 @@ a:hover {
 @media (max-width: 540px) {
     .media-container {
         padding-inline: 0;
-        padding-bottom: 2px;
+        padding-top: 2px;
+        padding-bottom: 12px;
     }
 
     .media-inner-container {
@@ -261,29 +240,19 @@ a:hover {
         height: 40px;
     }
 
-    .full-btn-text {
-        display: none;
-    }
-
-    .track-info-section {
-        height: 60px;
-        padding-inline: 4px;
-    }
-
     .track-logo-and-name img {
         width: 80px;
     }
 
     .track-name {
-        margin-left: 4px;
-        row-gap: 2px;
+        display: none;
     }
 
-    .track-name > .clickable-text {
+    .clickable-text {
         font-size: 14px;
     }
 
-    .track-info-section p, .image-section p {
+    .image-section p {
         font-size: 12px;
     }
 
