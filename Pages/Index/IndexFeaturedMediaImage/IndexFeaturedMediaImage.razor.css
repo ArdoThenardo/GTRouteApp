@@ -15,17 +15,7 @@ a {
 }
 
 a:hover {
-    color: #e8e8e8;
-}
-
-.btn-success {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 24px;
-    padding-block: 10px;
-    padding-inline: 24px;
-    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
+    color: #ffc107;
 }
 
 .media-container {
@@ -114,12 +104,12 @@ a:hover {
     animation: reveal .5s ease-in-out forwards;
 }
 
-.full-btn {
+.media-btn {
     position: absolute;
     top: 12px;
     right: 12px;
     width: auto;
-    height: 45px;
+    height: 42px;
     padding: 8px;
     display: flex;
     align-items: center;
@@ -127,7 +117,19 @@ a:hover {
     padding-inline: 12px;
     background-color: rgba(30, 32, 34, 0.7);
     color: #f4f4f2;
+    border-color: #ffc107;
     border-radius: 12px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+}
+
+.media-btn:hover {
+    color: #ffc107;
+    border-color: #ffc720;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.8);
+}
+
+.media-btn:first-of-type {
+    right: 58px;
 }
 
 .image-info-section {
@@ -198,10 +200,6 @@ a:hover {
     .image-section {
         height: 32vh;
     }
-
-    .btn-success {
-        display: none;
-    }
 }
 
 @media (max-width: 540px) {
@@ -236,7 +234,7 @@ a:hover {
         display: none;
     }
 
-    .full-btn {
+    .media-btn {
         height: 40px;
     }
 
