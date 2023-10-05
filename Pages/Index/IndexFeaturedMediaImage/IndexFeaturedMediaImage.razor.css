@@ -207,7 +207,8 @@ a:hover {
 @media (max-width: 540px) {
     .media-container {
         padding-inline: 0;
-        padding-bottom: 2px;
+        padding-top: 2px;
+        padding-bottom: 12px;
     }
 
     .media-inner-container {
@@ -244,8 +245,7 @@ a:hover {
     }
 
     .track-name {
-        margin-left: 4px;
-        row-gap: 2px;
+        display: none;
     }
 
     .clickable-text {
