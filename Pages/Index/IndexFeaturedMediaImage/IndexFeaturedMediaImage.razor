@@ -5,8 +5,7 @@
 
 <div class="media-container">
     <div class="media-inner-container">
-        @foreach (var media in Media)
-        {
+        <Virtualize Items="@Media" Context="media">
             <div class="media-item">
                 <div class="image-section">
                     <div class="image-placeholder">
@@ -56,7 +55,7 @@
                     </div>
                 </div>
             </div>
-        }
+        </Virtualize>
     </div>
 </div>
 

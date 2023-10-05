@@ -5,8 +5,7 @@
 
 <div class="media-container">
     <div class="media-inner-container">
-        @foreach (var media in Media)
-        {
+        <Virtualize Items="@Media" Context="media">
             <article class="media-item-container">
                 <div class="media-item" 
                     style="background-image:url(@media.ThumbnailUrl);"
@@ -37,7 +36,7 @@
                     </div>
                 </div>
             </article>
-        }
+        </Virtualize>
     </div>
 </div>
 
