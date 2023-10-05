@@ -33,8 +33,14 @@
                         </div>
                     </div>
                     <button type="button" 
+                        title="View Track Detail"
+                        class="btn btn-secondary media-btn"
+                        @onclick="() => AccessTrackDetail(media.Slug!)">
+                        <span class="bi bi-geo-alt-fill"></span>
+                    </button>
+                    <button type="button" 
                         title="See Image in Full Screen"
-                        class="btn btn-secondary full-btn"
+                        class="btn btn-secondary media-btn"
                         @onclick="() => OpenImageInFullScreen(media.ImageUrl)">
                         <span class="bi bi-arrows-fullscreen"></span>
                     </button>
