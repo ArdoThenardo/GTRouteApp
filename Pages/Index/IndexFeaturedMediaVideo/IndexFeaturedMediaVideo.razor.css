@@ -31,8 +31,7 @@ p {
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    border: 1.5px solid #e8e8e8;
-    border-radius: 12px;
+    border-radius: 6px;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
     isolation: isolate;
     overflow: hidden;
@@ -41,8 +40,6 @@ p {
 
 .media-item:hover {
     cursor: pointer;
-    border: 1.5px solid #ffc107;
-    box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
 .media-item:hover > .item-section-middle span {
@@ -105,13 +102,13 @@ p {
 }
 
 .bottom-section-1 p:first-of-type {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.8);
 }
 
 .bottom-section-1 p:nth-of-type(2) {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.8);
 }
