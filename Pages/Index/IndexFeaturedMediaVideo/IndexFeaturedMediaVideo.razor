@@ -8,14 +8,17 @@
         <Virtualize Items="@Media" Context="media">
             <article class="media-item-container">
                 <div class="media-item" 
-                    style="background-image:url(@media.ThumbnailUrl);"
-                    @onclick="() => OpenFeaturedVideo(media.VideoId)">
+                    style="background-image:url(@media.ThumbnailUrl);">
                     <div class="item-section-top">
                         <span><i class="bi bi-flag-fill"></i> @media.VideoType</span>
                         <img src="@media.LogoUrl" alt="@media.TrackName" />
                     </div>
                     <div class="item-section-middle">
-                        <span class="bi bi-play-circle"></span>
+                        <button type="button"
+                            class="btn btn-secondary media-btn"
+                            @onclick="() => OpenFeaturedVideo(media.VideoId)">
+                            <span class="bi bi-play-fill"></span>
+                        </button>
                     </div>
                     <div class="item-section-bottom">
                         <div class="bottom-section-1">
