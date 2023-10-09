@@ -4,24 +4,27 @@
 
 <div class="home-featured">
     <div class="featured-row-1">
+        <!-- Real Circuit -->
         <div class="row-1-featured-item" 
-            style="--bg-cover: url(@Tracks.ElementAt(0).CoverUrl); --delay: 0s;"
+            style="--bg-cover: url(@Tracks.ElementAt(3).CoverUrl); --delay: 0s;"
+            @onclick="() => AccessTrackDetail(Tracks.ElementAt(3).Slug!)">
+            <div class="featured-info">
+                <img src="@Tracks.ElementAt(3).LogoUrl" 
+                    alt="@Tracks.ElementAt(3).Name logo" />
+                <p class="featured-title">@Tracks.ElementAt(3).Name</p>
+                <p class="featured-text">@((MarkupString)(Tracks.ElementAt(3).Text ?? ""))</p>
+            </div>
+        </div>
+
+        <!-- Original Circuit -->
+        <div class="row-1-featured-item" 
+            style="--bg-cover: url(@Tracks.ElementAt(0).CoverUrl); --delay: .15s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(0).Slug!)">
             <div class="featured-info">
                 <img src="@Tracks.ElementAt(0).LogoUrl" 
                     alt="@Tracks.ElementAt(0).Name logo" />
                 <p class="featured-title">@Tracks.ElementAt(0).Name</p>
                 <p class="featured-text">@((MarkupString)(Tracks.ElementAt(0).Text ?? ""))</p>
-            </div>
-        </div>
-        <div class="row-1-featured-item" 
-            style="--bg-cover: url(@Tracks.ElementAt(1).CoverUrl); --delay: .15s;"
-            @onclick="() => AccessTrackDetail(Tracks.ElementAt(1).Slug!)">
-            <div class="featured-info">
-                <img src="@Tracks.ElementAt(1).LogoUrl" 
-                    alt="@Tracks.ElementAt(1).Name logo" />
-                <p class="featured-title">@Tracks.ElementAt(1).Name</p>
-                <p class="featured-text">@((MarkupString)(Tracks.ElementAt(1).Text ?? ""))</p>
             </div>
         </div>
     </div>
@@ -35,6 +38,7 @@
     }
 
     <div class="featured-row-2">
+        <!-- City Circuit -->
         <div class="row-2-featured-item" 
             style="--bg-cover: url(@Tracks.ElementAt(2).CoverUrl); --delay: .2s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(2).Slug!)">
@@ -45,18 +49,10 @@
                 <p class="featured-text">@((MarkupString)(Tracks.ElementAt(2).Text ?? ""))</p>
             </div>
         </div>
+
+        <!-- Dirt / Snow -->
         <div class="row-2-featured-item" 
-            style="--bg-cover: url(@Tracks.ElementAt(3).CoverUrl); --delay: .25s;"
-            @onclick="() => AccessTrackDetail(Tracks.ElementAt(3).Slug!)">
-            <div class="featured-info">
-                <img src="@Tracks.ElementAt(3).LogoUrl" 
-                    alt="@Tracks.ElementAt(3).Name logo" />
-                <p class="featured-title">@Tracks.ElementAt(3).Name</p>
-                <p class="featured-text">@((MarkupString)(Tracks.ElementAt(3).Text ?? ""))</p>
-            </div>
-        </div>
-        <div class="row-2-featured-item" 
-            style="--bg-cover: url(@Tracks.ElementAt(4).CoverUrl); --delay: .3s"
+            style="--bg-cover: url(@Tracks.ElementAt(4).CoverUrl); --delay: .25s"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(4).Slug!)">
             <div class="featured-info">
                 <img src="@Tracks.ElementAt(4).LogoUrl" 

@@ -25,6 +25,7 @@
 
 .row-1-featured-item, .row-2-featured-item {
     position: relative;
+    width: 50%;
     height: 100%;
     display: flex;
     border: 0.1px solid #e8e8e8;
@@ -65,14 +66,6 @@
 .row-1-featured-item:hover::before, .row-2-featured-item:hover::before {
     transform: translateY(0);
     box-shadow: inset 1px 1px 24px 8px rgba(30, 32, 34, 0.8);
-}
-
-.row-1-featured-item {
-    width: 50%;
-}
-
-.row-2-featured-item {
-    width: 33.33%;
 }
 
 .featured-info {
