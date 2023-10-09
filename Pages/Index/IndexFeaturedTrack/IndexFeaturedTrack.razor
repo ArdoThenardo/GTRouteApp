@@ -6,9 +6,10 @@
     <div class="featured-row-1">
         <!-- Real Circuit -->
         <div class="row-1-featured-item" 
-            style="--bg-cover: url(@Tracks.ElementAt(3).CoverUrl); --delay: 0s;"
+            style="--bg-cover: url(@Tracks.ElementAt(3).CoverUrl); 
+                --delay: 0s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(3).Slug!)">
-            <div class="featured-info">
+            <div class="featured-info" style="border-color: red;">
                 <img src="@Tracks.ElementAt(3).LogoUrl" 
                     alt="@Tracks.ElementAt(3).Name logo" />
                 <p class="featured-title">@Tracks.ElementAt(3).Name</p>
@@ -18,9 +19,10 @@
 
         <!-- Original Circuit -->
         <div class="row-1-featured-item" 
-            style="--bg-cover: url(@Tracks.ElementAt(0).CoverUrl); --delay: .15s;"
+            style="--bg-cover: url(@Tracks.ElementAt(0).CoverUrl); 
+                --delay: .15s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(0).Slug!)">
-            <div class="featured-info">
+            <div class="featured-info" style="border-color: blue;">
                 <img src="@Tracks.ElementAt(0).LogoUrl" 
                     alt="@Tracks.ElementAt(0).Name logo" />
                 <p class="featured-title">@Tracks.ElementAt(0).Name</p>
@@ -40,9 +42,10 @@
     <div class="featured-row-2">
         <!-- City Circuit -->
         <div class="row-2-featured-item" 
-            style="--bg-cover: url(@Tracks.ElementAt(2).CoverUrl); --delay: .2s;"
+            style="--bg-cover: url(@Tracks.ElementAt(2).CoverUrl); 
+                --delay: .2s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(2).Slug!)">
-            <div class="featured-info">
+            <div class="featured-info" style="border-color: green;">
                 <img src="@Tracks.ElementAt(2).LogoUrl" 
                     alt="@Tracks.ElementAt(2).Name logo" />
                 <p class="featured-title">@Tracks.ElementAt(2).Name</p>
@@ -52,9 +55,10 @@
 
         <!-- Dirt / Snow -->
         <div class="row-2-featured-item" 
-            style="--bg-cover: url(@Tracks.ElementAt(4).CoverUrl); --delay: .25s"
+            style="--bg-cover: url(@Tracks.ElementAt(4).CoverUrl); 
+                --delay: .25s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(4).Slug!)">
-            <div class="featured-info">
+            <div class="featured-info" style="border-color: orange;">
                 <img src="@Tracks.ElementAt(4).LogoUrl" 
                     alt="@Tracks.ElementAt(4).Name logo" />
                 <p class="featured-title">@Tracks.ElementAt(4).Name</p>

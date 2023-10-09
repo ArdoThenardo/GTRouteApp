@@ -73,6 +73,7 @@
     width: 100%;
     padding-block: 16px;
     padding-inline: 24px;
+    border-bottom: 8px solid;
 }
 
 .featured-info img {
