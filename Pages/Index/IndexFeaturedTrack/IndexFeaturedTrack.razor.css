@@ -145,10 +145,11 @@
     }
 
     .featured-title {
-        font-size: 4.8vw;
+        font-size: 4.4vw;
     }
 
     .featured-text {
-        font-size: 4.2vw;
+        margin-bottom: 1rem;
+        font-size: 4vw;
     }
 }
