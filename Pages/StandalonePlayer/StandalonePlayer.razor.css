@@ -184,9 +184,8 @@ p {
     box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
 }
 
-.related-video-item:hover > .related-thumbnail-area span {
-    text-shadow: 1px 1px 8px rgba(255, 193, 7, 0.8);
-    transition: .25s;
+.related-video-item:hover > .related-thumbnail-area span:first-of-type {
+    color: #ffc107;
 }
 
 .related-thumbnail-area {
