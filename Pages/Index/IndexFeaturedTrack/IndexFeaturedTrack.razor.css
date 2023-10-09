@@ -46,8 +46,12 @@
 
 .row-1-featured-item:hover, .row-2-featured-item:hover {
     cursor: pointer;
-    transition: .25s;
-    border-color: #1e2022;
+    border: 1.2px solid #ffc107;
+}
+
+.row-1-featured-item:hover > .featured-info, 
+.row-2-featured-item:hover > .featured-info {
+    border-bottom: 5px solid;
 }
 
 .row-1-featured-item::before, .row-2-featured-item::before {
@@ -74,6 +78,7 @@
     padding-block: 16px;
     padding-inline: 24px;
     border-bottom: 8px solid;
+    transition: .25s;
 }
 
 .featured-info img {
