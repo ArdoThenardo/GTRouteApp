@@ -10,10 +10,14 @@
                 --delay: 0s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(3).Slug!)">
             <div class="featured-info" style="border-color: red;">
-                <img src="@Tracks.ElementAt(3).LogoUrl" 
-                    alt="@Tracks.ElementAt(3).Name logo" />
-                <p class="featured-title">@Tracks.ElementAt(3).Name</p>
-                <p class="featured-text">@((MarkupString)(Tracks.ElementAt(3).Text ?? ""))</p>
+                <div class="featured-logo-title">
+                    <img src="@Tracks.ElementAt(3).LogoUrl" 
+                        alt="@Tracks.ElementAt(3).Name logo" />
+                    <p class="featured-title">@Tracks.ElementAt(3).Name</p>
+                </div>
+                <p class="featured-text">
+                    <i class="bi bi-info-circle"></i> @((MarkupString)(Tracks.ElementAt(3).Text ?? ""))
+                </p>
             </div>
         </div>
 
@@ -23,10 +27,14 @@
                 --delay: .15s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(0).Slug!)">
             <div class="featured-info" style="border-color: blue;">
-                <img src="@Tracks.ElementAt(0).LogoUrl" 
-                    alt="@Tracks.ElementAt(0).Name logo" />
-                <p class="featured-title">@Tracks.ElementAt(0).Name</p>
-                <p class="featured-text">@((MarkupString)(Tracks.ElementAt(0).Text ?? ""))</p>
+                <div class="featured-logo-title">
+                    <img src="@Tracks.ElementAt(0).LogoUrl" 
+                        alt="@Tracks.ElementAt(0).Name logo" />
+                    <p class="featured-title">@Tracks.ElementAt(0).Name</p>
+                </div>
+                <p class="featured-text">
+                    <i class="bi bi-info-circle"></i> @((MarkupString)(Tracks.ElementAt(0).Text ?? ""))
+                </p>
             </div>
         </div>
     </div>
@@ -46,10 +54,14 @@
                 --delay: .2s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(2).Slug!)">
             <div class="featured-info" style="border-color: green;">
-                <img src="@Tracks.ElementAt(2).LogoUrl" 
-                    alt="@Tracks.ElementAt(2).Name logo" />
-                <p class="featured-title">@Tracks.ElementAt(2).Name</p>
-                <p class="featured-text">@((MarkupString)(Tracks.ElementAt(2).Text ?? ""))</p>
+                <div class="featured-logo-title">
+                    <img src="@Tracks.ElementAt(2).LogoUrl" 
+                        alt="@Tracks.ElementAt(2).Name logo" />
+                    <p class="featured-title">@Tracks.ElementAt(2).Name</p>
+                </div>
+                <p class="featured-text">
+                    <i class="bi bi-info-circle"></i> @((MarkupString)(Tracks.ElementAt(2).Text ?? ""))
+                </p>
             </div>
         </div>
 
@@ -59,13 +71,18 @@
                 --delay: .25s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(4).Slug!)">
             <div class="featured-info" style="border-color: orange;">
-                <img src="@Tracks.ElementAt(4).LogoUrl" 
-                    alt="@Tracks.ElementAt(4).Name logo" />
-                <p class="featured-title">@Tracks.ElementAt(4).Name</p>
-                <p class="featured-text">@((MarkupString)(Tracks.ElementAt(4).Text ?? ""))</p>
+                <div class="featured-logo-title">
+                    <img src="@Tracks.ElementAt(4).LogoUrl" 
+                        alt="@Tracks.ElementAt(4).Name logo" />
+                    <p class="featured-title">@Tracks.ElementAt(4).Name</p>
+                </div>
+                <p class="featured-text">
+                    <i class="bi bi-info-circle"></i> @((MarkupString)(Tracks.ElementAt(4).Text ?? ""))
+                </p>
             </div>
         </div>
     </div>
+    
     <!-- To be revised in the next task -->
     @if (FeaturedVideos.Count() > 0)
     {
