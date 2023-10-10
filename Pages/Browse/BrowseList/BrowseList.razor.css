@@ -1,0 +1,11 @@
+.list-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    height: 85vh;
+}
+
+@media (max-width: 540px) {
+    .list-container {
+        height: 78vh;
+    }
+}

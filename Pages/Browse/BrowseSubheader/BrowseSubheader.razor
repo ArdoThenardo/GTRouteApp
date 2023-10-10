@@ -31,6 +31,12 @@
                 disabled=@disableGallery>
                 <span class="bi bi-image-fill"></span>
             </button>
+            <button type="button" class="btn btn-selection"
+                @onclick="() => SwitchMode(BrowseMode.List)"
+                title="Switch to List View"
+                disabled=@disableList>
+                <span class="bi bi-list-task"></span>
+            </button>
             <button type="button" class="btn btn-selection" 
                 @onclick="() => SwitchMode(BrowseMode.Grid)"
                 title="Switch to Grid View"
@@ -58,6 +64,7 @@
     public string selectedCategory { get; set; } = "";
 
     private bool disableGallery = true;
+    private bool disableList = false;
     private bool disableGrid = false;
 
     [CascadingParameter] 
@@ -78,12 +85,20 @@
             if (preselect_mode.Equals("gallery"))
             {
                 disableGallery = true;
+                disableList = false;
                 disableGrid = false;
             }
             else if (preselect_mode.Equals("grid"))
             {
                 disableGallery = false;
+                disableList = false;
                 disableGrid = true;
+            }
+            else if (preselect_mode.Equals("list"))
+            {
+                disableGallery = false;
+                disableList = true;
+                disableGrid = false;
             }
         }
     }
@@ -106,6 +121,7 @@
     private async Task SwitchMode(BrowseMode mode)
     {
         disableGallery = disableGallery ? false : true;
+        disableList = disableList ? false : true;
         disableGrid = disableGrid ? false : true;
 
         await ChosenBrowseMode.InvokeAsync(mode);

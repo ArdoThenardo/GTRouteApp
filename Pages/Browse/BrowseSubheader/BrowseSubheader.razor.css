@@ -80,6 +80,7 @@
     border-radius: 16px;
     overflow: hidden;
     align-items: center;
+    margin-right: 8px;
 }
 
 .subheader-view-options button {
@@ -87,6 +88,7 @@
     width: 48px;
 }
 
+    .subheader-view-options button:nth-of-type(2), 
     .subheader-view-options button:last-of-type {
         margin-left: 1px;
     }
@@ -138,6 +140,11 @@
     .subheader-options {
         width: auto;
         border-left: 0;
+        gap: 4px;
+    }
+
+    .setting-icon {
+        padding-right: 4px;
     }
 
     .subheader-category-selection {
@@ -156,14 +163,15 @@
     .subheader-view-options {
         height: 32px;
         border-radius: 24px;
+        margin-right: 0;
     }
 
     .subheader-view-options button {
-        width: 54px;
+        width: 60px;
     }
 
     .btn-category-change {
-        width: 46px;
+        width: 34px;
     }
 
     .btn-category-change span {
