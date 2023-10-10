@@ -2,6 +2,7 @@ namespace GTRouteApp.Helpers;
 
 public enum BrowseMode {
     Gallery,
+    List,
     Grid
 }
 
