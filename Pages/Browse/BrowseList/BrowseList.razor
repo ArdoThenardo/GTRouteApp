@@ -8,7 +8,7 @@
         <Virtualize Items="@Tracks" Context="track">
             @if (track.Slug == _selectedSlug)
             {
-                <div class="item-content">
+                <div class="item-content-selected">
                     <img src="@track.LogoUrl" 
                         alt="@track.Name">
                     <p>@track.Name</p>
@@ -16,7 +16,8 @@
             }
             else
             {
-                <div class="item-content">
+                <div class="item-content" 
+                    @onclick="() => SetSelection(track.Slug)">
                     <img src="@track.LogoUrl" 
                         alt="@track.Name">
                     <p>@track.Name</p>
@@ -77,6 +78,12 @@
 
         loadMoreBtnClass = !IsLoadMoreError ? "btn btn-primary btn-more" : "btn btn-warning btn-more";
         loadMoreBtnText = !IsLoadMoreError ? "Load More" : "Try Again";
+    }
+
+    private void SetSelection(string? slug)
+    {
+        if (!string.IsNullOrEmpty(slug))
+            _selectedSlug = slug;
     }
 
     private async Task LoadMoreTracks()
