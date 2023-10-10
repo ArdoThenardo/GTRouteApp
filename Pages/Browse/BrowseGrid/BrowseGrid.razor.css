@@ -37,20 +37,32 @@
     background-blend-mode: overlay;
     height: 100%;
     width: 100%;
-    border: 1px solid #1e2022;
+    border: 1px solid;
+    border-color: #1e2022;
     border-radius: 8px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     opacity: 0;
-    transition: 0.25s;
+    transition: .25s;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
     animation: reveal-item .5s forwards calc(var(--delay) * 0.05s);
 }
 
 .item-content:hover {
     cursor: pointer;
+    border: 2px solid;
+    border-color: #ffc107;
     box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
+}
+
+.item-content:hover > .content-section-1 {
+    background-color: rgba(30, 32, 34, 0.45);
+}
+
+.item-content:hover > .content-section-1 p {
+    color: #f4f4f2;
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.7);
 }
 
 .content-section-1 {
@@ -61,6 +73,7 @@
     justify-content: space-around;
     padding-top: 12%;
     align-items: center;
+    transition: .25s;
 }
 
 .content-section-1 p, .more-notice p, .load-more-container p {

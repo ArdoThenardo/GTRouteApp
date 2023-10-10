@@ -151,12 +151,20 @@
     width: 24vh;
     height: 100%;
     color: #1e2022;
-    border: 1px solid #1e2022;
+    border: 1px solid;
+    border-color: #1e2022;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    transition: .25s;
+}
+
+.gallery-item-content:hover {
+    background-color: rgba(30, 32, 34, 0.4);
+    border: 2px solid;
+    border-color: #ffc107;
 }
 
 .gallery-item-container:hover {
