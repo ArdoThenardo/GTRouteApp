@@ -31,7 +31,11 @@ else
     }
     else if (_mode == BrowseMode.List)
     {
-        <BrowseList />
+        <BrowseList Tracks="@tracks"
+            IsMaximum="@isMaximum"
+            IsLoadMoreError="@isLoadMoreError"
+            IsLoadMoreDisabled="@isLoadMoreDisabled"
+            OnLoadMoreClicked="@LoadMoreTracks" />
     }
     else if (_mode == BrowseMode.Grid)
     {
