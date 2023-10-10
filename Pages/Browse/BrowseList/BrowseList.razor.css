@@ -18,10 +18,12 @@
     overflow-y: scroll;
     overflow-anchor: none;
     justify-content: flex-start;
+    padding-top: 6px;
+    box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
 
     .list-sidebar::-webkit-scrollbar {
-        background-color: #e8e8e8;
+        background-color: transparent;
         width: 8px;
     }
 
@@ -32,13 +34,19 @@
     }
 
 .item-content {
+    background-color: transparent;
     display: flex;
     flex-direction: row;
     gap: 6px;
+    margin: 4px;
     height: 70px;
     align-items: center;
     padding-inline: 12px;
     padding-block: 8px;
+    border: 2px solid;
+    border-color: transparent;
+    border-radius: 8px;
+    transition: .25s;
 }
 
     .item-content img {
@@ -57,6 +65,14 @@
         font-weight: 600;
         line-height: 1.1;
         text-shadow: 1px 0 8px rgba(30, 32, 34, 0.4);
+    }
+    
+    .item-content:hover {
+        cursor: pointer;
+        background-color: #fff;
+        border-color: #ffc107;
+        transform: scale(0.98);
+        box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
     }
 
 .more-notice {
