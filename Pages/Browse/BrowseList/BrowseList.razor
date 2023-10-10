@@ -68,16 +68,24 @@
     private string loadMoreBtnClass = "";
     private string loadMoreBtnText = "";
 
+    protected override void OnInitialized()
+    {
+        PreselectTrack();
+    }
+
     protected override void OnParametersSet()
+    {
+        loadMoreBtnClass = !IsLoadMoreError ? "btn btn-primary btn-more" : "btn btn-warning btn-more";
+        loadMoreBtnText = !IsLoadMoreError ? "Load More" : "Try Again";
+    }
+
+    private void PreselectTrack()
     {
         if (Tracks.Count() > 0 &&
             !string.IsNullOrEmpty(Tracks.ElementAt(0).Slug))
         {
             _selectedSlug = Tracks.ElementAt(0).Slug!;
         }
-
-        loadMoreBtnClass = !IsLoadMoreError ? "btn btn-primary btn-more" : "btn btn-warning btn-more";
-        loadMoreBtnText = !IsLoadMoreError ? "Load More" : "Try Again";
     }
 
     private void SetSelection(string? slug)
