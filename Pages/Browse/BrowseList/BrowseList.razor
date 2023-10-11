@@ -2,27 +2,17 @@
 @using GTRouteApp.Helpers
 @namespace GTRouteApp.BrowseComponents
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <div class="list-container">
     <div class="list-sidebar">
         <Virtualize Items="@Tracks" Context="track">
-            @if (track.Slug == _selectedSlug)
-            {
-                <div class="item-content-selected">
-                    <img src="@track.LogoUrl" 
-                        alt="@track.Name">
-                    <p>@track.Name</p>
-                </div>
-            }
-            else
-            {
-                <div class="item-content" 
-                    @onclick="() => SetSelection(track.Slug)">
-                    <img src="@track.LogoUrl" 
-                        alt="@track.Name">
-                    <p>@track.Name</p>
-                </div>
-            }
+            <div class="@((_selectedSlug.Equals(track.Slug) ? "item-content-selected" : "item-content"))"
+                @onclick="() => SetSelection(track.Slug, true)">
+                <img src="@track.LogoUrl" 
+                    alt="@track.Name">
+                <p>@track.Name</p>
+            </div>
         </Virtualize>
         @if (!IsMaximum)
         {
@@ -48,15 +38,53 @@
             </div>
         }
     </div>
-    <p>
-        Highlight In Construction!!!!
-    </p>
+
+    <div @ref="highlightCoverRef" 
+        class="list-highlight" 
+        style="--bg-cover: url('@_selectedTrack.CoverUrl');">
+        <div class="highlight-section-1">
+            <img src="img/logo-gt.svg" alt="Gran Turismo" />
+
+            <img @ref="section1LogoRef" 
+                src="@_selectedTrack.LogoUrl" 
+                alt="@_selectedTrack.LogoUrl" />
+        </div>
+
+        <div class="highlight-section-2">
+            <div class="section-2-left">
+                <p>
+                    <span @ref="section2NameRef" style="font-size: 32px;">@_selectedTrack.Name</span>
+                </p>
+                <p>Country</p>
+                <p>
+                    <span class="fi fi-@_selectedTrack.Country?.code" 
+                        style="margin-bottom: 6px; margin-right: 4px;">
+                    </span>
+                    <span @ref="section2CountryRef">@_selectedTrack.Country?.name</span>
+                </p>
+                <p>Category</p>
+                <p>
+                    <span @ref="section2CategoryRef">@_selectedTrack.Category</span>
+                </p>
+                <p>Number of Layout</p>
+                <p>
+                    <span @ref="section2LayoutRef">@_selectedTrack.NumberOfLayouts</span>
+                </p>
+            </div>
+
+            <button type="button" 
+                class="btn btn-success btn-access">
+                View Track
+            </button>
+        </div>
+    </div>
 </div>
 
 @code {
     [Parameter]
     public List<RaceTrack> Tracks { get; set; } = new();
     private string _selectedSlug = "";
+    private RaceTrack _selectedTrack = new();
     [Parameter]
     public bool IsMaximum { get; set; } = false;
     [Parameter]
@@ -67,35 +95,53 @@
     public EventCallback OnLoadMoreClicked { get; set; }
     private string loadMoreBtnClass = "";
     private string loadMoreBtnText = "";
+    ElementReference highlightCoverRef, section1LogoRef, section2NameRef, 
+        section2CountryRef, section2CategoryRef, section2LayoutRef;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        PreselectTrack();
+        await PreselectTrack();
     }
 
     protected override void OnParametersSet()
     {
-        loadMoreBtnClass = !IsLoadMoreError ? "btn btn-primary btn-more" : "btn btn-warning btn-more";
+        loadMoreBtnClass = !IsLoadMoreError ? "btn btn-primary" : "btn btn-warning";
         loadMoreBtnText = !IsLoadMoreError ? "Load More" : "Try Again";
     }
 
-    private void PreselectTrack()
+    private async Task PreselectTrack()
     {
         if (Tracks.Count() > 0 &&
             !string.IsNullOrEmpty(Tracks.ElementAt(0).Slug))
         {
-            _selectedSlug = Tracks.ElementAt(0).Slug!;
+            await SetSelection(Tracks.ElementAt(0).Slug);
         }
     }
 
-    private void SetSelection(string? slug)
+    private async Task SetSelection(string? slug, bool allowResetAnimation = false)
     {
-        if (!string.IsNullOrEmpty(slug))
+        if (!string.IsNullOrEmpty(slug) && !_selectedSlug.Equals(slug))
+        {
             _selectedSlug = slug;
+            _selectedTrack = Tracks.Where(t => t.Slug == _selectedSlug).FirstOrDefault() ?? new();
+
+            if (allowResetAnimation)
+                await ResetHighlightAnimationWithJS();
+        }
     }
 
     private async Task LoadMoreTracks()
     {
         await OnLoadMoreClicked.InvokeAsync();
+    }
+
+    private async Task ResetHighlightAnimationWithJS()
+    {
+        await JS.InvokeVoidAsync("resetAnimationByReinsertClassName", highlightCoverRef, "list-highlight");
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section1LogoRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2NameRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2CountryRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2CategoryRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2LayoutRef);
     }
 }
