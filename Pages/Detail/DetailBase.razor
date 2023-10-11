@@ -234,6 +234,10 @@
         {
             NavigationManager.NavigateTo($"/browse?mode=gallery&category={category}");
         }
+        else if (originPage.Equals("browseList"))
+        {
+            NavigationManager.NavigateTo($"/browse?mode=list&category={category}");
+        }
         else if (originPage.Equals("browseGrid"))
         {
             NavigationManager.NavigateTo($"/browse?mode=grid&category={category}");

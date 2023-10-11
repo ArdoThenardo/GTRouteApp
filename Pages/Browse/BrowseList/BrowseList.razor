@@ -73,7 +73,8 @@
             </div>
 
             <button type="button" 
-                class="btn btn-success btn-access">
+                class="btn btn-success btn-access" 
+                @onclick="() => AccessTrackDetail(_selectedSlug)">
                 View Track
             </button>
         </div>
@@ -85,6 +86,7 @@
     public List<RaceTrack> Tracks { get; set; } = new();
     private string _selectedSlug = "";
     private RaceTrack _selectedTrack = new();
+
     [Parameter]
     public bool IsMaximum { get; set; } = false;
     [Parameter]
@@ -93,6 +95,9 @@
     public bool IsLoadMoreDisabled { get; set; } = false;
     [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
+    [Parameter]
+    public EventCallback<string> OnViewClickHandler { get; set; }
+    
     private string loadMoreBtnClass = "";
     private string loadMoreBtnText = "";
     ElementReference highlightCoverRef, section1LogoRef, section2NameRef, 
@@ -128,6 +133,11 @@
             if (allowResetAnimation)
                 await ResetHighlightAnimationWithJS();
         }
+    }
+
+    private async Task AccessTrackDetail(string slug)
+    {
+        await OnViewClickHandler.InvokeAsync(slug);
     }
 
     private async Task LoadMoreTracks()
