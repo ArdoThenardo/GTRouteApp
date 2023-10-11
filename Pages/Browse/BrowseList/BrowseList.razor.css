@@ -145,8 +145,13 @@
     flex-direction: row;
     justify-content: space-between;
 }
+    .highlight-section-1 img:first-of-type {
+        width: 64px;
+        height: 48px;
+        filter: drop-shadow(0 0 3px rgba(30, 32, 34, 0.6));
+    }
 
-    .highlight-section-1 img {
+    .highlight-section-1 img:last-of-type {
         object-fit: contain;
         width: 16vw;
         filter: drop-shadow(0 0 3px rgba(30, 32, 34, 0.6));
