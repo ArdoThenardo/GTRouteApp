@@ -182,6 +182,7 @@
         white-space: nowrap;
         max-width: 0%;
         overflow: hidden;
+        text-overflow: clip;
         animation: span-max-width 0.5s ease-out forwards;
     }
 

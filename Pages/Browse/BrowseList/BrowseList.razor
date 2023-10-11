@@ -2,12 +2,13 @@
 @using GTRouteApp.Helpers
 @namespace GTRouteApp.BrowseComponents
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <div class="list-container">
     <div class="list-sidebar">
         <Virtualize Items="@Tracks" Context="track">
             <div class="@((_selectedSlug.Equals(track.Slug) ? "item-content-selected" : "item-content"))"
-                @onclick="() => SetSelection(track.Slug)">
+                @onclick="() => SetSelection(track.Slug, true)">
                 <img src="@track.LogoUrl" 
                     alt="@track.Name">
                 <p>@track.Name</p>
@@ -38,34 +39,36 @@
         }
     </div>
 
-    <div class="list-highlight" 
+    <div @ref="highlightCoverRef" 
+        class="list-highlight" 
         style="--bg-cover: url('@_selectedTrack.CoverUrl');">
         <div class="highlight-section-1">
             <i class="bi bi-car-front-fill"></i> <!-- placeholder for GT logo -->
 
-            <img src="@_selectedTrack.LogoUrl" 
+            <img @ref="section1LogoRef" 
+                src="@_selectedTrack.LogoUrl" 
                 alt="@_selectedTrack.LogoUrl" />
         </div>
 
         <div class="highlight-section-2">
             <div class="section-2-left">
                 <p>
-                    <span style="font-size: 32px;">@_selectedTrack.Name</span>
+                    <span @ref="section2NameRef" style="font-size: 32px;">@_selectedTrack.Name</span>
                 </p>
                 <p>Country</p>
                 <p>
                     <span class="fi fi-@_selectedTrack.Country?.code" 
                         style="margin-bottom: 6px; margin-right: 4px;">
                     </span>
-                    <span>@_selectedTrack.Country?.name</span>
+                    <span @ref="section2CountryRef">@_selectedTrack.Country?.name</span>
                 </p>
                 <p>Category</p>
                 <p>
-                    <span>@_selectedTrack.Category</span>
+                    <span @ref="section2CategoryRef">@_selectedTrack.Category</span>
                 </p>
                 <p>Number of Layout</p>
                 <p>
-                    <span>@_selectedTrack.NumberOfLayouts</span>
+                    <span @ref="section2LayoutRef">@_selectedTrack.NumberOfLayouts</span>
                 </p>
             </div>
 
@@ -92,10 +95,12 @@
     public EventCallback OnLoadMoreClicked { get; set; }
     private string loadMoreBtnClass = "";
     private string loadMoreBtnText = "";
+    ElementReference highlightCoverRef, section1LogoRef, section2NameRef, 
+        section2CountryRef, section2CategoryRef, section2LayoutRef;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        PreselectTrack();
+        await PreselectTrack();
     }
 
     protected override void OnParametersSet()
@@ -104,26 +109,39 @@
         loadMoreBtnText = !IsLoadMoreError ? "Load More" : "Try Again";
     }
 
-    private void PreselectTrack()
+    private async Task PreselectTrack()
     {
         if (Tracks.Count() > 0 &&
             !string.IsNullOrEmpty(Tracks.ElementAt(0).Slug))
         {
-            SetSelection(Tracks.ElementAt(0).Slug);
+            await SetSelection(Tracks.ElementAt(0).Slug);
         }
     }
 
-    private void SetSelection(string? slug)
+    private async Task SetSelection(string? slug, bool allowResetAnimation = false)
     {
         if (!string.IsNullOrEmpty(slug) && !_selectedSlug.Equals(slug))
         {
             _selectedSlug = slug;
             _selectedTrack = Tracks.Where(t => t.Slug == _selectedSlug).FirstOrDefault() ?? new();
+
+            if (allowResetAnimation)
+                await ResetHighlightAnimationWithJS();
         }
     }
 
     private async Task LoadMoreTracks()
     {
         await OnLoadMoreClicked.InvokeAsync();
+    }
+
+    private async Task ResetHighlightAnimationWithJS()
+    {
+        await JS.InvokeVoidAsync("resetAnimationByReinsertClassName", highlightCoverRef, "list-highlight");
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section1LogoRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2NameRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2CountryRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2CategoryRef);
+        await JS.InvokeVoidAsync("resetAnimationByStyle", section2LayoutRef);
     }
 }
