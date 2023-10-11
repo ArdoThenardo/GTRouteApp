@@ -37,15 +37,21 @@
             </div>
         }
     </div>
-    <p>
-        Highlight In Construction!!!!
-    </p>
+
+    <div class="list-highlight">
+        <p>@_selectedTrack.Name</p>
+        <p>Country: <span class="fi fi-@_selectedTrack.Country?.code"></span> @_selectedTrack.Country?.name</p>
+        <p>Category: @_selectedTrack.Category</p>
+        <p>Number of Layout: @_selectedTrack.NumberOfLayouts</p>
+        <img src="@_selectedTrack.LogoUrl" alt="logo" />
+    </div>
 </div>
 
 @code {
     [Parameter]
     public List<RaceTrack> Tracks { get; set; } = new();
     private string _selectedSlug = "";
+    private RaceTrack _selectedTrack = new();
     [Parameter]
     public bool IsMaximum { get; set; } = false;
     [Parameter]
@@ -73,14 +79,17 @@
         if (Tracks.Count() > 0 &&
             !string.IsNullOrEmpty(Tracks.ElementAt(0).Slug))
         {
-            _selectedSlug = Tracks.ElementAt(0).Slug!;
+            SetSelection(Tracks.ElementAt(0).Slug);
         }
     }
 
     private void SetSelection(string? slug)
     {
         if (!string.IsNullOrEmpty(slug) && !_selectedSlug.Equals(slug))
+        {
             _selectedSlug = slug;
+            _selectedTrack = Tracks.Where(t => t.Slug == _selectedSlug).FirstOrDefault() ?? new();
+        }
     }
 
     private async Task LoadMoreTracks()
