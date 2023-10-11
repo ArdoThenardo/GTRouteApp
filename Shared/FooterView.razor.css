@@ -52,7 +52,8 @@ a:hover, ::deep a:hover {
 
 .footer-column img {
     object-fit: contain;
-    height: 42px;
+    height: 46px;
+    margin-top: 12px;
 }
 
 .footer-label {
@@ -61,7 +62,7 @@ a:hover, ::deep a:hover {
 }
 
 .footer-separator {
-    height: 24px;
+    height: 30px;
 }
 
 .credits-mobile {
