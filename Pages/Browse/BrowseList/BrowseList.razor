@@ -50,11 +50,13 @@
         <div class="highlight-section-2">
             <div class="section-2-left">
                 <p>
-                    <span>@_selectedTrack.Name</span>
+                    <span style="font-size: 32px;">@_selectedTrack.Name</span>
                 </p>
                 <p>Country</p>
                 <p>
-                    <span class="fi fi-@_selectedTrack.Country?.code"></span>
+                    <span class="fi fi-@_selectedTrack.Country?.code" 
+                        style="margin-bottom: 6px; margin-right: 4px;">
+                    </span>
                     <span>@_selectedTrack.Country?.name</span>
                 </p>
                 <p>Category</p>
@@ -68,7 +70,7 @@
             </div>
 
             <button type="button" 
-                class="btn btn-success">
+                class="btn btn-success btn-access">
                 View Track
             </button>
         </div>
@@ -98,7 +100,7 @@
 
     protected override void OnParametersSet()
     {
-        loadMoreBtnClass = !IsLoadMoreError ? "btn btn-primary btn-more" : "btn btn-warning btn-more";
+        loadMoreBtnClass = !IsLoadMoreError ? "btn btn-primary" : "btn btn-warning";
         loadMoreBtnText = !IsLoadMoreError ? "Load More" : "Try Again";
     }
 
