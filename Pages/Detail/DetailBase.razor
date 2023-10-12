@@ -50,18 +50,12 @@
         </div>
 
         <div class="back-button">
-            @if (!string.IsNullOrWhiteSpace(origin))
-            {
-                <button type="button" class="btn btn-secondary" @onclick="() => GoBack(origin)">
-                    <span class="bi bi-arrow-left-square"></span> Back
-                </button>
-            }
-            else
-            {
-                <button type="button" class="btn btn-secondary" @onclick="() => GoBack()">
-                    <span class="bi bi-arrow-left-square"></span> Browse Race Tracks
-                </button>
-            }
+            <button type="button"
+                class="@((!string.IsNullOrEmpty(origin) ? "btn btn-danger" : "btn btn-primary"))" 
+                @onclick="() => GoBack(origin)">
+                <span class="bi bi-arrow-left-square" style="margin-right: 4px;"></span> 
+                @((!string.IsNullOrEmpty(origin) ? "Back" : "Browse Race Tracks"))
+            </button>
         </div>
     }
 </div>
@@ -120,14 +114,7 @@
 
     private void OnBackSidebarClickedHandler()
     {
-        if (!string.IsNullOrWhiteSpace(origin))
-        {
-            GoBack(origin);
-        }
-        else
-        {
-            GoBack();
-        }
+        GoBack(!string.IsNullOrEmpty(origin) ? origin : "");
     }
 
     private void OnSubDetailChangedHandler(SubDetail subDetail)
@@ -224,14 +211,17 @@
         showVideoMenu = videos.Count() > 0 ? true : false;
     }
 
-    private void GoBack(string originPage = "browse")
+    private void GoBack(string originPage)
     {
+        if (string.IsNullOrEmpty(originPage))
+            originPage = "browse";
+
         switch (originPage)
         {
             case "home":
                 NavigationManager.NavigateTo("/");
                 break;
-            case "browse":
+            case "browse" or "":
                 NavigationManager.NavigateTo("/browse");
                 break;
             default:

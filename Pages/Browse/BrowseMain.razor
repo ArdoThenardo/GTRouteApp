@@ -66,7 +66,7 @@ else
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "mode")]
-    public string SelectedModeQuery { get; set; } = BrowseModeQuery.GalleryMode; // use BrowseModeQuery
+    public string SelectedModeQuery { get; set; } = ""; // use BrowseModeQuery
     private BrowseMode _mode = BrowseMode.Gallery;
     private string info = galleryInfo;
 
@@ -208,6 +208,9 @@ else
 
     private void AccessTrackDetail(string slug)
     {
+        if (string.IsNullOrEmpty(SelectedModeQuery))
+            SelectedModeQuery = BrowseModeQuery.GalleryMode;
+
         NavigationManager.NavigateTo($"/browse/detail/{slug}?"
             +$"category={selectedCategory}&origin={SelectedModeQuery}");
     }
