@@ -17,7 +17,7 @@ else
     <BrowseSubheader Info="@info" 
         OnCategoryChanged="OnCategoryChangedHandler" 
         ChosenBrowseMode="ChangeBrowseMode" 
-        preselect_mode="@preselect_mode" 
+        SelectedModeQuery="@SelectedModeQuery" 
         selectedCategory="@selectedCategory" />
 
     @if (_mode == BrowseMode.Gallery)
@@ -66,7 +66,7 @@ else
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "mode")]
-    public string preselect_mode { get; set; } = ""; // gallery or grid
+    public string SelectedModeQuery { get; set; } = ""; // use BrowseModeQuery
     private BrowseMode _mode = BrowseMode.Gallery;
     private string info = galleryInfo;
 
@@ -163,19 +163,19 @@ else
 
     private void PreselectBrowseMode()
     {
-        if (!string.IsNullOrWhiteSpace(preselect_mode))
+        if (!string.IsNullOrWhiteSpace(SelectedModeQuery))
         {
-            if (preselect_mode.Equals("gallery"))
+            switch (SelectedModeQuery)
             {
-                ChangeBrowseMode(BrowseMode.Gallery);
-            }
-            else if (preselect_mode.Equals("list"))
-            {
-                ChangeBrowseMode(BrowseMode.List);
-            }
-            else if (preselect_mode.Equals("grid"))
-            {
-                ChangeBrowseMode(BrowseMode.Grid);
+                case BrowseModeQuery.GalleryMode:
+                    ChangeBrowseMode(BrowseMode.Gallery);
+                    break;
+                case BrowseModeQuery.ListMode:
+                    ChangeBrowseMode(BrowseMode.List);
+                    break;
+                case BrowseModeQuery.GridMode:
+                    ChangeBrowseMode(BrowseMode.Grid);
+                    break;
             }
         }
     }
@@ -185,50 +185,34 @@ else
         this._mode = mode;
         var updatedUrl = "";
 
-        if (this._mode == BrowseMode.Gallery)
+        switch (this._mode)
         {
-            info = galleryInfo;
-
-            updatedUrl = NavigationManager.GetUriWithQueryParameter(
-                "mode", "gallery");
-            NavigationManager.NavigateTo(updatedUrl);
+            case BrowseMode.Gallery:
+                SelectedModeQuery = BrowseModeQuery.GalleryMode;
+                info = galleryInfo;
+                break;
+            case BrowseMode.List:
+                SelectedModeQuery = BrowseModeQuery.ListMode;
+                info = listInfo;
+                break;
+            case BrowseMode.Grid:
+                SelectedModeQuery = BrowseModeQuery.GridMode;
+                info = gridInfo;
+                break;
         }
-        else if (this._mode == BrowseMode.List)
-        {
-            info = listInfo;
-
-            updatedUrl = NavigationManager.GetUriWithQueryParameter(
-                "mode", "list");
-            NavigationManager.NavigateTo(updatedUrl);
-        }
-        else if (this._mode == BrowseMode.Grid)
-        {
-            info = gridInfo;
-
-            updatedUrl = NavigationManager.GetUriWithQueryParameter(
-                "mode", "grid");
-            NavigationManager.NavigateTo(updatedUrl);
-        }
+        
+        updatedUrl = NavigationManager.GetUriWithQueryParameter(
+            "mode", SelectedModeQuery);
+        NavigationManager.NavigateTo(updatedUrl);
     }
 
     private void AccessTrackDetail(string slug)
     {
-        var origin = "";
-        switch (_mode)
-        {
-            case BrowseMode.Gallery:
-                origin = "browseGallery";
-                break;
-            case BrowseMode.List:
-                origin = "browseList";
-                break;
-            case BrowseMode.Grid:
-                origin = "browseGrid";
-                break;
-        }
+        if (string.IsNullOrEmpty(SelectedModeQuery))
+            SelectedModeQuery = BrowseModeQuery.GalleryMode; // default to gallery origin, if empty
 
         NavigationManager.NavigateTo($"/browse/detail/{slug}?"
-            +$"category={selectedCategory}&origin={origin}");
+            +$"category={selectedCategory}&origin={SelectedModeQuery}");
     }
 
     private async Task OnTryAgainHandler()

@@ -58,7 +58,7 @@
     public EventCallback<BrowseMode> ChosenBrowseMode { get; set; }
 
     [Parameter]
-    public string preselect_mode { get; set; } = ""; // gallery or grid
+    public string SelectedModeQuery { get; set; } = ""; // use BrowseModeQuery
 
     [Parameter]
     public string selectedCategory { get; set; } = "";
@@ -80,25 +80,25 @@
 
     protected override void OnParametersSet()
     {
-        if (!string.IsNullOrWhiteSpace(preselect_mode))
+        if (!string.IsNullOrWhiteSpace(SelectedModeQuery))
         {
-            if (preselect_mode.Equals("gallery"))
+            switch (SelectedModeQuery)
             {
-                disableGallery = true;
-                disableList = false;
-                disableGrid = false;
-            }
-            else if (preselect_mode.Equals("grid"))
-            {
-                disableGallery = false;
-                disableList = false;
-                disableGrid = true;
-            }
-            else if (preselect_mode.Equals("list"))
-            {
-                disableGallery = false;
-                disableList = true;
-                disableGrid = false;
+                case BrowseModeQuery.GalleryMode:
+                    disableGallery = true;
+                    disableList = false;
+                    disableGrid = false;
+                    break;
+                case BrowseModeQuery.ListMode:
+                    disableGallery = false;
+                    disableList = true;
+                    disableGrid = false;
+                    break;
+                case BrowseModeQuery.GridMode:
+                    disableGallery = false;
+                    disableList = false;
+                    disableGrid = true;
+                    break;
             }
         }
     }
