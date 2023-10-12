@@ -29,7 +29,7 @@
                 @onclick="() => SwitchMode(BrowseMode.Gallery)"
                 title="Switch to Gallery View"
                 disabled=@disableGallery>
-                <span class="bi bi-image-fill"></span>
+                <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
             </button>
             <button type="button" class="btn btn-selection"
                 @onclick="() => SwitchMode(BrowseMode.List)"
@@ -37,11 +37,11 @@
                 disabled=@disableList>
                 <span class="bi bi-list-task"></span>
             </button>
-            <button type="button" class="btn btn-selection" 
+            <button type="button" class="btn btn-selection" style="padding-left: 10px;" 
                 @onclick="() => SwitchMode(BrowseMode.Grid)"
                 title="Switch to Grid View"
                 disabled=@disableGrid>
-                <span class="bi bi-grid-3x3-gap-fill"></span>
+                <span class="bi bi-grid-3x3-gap-fill" style="margin-right: 4px;"></span>
             </button>
         </div>
     </div>
