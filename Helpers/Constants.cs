@@ -28,6 +28,12 @@ public static class BrowseCategory
     };
 }
 
+public static class BrowseModeQuery {
+    public const string GalleryMode = "gallery";
+    public const string ListMode = "list";
+    public const string GridMode = "grid";
+}
+
 public static class ErrorMessage
 {
     public const string NoData = "There is no data.";

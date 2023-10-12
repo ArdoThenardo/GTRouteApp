@@ -226,25 +226,17 @@
 
     private void GoBack(string originPage = "browse")
     {
-        if (originPage.Equals("home"))
+        switch (originPage)
         {
-            NavigationManager.NavigateTo("/");
-        }
-        else if (originPage.Equals("browseGallery"))
-        {
-            NavigationManager.NavigateTo($"/browse?mode=gallery&category={category}");
-        }
-        else if (originPage.Equals("browseList"))
-        {
-            NavigationManager.NavigateTo($"/browse?mode=list&category={category}");
-        }
-        else if (originPage.Equals("browseGrid"))
-        {
-            NavigationManager.NavigateTo($"/browse?mode=grid&category={category}");
-        }
-        else
-        {
-            NavigationManager.NavigateTo("/browse");
+            case "home":
+                NavigationManager.NavigateTo("/");
+                break;
+            case "browse":
+                NavigationManager.NavigateTo("/browse");
+                break;
+            default:
+                NavigationManager.NavigateTo($"/browse?mode={originPage}&category={category}");
+                break;
         }
     }
 
