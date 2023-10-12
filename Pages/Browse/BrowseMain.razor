@@ -209,7 +209,7 @@ else
     private void AccessTrackDetail(string slug)
     {
         if (string.IsNullOrEmpty(SelectedModeQuery))
-            SelectedModeQuery = BrowseModeQuery.GalleryMode;
+            SelectedModeQuery = BrowseModeQuery.GalleryMode; // default to gallery origin, if empty
 
         NavigationManager.NavigateTo($"/browse/detail/{slug}?"
             +$"category={selectedCategory}&origin={SelectedModeQuery}");
