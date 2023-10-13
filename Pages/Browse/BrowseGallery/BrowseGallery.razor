@@ -41,31 +41,18 @@
     <div class="gallery-selection">
         @foreach(var track in Tracks.Select((trackData, index) => (trackData, index)))
         {
-            @if (selectedIndex == track.index)
-            {
-                <div class="gallery-item-container-selected" 
-                    style="background-image: url(@track.trackData.CoverUrl);">
-                    <div class="gallery-item-content-selected">
-                        <img
-                            src="@track.trackData.LogoUrl"
-                            alt="@track.trackData.Name"
-                        />
-                    </div>
+            <div class="@((selectedIndex == track.index) ? 
+                        "gallery-item-container-selected" : "gallery-item-container")" 
+                style="background-image: url(@track.trackData.CoverUrl);" 
+                @onclick="() => SetSelection(track.index)">
+                <div class="@((selectedIndex == track.index) ? 
+                            "gallery-item-content-selected" : "gallery-item-content")">
+                    <img
+                        src="@track.trackData.LogoUrl"
+                        alt="@track.trackData.Name"
+                    />
                 </div>
-            }
-            else
-            {
-                <div class="gallery-item-container" 
-                    style="background-image: url(@track.trackData.CoverUrl);" 
-                    @onclick="() => SetSelection(track.index)">
-                    <div class="gallery-item-content">
-                        <img
-                            src="@track.trackData.LogoUrl"
-                            alt="@track.trackData.Name"
-                        />
-                    </div>
-                </div>
-            }
+            </div>
         }
         @if (!IsMaximum)
         {
@@ -127,9 +114,12 @@
 
     private async Task SetSelection(int index)
     {
-        selectedIndex = index;
+        if (selectedIndex != index)
+        {
+            selectedIndex = index;
 
-        await ResetHighlightAnimationWithJS();
+            await ResetHighlightAnimationWithJS();
+        }
     }
 
     private async Task AccessTrackDetail(string slug)

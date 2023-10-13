@@ -7,7 +7,7 @@
 <div class="list-container">
     <div class="list-sidebar">
         <Virtualize Items="@Tracks" Context="track">
-            <div class="@((_selectedSlug.Equals(track.Slug) ? "item-content-selected" : "item-content"))"
+            <div class="@((_selectedSlug.Equals(track.Slug)) ? "item-content-selected" : "item-content")"
                 @onclick="() => SetSelection(track.Slug, true)">
                 <img src="@track.LogoUrl" 
                     alt="@track.Name">
