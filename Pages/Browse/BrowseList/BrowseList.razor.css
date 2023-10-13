@@ -241,6 +241,7 @@
     }
 
     .list-highlight::before {
+        background-image: radial-gradient(circle, transparent 50%, black 160%), var(--bg-cover);
         animation: reveal-cover-basic .5s ease-in-out forwards;
     }
 
