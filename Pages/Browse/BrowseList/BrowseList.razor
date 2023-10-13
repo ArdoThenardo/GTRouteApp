@@ -73,7 +73,23 @@
             </div>
 
             <div class="section-2-right">
-                <span>placeholder for something</span>
+                <div class="track-information-mobile">
+                    <img @ref="section1LogoRef" 
+                        src="@_selectedTrack.LogoUrl" 
+                        alt="@_selectedTrack.LogoUrl" />
+                    <div class="information-mobile-2">
+                        <p>
+                            @_selectedTrack.Name
+                        </p>
+                        <p>
+                            <span class="fi fi-@_selectedTrack.Country?.code" 
+                                style="margin-right: 4px;">
+                            </span>
+                            @_selectedTrack.Category
+                        </p>
+                    </div>
+                </div>
+                
                 <button type="button" 
                     class="btn btn-success btn-access" 
                     @onclick="() => AccessTrackDetail(_selectedSlug)">
