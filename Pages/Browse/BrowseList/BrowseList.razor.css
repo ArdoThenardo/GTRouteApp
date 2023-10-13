@@ -219,6 +219,11 @@
     to { opacity: 1; transform: translateY(0) scale(1.0); } 
 }
 
+@keyframes reveal-cover-basic {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 @media (max-width: 540px) {
     .list-container {
         grid-template-columns: 1fr;
@@ -230,4 +235,26 @@
         margin-inline: 4px;
         margin-block: 1px;
     }
+
+    .list-highlight::before {
+        animation: reveal-cover-basic .5s ease-in-out forwards;
+    }
+
+    .highlight-section-1 {
+        display: none;
+    }
+
+    .highlight-section-2 {
+        height: 100%;
+        padding-bottom: 0;
+    }
+
+    .section-2-left {
+        display: none;
+    }
+
+    .section-2-right {
+        width: 100%;
+    }
+
 }
