@@ -87,22 +87,17 @@
 
     [Parameter]
     public bool IsMaximum { get; set; } = false;
-
     [Parameter]
     public bool IsLoadMoreError { get; set; } = false;
-
     [Parameter]
     public bool IsLoadMoreDisabled { get; set; } = false;
-
     [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
-
     [Parameter]
     public EventCallback<string> OnViewClickHandler { get; set; }
 
     private string loadMoreBtnClass = "";
     private string loadMoreBtnText = "";
-    
     ElementReference highlightCoverRef, section1CountryRef, section1LogoRef;
     ElementReference section2NameRef, section2CategoryRef, section2LayoutRef;
 
