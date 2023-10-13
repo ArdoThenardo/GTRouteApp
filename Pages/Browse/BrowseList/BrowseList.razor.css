@@ -191,10 +191,16 @@
         animation: span-max-width 0.5s ease-out forwards;
     }
 
-.btn-access {
+.section-2-right {
+    display: flex;
+    flex-direction: column;
     width: 16.5vw;
-    padding: 10px;
     margin-bottom: 8px;
+}
+
+.btn-access {
+    width: 100%;
+    padding: 10px;
 }
     
 @keyframes span-max-width {
@@ -215,6 +221,8 @@
 
 @media (max-width: 540px) {
     .list-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 75% 25%;
         height: 78vh;
     }
 }
