@@ -225,4 +225,9 @@
         grid-template-rows: 75% 25%;
         height: 78vh;
     }
+    
+    .item-content, .item-content-selected {
+        margin-inline: 4px;
+        margin-block: 1px;
+    }
 }
