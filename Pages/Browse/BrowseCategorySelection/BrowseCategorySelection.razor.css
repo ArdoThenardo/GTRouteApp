@@ -47,6 +47,11 @@
     border: 0.1px solid #e8e8e8;
     border-radius: 0;
     overflow: hidden;
+    transition: .25s;
+}
+
+.category-item:hover {
+    border: 2px solid #ffc107;
 }
 
 .category-item::before {
