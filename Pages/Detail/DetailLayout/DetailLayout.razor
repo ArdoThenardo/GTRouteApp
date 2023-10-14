@@ -49,7 +49,6 @@
                     </div>
                     <img src="@selectedMapLayoutUrl" 
                         alt="@Layouts.ElementAt(selectedIndex).LayoutName"
-                        style="visibility: @((string.IsNullOrEmpty(selectedMapLayoutUrl) ? "hidden" : "unset"));"
                         @ref="@highlightMapRef" />
                 </div>
                 <div class="layout-info">
@@ -93,6 +92,9 @@
     {
         if (selectedIndex != index)
         {
+            selectedMapLayoutUrl = ""; // empty image as transition to next selected item
+            await Task.Delay(10);
+
             SetSelection(index);
             await ResetHighlightAnimationWithJS();
         }

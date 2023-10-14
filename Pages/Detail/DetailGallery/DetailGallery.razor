@@ -127,6 +127,9 @@
     {
         if (selectedImageIndex != selectedIndex)
         {
+            selectedImageUrl = ""; // empty image as transition to next selected item
+            await Task.Delay(10);
+
             SetSelection(selectedIndex);
 
             ToggleArrowButton();
