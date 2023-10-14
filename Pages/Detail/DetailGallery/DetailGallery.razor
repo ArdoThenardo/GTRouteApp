@@ -76,28 +76,15 @@
             @foreach (var image in loadedImages
                                     .Select((imageData, index) => (imageData, index)))
             {
-                @if (selectedImageIndex == image.index)
-                {
-                    <div class="gallery-item-selected">
-                        <div class="item-shimmer"></div>
-                        <div class="item-placeholder">
-                            <span class="bi bi-image-fill"></span>
-                        </div>
-                        <img src="@image.imageData.ThumbnailUrl" 
-                            alt="@image.imageData.ImageName" />
+                <div class="@((selectedImageIndex == image.index) ? "gallery-item-selected" : "gallery-item")" 
+                    @onclick="() => InitiateSelection(image.index)">
+                    <div class="item-shimmer"></div>
+                    <div class="item-placeholder">
+                        <span class="bi bi-image-fill"></span>
                     </div>
-                }
-                else
-                {
-                    <div class="gallery-item" @onclick="() => SetSelection(image.index)">
-                        <div class="item-shimmer"></div>
-                        <div class="item-placeholder">
-                            <span class="bi bi-image-fill"></span>
-                        </div>
-                        <img src="@image.imageData.ThumbnailUrl" 
-                            alt="@image.imageData.ImageName" />
-                    </div>
-                }
+                    <img src="@image.imageData.ThumbnailUrl" 
+                        alt="@image.imageData.ImageName" />
+                </div>
             }
             @if (loadedImages.Count() < Images.Count())
             {
@@ -129,25 +116,33 @@
     
     ElementReference highlightImageRef;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         LoadImages(nextPage);
         if (Images.Count() > 0)
-            await SetSelection(selectedImageIndex);
+            SetSelection(selectedImageIndex);
     }
 
-    private async Task SetSelection(int selectedIndex)
+    private async Task InitiateSelection(int selectedIndex)
     {
-        selectedImageUrl = GeneralConstants.PlaceholderImageUrl; // switch to placeholder image temporarily
-        await Task.Delay(10);
+        if (selectedImageIndex != selectedIndex)
+        {
+            selectedImageUrl = ""; // empty image as transition to next selected item
+            await Task.Delay(10);
 
-        selectedImageIndex = selectedIndex;
+            SetSelection(selectedIndex);
+
+            ToggleArrowButton();
+            SetDefaultInfoVisibility();
+
+            await ResetHighlightAnimationWithJS();
+        }
+    }
+
+    private void SetSelection(int index)
+    {
+        selectedImageIndex = index;
         selectedImageUrl = loadedImages.ElementAt(selectedImageIndex).ImageUrl ?? "";
-
-        ToggleArrowButton();
-        SetDefaultInfoVisibility();
-
-        await ResetHighlightAnimationWithJS();
     }
 
     private void LoadImages(int page)

@@ -27,26 +27,14 @@
             <div class="layout-selection">
                 @foreach (var layoutItem in Layouts.Select((data, index) => (data, index)))
                 {
-                    @if (selectedIndex == layoutItem.index)
-                    {
-                        <div class="layout-item-selected">
-                            <div class="layout-item-thumbnail">
-                                <div class="layout-item-shimmer"></div>
-                                <img src="@layoutItem.data.ThumbnailUrl" alt="@layoutItem.data.LayoutName" />
-                            </div>
-                            <p>@layoutItem.data.LayoutName</p>
+                    <div class="@((selectedIndex == layoutItem.index) ? "layout-item-selected" : "layout-item")" 
+                        @onclick="() => InitiateSelection(layoutItem.index)">
+                        <div class="layout-item-thumbnail">
+                            <div class="layout-item-shimmer"></div>
+                            <img src="@layoutItem.data.ThumbnailUrl" alt="@layoutItem.data.LayoutName" />
                         </div>
-                    }
-                    else
-                    {
-                        <div class="layout-item" @onclick="() => SetSelection(layoutItem.index)">
-                            <div class="layout-item-thumbnail">
-                                <div class="layout-item-shimmer"></div>
-                                <img src="@layoutItem.data.ThumbnailUrl" alt="@layoutItem.data.LayoutName" />
-                            </div>
-                            <p>@layoutItem.data.LayoutName</p>
-                        </div>
-                    }
+                        <p>@layoutItem.data.LayoutName</p>
+                    </div>
                 }
             </div>
 
@@ -56,12 +44,9 @@
             <div class="layout-highlight">
                 <div class="layout-map">
                     <div class="layout-item-shimmer"></div>
-                    @if (string.IsNullOrWhiteSpace(selectedMapLayoutUrl))
-                    {
-                        <div class="map-placeholder">
-                            <span class="bi bi-card-image"></span>
-                        </div>
-                    }
+                    <div class="map-placeholder">
+                        <span class="bi bi-card-image"></span>
+                    </div>
                     <img src="@selectedMapLayoutUrl" 
                         alt="@Layouts.ElementAt(selectedIndex).LayoutName"
                         @ref="@highlightMapRef" />
@@ -97,21 +82,28 @@
 
     ElementReference highlightMapRef;
 
-    protected override async Task OnParametersSetAsync()
+    protected override void OnParametersSet()
     {
         if (Layouts.Count() > 0)
-            await SetSelection(selectedIndex);
+            SetSelection(selectedIndex);
     }
 
-    private async Task SetSelection(int index)
+    private async Task InitiateSelection(int index)
     {
-        selectedMapLayoutUrl = GeneralConstants.PlaceholderImageUrl; // switch to placeholder image temporarily
-        await Task.Delay(10);
+        if (selectedIndex != index)
+        {
+            selectedMapLayoutUrl = ""; // empty image as transition to next selected item
+            await Task.Delay(10);
 
+            SetSelection(index);
+            await ResetHighlightAnimationWithJS();
+        }
+    }
+
+    private void SetSelection(int index)
+    {
         selectedIndex = index;
         selectedMapLayoutUrl = Layouts.ElementAt(selectedIndex).MapUrl ?? "";
-
-        await ResetHighlightAnimationWithJS();
     }
 
     private async Task ResetHighlightAnimationWithJS()
