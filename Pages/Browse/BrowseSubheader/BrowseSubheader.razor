@@ -24,7 +24,13 @@
             </div>
         </div>
 
-        <div class="subheader-view-options">
+        <button type="button" class="btn btn-selection btn-subheader"
+            title="Change view mode">
+            <span class="bi bi-list-task"></span> |
+            <span class="bi bi-caret-down-fill"></span>
+        </button>
+
+        <div class="subheader-view-options" style="display: none;">
             <button type="button" class="btn btn-selection" 
                 @onclick="() => SwitchMode(BrowseMode.Gallery)"
                 title="Switch to Gallery View"

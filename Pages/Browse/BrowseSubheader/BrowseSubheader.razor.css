@@ -73,6 +73,28 @@
     text-overflow: ellipsis;
 }
 
+.btn-subheader {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    padding-block: 2px;
+    padding-inline: 12px;
+    border-radius: 16px;
+}
+
+    .btn-subheader span:first-of-type {
+        font-size: 16px;
+        border-right: 1px solid transparent;
+        padding-left: 3px;
+        padding-right: 8px;
+    }
+
+    .btn-subheader span:last-of-type {
+        font-size: 14px;
+        padding-left: 4px;
+        margin-top: 1.5px;
+    }
+
 .subheader-view-options {
     display: flex;
     flex-direction: row;
