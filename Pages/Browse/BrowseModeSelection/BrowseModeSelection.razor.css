@@ -1,7 +1,7 @@
 .selection-container {
     display: flex;
     flex-direction: column;
-    width: 46vw;
+    width: 24vw;
 }
 
 .selection-header {
@@ -36,11 +36,30 @@
     flex-direction: column;
 }
 
-.selection-mode-area button {
-    margin: 4px;
-}
+    .selection-mode-area button {
+        font-size: 16px;
+        font-weight: 600;
+        text-align: justify;
+        margin-top: 4px;
+        margin-inline: 4px;
+        padding-block: 12px;
+    }
+
+    .selection-mode-area button:last-of-type {
+        margin-bottom: 4px;
+    }
+
+    .selection-mode-area button span {
+        margin-right: 4px;
+    }
 
 .small-footer {
     background-color: #303841;
     height: 14px;
+}
+
+@media (max-width: 540px) {
+    .selection-container {
+        width: 70vw;
+    }
 }
