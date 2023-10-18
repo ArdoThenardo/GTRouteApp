@@ -25,12 +25,27 @@
         </div>
 
         <button type="button" class="btn btn-selection btn-subheader"
-            title="Change view mode">
-            <span class="bi bi-list-task"></span> |
-            <span class="bi bi-caret-down-fill"></span>
+            title="Change view mode" 
+            @onclick="() => ModeSelection()">
+            @switch (SelectedModeQuery)
+            {
+                case BrowseModeQuery.GalleryMode:
+                    <span class="bi bi-image-fill"></span>
+                    break;
+                case BrowseModeQuery.ListMode:
+                    <span class="bi bi-list-task"></span>
+                    break;
+                case BrowseModeQuery.GridMode:
+                    <span class="bi bi-grid-3x3-gap-fill"></span>
+                    break;
+                default:
+                    <span class="bi bi-image-fill"></span>
+                    break;
+            }
+            | <span class="bi bi-caret-down-fill"></span>
         </button>
 
-        <div class="subheader-view-options" style="display: none;">
+        <div class="subheader-view-options">
             <button type="button" class="btn btn-selection" 
                 @onclick="() => SwitchMode(BrowseMode.Gallery)"
                 title="Switch to Gallery View"
@@ -75,6 +90,8 @@
 
     [CascadingParameter] 
     public IModalService CategorySelectionModal { get; set; } = default!;
+    [CascadingParameter]
+    public IModalService ModeSelectionModal { get; set; } = default!;
 
     private ModalOptions modalOptions = new ModalOptions()
     {
@@ -121,6 +138,18 @@
         {
             selectedCategory = result.Data.ToString() ?? "";
             await OnCategoryChanged.InvokeAsync(selectedCategory);
+        }
+    }
+
+    private async Task ModeSelection()
+    {
+        var modal = ModeSelectionModal.Show<BrowseModeSelection>("Mode Selection", modalOptions);
+        var result = await modal.Result;
+
+        if (result.Confirmed && result.Data != null)
+        {
+            var selectedMode = (BrowseMode) result.Data;
+            await SwitchMode(selectedMode);
         }
     }
 
