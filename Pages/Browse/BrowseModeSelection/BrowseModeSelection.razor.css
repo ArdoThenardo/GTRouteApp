@@ -40,13 +40,33 @@
         font-size: 16px;
         font-weight: 600;
         text-align: justify;
-        margin-top: 4px;
-        margin-inline: 4px;
+        margin-top: 6px;
+        margin-inline: 6px;
         padding-block: 12px;
+        border: 1.8px solid transparent;
+        border-radius: 8px;
+        transition: .25s;
+        box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.5);
     }
 
     .selection-mode-area button:last-of-type {
-        margin-bottom: 4px;
+        margin-bottom: 6px;
+    }
+
+    .selection-mode-area button:hover, 
+    .selection-mode-area button:disabled {
+        color: #ffc107;
+        background-color: #1e2022;
+        border-color: #ffc107;
+    }
+
+    .selection-mode-area button:hover {
+        box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.8);
+    }
+
+    .selection-mode-area button:disabled {
+        color: #f4f4f2;
+        opacity: 0.85;
     }
 
     .selection-mode-area button span {
