@@ -1,0 +1,41 @@
+@using GTRouteApp.Helpers
+@namespace GTRouteApp.BrowseComponents
+
+<div class="selection-container">
+    <div class="selection-header">
+        <p>Mode Selection</p>
+        <button type="button"
+            title="Close" 
+            @onclick="DismissModal" 
+            class="btn btn-danger">
+            <span class="bi bi-x-square-fill"></span>
+        </button>
+    </div>
+    <div class="selection-mode-area">
+        <button class="btn btn-warning" @onclick="() => ChooseMode(BrowseMode.Gallery)">
+            <span class="bi bi-image-fill"></span> Gallery View
+        </button>
+        <button class="btn btn-warning" @onclick="() => ChooseMode(BrowseMode.List)">
+            <span class="bi bi-list-task"></span> List View
+        </button>
+        <button class="btn btn-warning" @onclick="() => ChooseMode(BrowseMode.Grid)">
+            <span class="bi bi-grid-3x3-gap-fill"></span> Grid View
+        </button>
+    </div>
+    <div class="small-footer"></div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance ModeSelectionInstance { get; set; } = default!;
+
+    private async Task ChooseMode(BrowseMode mode)
+    {
+        await ModeSelectionInstance.CloseAsync(ModalResult.Ok(mode));
+    }
+
+    private async Task DismissModal()
+    {
+        await ModeSelectionInstance.CancelAsync();
+    }
+}
