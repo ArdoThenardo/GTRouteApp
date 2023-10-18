@@ -143,7 +143,12 @@
 
     private async Task ModeSelection()
     {
-        var modal = ModeSelectionModal.Show<BrowseModeSelection>("Mode Selection", modalOptions);
+        var modal = ModeSelectionModal.Show<BrowseModeSelection>(
+            "Mode Selection", 
+            new ModalParameters().Add(
+                nameof(BrowseModeSelection.SelectedModeQuery), 
+                    !string.IsNullOrEmpty(SelectedModeQuery) ? SelectedModeQuery : BrowseModeQuery.GalleryMode), 
+            modalOptions);
         var result = await modal.Result;
 
         if (result.Confirmed && result.Data != null)
