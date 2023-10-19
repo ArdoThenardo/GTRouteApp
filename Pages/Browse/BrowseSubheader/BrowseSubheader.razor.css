@@ -74,7 +74,10 @@
 }
 
 .btn-subheader {
-    display: inline-flex;
+    display: none;
+}
+
+.btn-subheader {
     flex-direction: row;
     align-items: center;
     padding-block: 2px;
@@ -143,6 +146,16 @@
 
 .btn-category-change p {
     margin-bottom: 0;
+}
+
+@media (max-width: 1024px) {
+    .btn-subheader {
+        display: inline-flex;
+    }
+
+    .subheader-view-options {
+        display: none;
+    }
 }
 
 @media (max-width: 540px) {
