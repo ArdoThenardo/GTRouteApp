@@ -46,6 +46,10 @@
                     break;
             }
             | <span class="bi bi-caret-down-fill"></span>
+            <BrowseTooltip Text="Change Sort setting" 
+                WidthInPx="160" 
+                TopPositionInPx="122" 
+                RightPositionInPx="70" />
         </button>
 
         <button type="button" class="btn btn-selection btn-subheader"
@@ -67,6 +71,10 @@
                     break;
             }
             | <span class="bi bi-caret-down-fill"></span>
+            <BrowseTooltip Text="Change View setting" 
+                WidthInPx="160" 
+                TopPositionInPx="122" 
+                RightPositionInPx="8" />
         </button>
 
         <div class="subheader-view-options">
@@ -75,18 +83,32 @@
                 title="Switch to Gallery View"
                 disabled=@disableGallery>
                 <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
+                <BrowseTooltip Text="Gallery View" 
+                    WidthInPx="110" 
+                    TopPositionInPx="122" 
+                    RightPositionInPx="70" />
             </button>
+
             <button type="button" class="btn btn-selection"
                 @onclick="() => SwitchMode(BrowseMode.List)"
                 title="Switch to List View"
                 disabled=@disableList>
                 <span class="bi bi-list-task"></span>
+                <BrowseTooltip Text="List View" 
+                    WidthInPx="90" 
+                    TopPositionInPx="122" 
+                    RightPositionInPx="40" />
             </button>
+
             <button type="button" class="btn btn-selection" style="padding-left: 10px;" 
                 @onclick="() => SwitchMode(BrowseMode.Grid)"
                 title="Switch to Grid View"
                 disabled=@disableGrid>
                 <span class="bi bi-grid-3x3-gap-fill" style="margin-right: 4px;"></span>
+                <BrowseTooltip Text="Grid View" 
+                    WidthInPx="95" 
+                    TopPositionInPx="122" 
+                    RightPositionInPx="8" />
             </button>
         </div>
     </div>

@@ -121,6 +121,13 @@
         margin-left: 1px;
     }
 
+.btn-subheader:hover > ::deep .button-tooltip, 
+.btn-subheader-2:hover > ::deep .button-tooltip, 
+.subheader-view-options button:hover > ::deep .button-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
 .btn-selection, .btn-category-change {
     color: #1e2022;
     background-color: #ffc107;
