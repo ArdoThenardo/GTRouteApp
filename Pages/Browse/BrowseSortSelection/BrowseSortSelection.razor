@@ -1,0 +1,55 @@
+@using GTRouteApp.Helpers
+@namespace GTRouteApp.BrowseComponents
+
+<div class="selection-container">
+    <div class="selection-header">
+        <p>Sort Selection</p>
+        <button type="button"
+            title="Close" 
+            @onclick="DismissModal" 
+            class="btn btn-danger">
+            <span class="bi bi-x-square-fill"></span>
+        </button>
+    </div>
+    <div class="selection-area">
+        <button class="btn btn-warning"
+            disabled="@((SelectedSort.Equals(BrowseSort.Alphabetical)) ? true : false)" 
+            @onclick="() => ChooseSort(BrowseSort.Alphabetical)">
+            <span class="bi bi-sort-alpha-down"></span> Alphabetical
+        </button>
+        <button class="btn btn-warning"
+            disabled="@((SelectedSort.Equals(BrowseSort.AlphabeticalReverse)) ? true : false)" 
+            @onclick="() => ChooseSort(BrowseSort.AlphabeticalReverse)">
+            <span class="bi bi-sort-alpha-up"></span> Alphabetical Reverse
+        </button>
+        <button class="btn btn-warning"
+            disabled="@((SelectedSort.Equals(BrowseSort.Standard)) ? true : false)" 
+            @onclick="() => ChooseSort(BrowseSort.Standard)">
+            <span class="bi bi-sort-down"></span> Standard
+        </button>
+        <button class="btn btn-warning"
+            disabled="@((SelectedSort.Equals(BrowseSort.StandardReverse)) ? true : false)" 
+            @onclick="() => ChooseSort(BrowseSort.StandardReverse)">
+            <span class="bi bi-sort-up"></span> Standard Reverse
+        </button>
+    </div>
+    <div class="small-footer"></div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance SortSelectionInstance { get; set; } = default!;
+
+    [Parameter]
+    public BrowseSort SelectedSort { get; set; } = BrowseSort.Alphabetical;
+
+    private async Task ChooseSort(BrowseSort sort)
+    {
+        await SortSelectionInstance.CloseAsync(ModalResult.Ok(sort));
+    }
+
+    private async Task DismissModal()
+    {
+        await SortSelectionInstance.CancelAsync();
+    }
+}
