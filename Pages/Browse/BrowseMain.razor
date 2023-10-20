@@ -162,8 +162,6 @@ else
         RaceTrackService.ResetRaceTracksList();
 
         ChangeSortOption(sort);
-        RaceTrackService.SetSortOption(sort);
-
         await LoadData();
     }
 
@@ -252,6 +250,7 @@ else
     private void ChangeSortOption(BrowseSort sort)
     {
         this._SelectedSort = sort;
+        RaceTrackService.SetSortOption(_SelectedSort);
 
         switch (this._SelectedSort)
         {
