@@ -46,6 +46,7 @@
                     break;
             }
             | <span class="bi bi-caret-down-fill"></span>
+            <span class="button-tooltip">Change Sort setting</span>
         </button>
 
         <button type="button" class="btn btn-selection btn-subheader"
@@ -67,6 +68,7 @@
                     break;
             }
             | <span class="bi bi-caret-down-fill"></span>
+            <span class="button-tooltip">Change View setting</span>
         </button>
 
         <div class="subheader-view-options">
@@ -75,18 +77,41 @@
                 title="Switch to Gallery View"
                 disabled=@disableGallery>
                 <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
+                <span class="button-tooltip" 
+                    style="--width: 110px; 
+                        --rightPos: 2%; 
+                        --marginTop: 6px; 
+                        --marginRight: 30px;">
+                    Gallery View
+                </span>
             </button>
+
             <button type="button" class="btn btn-selection"
                 @onclick="() => SwitchMode(BrowseMode.List)"
                 title="Switch to List View"
                 disabled=@disableList>
                 <span class="bi bi-list-task"></span>
+                <span class="button-tooltip" 
+                    style="--width: 90px; 
+                        --rightPos: 2%; 
+                        --marginTop: 30px; 
+                        --marginRight: -4px;">
+                    List View
+                </span>
             </button>
+
             <button type="button" class="btn btn-selection" style="padding-left: 10px;" 
                 @onclick="() => SwitchMode(BrowseMode.Grid)"
                 title="Switch to Grid View"
                 disabled=@disableGrid>
                 <span class="bi bi-grid-3x3-gap-fill" style="margin-right: 4px;"></span>
+                <span class="button-tooltip" 
+                    style="--width: 95px; 
+                        --rightPos: 2%; 
+                        --marginTop: 30px; 
+                        --marginRight: -14px;">
+                    Grid View
+                </span>
             </button>
         </div>
     </div>
