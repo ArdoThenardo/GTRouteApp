@@ -73,24 +73,6 @@ public class RaceTrackService: BaseService
         }
     }
 
-    private List<RaceTrack> SortTracksByCategory()
-    {
-        List <RaceTrack> sortedTracks = new();
-        var originalTracks = tracks.Where(t => t.Category == RaceTrackCategory.OriginalCircuit).ToList();
-        var realTracks = tracks.Where(t => t.Category == RaceTrackCategory.RealCircuit).ToList();
-        var cityTracks = tracks.Where(t => t.Category == RaceTrackCategory.CityCircuit).ToList();
-        var dirtTracks = tracks.Where(t => t.Category == RaceTrackCategory.DirtCircuit).ToList();
-        var snowTracks = tracks.Where(t => t.Category == RaceTrackCategory.SnowCircuit).ToList();
-
-        sortedTracks.AddRange(originalTracks);
-        sortedTracks.AddRange(realTracks);
-        sortedTracks.AddRange(cityTracks);
-        sortedTracks.AddRange(dirtTracks);
-        sortedTracks.AddRange(snowTracks);
-
-        return sortedTracks;
-    }
-
     public bool IsRaceTracksReachMaximum()
     {
         if (currentNumberOfRaceTracks < numberOfTotalRaceTracks)
