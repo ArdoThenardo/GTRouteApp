@@ -46,7 +46,12 @@
                     break;
             }
             | <span class="bi bi-caret-down-fill"></span>
-            <span class="button-tooltip">Change Sort setting</span>
+            <span class="button-tooltip" 
+                style="--width: 160px;
+                    --topPos: 122px; 
+                    --rightPos: 70px;">
+                Change Sort setting
+            </span>
         </button>
 
         <button type="button" class="btn btn-selection btn-subheader"
@@ -68,7 +73,12 @@
                     break;
             }
             | <span class="bi bi-caret-down-fill"></span>
-            <span class="button-tooltip">Change View setting</span>
+            <span class="button-tooltip" 
+                style="--width: 160px;
+                    --topPos: 122px; 
+                    --rightPos: 8px;">
+                Change View setting
+            </span>
         </button>
 
         <div class="subheader-view-options">
@@ -78,10 +88,9 @@
                 disabled=@disableGallery>
                 <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
                 <span class="button-tooltip" 
-                    style="--width: 110px; 
-                        --rightPos: 2%; 
-                        --marginTop: 6px; 
-                        --marginRight: 30px;">
+                    style="--width: 110px;
+                        --topPos: 122px; 
+                        --rightPos: 70px;">
                     Gallery View
                 </span>
             </button>
@@ -92,10 +101,9 @@
                 disabled=@disableList>
                 <span class="bi bi-list-task"></span>
                 <span class="button-tooltip" 
-                    style="--width: 90px; 
-                        --rightPos: 2%; 
-                        --marginTop: 30px; 
-                        --marginRight: -4px;">
+                    style="--width: 90px;
+                        --topPos: 122px; 
+                        --rightPos: 40px;">
                     List View
                 </span>
             </button>
@@ -106,10 +114,9 @@
                 disabled=@disableGrid>
                 <span class="bi bi-grid-3x3-gap-fill" style="margin-right: 4px;"></span>
                 <span class="button-tooltip" 
-                    style="--width: 95px; 
-                        --rightPos: 2%; 
-                        --marginTop: 30px; 
-                        --marginRight: -14px;">
+                    style="--width: 95px;
+                        --topPos: 122px; 
+                        --rightPos: 8px;">
                     Grid View
                 </span>
             </button>

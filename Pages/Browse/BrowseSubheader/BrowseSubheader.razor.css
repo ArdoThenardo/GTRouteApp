@@ -121,10 +121,12 @@
         margin-left: 1px;
     }
 
-    .subheader-view-options button:hover > .button-tooltip {
-        opacity: 1;
-        visibility: visible;
-    }
+.btn-subheader:hover > .button-tooltip, 
+.btn-subheader-2:hover > .button-tooltip, 
+.subheader-view-options button:hover > .button-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
 
 .btn-selection, .btn-category-change {
     color: #1e2022;
@@ -162,9 +164,8 @@
     visibility: hidden;
     position: fixed;
     width: var(--width); /* adjust with --width */
+    top: var(--topPos); /* adjust with --topPos */
     right: var(--rightPos); /* adjust with --rightPos */
-    margin-top: var(--marginTop); /* adjust with --marginTop */
-    margin-right: var(--marginRight); /* adjust with --marginRight */
     background-color: #363636;
     color: #f4f4f2;
     font-size: 14px;
