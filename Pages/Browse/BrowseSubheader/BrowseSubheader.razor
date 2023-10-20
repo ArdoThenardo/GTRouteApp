@@ -24,6 +24,30 @@
             </div>
         </div>
 
+        <button type="button" class="btn btn-selection btn-subheader-2" 
+            title="Sort Race Tracks"
+            @onclick="() => SortSelection()">
+            @switch (SelectedSort)
+            {
+                case BrowseSort.Alphabetical:
+                    <span class="bi bi-sort-alpha-down"></span>
+                    break;
+                case BrowseSort.AlphabeticalReverse:
+                    <span class="bi bi-sort-alpha-up"></span>
+                    break;
+                case BrowseSort.Standard:
+                    <span class="bi bi-sort-down"></span>
+                    break;
+                case BrowseSort.StandardReverse:
+                    <span class="bi bi-sort-up"></span>
+                    break;
+                default:
+                    <span class="bi bi-sort-alpha-down"></span>
+                    break;
+            }
+            | <span class="bi bi-caret-down-fill"></span>
+        </button>
+
         <button type="button" class="btn btn-selection btn-subheader"
             title="Change view mode" 
             @onclick="() => ModeSelection()">
@@ -78,6 +102,8 @@
     [Parameter]
     public EventCallback<BrowseMode> ChosenBrowseMode { get; set; }
 
+    public BrowseSort SelectedSort = BrowseSort.Alphabetical;
+
     [Parameter]
     public string SelectedModeQuery { get; set; } = ""; // use BrowseModeQuery
 
@@ -90,6 +116,8 @@
 
     [CascadingParameter] 
     public IModalService CategorySelectionModal { get; set; } = default!;
+    [CascadingParameter]
+    public IModalService SortSelectionModal { get; set; } = default!;
     [CascadingParameter]
     public IModalService ModeSelectionModal { get; set; } = default!;
 
@@ -138,6 +166,20 @@
         {
             selectedCategory = result.Data.ToString() ?? "";
             await OnCategoryChanged.InvokeAsync(selectedCategory);
+        }
+    }
+
+    private async Task SortSelection()
+    {
+        var modal = SortSelectionModal.Show<BrowseSortSelection>(
+            "Sort Selection", 
+            new ModalParameters().Add(nameof(BrowseSortSelection.SelectedSort), SelectedSort),
+            modalOptions);
+        var result = await modal.Result;
+
+        if (result.Confirmed && result.Data != null)
+        {
+            SelectedSort = (BrowseSort) result.Data;
         }
     }
 

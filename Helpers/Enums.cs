@@ -6,6 +6,13 @@ public enum BrowseMode {
     Grid
 }
 
+public enum BrowseSort {
+    Alphabetical,
+    AlphabeticalReverse,
+    Standard,
+    StandardReverse
+}
+
 public enum SubDetail {
     General,
     Layout,

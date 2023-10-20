@@ -1,0 +1,87 @@
+.selection-container {
+    display: flex;
+    flex-direction: column;
+    width: 24vw;
+}
+
+.selection-header {
+    background-color: #303841;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 16px;
+    padding-block: 8px;
+}
+
+.selection-header > p {
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #f4f4f2;
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.9);
+}
+
+.selection-header > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 40px;
+    box-shadow: 1px 0px 8px rgba(30, 32, 34, 0.9);
+}
+
+.selection-area {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    gap: 8px;
+    padding-inline: 12px;
+    padding-block: 8px;
+    justify-content: space-evenly;
+}
+
+    .selection-area button {
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+        border: 1.8px solid transparent;
+        border-radius: 8px;
+        transition: .25s;
+        box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.5);
+    }
+
+    .selection-area button:hover, 
+    .selection-area button:disabled {
+        color: #ffc107;
+        background-color: #1e2022;
+        border-color: #ffc107;
+    }
+
+    .selection-area button:hover {
+        box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.8);
+    }
+
+    .selection-area button:disabled {
+        color: #f4f4f2;
+        opacity: 0.85;
+    }
+
+    .selection-area button span {
+        font-size: 32px;
+    }
+
+.small-footer {
+    background-color: #303841;
+    height: 14px;
+}
+
+@media (max-width: 540px) {
+    .selection-container {
+        width: 70vw;
+    }
+}
