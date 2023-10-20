@@ -100,9 +100,13 @@
     public EventCallback<string> OnCategoryChanged { get; set; }
 
     [Parameter]
+    public EventCallback<BrowseSort> OnSortChanged { get; set; }
+
+    [Parameter]
     public EventCallback<BrowseMode> ChosenBrowseMode { get; set; }
 
-    public BrowseSort SelectedSort = BrowseSort.Alphabetical;
+    [Parameter]
+    public BrowseSort SelectedSort { get; set; } = BrowseSort.Alphabetical;
 
     [Parameter]
     public string SelectedModeQuery { get; set; } = ""; // use BrowseModeQuery
@@ -180,6 +184,7 @@
         if (result.Confirmed && result.Data != null)
         {
             SelectedSort = (BrowseSort) result.Data;
+            await OnSortChanged.InvokeAsync(SelectedSort);
         }
     }
 

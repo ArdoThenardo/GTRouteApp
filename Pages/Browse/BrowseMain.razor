@@ -16,7 +16,9 @@ else
 {
     <BrowseSubheader Info="@info" 
         OnCategoryChanged="OnCategoryChangedHandler" 
-        ChosenBrowseMode="ChangeBrowseMode" 
+        OnSortChanged="OnSortChangedHandler"
+        ChosenBrowseMode="ChangeBrowseMode"
+        SelectedSort="@_SelectedSort"
         SelectedModeQuery="@SelectedModeQuery" 
         selectedCategory="@selectedCategory" />
 
@@ -70,6 +72,11 @@ else
     private BrowseMode _mode = BrowseMode.Gallery;
     private string info = galleryInfo;
 
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "sort")]
+    public string SelectedSortQuery { get; set; } = ""; // use BrowseSortQuery
+    private BrowseSort _SelectedSort { get; set; } = BrowseSort.Alphabetical;
+
     private bool isMaximum = false;
     private int firstIndexInCurrentPage = 0;
     private bool isLoadMoreError = false;
@@ -80,6 +87,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         PreselectCategory();
+        PreselectSortOption();
         
         await LoadData();
     }
@@ -146,6 +154,17 @@ else
         await LoadData();
     }
 
+    private async Task OnSortChangedHandler(BrowseSort sort)
+    {
+        tracks.Clear();
+        currentPage = 1;
+        isMaximum = false;
+        RaceTrackService.ResetRaceTracksList();
+
+        ChangeSortOption(sort);
+        await LoadData();
+    }
+
     private void PreselectCategory()
     {
         selectedCategory = string.IsNullOrWhiteSpace(preselect_category) ? 
@@ -203,6 +222,54 @@ else
         
         updatedUrl = NavigationManager.GetUriWithQueryParameter(
             "mode", SelectedModeQuery);
+        NavigationManager.NavigateTo(updatedUrl);
+    }
+
+    private void PreselectSortOption()
+    {
+        if (!string.IsNullOrWhiteSpace(SelectedSortQuery))
+        {
+            switch (SelectedSortQuery)
+            {
+                case BrowseSortQuery.Alphabetical:
+                    ChangeSortOption(BrowseSort.Alphabetical);
+                    break;
+                case BrowseSortQuery.AlphabeticalReverse:
+                    ChangeSortOption(BrowseSort.AlphabeticalReverse);
+                    break;
+                case BrowseSortQuery.Standard:
+                    ChangeSortOption(BrowseSort.Standard);
+                    break;
+                case BrowseSortQuery.StandardReverse:
+                    ChangeSortOption(BrowseSort.StandardReverse);
+                    break;
+            }
+        }
+    }
+
+    private void ChangeSortOption(BrowseSort sort)
+    {
+        this._SelectedSort = sort;
+        RaceTrackService.SetSortOption(_SelectedSort);
+
+        switch (this._SelectedSort)
+        {
+            case BrowseSort.Alphabetical:
+                SelectedSortQuery = BrowseSortQuery.Alphabetical;
+                break;
+            case BrowseSort.AlphabeticalReverse:
+                SelectedSortQuery = BrowseSortQuery.AlphabeticalReverse;
+                break;
+            case BrowseSort.Standard:
+                SelectedSortQuery = BrowseSortQuery.Standard;
+                break;
+            case BrowseSort.StandardReverse:
+                SelectedSortQuery = BrowseSortQuery.StandardReverse;
+                break;
+        }
+
+        var updatedUrl = NavigationManager.GetUriWithQueryParameter(
+            "sort", SelectedSortQuery);
         NavigationManager.NavigateTo(updatedUrl);
     }
 

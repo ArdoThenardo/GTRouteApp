@@ -15,6 +15,9 @@ public class RaceTrackService: BaseService
     private int numberOfTotalRaceTracks = 0;
     private int currentNumberOfRaceTracks = 0;
     private string raceTracksCategory = BrowseCategory.Categories[0];
+    private BrowseSort raceTracksSortOption = BrowseSort.Alphabetical;
+    private bool shouldSortByName = true;
+    private bool isDescending = false;
     private string recentError = "";
 
     public RaceTrackService(HttpClient http, IOptions<GTRouteAppSettings> settings): base(http, settings) 
@@ -35,18 +38,21 @@ public class RaceTrackService: BaseService
             if (raceTracksCategory.Equals(BrowseCategory.Categories[4])) // Category: Dirt / Snow
             {
                 tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
-                    ($"{GetOffroadsUrl}/?page={page}&limit={Limit}");
+                    ($"{GetOffroadsUrl}/?page={page}&limit={Limit}&"
+                    +$"shouldSortByName={shouldSortByName}&isDescending={isDescending}");
             }
             else if (raceTracksCategory.Equals(BrowseCategory.Categories[0])) // Category: All
             {
                 tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
-                    ($"{GetTracksUrl}/?page={page}&limit={Limit}");
+                    ($"{GetTracksUrl}/?page={page}&limit={Limit}&"
+                    +$"shouldSortByName={shouldSortByName}&isDescending={isDescending}");
             }
             else // Category: Original Circuits || Real Circuits || City Circuits
             {
                 var singularCategoryString = raceTracksCategory.Remove(raceTracksCategory.Length - 1, 1);
                 tracksData = await HitRequest<BaseModel<List<RaceTrack>>>
-                    ($"{GetTracksUrl}/?page={page}&limit={Limit}&category={singularCategoryString}");
+                    ($"{GetTracksUrl}/?page={page}&limit={Limit}&category={singularCategoryString}&"
+                    +$"shouldSortByName={shouldSortByName}&isDescending={isDescending}");
             }
 
             if (tracksData.NumberOfData == 0)
@@ -57,7 +63,7 @@ public class RaceTrackService: BaseService
             currentNumberOfRaceTracks = currentNumberOfRaceTracks + tracks.Count();
             numberOfTotalRaceTracks = tracksData.NumberOfData;
 
-            return raceTracksCategory.Equals(BrowseCategory.Categories[0]) ? SortTracksByCategory() : tracks;
+            return tracks;
         }
         catch
         {
@@ -65,24 +71,6 @@ public class RaceTrackService: BaseService
 
             return Enumerable.Empty<RaceTrack>().ToList();
         }
-    }
-
-    private List<RaceTrack> SortTracksByCategory()
-    {
-        List <RaceTrack> sortedTracks = new();
-        var originalTracks = tracks.Where(t => t.Category == RaceTrackCategory.OriginalCircuit).ToList();
-        var realTracks = tracks.Where(t => t.Category == RaceTrackCategory.RealCircuit).ToList();
-        var cityTracks = tracks.Where(t => t.Category == RaceTrackCategory.CityCircuit).ToList();
-        var dirtTracks = tracks.Where(t => t.Category == RaceTrackCategory.DirtCircuit).ToList();
-        var snowTracks = tracks.Where(t => t.Category == RaceTrackCategory.SnowCircuit).ToList();
-
-        sortedTracks.AddRange(originalTracks);
-        sortedTracks.AddRange(realTracks);
-        sortedTracks.AddRange(cityTracks);
-        sortedTracks.AddRange(dirtTracks);
-        sortedTracks.AddRange(snowTracks);
-
-        return sortedTracks;
     }
 
     public bool IsRaceTracksReachMaximum()
@@ -98,6 +86,31 @@ public class RaceTrackService: BaseService
     public void SetRaceTracksCategory(string category)
     {
         raceTracksCategory = category;
+    }
+
+    public void SetSortOption(BrowseSort sort)
+    {
+        raceTracksSortOption = sort;
+
+        switch (raceTracksSortOption)
+        {
+            case BrowseSort.Alphabetical:
+                shouldSortByName = true;
+                isDescending = false;
+                break;
+            case BrowseSort.AlphabeticalReverse:
+                shouldSortByName = true;
+                isDescending = true;
+                break;
+            case BrowseSort.Standard:
+                shouldSortByName = false;
+                isDescending = true;
+                break;
+            case BrowseSort.StandardReverse:
+                shouldSortByName = false;
+                isDescending = false;
+                break;
+        }
     }
 
     public void ResetRaceTracksList()
