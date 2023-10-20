@@ -28,7 +28,16 @@ public static class BrowseCategory
     };
 }
 
-public static class BrowseModeQuery {
+public static class BrowseSortQuery 
+{
+    public const string Alphabetical = "alphabetical";
+    public const string AlphabeticalReverse = "alphabetical_reverse";
+    public const string Standard = "standard";
+    public const string StandardReverse = "standard_reverse";
+}
+
+public static class BrowseModeQuery 
+{
     public const string GalleryMode = "gallery";
     public const string ListMode = "list";
     public const string GridMode = "grid";
