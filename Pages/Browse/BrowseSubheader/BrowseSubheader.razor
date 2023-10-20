@@ -24,6 +24,29 @@
             </div>
         </div>
 
+        <button type="button" class="btn btn-selection btn-subheader-2" 
+            title="Sort Race Tracks">
+            @switch (SelectedSort)
+            {
+                case BrowseSort.Alphabetical:
+                    <span class="bi bi-sort-alpha-down"></span>
+                    break;
+                case BrowseSort.AlphabeticalReverse:
+                    <span class="bi bi-sort-alpha-up"></span>
+                    break;
+                case BrowseSort.Standard:
+                    <span class="bi bi-sort-alpha-up"></span>
+                    break;
+                case BrowseSort.StandardReverse:
+                    <span class="bi bi-sort-alpha-up"></span>
+                    break;
+                default:
+                    <span class="bi bi-sort-alpha-down"></span>
+                    break;
+            }
+            | <span class="bi bi-caret-down-fill"></span>
+        </button>
+
         <button type="button" class="btn btn-selection btn-subheader"
             title="Change view mode" 
             @onclick="() => ModeSelection()">
@@ -77,6 +100,8 @@
 
     [Parameter]
     public EventCallback<BrowseMode> ChosenBrowseMode { get; set; }
+
+    public BrowseSort SelectedSort = BrowseSort.Alphabetical;
 
     [Parameter]
     public string SelectedModeQuery { get; set; } = ""; // use BrowseModeQuery
