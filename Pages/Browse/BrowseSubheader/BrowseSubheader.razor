@@ -46,12 +46,10 @@
                     break;
             }
             | <span class="bi bi-caret-down-fill"></span>
-            <span class="button-tooltip" 
-                style="--width: 160px;
-                    --topPos: 122px; 
-                    --rightPos: 70px;">
-                Change Sort setting
-            </span>
+            <BrowseTooltip Text="Change Sort setting" 
+                WidthInPx="160" 
+                TopPositionInPx="122" 
+                RightPositionInPx="70" />
         </button>
 
         <button type="button" class="btn btn-selection btn-subheader"
@@ -73,12 +71,10 @@
                     break;
             }
             | <span class="bi bi-caret-down-fill"></span>
-            <span class="button-tooltip" 
-                style="--width: 160px;
-                    --topPos: 122px; 
-                    --rightPos: 8px;">
-                Change View setting
-            </span>
+            <BrowseTooltip Text="Change View setting" 
+                WidthInPx="160" 
+                TopPositionInPx="122" 
+                RightPositionInPx="8" />
         </button>
 
         <div class="subheader-view-options">
@@ -87,12 +83,10 @@
                 title="Switch to Gallery View"
                 disabled=@disableGallery>
                 <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
-                <span class="button-tooltip" 
-                    style="--width: 110px;
-                        --topPos: 122px; 
-                        --rightPos: 70px;">
-                    Gallery View
-                </span>
+                <BrowseTooltip Text="Gallery View" 
+                    WidthInPx="110" 
+                    TopPositionInPx="122" 
+                    RightPositionInPx="70" />
             </button>
 
             <button type="button" class="btn btn-selection"
@@ -100,12 +94,10 @@
                 title="Switch to List View"
                 disabled=@disableList>
                 <span class="bi bi-list-task"></span>
-                <span class="button-tooltip" 
-                    style="--width: 90px;
-                        --topPos: 122px; 
-                        --rightPos: 40px;">
-                    List View
-                </span>
+                <BrowseTooltip Text="List View" 
+                    WidthInPx="90" 
+                    TopPositionInPx="122" 
+                    RightPositionInPx="40" />
             </button>
 
             <button type="button" class="btn btn-selection" style="padding-left: 10px;" 
@@ -113,12 +105,10 @@
                 title="Switch to Grid View"
                 disabled=@disableGrid>
                 <span class="bi bi-grid-3x3-gap-fill" style="margin-right: 4px;"></span>
-                <span class="button-tooltip" 
-                    style="--width: 95px;
-                        --topPos: 122px; 
-                        --rightPos: 8px;">
-                    Grid View
-                </span>
+                <BrowseTooltip Text="Grid View" 
+                    WidthInPx="95" 
+                    TopPositionInPx="122" 
+                    RightPositionInPx="8" />
             </button>
         </div>
     </div>
