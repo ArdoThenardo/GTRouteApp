@@ -154,9 +154,17 @@ else
         await LoadData();
     }
 
-    private void OnSortChangedHandler(BrowseSort sort)
+    private async Task OnSortChangedHandler(BrowseSort sort)
     {
+        tracks.Clear();
+        currentPage = 1;
+        isMaximum = false;
+        RaceTrackService.ResetRaceTracksList();
+
         ChangeSortOption(sort);
+        RaceTrackService.SetSortOption(sort);
+
+        await LoadData();
     }
 
     private void PreselectCategory()
