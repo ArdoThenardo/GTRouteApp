@@ -288,7 +288,8 @@ else
             SelectedSortQuery = BrowseSortQuery.Alphabetical; // default to sort by alphabetical, if empty
 
         NavigationManager.NavigateTo($"/browse/detail/{slug}?"
-            +$"origin_category={_SelectedCategory}&origin_sort={SelectedSortQuery}&origin_mode={SelectedModeQuery}");
+            +$"origin_page=browse&origin_category={_SelectedCategory}"
+            +$"&origin_sort={SelectedSortQuery}&origin_mode={SelectedModeQuery}");
     }
 
     private async Task OnTryAgainHandler()
