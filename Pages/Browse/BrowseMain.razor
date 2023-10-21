@@ -283,9 +283,12 @@ else
     {
         if (string.IsNullOrEmpty(SelectedModeQuery))
             SelectedModeQuery = BrowseModeQuery.GalleryMode; // default to gallery origin, if empty
+        
+        if (string.IsNullOrEmpty(SelectedSortQuery))
+            SelectedSortQuery = BrowseSortQuery.Alphabetical; // default to sort by alphabetical, if empty
 
         NavigationManager.NavigateTo($"/browse/detail/{slug}?"
-            +$"category={_SelectedCategory}&origin={SelectedModeQuery}");
+            +$"origin_category={_SelectedCategory}&origin_sort={SelectedSortQuery}&origin_mode={SelectedModeQuery}");
     }
 
     private async Task OnTryAgainHandler()
