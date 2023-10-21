@@ -14,15 +14,15 @@
 }
 else
 {
-    <BrowseSubheader Info="@info" 
+    <BrowseSubheader Info="@_ModeInfo" 
         OnCategoryChanged="OnCategoryChangedHandler" 
         OnSortChanged="OnSortChangedHandler"
         ChosenBrowseMode="ChangeBrowseMode"
         SelectedSort="@_SelectedSort"
         SelectedModeQuery="@SelectedModeQuery" 
-        selectedCategory="@selectedCategory" />
+        selectedCategory="@_SelectedCategory" />
 
-    @if (_mode == BrowseMode.Gallery)
+    @if (_SelectedMode == BrowseMode.Gallery)
     {
         <BrowseGallery Tracks="@tracks" 
             IsMaximum="@isMaximum" 
@@ -31,7 +31,7 @@ else
             OnLoadMoreClicked="LoadMoreTracks"
             OnViewClickHandler="AccessTrackDetail" />
     }
-    else if (_mode == BrowseMode.List)
+    else if (_SelectedMode == BrowseMode.List)
     {
         <BrowseList Tracks="@tracks"
             IsMaximum="@isMaximum"
@@ -40,7 +40,7 @@ else
             OnLoadMoreClicked="@LoadMoreTracks"
             OnViewClickHandler="AccessTrackDetail" />
     }
-    else if (_mode == BrowseMode.Grid)
+    else if (_SelectedMode == BrowseMode.Grid)
     {
         <BrowseGrid Tracks="@tracks" 
             IsMaximum="@isMaximum"
@@ -63,19 +63,19 @@ else
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "category")]
-    public string preselect_category { get; set; } = "";
-    public string selectedCategory { get; set; } = BrowseCategory.Categories[0];
+    public string InitialCategory { get; set; } = "";
+    private string _SelectedCategory { get; set; } = BrowseCategory.Categories[0];
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "mode")]
     public string SelectedModeQuery { get; set; } = ""; // use BrowseModeQuery
-    private BrowseMode _mode = BrowseMode.Gallery;
-    private string info = galleryInfo;
+    private BrowseMode _SelectedMode = BrowseMode.Gallery;
+    private string _ModeInfo = galleryInfo;
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "sort")]
     public string SelectedSortQuery { get; set; } = ""; // use BrowseSortQuery
-    private BrowseSort _SelectedSort { get; set; } = BrowseSort.Alphabetical;
+    private BrowseSort _SelectedSort = BrowseSort.Alphabetical;
 
     private bool isMaximum = false;
     private int firstIndexInCurrentPage = 0;
@@ -139,27 +139,25 @@ else
         }
     }
 
-    private async Task OnCategoryChangedHandler(string category)
+    private void ClearData()
     {
         tracks.Clear();
         currentPage = 1;
         isMaximum = false;
         RaceTrackService.ResetRaceTracksList();
+    }
 
-        selectedCategory = category;
-        RaceTrackService.SetRaceTracksCategory(selectedCategory);
-        NavigationManager.NavigateTo(
-            NavigationManager.GetUriWithQueryParameter("category", selectedCategory)); // update url
+    private async Task OnCategoryChangedHandler(string category)
+    {
+        ClearData();
 
+        ChangeCategory(category);
         await LoadData();
     }
 
     private async Task OnSortChangedHandler(BrowseSort sort)
     {
-        tracks.Clear();
-        currentPage = 1;
-        isMaximum = false;
-        RaceTrackService.ResetRaceTracksList();
+        ClearData();
 
         ChangeSortOption(sort);
         await LoadData();
@@ -167,17 +165,26 @@ else
 
     private void PreselectCategory()
     {
-        selectedCategory = string.IsNullOrWhiteSpace(preselect_category) ? 
+        _SelectedCategory = string.IsNullOrWhiteSpace(InitialCategory) ? 
             BrowseCategory.Categories[0] : 
-            preselect_category;
+            InitialCategory;
 
-        RaceTrackService.SetRaceTracksCategory(selectedCategory);
+        RaceTrackService.SetRaceTracksCategory(_SelectedCategory);
     }
 
     private void CheckError()
     {
         errorMessage = RaceTrackService.GetRecentErrorMessage();
         showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+    }
+
+    private void ChangeCategory(string category)
+    {
+        _SelectedCategory = category;
+        RaceTrackService.SetRaceTracksCategory(_SelectedCategory);
+
+        var updatedUrl = NavigationManager.GetUriWithQueryParameter("category", _SelectedCategory);
+        NavigationManager.NavigateTo(updatedUrl);
     }
 
     private void PreselectBrowseMode()
@@ -201,26 +208,25 @@ else
 
     private void ChangeBrowseMode(BrowseMode mode)
     {
-        this._mode = mode;
-        var updatedUrl = "";
+        _SelectedMode = mode;
 
-        switch (this._mode)
+        switch (_SelectedMode)
         {
             case BrowseMode.Gallery:
                 SelectedModeQuery = BrowseModeQuery.GalleryMode;
-                info = galleryInfo;
+                _ModeInfo = galleryInfo;
                 break;
             case BrowseMode.List:
                 SelectedModeQuery = BrowseModeQuery.ListMode;
-                info = listInfo;
+                _ModeInfo = listInfo;
                 break;
             case BrowseMode.Grid:
                 SelectedModeQuery = BrowseModeQuery.GridMode;
-                info = gridInfo;
+                _ModeInfo = gridInfo;
                 break;
         }
         
-        updatedUrl = NavigationManager.GetUriWithQueryParameter(
+        var updatedUrl = NavigationManager.GetUriWithQueryParameter(
             "mode", SelectedModeQuery);
         NavigationManager.NavigateTo(updatedUrl);
     }
@@ -279,7 +285,7 @@ else
             SelectedModeQuery = BrowseModeQuery.GalleryMode; // default to gallery origin, if empty
 
         NavigationManager.NavigateTo($"/browse/detail/{slug}?"
-            +$"category={selectedCategory}&origin={SelectedModeQuery}");
+            +$"category={_SelectedCategory}&origin={SelectedModeQuery}");
     }
 
     private async Task OnTryAgainHandler()
