@@ -13,17 +13,17 @@
     </div>
     <div class="selection-mode-area">
         <button class="btn btn-warning"
-            disabled="@(SelectedModeQuery.Equals(BrowseModeQuery.GalleryMode) ? true : false)" 
+            disabled="@(SelectedMode.Equals(BrowseMode.Gallery) ? true : false)" 
             @onclick="() => ChooseMode(BrowseMode.Gallery)">
             <span class="bi bi-image-fill"></span> Gallery View
         </button>
         <button class="btn btn-warning"
-            disabled="@(SelectedModeQuery.Equals(BrowseModeQuery.ListMode) ? true : false)" 
+            disabled="@(SelectedMode.Equals(BrowseMode.List) ? true : false)" 
             @onclick="() => ChooseMode(BrowseMode.List)">
             <span class="bi bi-list-task"></span> List View
         </button>
         <button class="btn btn-warning"
-            disabled="@(SelectedModeQuery.Equals(BrowseModeQuery.GridMode) ? true : false)" 
+            disabled="@(SelectedMode.Equals(BrowseMode.Grid) ? true : false)" 
             @onclick="() => ChooseMode(BrowseMode.Grid)">
             <span class="bi bi-grid-3x3-gap-fill"></span> Grid View
         </button>
@@ -36,7 +36,7 @@
     public BlazoredModalInstance ModeSelectionInstance { get; set; } = default!;
 
     [Parameter]
-    public string SelectedModeQuery { get; set; } = BrowseModeQuery.GalleryMode;
+    public BrowseMode SelectedMode { get; set; } = BrowseMode.Gallery;
 
     private async Task ChooseMode(BrowseMode mode)
     {

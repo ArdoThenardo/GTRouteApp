@@ -55,15 +55,15 @@
         <button type="button" class="btn btn-selection btn-subheader"
             title="Change view mode" 
             @onclick="() => ModeSelection()">
-            @switch (SelectedModeQuery)
+            @switch (SelectedMode)
             {
-                case BrowseModeQuery.GalleryMode:
+                case BrowseMode.Gallery:
                     <span class="bi bi-image-fill"></span>
                     break;
-                case BrowseModeQuery.ListMode:
+                case BrowseMode.List:
                     <span class="bi bi-list-task"></span>
                     break;
-                case BrowseModeQuery.GridMode:
+                case BrowseMode.Grid:
                     <span class="bi bi-grid-3x3-gap-fill"></span>
                     break;
                 default:
@@ -131,7 +131,7 @@
     public BrowseSort SelectedSort { get; set; } = BrowseSort.Alphabetical;
 
     [Parameter]
-    public string SelectedModeQuery { get; set; } = ""; // use BrowseModeQuery
+    public BrowseMode SelectedMode { get; set; } = BrowseMode.Gallery;
 
     [Parameter]
     public string selectedCategory { get; set; } = "";
@@ -157,26 +157,23 @@
 
     protected override void OnParametersSet()
     {
-        if (!string.IsNullOrWhiteSpace(SelectedModeQuery))
+        switch (SelectedMode)
         {
-            switch (SelectedModeQuery)
-            {
-                case BrowseModeQuery.GalleryMode:
-                    disableGallery = true;
-                    disableList = false;
-                    disableGrid = false;
-                    break;
-                case BrowseModeQuery.ListMode:
-                    disableGallery = false;
-                    disableList = true;
-                    disableGrid = false;
-                    break;
-                case BrowseModeQuery.GridMode:
-                    disableGallery = false;
-                    disableList = false;
-                    disableGrid = true;
-                    break;
-            }
+            case BrowseMode.Gallery:
+                disableGallery = true;
+                disableList = false;
+                disableGrid = false;
+                break;
+            case BrowseMode.List:
+                disableGallery = false;
+                disableList = true;
+                disableGrid = false;
+                break;
+            case BrowseMode.Grid:
+                disableGallery = false;
+                disableList = false;
+                disableGrid = true;
+                break;
         }
     }
 
@@ -214,9 +211,7 @@
     {
         var modal = ModeSelectionModal.Show<BrowseModeSelection>(
             "Mode Selection", 
-            new ModalParameters().Add(
-                nameof(BrowseModeSelection.SelectedModeQuery), 
-                    !string.IsNullOrEmpty(SelectedModeQuery) ? SelectedModeQuery : BrowseModeQuery.GalleryMode), 
+            new ModalParameters().Add(nameof(BrowseModeSelection.SelectedMode), SelectedMode), 
             modalOptions);
         var result = await modal.Result;
 
