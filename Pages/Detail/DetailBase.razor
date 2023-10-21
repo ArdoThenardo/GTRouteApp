@@ -51,10 +51,10 @@
 
         <div class="back-button">
             <button type="button"
-                class="@((!string.IsNullOrEmpty(origin) ? "btn btn-danger" : "btn btn-primary"))" 
-                @onclick="() => GoBack(origin)">
+                class="@((!string.IsNullOrEmpty(OriginPage) ? "btn btn-danger" : "btn btn-primary"))" 
+                @onclick="() => GoBack()">
                 <span class="bi bi-arrow-left-square" style="margin-right: 4px;"></span> 
-                @((!string.IsNullOrEmpty(origin) ? "Back" : "Browse Race Tracks"))
+                @((!string.IsNullOrEmpty(OriginPage) ? "Back" : "Browse Race Tracks"))
             </button>
         </div>
     }
@@ -65,12 +65,20 @@
     public string slug { get; set; } = "";
 
     [Parameter]
-    [SupplyParameterFromQuery(Name = "category")]
-    public string category { get; set; } = "";
+    [SupplyParameterFromQuery(Name = "origin_page")]
+    public string OriginPage { get; set; } = "";
 
     [Parameter]
-    [SupplyParameterFromQuery(Name = "origin")]
-    public string origin { get; set; } = "";
+    [SupplyParameterFromQuery(Name = "origin_category")]
+    public string OriginCategory { get; set; } = "";
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "origin_sort")]
+    public string OriginSort { get; set; } = "";
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "origin_mode")]
+    public string OriginMode { get; set; } = "";
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "selected_subdetail")]
@@ -114,7 +122,7 @@
 
     private void OnBackSidebarClickedHandler()
     {
-        GoBack(!string.IsNullOrEmpty(origin) ? origin : "");
+        GoBack();
     }
 
     private void OnSubDetailChangedHandler(SubDetail subDetail)
@@ -211,21 +219,30 @@
         showVideoMenu = videos.Count() > 0 ? true : false;
     }
 
-    private void GoBack(string originPage)
+    private void GoBack()
     {
-        if (string.IsNullOrEmpty(originPage))
-            originPage = "browse";
+        if (string.IsNullOrEmpty(OriginPage))
+            OriginPage = "browse";
 
-        switch (originPage)
+        if (string.IsNullOrEmpty(OriginCategory))
+            OriginCategory = BrowseCategory.Categories[0]; // all
+
+        if (string.IsNullOrEmpty(OriginSort))
+            OriginSort = BrowseSortQuery.Alphabetical;
+
+        if (string.IsNullOrEmpty(OriginMode))
+            OriginMode = BrowseModeQuery.GalleryMode;
+
+        switch (OriginPage)
         {
             case "home":
                 NavigationManager.NavigateTo("/");
                 break;
-            case "browse" or "":
-                NavigationManager.NavigateTo("/browse");
+            case "browse":
+                NavigationManager.NavigateTo($"/browse?mode={OriginMode}&sort={OriginSort}&category={OriginCategory}");
                 break;
             default:
-                NavigationManager.NavigateTo($"/browse?mode={originPage}&category={category}");
+                NavigationManager.NavigateTo($"/browse");
                 break;
         }
     }
