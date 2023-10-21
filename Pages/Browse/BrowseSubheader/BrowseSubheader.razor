@@ -24,8 +24,7 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-selection btn-subheader-2" 
-            title="Sort Race Tracks"
+        <button type="button" class="btn btn-selection btn-subheader-2"
             @onclick="() => SortSelection()">
             @switch (SelectedSort)
             {
@@ -53,7 +52,6 @@
         </button>
 
         <button type="button" class="btn btn-selection btn-subheader"
-            title="Change view mode" 
             @onclick="() => ModeSelection()">
             @switch (SelectedMode)
             {
@@ -80,7 +78,6 @@
         <div class="subheader-view-options">
             <button type="button" class="btn btn-selection" 
                 @onclick="() => SwitchMode(BrowseMode.Gallery)"
-                title="Switch to Gallery View"
                 disabled=@disableGallery>
                 <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
                 <BrowseTooltip Text="Gallery View" 
@@ -91,7 +88,6 @@
 
             <button type="button" class="btn btn-selection"
                 @onclick="() => SwitchMode(BrowseMode.List)"
-                title="Switch to List View"
                 disabled=@disableList>
                 <span class="bi bi-list-task"></span>
                 <BrowseTooltip Text="List View" 
@@ -102,7 +98,6 @@
 
             <button type="button" class="btn btn-selection" style="padding-left: 10px;" 
                 @onclick="() => SwitchMode(BrowseMode.Grid)"
-                title="Switch to Grid View"
                 disabled=@disableGrid>
                 <span class="bi bi-grid-3x3-gap-fill" style="margin-right: 4px;"></span>
                 <BrowseTooltip Text="Grid View" 
