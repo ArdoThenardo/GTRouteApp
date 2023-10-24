@@ -49,6 +49,7 @@
                     </div>
                     <img src="@selectedMapLayoutUrl" 
                         alt="@Layouts.ElementAt(selectedIndex).LayoutName"
+                        style="display: @(isChanging ? "none" : "block");"
                         @ref="@highlightMapRef" />
                 </div>
                 <div class="layout-info">
@@ -79,6 +80,7 @@
     public string CoverImageUrl { get; set; } = "";
     private int selectedIndex = 0;
     private string selectedMapLayoutUrl = "";
+    private bool isChanging = false;
 
     ElementReference highlightMapRef;
 
@@ -92,8 +94,8 @@
     {
         if (selectedIndex != index)
         {
-            selectedMapLayoutUrl = ""; // empty image as transition to next selected item
-            await Task.Delay(10);
+            isChanging = true;
+            await Task.Delay(10); // necessary to delay so previously loaded image won't show on next selected item
 
             SetSelection(index);
             await ResetHighlightAnimationWithJS();
@@ -104,6 +106,8 @@
     {
         selectedIndex = index;
         selectedMapLayoutUrl = Layouts.ElementAt(selectedIndex).MapUrl ?? "";
+
+        isChanging = false;
     }
 
     private async Task ResetHighlightAnimationWithJS()
