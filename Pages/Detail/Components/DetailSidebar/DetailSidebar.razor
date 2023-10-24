@@ -11,68 +11,40 @@
         <img class="img-logo" src="@LogoUrl" alt="logo" />
     </div>
 
-    @if (SelectedSubDetail == SubDetail.General)
-    {
-        <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-clipboard2-fill"></span> 
-            <span class="button-menu-name">@DetailSidebarMenu.General</span>
-        </button>
-    }
-    else
-    {
-        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.General)">
-            <span class="bi bi-clipboard2-fill"></span> 
-            <span class="button-menu-name">@DetailSidebarMenu.General</span>
-        </button>
-    }
+    <button class="sidebar-button" 
+        type="button"
+        disabled="@((SelectedSubDetail == SubDetail.General) ? true : false)" 
+        @onclick="() => ChangeSubDetail(SubDetail.General)">
+        <span class="bi bi-card-heading"></span> 
+        <span class="button-menu-name">@DetailSidebarMenu.General</span>
+    </button>
 
-    @if (SelectedSubDetail == SubDetail.Layout)
-    {
-        <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-sign-turn-slight-right-fill"></span> 
-            <span class="button-menu-name">@DetailSidebarMenu.Layout</span>
-        </button>
-    }
-    else
-    {
-        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Layout)">
-            <span class="bi bi-sign-turn-slight-right-fill"></span> 
-            <span class="button-menu-name">@DetailSidebarMenu.Layout</span>
-        </button>
-    }
+    <button class="sidebar-button" 
+        type="button"
+        disabled="@((SelectedSubDetail == SubDetail.Layout) ? true : false)" 
+        @onclick="() => ChangeSubDetail(SubDetail.Layout)">
+        <span class="bi bi-sign-turn-slight-right-fill"></span> 
+        <span class="button-menu-name">@DetailSidebarMenu.Layout</span>
+    </button>
 
-    @if (SelectedSubDetail == SubDetail.Video)
+    @if (CanShowVideoMenu)
     {
-        <button class="sidebar-button" type="button" disabled>
+        <button class="sidebar-button" 
+            type="button"
+            disabled="@((SelectedSubDetail == SubDetail.Video) ? true : false)" 
+            @onclick="() => ChangeSubDetail(SubDetail.Video)">
             <span class="bi bi-collection-play-fill"></span> 
             <span class="button-menu-name">@DetailSidebarMenu.Showcase</span>
         </button>
     }
-    else
-    {
-        @if (ShowVideoMenu)
-        {
-            <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Video)">
-                <span class="bi bi-collection-play-fill"></span> 
-                <span class="button-menu-name">@DetailSidebarMenu.Showcase</span>
-            </button>
-        }
-    }
     
-    @if (SelectedSubDetail == SubDetail.Image)
-    {
-        <button class="sidebar-button" type="button" disabled>
-            <span class="bi bi-images"></span> 
-            <span class="button-menu-name">@DetailSidebarMenu.Gallery</span>
-        </button>
-    }
-    else
-    {
-        <button class="sidebar-button" type="button" @onclick="() => ChangeSubDetail(SubDetail.Image)">
-            <span class="bi bi-images"></span> 
-            <span class="button-menu-name">@DetailSidebarMenu.Gallery</span>
-        </button>
-    }
+    <button class="sidebar-button" 
+        type="button"
+        disabled="@((SelectedSubDetail == SubDetail.Image) ? true : false)"  
+        @onclick="() => ChangeSubDetail(SubDetail.Image)">
+        <span class="bi bi-images"></span> 
+        <span class="button-menu-name">@DetailSidebarMenu.Gallery</span>
+    </button>
 </div>
 
 @code {
@@ -86,7 +58,7 @@
     public SubDetail SelectedSubDetail { get; set; } = SubDetail.General;
 
     [Parameter]
-    public bool ShowVideoMenu { get; set; } = true;
+    public bool CanShowVideoMenu { get; set; } = true;
 
     [Parameter]
     public string CoverUrl { get; set; } = "";
