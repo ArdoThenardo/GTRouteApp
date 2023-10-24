@@ -124,6 +124,7 @@ p {
     background-color: rgba(30, 32, 34, 0.7);
     border-radius: 12px;
     color: #f4f4f2;
+    border-color: rgba(255, 193, 7, 0.6);
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
 }
 
