@@ -95,19 +95,28 @@ p {
 
 .next-btn, .prev-btn {
     position: absolute;
-    padding: 8px;
-    width: 40px;
-    height: 40px;
+    padding: 0;
     top: 50%;
+    background-color: transparent;
+    color: #f4f4f2;
+    font-size: 48px;
+    border-radius: 0;
+    border: 0;
+    text-shadow: 1px 0px 12px rgba(30, 32, 34, 0.5);
     transform: translateY(-50%);
 }
 
 .next-btn {
-    right: 12px;
+    right: 6px;
 }
 
 .prev-btn {
-    left: 12px;
+    left: 6px
+}
+
+.next-btn:hover, .prev-btn:hover {
+    color: #ffc107;
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.9);
 }
 
 .info-visibility-btn {
@@ -120,7 +129,7 @@ p {
     transition: 0.25s;
 }
 
-.full-btn, .next-btn, .prev-btn, .info-visibility-btn {
+.full-btn, .info-visibility-btn {
     background-color: rgba(30, 32, 34, 0.7);
     border-radius: 12px;
     color: #f4f4f2;
@@ -128,8 +137,7 @@ p {
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
 }
 
-.full-btn:hover, 
-.next-btn:hover, .prev-btn:hover, 
+.full-btn:hover,
 .info-visibility-btn:hover {
     color: #ffc107;
     border-color: #ffc720;

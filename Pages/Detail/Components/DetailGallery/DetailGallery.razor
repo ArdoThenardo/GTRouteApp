@@ -29,14 +29,14 @@
                 </button>
                 <button type="button" 
                     title="See next image"
-                    class="btn btn-secondary next-btn" 
+                    class="btn next-btn" 
                     disabled="@isNextDisabled"
                     @onclick="() => InitiateSelection(selectedImageIndex + 1)">
                     <span class="bi bi-chevron-right"></span>
                 </button>
                 <button type="button" 
                     title="See previous image"
-                    class="btn btn-secondary prev-btn" 
+                    class="btn prev-btn" 
                     disabled="@isPrevDisabled"
                     @onclick="() => InitiateSelection(selectedImageIndex - 1)">
                     <span class="bi bi-chevron-left"></span>
