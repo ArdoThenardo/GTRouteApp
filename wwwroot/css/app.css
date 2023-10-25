@@ -36,6 +36,10 @@ a, .btn-link {
     color: #0071c1;
 }
 
+.btn:focus {
+    box-shadow: unset;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
