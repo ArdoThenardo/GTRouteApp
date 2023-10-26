@@ -39,6 +39,7 @@
 /* START OF underline animation on hover */
 .nav-item ::deep span {
     position: relative;
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.6);
 }
 
 .nav-item ::deep span::after {
