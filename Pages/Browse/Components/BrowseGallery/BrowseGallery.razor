@@ -39,21 +39,19 @@
         </div>
     </div>
     <div class="gallery-selection">
-        @foreach(var track in Tracks.Select((trackData, index) => (trackData, index)))
-        {
-            <div class="@((selectedIndex == track.index) ? 
+        <Virtualize Items="@Tracks" Context="track">
+            <div class="@(_SelectedSlug.Equals(track.Slug) ? 
                         "gallery-item-container-selected" : "gallery-item-container")" 
-                style="background-image: url(@track.trackData.CoverUrl);" 
-                @onclick="() => SetSelection(track.index)">
-                <div class="@((selectedIndex == track.index) ? 
+                style="background-image: url(@track.CoverUrl);">
+                <div class="@(_SelectedSlug.Equals(track.Slug) ? 
                             "gallery-item-content-selected" : "gallery-item-content")">
                     <img
-                        src="@track.trackData.LogoUrl"
-                        alt="@track.trackData.Name"
+                        src="@track.LogoUrl"
+                        alt="@track.Name"
                     />
                 </div>
             </div>
-        }
+        </Virtualize>
         @if (!IsMaximum)
         {
             <div class="more-notice">
@@ -84,6 +82,8 @@
     [Parameter]
     public List<RaceTrack> Tracks { get; set; } = new();
     private int selectedIndex = 0;
+    private string _SelectedSlug = "";
+    private RaceTrack _SelectedTrack = new();
 
     [Parameter]
     public bool IsMaximum { get; set; } = false;
