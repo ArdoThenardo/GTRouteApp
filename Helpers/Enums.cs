@@ -19,3 +19,8 @@ public enum SubDetail {
     Video,
     Image
 }
+
+public enum DetailGalleryMode {
+    Slideshow,
+    Grid
+}
