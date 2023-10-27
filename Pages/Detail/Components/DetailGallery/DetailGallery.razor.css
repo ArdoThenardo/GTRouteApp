@@ -16,11 +16,7 @@
     box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
 }
 
-@media (max-width: 540px), (max-height: 414px) {
-    .gallery-container {
-        height: 88vh;
-    }
-
+@media (max-width: 540px) {
     .gallery-container::after {
         box-shadow: unset;
     }
