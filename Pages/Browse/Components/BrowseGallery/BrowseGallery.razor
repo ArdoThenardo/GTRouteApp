@@ -42,7 +42,8 @@
     <div class="gallery-selection">
         <Virtualize Items="@Tracks" Context="track">
             <div class="@(_SelectedSlug.Equals(track.Slug) ? 
-                        "gallery-item-container-selected" : "gallery-item-container")" 
+                        "gallery-item-container-selected item-revelation" : 
+                        "gallery-item-container item-revelation")" 
                 style="background-image: url(@track.CoverUrl);"
                 @onclick="() => SetSelection(track.Slug, true)">
                 <div class="@(_SelectedSlug.Equals(track.Slug) ? 
@@ -56,7 +57,7 @@
         </Virtualize>
         @if (!IsMaximum)
         {
-            <div class="more-notice">
+            <div class="more-notice item-revelation">
                 <button type="button" 
                     class="@loadMoreBtnClass"
                     disabled="@IsLoadMoreDisabled"
