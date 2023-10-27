@@ -7,7 +7,9 @@
 <div class="list-container">
     <div class="list-sidebar">
         <Virtualize Items="@Tracks" Context="track">
-            <div class="@((_selectedSlug.Equals(track.Slug)) ? "item-content-selected" : "item-content")"
+            <div class="@((_selectedSlug.Equals(track.Slug)) ? 
+                            "item-content-selected item-revelation" : 
+                            "item-content item-revelation")"
                 @onclick="() => SetSelection(track.Slug, true)">
                 <img src="@track.LogoUrl" 
                     alt="@track.Name">
@@ -16,7 +18,7 @@
         </Virtualize>
         @if (!IsMaximum)
         {
-            <div class="more-notice">
+            <div class="more-notice item-revelation">
                 <button type="button" 
                     class="@loadMoreBtnClass"
                     disabled="@IsLoadMoreDisabled"

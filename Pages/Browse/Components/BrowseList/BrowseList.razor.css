@@ -113,6 +113,11 @@
         text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.4);
     }
 
+.item-revelation {
+    opacity: 0;
+    animation: reveal-item-left .5s forwards;
+}
+
 .list-highlight {
     position: relative;
     width: 100%;
@@ -226,6 +231,11 @@
 @keyframes reveal-cover-basic {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+@keyframes reveal-item-left {
+    from { translate: -20px 0; }
+    to { translate: none; opacity: 1; }
 }
 
 @media (max-width: 540px) {
