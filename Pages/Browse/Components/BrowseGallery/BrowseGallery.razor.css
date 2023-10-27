@@ -119,6 +119,7 @@
     padding-inline: 8px;
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
     overflow-x: scroll;
     overflow-y: hidden;
     box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
@@ -213,6 +214,11 @@
     text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.4);
 }
 
+.item-revelation {
+    opacity: 0;
+    animation: reveal-item-left .5s forwards;
+}
+
 @keyframes span-max-width {
     0% { max-width: 0%; }
     100% { max-width: 100%; }
@@ -227,6 +233,11 @@
 @keyframes reveal-cover {
     from { opacity: 0; transform: translateY(24px) scale(1.1); }
     to { opacity: 1; transform: translateY(0) scale(1.0); } 
+}
+
+@keyframes reveal-item-left {
+    from { translate: -20px 0; }
+    to { translate: none; opacity: 1; }
 }
 
 @media (max-width: 540px) {
