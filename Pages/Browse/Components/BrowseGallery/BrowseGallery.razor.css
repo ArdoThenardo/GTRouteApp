@@ -145,8 +145,6 @@
     transform: scale(0.95);
     transition: 0.25s;
     box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
-    opacity: 0;
-    animation: reveal-item-left .5s forwards;
 }
 
 .gallery-item-content {
@@ -203,8 +201,6 @@
     justify-content: center;
     color: #1e2022;
     padding-inline: 16px;
-    opacity: 0;
-    animation: reveal-item-left .5s forwards;
 }
 
 .more-notice p {
@@ -216,6 +212,11 @@
     text-align: center;
     white-space: nowrap;
     text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.4);
+}
+
+.item-revelation {
+    opacity: 0;
+    animation: reveal-item-left .5s forwards;
 }
 
 @keyframes span-max-width {
