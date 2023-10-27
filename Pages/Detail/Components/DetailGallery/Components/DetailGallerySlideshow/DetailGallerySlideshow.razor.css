@@ -1,0 +1,317 @@
+p {
+    color: #f4f4f2;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.slideshow-highlight {
+    display: flex;
+    height: 64vh;
+}
+
+.highlight-image-section {
+    position: relative;
+    background-color: #2b2b28;
+    width: 100%;
+    height: inherit;
+}
+
+.item-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.highlight-placeholder {
+    position: absolute;
+    background-color: rgba(48, 56, 65, 0.3);
+    width: 65%;
+    height: 65%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    border: 1px solid rgba(202, 202, 202, 0.8);
+    overflow: hidden;
+}
+
+    .highlight-placeholder span {
+        position: absolute;
+        font-size: 6vw;
+        color: #1e2022;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .highlight-image-section img {
+        position: relative;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(1px 1px 10px rgba(30, 32, 34, 0.8));
+        box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
+        opacity: 0;
+        animation: reveal .5s ease-in-out forwards;
+    }
+
+.full-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: auto;
+    height: 45px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 12px;
+}
+
+.full-btn-text {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.next-btn, .prev-btn {
+    position: absolute;
+    padding: 0;
+    top: 50%;
+    background-color: transparent;
+    color: #f4f4f2;
+    font-size: 48px;
+    border-radius: 0;
+    border: 0;
+    text-shadow: 1px 0px 12px rgba(30, 32, 34, 0.5);
+    transform: translateY(-50%);
+}
+
+.next-btn {
+    right: 6px;
+}
+
+.prev-btn {
+    left: 6px
+}
+
+.next-btn:hover, .prev-btn:hover {
+    color: #ffc107;
+    text-shadow: 1px 0px 8px rgba(30, 32, 34, 0.9);
+}
+
+.info-visibility-btn {
+    position: absolute;
+    bottom: 74px;
+    right: 12px;
+    width: 128px;
+    height: 40px;
+    padding: 8px;
+    transition: 0.25s;
+}
+
+.full-btn, .info-visibility-btn {
+    background-color: rgba(30, 32, 34, 0.7);
+    border-radius: 12px;
+    color: #f4f4f2;
+    border-color: rgba(255, 193, 7, 0.6);
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+}
+
+.full-btn:hover,
+.info-visibility-btn:hover {
+    color: #ffc107;
+    border-color: #ffc720;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.8);
+}
+
+.info-visibility-btn:hover p {
+    color: #ffc107;
+    transition: .25s;
+}
+
+.highlight-info-section {
+    position: absolute;
+    background-color: rgba(30, 32, 34, 0.6);
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 24px;
+    padding-block: 12px;
+}
+
+.info-part-1 p {
+    margin-bottom: 2px;
+}
+
+.slideshow-selection {
+    background-color: #e8e8e8;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 8px;
+    height: 16vh;
+    overflow-x: scroll;
+    box-shadow: inset 1px 1px 8px rgba(30, 32, 34, 0.6);
+}
+
+    .slideshow-selection::-webkit-scrollbar {
+        background-color: #e8e8e8;
+        height: 4px;
+    }
+
+    .slideshow-selection::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #1e2022;
+    }
+
+.gallery-item, .gallery-item-selected {
+    position: relative;
+    background-color: #e8e8e8;
+    min-width: 160px;
+    max-width: 160px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+    transition: 0.25s;
+    overflow: hidden;
+}
+
+    .gallery-item:hover {
+        cursor: pointer;
+        box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
+    }
+
+    .gallery-item img, .gallery-item-selected img {
+        position: relative;
+        display: block;
+        object-fit: cover;
+        object-position: right;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        transition: .25s;
+    }
+
+    .gallery-item img {
+        filter: grayscale(0.8);
+        border: 2px solid #1e2022;
+    }
+
+    .gallery-item img:hover {
+        filter: grayscale(0);
+        border-color: #ffc107;
+    }
+
+    .gallery-item-selected img {
+        border: 2px solid #ffc107;
+    }
+
+.button-item {
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+    margin-bottom: 6px;
+}
+
+.load-more-btn {
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    border-radius: 24px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.6);
+}
+
+.item-placeholder {
+    position: absolute;
+}
+
+    .item-placeholder span {
+        font-size: 34px;
+        color: rgba(43, 43, 40, 0.75);
+    }
+
+.item-shimmer, .highlight-shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+        90deg,
+        rgba(202, 202, 202, 0) 0%, 
+        rgba(202, 202, 202, 0.2) 20%,
+        rgba(202, 202, 202, 0.5) 60%,
+        rgba(202, 202, 202, 0) 100%);
+}
+
+.item-shimmer {
+    animation: loading-shimmer 1.5s;
+    animation-iteration-count: 10;
+}
+
+.highlight-shimmer {
+    animation: loading-shimmer 1s infinite;
+}
+
+@keyframes reveal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes loading-shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@media (max-width: 540px), (max-height: 414px) {
+    p {
+        font-size: 10px;
+    }
+
+    .gallery-container {
+        height: 88vh;
+    }
+
+    .gallery-container::after {
+        box-shadow: unset;
+    }
+
+    .highlight-info-section {
+        padding-inline: 12px;
+        padding-block: 8px;
+    }
+
+    .info-visibility-btn {
+        display: none;
+    }
+
+    .highlight-placeholder span {
+        font-size: 14vw;
+    }
+
+    .slideshow-selection {
+        z-index: 1;
+        height: 20%;
+    }
+
+    .gallery-item:hover img {
+        filter: grayscale(0.8);
+    }
+
+    .gallery-item, .gallery-item-selected {
+        min-width: 140px;
+        height: 100%;
+    }
+    
+    .gallery-item img, .gallery-item-selected img {
+        width: 100%;
+        height: 100%;
+    }
+}

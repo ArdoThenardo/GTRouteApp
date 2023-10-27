@@ -1,7 +1,6 @@
 @using GTRouteApp.Models
 @using GTRouteApp.Helpers
 @namespace GTRouteApp.Components.Detail
-@inject IJSRuntime JS
 
 <div class="gallery-container">
     @if (Images.Count() < 1)
@@ -12,143 +11,23 @@
     {
         <DetailGalleryInnerHeader Info="Click or tap a image to highlight" 
             SelectedMode="DetailGalleryMode.Slideshow" /> 
-        <div class="detail-gallery-highlight">
-            <div class="highlight-image-section">
-                <div class="highlight-placeholder">
-                    <div class="highlight-shimmer"></div>
-                    <span class="bi bi-image"></span>
-                </div>
-                <img src="@selectedImageUrl" 
-                    alt="@loadedImages.ElementAt(selectedImageIndex).ImageName"
-                    style="display: @(isChanging ? "none" : "block");"
-                    @ref="@highlightImageRef">
-                <button type="button" 
-                    title="See Image in Full Screen"
-                    class="btn btn-secondary full-btn" 
-                    @onclick="() => OpenImageInFullScreen(selectedImageUrl)">
-                    <span class="bi bi-arrows-fullscreen"></span> 
-                    <span class="full-btn-text" style="margin-left: 6px">See Image in Full Screen</span>
-                </button>
-                <button type="button" 
-                    title="See next image"
-                    class="btn next-btn" 
-                    disabled="@isNextDisabled"
-                    @onclick="() => InitiateSelection(selectedImageIndex + 1)">
-                    <span class="bi bi-chevron-right"></span>
-                </button>
-                <button type="button" 
-                    title="See previous image"
-                    class="btn prev-btn" 
-                    disabled="@isPrevDisabled"
-                    @onclick="() => InitiateSelection(selectedImageIndex - 1)">
-                    <span class="bi bi-chevron-left"></span>
-                </button>
-                <button type="button" 
-                    class="btn btn-secondary info-visibility-btn" 
-                    style="bottom: @infoVisibilityButtonBottomPosition;"
-                    @onclick="() => ToggleInfoVisibility()">
-                    @if (isInfoHidden)
-                    {
-                        <p>
-                            <span class="bi bi-info-circle"></span>
-                            Show Info<span class="bi bi-chevron-up" style="margin-left: 6px;"></span>
-                        </p>
-                    }
-                    else
-                    {
-                        <p>
-                            <span class="bi bi-info-circle"></span>
-                            Hide Info<span class="bi bi-chevron-down" style="margin-left: 6px;"></span>
-                        </p>
-                    }
-                </button>
-                <div class="highlight-info-section" style="visibility: @infoVisibilityStyle;">
-                    <div class="info-part-1">
-                        <p>@loadedImages.ElementAt(selectedImageIndex).Description</p>
-                    </div>
-                    <div class="info-part-2">
-                        <p>
-                            <span class="bi bi-camera-fill"></span> by @loadedImages.ElementAt(selectedImageIndex).Author
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <div class="detail-gallery-selection">
-            @foreach (var image in loadedImages
-                                    .Select((imageData, index) => (imageData, index)))
-            {
-                <div class="@((selectedImageIndex == image.index) ? "gallery-item-selected" : "gallery-item")" 
-                    @onclick="() => InitiateSelection(image.index)">
-                    <div class="item-shimmer"></div>
-                    <div class="item-placeholder">
-                        <span class="bi bi-image-fill"></span>
-                    </div>
-                    <img src="@image.imageData.ThumbnailUrl" 
-                        alt="@image.imageData.ImageName" />
-                </div>
-            }
-            @if (loadedImages.Count() < Images.Count())
-            {
-                <div class="button-item">
-                    <button type="button" 
-                        class="btn btn-primary load-more-btn" 
-                        @onclick="() => LoadImages(nextPage)">
-                        Load More
-                    </button>
-                </div>
-            }
-        </div>
+        <DetailGallerySlideshow LoadedImages="@loadedImages" 
+            TotalNumberOfImages="@Images.Count()"
+            OnLoadMoreClicked="() => LoadImages(nextPage)" />
     }
 </div>
 
 @code {
     [Parameter]
     public List<TrackImage> Images { get; set; } = new();
+
     private List<TrackImage> loadedImages = new();
-    private int selectedImageIndex = 0;
-    private string selectedImageUrl = "";
-    private bool isNextDisabled = false;
-    private bool isPrevDisabled = false;
-    private bool isInfoHidden = false;
-    private string infoVisibilityStyle = "visible"; // "hidden" and "visible"
-    private string infoVisibilityButtonBottomPosition = "74px"; // "12px" and "74px"
     private int nextPage = 1;
     private const int itemLimit = 6;
-    private bool isChanging = false;
     
-    ElementReference highlightImageRef;
-
     protected override void OnInitialized()
     {
         LoadImages(nextPage);
-        if (Images.Count() > 0)
-            SetSelection(selectedImageIndex);
-    }
-
-    private async Task InitiateSelection(int selectedIndex)
-    {
-        if (selectedImageIndex != selectedIndex)
-        {
-            isChanging = true;
-            await Task.Delay(10); // necessary to delay so previously loaded image won't show on next selected item
-
-            SetSelection(selectedIndex);
-
-            ToggleArrowButton();
-            SetDefaultInfoVisibility();
-
-            await ResetHighlightAnimationWithJS();
-        }
-    }
-
-    private void SetSelection(int index)
-    {
-        selectedImageIndex = index;
-        selectedImageUrl = loadedImages.ElementAt(selectedImageIndex).ImageUrl ?? "";
-        
-        isChanging = false;
     }
 
     private void LoadImages(int page)
@@ -157,37 +36,5 @@
         loadedImages.AddRange(images);
 
         nextPage += 1;
-        ToggleArrowButton();
-    }
-
-    private async Task OpenImageInFullScreen(string? url)
-    {
-        if (url is not null)
-            await JS.InvokeVoidAsync("open", url, "_blank");
-    }
-
-    private void ToggleArrowButton()
-    {
-        isNextDisabled = selectedImageIndex == (loadedImages.Count() - 1) ? true : false;
-        isPrevDisabled = selectedImageIndex == 0 ? true : false;
-    }
-
-    private void ToggleInfoVisibility()
-    {
-        isInfoHidden = isInfoHidden ? false : true;
-        infoVisibilityStyle = isInfoHidden ? "hidden" : "visible";
-        infoVisibilityButtonBottomPosition = isInfoHidden ? "12px" : "74px";
-    }
-
-    private void SetDefaultInfoVisibility()
-    {
-        isInfoHidden = false;
-        infoVisibilityStyle = "visible";
-        infoVisibilityButtonBottomPosition = "74px";
-    }
-
-    private async Task ResetHighlightAnimationWithJS()
-    {
-        await JS.InvokeVoidAsync("resetAnimationByStyle", highlightImageRef);
     }
 }
