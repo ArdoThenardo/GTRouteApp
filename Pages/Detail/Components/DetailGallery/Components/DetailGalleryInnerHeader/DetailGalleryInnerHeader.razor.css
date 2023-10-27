@@ -13,6 +13,7 @@
     color: #f4f4f2;
     font-size: 16px;
     font-weight: 500;
+    text-align: right;
 }
 
 .header-view-options {
@@ -43,4 +44,10 @@
     color: #1e2022;
     background-color: #ffca2c;
     border-color: #ffc720;
+}
+
+@media (max-width: 540px) {
+    .header-info {
+        font-size: 14px;
+    }
 }
