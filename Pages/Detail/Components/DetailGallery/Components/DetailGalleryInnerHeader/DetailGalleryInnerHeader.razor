@@ -1,0 +1,53 @@
+@using GTRouteApp.Helpers
+@namespace GTRouteApp.Components.Detail
+
+<div class="header-container">
+    <div class="header-view-options">
+        <button type="button" class="btn btn-selection"
+            @onclick="() => SwitchMode(DetailGalleryMode.Slideshow)" 
+            disabled=@_DisableSlideshow>
+            <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
+        </button>
+
+        <button type="button" class="btn btn-selection"
+            @onclick="() => SwitchMode(DetailGalleryMode.Grid)"
+            disabled=@_DisableGrid>
+            <span class="bi bi-list-task" style="margin-left: -4px;"></span>
+        </button>
+    </div>
+
+    <div class="header-info">
+        <span class="bi bi-info-circle" style="margin-right: 6px;"></span>@Info
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Info { get; set; } = "";
+    [Parameter]
+    public DetailGalleryMode SelectedMode { get; set; } = DetailGalleryMode.Slideshow;
+
+    private bool _DisableSlideshow = true;
+    private bool _DisableGrid = false;
+
+    protected override void OnParametersSet()
+    {
+        switch (SelectedMode)
+        {
+            case DetailGalleryMode.Slideshow:
+                _DisableSlideshow = true;
+                _DisableGrid = false;
+                break;
+            case DetailGalleryMode.Grid:
+                _DisableSlideshow = false;
+                _DisableGrid = true;
+                break;
+        }
+    }
+
+    private void SwitchMode(DetailGalleryMode mode)
+    {
+        _DisableSlideshow = _DisableSlideshow ? false : true;
+        _DisableGrid = _DisableGrid ? false : true;
+    }
+}
