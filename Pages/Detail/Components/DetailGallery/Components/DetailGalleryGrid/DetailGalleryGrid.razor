@@ -1,0 +1,22 @@
+@using GTRouteApp.Models
+@namespace GTRouteApp.Components.Detail
+@inject IJSRuntime JS
+
+<div class="grid-container">
+    @foreach (var image in LoadedImages
+                                .Select((imageData, index) => (imageData, index)))
+    {
+        <article class="grid-item item-revelation">
+            <img src="@image.imageData.ImageUrl" alt="@image.imageData.ImageName" />
+        </article>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public List<TrackImage> LoadedImages { get; set; } = new();
+    [Parameter]
+    public int TotalNumberOfImages { get; set; } = 0;
+    [Parameter]
+    public EventCallback OnLoadMoreClicked { get; set; }
+}

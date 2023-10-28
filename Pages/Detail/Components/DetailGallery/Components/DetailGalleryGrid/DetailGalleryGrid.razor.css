@@ -1,0 +1,27 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 160px;
+}
+
+.grid-item {
+    padding: 8px;
+    border: 1px solid #1e2022;
+    border-radius: 12px;
+}
+
+    .grid-item img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+.item-revelation {
+    opacity: 0;
+    animation: reveal-item .5s forwards;
+}
+
+@keyframes reveal-item {
+    from { translate: 0 20px; }
+    to { translate: none; opacity: 1; }
+}
