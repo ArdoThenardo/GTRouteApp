@@ -26,6 +26,8 @@
     public string Info { get; set; } = "";
     [Parameter]
     public DetailGalleryMode SelectedMode { get; set; } = DetailGalleryMode.Slideshow;
+    [Parameter]
+    public EventCallback<DetailGalleryMode> OnGalleryModeChanged { get; set; }
 
     private bool _DisableSlideshow = true;
     private bool _DisableGrid = false;
@@ -45,9 +47,11 @@
         }
     }
 
-    private void SwitchMode(DetailGalleryMode mode)
+    private async Task SwitchMode(DetailGalleryMode mode)
     {
         _DisableSlideshow = _DisableSlideshow ? false : true;
         _DisableGrid = _DisableGrid ? false : true;
+
+        await OnGalleryModeChanged.InvokeAsync(mode);
     }
 }

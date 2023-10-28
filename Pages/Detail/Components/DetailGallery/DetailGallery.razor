@@ -9,8 +9,9 @@
     }
     else
     {
-        <DetailGalleryInnerHeader Info="Click or tap a image to highlight" 
-            SelectedMode="DetailGalleryMode.Slideshow" />
+        <DetailGalleryInnerHeader Info="@_InnerHeaderInfo" 
+            SelectedMode="@_SelectedMode"
+            OnGalleryModeChanged="ChangeGalleryMode" />
 
         @if (_SelectedMode == DetailGalleryMode.Slideshow)
         {
@@ -33,10 +34,15 @@
     private List<TrackImage> loadedImages = new();
     private int nextPage = 1;
     private const int itemLimit = 6;
-    private DetailGalleryMode _SelectedMode = DetailGalleryMode.Grid;
+    private DetailGalleryMode _SelectedMode = DetailGalleryMode.Slideshow;
+    private string _InnerHeaderInfo = "";
+
+    private const string _SlideshowInfo = "Click or tap image at the bottom to higlight.";
+    private const string _GridInfo = "Click or tap image to view.";
     
     protected override void OnInitialized()
     {
+        _InnerHeaderInfo = _SlideshowInfo; // pre-set to slideshow mode info
         LoadImages(nextPage);
     }
 
@@ -46,5 +52,20 @@
         loadedImages.AddRange(images);
 
         nextPage += 1;
+    }
+
+    private void ChangeGalleryMode(DetailGalleryMode mode)
+    {
+        _SelectedMode = mode;
+
+        switch (_SelectedMode)
+        {
+            case DetailGalleryMode.Slideshow:
+                _InnerHeaderInfo = _SlideshowInfo;
+                break;
+            case DetailGalleryMode.Grid:
+                _InnerHeaderInfo = _GridInfo;
+                break;
+        }
     }
 }
