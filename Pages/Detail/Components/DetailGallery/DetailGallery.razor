@@ -10,10 +10,19 @@
     else
     {
         <DetailGalleryInnerHeader Info="Click or tap a image to highlight" 
-            SelectedMode="DetailGalleryMode.Slideshow" /> 
-        <DetailGallerySlideshow LoadedImages="@loadedImages" 
-            TotalNumberOfImages="@Images.Count()"
-            OnLoadMoreClicked="() => LoadImages(nextPage)" />
+            SelectedMode="DetailGalleryMode.Slideshow" />
+
+        @if (_SelectedMode == DetailGalleryMode.Slideshow)
+        {
+            <DetailGallerySlideshow LoadedImages="@loadedImages" 
+                TotalNumberOfImages="@Images.Count()"
+                OnLoadMoreClicked="() => LoadImages(nextPage)" />
+        } 
+        else if (_SelectedMode == DetailGalleryMode.Grid)
+        {
+            <DetailGalleryGrid LoadedImages="@loadedImages"
+                TotalNumberOfImages="@Images.Count()" />
+        }
     }
 </div>
 
@@ -24,6 +33,7 @@
     private List<TrackImage> loadedImages = new();
     private int nextPage = 1;
     private const int itemLimit = 6;
+    private DetailGalleryMode _SelectedMode = DetailGalleryMode.Grid;
     
     protected override void OnInitialized()
     {
