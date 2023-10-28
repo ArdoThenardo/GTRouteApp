@@ -108,6 +108,10 @@ p {
     padding-inline: 12px;
 }
 
+.bottom-section-1 {
+    width: 75%;
+}
+
 .bottom-section-1 p:first-of-type {
     font-size: 18px;
     font-weight: 700;
