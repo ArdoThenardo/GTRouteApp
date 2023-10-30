@@ -115,3 +115,19 @@
         transform: translateX(100%);
     }
 }
+
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 540px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-item, .button-item {
+        height: 120px;
+    }
+}
