@@ -18,28 +18,59 @@
     }
 
 .grid-item {
+    position: relative;
     height: 160px;
-    padding: 8px;
+    margin: 8px;
+    border: 2px solid #f4f4f2;
+    border-radius: 8px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
+    transition: .25s;
+    overflow: hidden;
+    isolation: isolate;
 }
+
+    .grid-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+            90deg,
+            rgba(202, 202, 202, 0) 0%, 
+            rgba(202, 202, 202, 0.2) 20%,
+            rgba(202, 202, 202, 0.5) 60%,
+            rgba(202, 202, 202, 0) 100%);
+        animation: loading-shimmer 1.5s;
+        animation-iteration-count: 15;
+    }
 
     .grid-item:hover {
         cursor: pointer;
-    }
-
-    .grid-item:hover > img {
         border-color: #ffc107;
         box-shadow: 1px 1px 10px rgba(30, 32, 34, 0.9);
     }
 
     .grid-item img {
+        position: relative;
         object-fit: cover;
         object-position: left;
         width: 100%;
         height: 100%;
-        border: 2px solid #f4f4f2;
-        border-radius: 8px;
-        box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
-        transition: .25s;
+    }
+
+.item-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+    .item-placeholder span {
+        font-size: 34px;
+        color: rgba(43, 43, 40, 0.75);
     }
 
 .button-item {
@@ -65,4 +96,10 @@
 @keyframes reveal-item {
     from { translate: 0 20px; }
     to { translate: none; opacity: 1; }
+}
+
+@keyframes loading-shimmer {
+    100% {
+        transform: translateX(100%);
+    }
 }

@@ -7,7 +7,11 @@
                                 .Select((imageData, index) => (imageData, index)))
     {
         <article class="grid-item item-revelation">
-            <img src="@image.imageData.ImageUrl" alt="@image.imageData.ImageName" />
+            <div class="item-placeholder">
+                <span class="bi bi-image-fill"></span>
+            </div>
+            <img src="@image.imageData.ImageUrl" 
+                alt="@image.imageData.ImageName" />
         </article>
     }
     @if (LoadedImages.Count() < TotalNumberOfImages)
