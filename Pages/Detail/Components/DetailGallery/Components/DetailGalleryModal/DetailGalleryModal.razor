@@ -1,0 +1,53 @@
+@using GTRouteApp.Models
+@namespace GTRouteApp.Components.Detail
+
+<div class="modal-container">
+    <div class="modal-header">
+        <p>Image Detail</p>
+        <button type="button"
+            title="Close" 
+            @onclick="DismissModal" 
+            class="btn btn-danger">
+            <span class="bi bi-x-square-fill"></span>
+        </button>
+    </div>
+    <div class="modal-contents">
+        <div class="track-image">
+            <div class="image-placeholder">
+                <div class="image-shimmer"></div>
+                <span class="bi bi-image"></span>
+            </div>
+            <img src="@Image.ImageUrl" 
+                alt="@Image.ImageName">
+            <button type="button" 
+                title="See Image in Full Screen"
+                class="btn btn-secondary full-btn">
+                <span class="bi bi-arrows-fullscreen"></span> 
+                <span class="full-btn-text" style="margin-left: 6px">See Image in Full Screen</span>
+            </button>
+            <div class="track-info">
+                <div class="info-part-1">
+                    <p>@Image.Description</p>
+                </div>
+                <div class="info-part-2">
+                    <p>
+                        <span class="bi bi-camera-fill"></span> by @Image.Author
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance ModalInstance { get; set; } = default!;
+
+    [Parameter]
+    public TrackImage Image { get; set; } = new();
+
+    private async Task DismissModal()
+    {
+        await ModalInstance.CancelAsync();
+    } 
+}
