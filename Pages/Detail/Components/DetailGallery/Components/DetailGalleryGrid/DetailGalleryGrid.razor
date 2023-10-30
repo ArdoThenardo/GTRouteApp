@@ -10,6 +10,16 @@
             <img src="@image.imageData.ImageUrl" alt="@image.imageData.ImageName" />
         </article>
     }
+    @if (LoadedImages.Count() < TotalNumberOfImages)
+    {
+        <div class="button-item">
+            <button type="button" 
+                class="btn btn-primary load-more-btn" 
+                @onclick="LoadMoreImages">
+                Load More
+            </button>
+        </div>
+    }
 </div>
 
 @code {
@@ -19,4 +29,9 @@
     public int TotalNumberOfImages { get; set; } = 0;
     [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
+
+    private async Task LoadMoreImages()
+    {
+        await OnLoadMoreClicked.InvokeAsync();
+    }
 }

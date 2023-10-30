@@ -22,7 +22,8 @@
         else if (_SelectedMode == DetailGalleryMode.Grid)
         {
             <DetailGalleryGrid LoadedImages="@loadedImages"
-                TotalNumberOfImages="@Images.Count()" />
+                TotalNumberOfImages="@Images.Count()"
+                OnLoadMoreClicked="() => LoadImages(nextPage)" />
         }
     }
 </div>
