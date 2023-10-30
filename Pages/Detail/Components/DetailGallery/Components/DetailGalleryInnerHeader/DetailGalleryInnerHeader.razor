@@ -5,13 +5,13 @@
     <div class="header-view-options">
         <button type="button" class="btn btn-selection"
             @onclick="() => SwitchMode(DetailGalleryMode.Slideshow)" 
-            disabled=@_DisableSlideshow>
+            disabled=@_disableSlideshow>
             <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
         </button>
 
         <button type="button" class="btn btn-selection"
             @onclick="() => SwitchMode(DetailGalleryMode.Grid)"
-            disabled=@_DisableGrid>
+            disabled=@_disableGrid>
             <span class="bi bi-list-task" style="margin-left: -4px;"></span>
         </button>
     </div>
@@ -29,28 +29,28 @@
     [Parameter]
     public EventCallback<DetailGalleryMode> OnGalleryModeChanged { get; set; }
 
-    private bool _DisableSlideshow = true;
-    private bool _DisableGrid = false;
+    private bool _disableSlideshow = true;
+    private bool _disableGrid = false;
 
     protected override void OnParametersSet()
     {
         switch (SelectedMode)
         {
             case DetailGalleryMode.Slideshow:
-                _DisableSlideshow = true;
-                _DisableGrid = false;
+                _disableSlideshow = true;
+                _disableGrid = false;
                 break;
             case DetailGalleryMode.Grid:
-                _DisableSlideshow = false;
-                _DisableGrid = true;
+                _disableSlideshow = false;
+                _disableGrid = true;
                 break;
         }
     }
 
     private async Task SwitchMode(DetailGalleryMode mode)
     {
-        _DisableSlideshow = _DisableSlideshow ? false : true;
-        _DisableGrid = _DisableGrid ? false : true;
+        _disableSlideshow = _disableSlideshow ? false : true;
+        _disableGrid = _disableGrid ? false : true;
 
         await OnGalleryModeChanged.InvokeAsync(mode);
     }

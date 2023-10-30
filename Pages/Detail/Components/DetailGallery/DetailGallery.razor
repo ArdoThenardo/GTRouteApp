@@ -9,17 +9,17 @@
     }
     else
     {
-        <DetailGalleryInnerHeader Info="@_InnerHeaderInfo" 
-            SelectedMode="@_SelectedMode"
+        <DetailGalleryInnerHeader Info="@_innerHeaderInfo" 
+            SelectedMode="@_selectedMode"
             OnGalleryModeChanged="ChangeGalleryMode" />
 
-        @if (_SelectedMode == DetailGalleryMode.Slideshow)
+        @if (_selectedMode == DetailGalleryMode.Slideshow)
         {
             <DetailGallerySlideshow LoadedImages="@loadedImages" 
                 TotalNumberOfImages="@Images.Count()"
                 OnLoadMoreClicked="() => LoadImages(nextPage)" />
         } 
-        else if (_SelectedMode == DetailGalleryMode.Grid)
+        else if (_selectedMode == DetailGalleryMode.Grid)
         {
             <DetailGalleryGrid LoadedImages="@loadedImages"
                 TotalNumberOfImages="@Images.Count()"
@@ -35,15 +35,15 @@
     private List<TrackImage> loadedImages = new();
     private int nextPage = 1;
     private const int itemLimit = 6;
-    private DetailGalleryMode _SelectedMode = DetailGalleryMode.Slideshow;
-    private string _InnerHeaderInfo = "";
+    private DetailGalleryMode _selectedMode = DetailGalleryMode.Slideshow;
+    private string _innerHeaderInfo = "";
 
-    private const string _SlideshowInfo = "Click or tap image at the bottom to higlight.";
-    private const string _GridInfo = "Click or tap image to view.";
+    private const string SlideshowInfo = "Click or tap image at the bottom to higlight.";
+    private const string GridInfo = "Click or tap image to view.";
     
     protected override void OnInitialized()
     {
-        _InnerHeaderInfo = _SlideshowInfo; // pre-set to slideshow mode info
+        _innerHeaderInfo = SlideshowInfo; // pre-set to slideshow mode info
         LoadImages(nextPage);
     }
 
@@ -57,15 +57,15 @@
 
     private void ChangeGalleryMode(DetailGalleryMode mode)
     {
-        _SelectedMode = mode;
+        _selectedMode = mode;
 
-        switch (_SelectedMode)
+        switch (_selectedMode)
         {
             case DetailGalleryMode.Slideshow:
-                _InnerHeaderInfo = _SlideshowInfo;
+                _innerHeaderInfo = SlideshowInfo;
                 break;
             case DetailGalleryMode.Grid:
-                _InnerHeaderInfo = _GridInfo;
+                _innerHeaderInfo = GridInfo;
                 break;
         }
     }

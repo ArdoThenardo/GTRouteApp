@@ -10,36 +10,36 @@
                 <div class="highlight-shimmer"></div>
                 <span class="bi bi-image"></span>
             </div>
-            <img src="@_SelectedImageUrl" 
-                alt="@LoadedImages.ElementAt(_SelectedImageIndex).ImageName"
-                style="display: @(_IsChanging ? "none" : "block");"
+            <img src="@_selectedImageUrl" 
+                alt="@LoadedImages.ElementAt(_selectedImageIndex).ImageName"
+                style="display: @(_isChanging ? "none" : "block");"
                 @ref="@highlightImageRef">
             <button type="button" 
                 title="See Image in Full Screen"
                 class="btn btn-secondary full-btn" 
-                @onclick="() => OpenImageInFullScreen(_SelectedImageUrl)">
+                @onclick="() => OpenImageInFullScreen(_selectedImageUrl)">
                 <span class="bi bi-arrows-fullscreen"></span> 
                 <span class="full-btn-text" style="margin-left: 6px">See Image in Full Screen</span>
             </button>
             <button type="button" 
                 title="See next image"
                 class="btn next-btn" 
-                disabled="@_IsNextDisabled"
-                @onclick="() => InitiateSelection(_SelectedImageIndex + 1)">
+                disabled="@_isNextDisabled"
+                @onclick="() => InitiateSelection(_selectedImageIndex + 1)">
                 <span class="bi bi-chevron-right"></span>
             </button>
             <button type="button" 
                 title="See previous image"
                 class="btn prev-btn" 
-                disabled="@_IsPrevDisabled"
-                @onclick="() => InitiateSelection(_SelectedImageIndex - 1)">
+                disabled="@_isPrevDisabled"
+                @onclick="() => InitiateSelection(_selectedImageIndex - 1)">
                 <span class="bi bi-chevron-left"></span>
             </button>
             <button type="button" 
                 class="btn btn-secondary info-visibility-btn" 
                 style="bottom: @infoVisibilityButtonBottomPosition;"
                 @onclick="() => ToggleInfoVisibility()">
-                @if (_IsInfoHidden)
+                @if (_isInfoHidden)
                 {
                     <p>
                         <span class="bi bi-info-circle"></span>
@@ -56,11 +56,11 @@
             </button>
             <div class="highlight-info-section" style="visibility: @infoVisibilityStyle;">
                 <div class="info-part-1">
-                    <p>@LoadedImages.ElementAt(_SelectedImageIndex).Description</p>
+                    <p>@LoadedImages.ElementAt(_selectedImageIndex).Description</p>
                 </div>
                 <div class="info-part-2">
                     <p>
-                        <span class="bi bi-camera-fill"></span> by @LoadedImages.ElementAt(_SelectedImageIndex).Author
+                        <span class="bi bi-camera-fill"></span> by @LoadedImages.ElementAt(_selectedImageIndex).Author
                     </p>
                 </div>
             </div>
@@ -71,7 +71,7 @@
         @foreach (var image in LoadedImages
                                 .Select((imageData, index) => (imageData, index)))
         {
-            <div class="@((_SelectedImageIndex == image.index) ? "gallery-item-selected" : "gallery-item")" 
+            <div class="@((_selectedImageIndex == image.index) ? "gallery-item-selected" : "gallery-item")" 
                 @onclick="() => InitiateSelection(image.index)">
                 <div class="item-shimmer"></div>
                 <div class="item-placeholder">
@@ -102,28 +102,28 @@
     [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
 
-    private int _SelectedImageIndex = 0;
-    private string _SelectedImageUrl = "";
-    private bool _IsNextDisabled = false;
-    private bool _IsPrevDisabled = false;
-    private bool _IsInfoHidden = false;
+    private int _selectedImageIndex = 0;
+    private string _selectedImageUrl = "";
+    private bool _isNextDisabled = false;
+    private bool _isPrevDisabled = false;
+    private bool _isInfoHidden = false;
     private string infoVisibilityStyle = "visible"; // "hidden" and "visible"
     private string infoVisibilityButtonBottomPosition = "74px"; // "12px" and "74px"
-    private bool _IsChanging = false;
+    private bool _isChanging = false;
 
     ElementReference highlightImageRef;
 
     protected override void OnInitialized()
     {
         if (TotalNumberOfImages > 0)
-            SetSelection(_SelectedImageIndex);
+            SetSelection(_selectedImageIndex);
     }
 
     private async Task InitiateSelection(int selectedIndex)
     {
-        if (_SelectedImageIndex != selectedIndex)
+        if (_selectedImageIndex != selectedIndex)
         {
-            _IsChanging = true;
+            _isChanging = true;
             await Task.Delay(10); // necessary to delay so previously loaded image won't show on next selected item
 
             SetSelection(selectedIndex);
@@ -137,10 +137,10 @@
 
     private void SetSelection(int index)
     {
-        _SelectedImageIndex = index;
-        _SelectedImageUrl = LoadedImages.ElementAt(_SelectedImageIndex).ImageUrl ?? "";
+        _selectedImageIndex = index;
+        _selectedImageUrl = LoadedImages.ElementAt(_selectedImageIndex).ImageUrl ?? "";
         
-        _IsChanging = false;
+        _isChanging = false;
     }
 
     private async Task LoadMoreImages()
@@ -157,20 +157,20 @@
 
     private void ToggleArrowButton()
     {
-        _IsNextDisabled = _SelectedImageIndex == (LoadedImages.Count() - 1) ? true : false;
-        _IsPrevDisabled = _SelectedImageIndex == 0 ? true : false;
+        _isNextDisabled = _selectedImageIndex == (LoadedImages.Count() - 1) ? true : false;
+        _isPrevDisabled = _selectedImageIndex == 0 ? true : false;
     }
 
     private void ToggleInfoVisibility()
     {
-        _IsInfoHidden = _IsInfoHidden ? false : true;
-        infoVisibilityStyle = _IsInfoHidden ? "hidden" : "visible";
-        infoVisibilityButtonBottomPosition = _IsInfoHidden ? "12px" : "74px";
+        _isInfoHidden = _isInfoHidden ? false : true;
+        infoVisibilityStyle = _isInfoHidden ? "hidden" : "visible";
+        infoVisibilityButtonBottomPosition = _isInfoHidden ? "12px" : "74px";
     }
 
     private void SetDefaultInfoVisibility()
     {
-        _IsInfoHidden = false;
+        _isInfoHidden = false;
         infoVisibilityStyle = "visible";
         infoVisibilityButtonBottomPosition = "74px";
     }
