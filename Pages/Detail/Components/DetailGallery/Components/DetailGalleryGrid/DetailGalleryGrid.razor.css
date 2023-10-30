@@ -2,7 +2,20 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 160px;
+    padding: 8px;
+    overflow-y: scroll;
 }
+
+    .grid-container::-webkit-scrollbar {
+        background-color: transparent;
+        width: 8px;
+    }
+
+    .grid-container::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: #1e2022;
+        border: 1.2px solid #e8e8e8;
+    }
 
 .grid-item {
     padding: 8px;
