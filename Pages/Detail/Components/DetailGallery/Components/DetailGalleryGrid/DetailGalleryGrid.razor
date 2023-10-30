@@ -7,8 +7,22 @@
                                 .Select((imageData, index) => (imageData, index)))
     {
         <article class="grid-item item-revelation">
-            <img src="@image.imageData.ImageUrl" alt="@image.imageData.ImageName" />
+            <div class="item-placeholder">
+                <span class="bi bi-image-fill"></span>
+            </div>
+            <img src="@image.imageData.ImageUrl" 
+                alt="@image.imageData.ImageName" />
         </article>
+    }
+    @if (LoadedImages.Count() < TotalNumberOfImages)
+    {
+        <div class="button-item item-revelation">
+            <button type="button" 
+                class="btn btn-primary load-more-btn" 
+                @onclick="LoadMoreImages">
+                Load More
+            </button>
+        </div>
     }
 </div>
 
@@ -19,4 +33,9 @@
     public int TotalNumberOfImages { get; set; } = 0;
     [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
+
+    private async Task LoadMoreImages()
+    {
+        await OnLoadMoreClicked.InvokeAsync();
+    }
 }
