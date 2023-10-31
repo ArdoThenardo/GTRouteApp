@@ -54,11 +54,17 @@
 
 @media (max-width: 540px) {
     .header-container {
-        height: unset;
+        height: 6.5vh;
+    }
+
+    .btn-selection:hover > ::deep .button-tooltip {
+        opacity: 0;
+        visibility: hidden;
     }
 
     .header-info {
         font-size: 14px;
+        width: 70%;
     }
 }
 
