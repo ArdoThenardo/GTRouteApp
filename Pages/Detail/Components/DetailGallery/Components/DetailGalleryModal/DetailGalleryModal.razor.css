@@ -1,7 +1,7 @@
 .modal-container {
     display: flex;
     flex-direction: column;
-    width: 46vw;
+    width: 80vw;
 }
 
 .modal-header {
@@ -66,16 +66,27 @@
 
 .full-btn {
     position: absolute;
+    background-color: rgba(30, 32, 34, 0.7);
+    color: #f4f4f2;
     top: 12px;
     right: 12px;
     width: auto;
     height: 45px;
     padding: 8px;
+    border-radius: 12px;
+    border-color: rgba(255, 193, 7, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
     padding-inline: 12px;
+    box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.4);
 }
+
+    .full-btn:hover {
+        color: #ffc107;
+        border-color: #ffc720;
+        box-shadow: 1px 1px 8px rgba(30, 32, 34, 0.8);
+    }
 
 .full-btn-text {
     display: block;
@@ -83,16 +94,20 @@
     font-weight: 600;
 }
 
-.track-info {
-    background-color: rgba(30, 32, 34, 0.6);
-    bottom: 0;
+.image-info {
+    background-color: #303841;
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding-inline: 24px;
-    padding-block: 12px;
+    padding-top: 12px;
+    padding-inline: 18px;
+    padding-bottom: 18px;
+    border-top: 1px solid #fff;
 }
 
-.info-part-1 p {
+.info-part-1 p, .info-part-2 p {
     margin-bottom: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f4f4f2;
 }
