@@ -6,7 +6,8 @@
     @foreach (var image in LoadedImages
                                 .Select((imageData, index) => (imageData, index)))
     {
-        <article class="grid-item item-revelation">
+        <article class="grid-item item-revelation" 
+            @onclick="() => ViewImageDetail(image.imageData)">
             <div class="item-placeholder">
                 <span class="bi bi-image-fill"></span>
             </div>
@@ -34,8 +35,27 @@
     [Parameter]
     public EventCallback OnLoadMoreClicked { get; set; }
 
+    [CascadingParameter] 
+    public IModalService DetailModal { get; set; } = default!;
+
+    private ModalOptions _modalOptions = new ModalOptions()
+    {
+        Class = "custom-blazored-modal",
+        Size = ModalSize.Automatic,
+        Position = ModalPosition.Middle,
+        HideHeader = true
+    };
+
     private async Task LoadMoreImages()
     {
         await OnLoadMoreClicked.InvokeAsync();
+    }
+
+    private void ViewImageDetail(TrackImage image)
+    {
+        var modal = DetailModal.Show<DetailGalleryModal>(
+            "Image Detail", 
+            new ModalParameters().Add(nameof(DetailGalleryModal.Image), image),
+            _modalOptions);
     }
 }
