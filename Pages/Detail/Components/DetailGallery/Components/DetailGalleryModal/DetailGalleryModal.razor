@@ -1,5 +1,6 @@
 @using GTRouteApp.Models
 @namespace GTRouteApp.Components.Detail
+@inject IJSRuntime JS
 
 <div class="modal-container">
     <div class="modal-header">
@@ -21,6 +22,7 @@
                 alt="@Image.ImageName">
             <button type="button" 
                 title="See Image in Full Screen"
+                @onclick="() => OpenImageInFullScreen(Image.ImageUrl)"
                 class="btn btn-secondary full-btn">
                 <span class="bi bi-arrows-fullscreen"></span> 
                 <span class="full-btn-text" style="margin-left: 6px">See Image in Full Screen</span>
@@ -45,6 +47,12 @@
 
     [Parameter]
     public TrackImage Image { get; set; } = new();
+
+    private async Task OpenImageInFullScreen(string? url)
+    {
+        if (url is not null)
+            await JS.InvokeVoidAsync("open", url, "_blank");
+    }
 
     private async Task DismissModal()
     {
