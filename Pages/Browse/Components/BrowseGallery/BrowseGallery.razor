@@ -6,47 +6,47 @@
 
 <div class="gallery-container">
     <div @ref="highlightCoverRef" class="gallery-highlight" 
-        style="--bg-cover: url('@_SelectedTrack.CoverUrl');">
+        style="--bg-cover: url('@_selectedTrack.CoverUrl');">
         <div class="highlight-section-1">
             <p>
-                <span class="fi fi-@_SelectedTrack.Country?.code"></span>
-                <span @ref="section1CountryRef" class="section-1-country-span">@_SelectedTrack.Country?.name</span>
+                <span class="fi fi-@_selectedTrack.Country?.code"></span>
+                <span @ref="section1CountryRef" class="section-1-country-span">@_selectedTrack.Country?.name</span>
             </p>
             <img
-                src="@_SelectedTrack.LogoUrl"
-                alt="@_SelectedTrack.LogoUrl"
+                src="@_selectedTrack.LogoUrl"
+                alt="@_selectedTrack.LogoUrl"
                 @ref="section1LogoRef"
             />
         </div>
         <div class="highlight-section-2">
             <div class="section-2-left">
                 <p>
-                    <span @ref="section2NameRef">@_SelectedTrack.Name</span>
+                    <span @ref="section2NameRef">@_selectedTrack.Name</span>
                 </p>
                 <p>Category</p>
                 <p>
-                    <span @ref="section2CategoryRef">@_SelectedTrack.Category</span>
+                    <span @ref="section2CategoryRef">@_selectedTrack.Category</span>
                 </p>
                 <p>No. Of Layouts</p>
                 <p>
-                    <span @ref="section2LayoutRef">@_SelectedTrack.NumberOfLayouts</span>
+                    <span @ref="section2LayoutRef">@_selectedTrack.NumberOfLayouts</span>
                 </p>
             </div>
             <button type="button" 
                 class="btn btn-success"
-                @onclick="@(() => AccessTrackDetail(_SelectedSlug))">
+                @onclick="@(() => AccessTrackDetail(_selectedSlug))">
                 View Track
             </button>
         </div>
     </div>
     <div class="gallery-selection">
         <Virtualize Items="@Tracks" Context="track">
-            <div class="@(_SelectedSlug.Equals(track.Slug) ? 
+            <div class="@(_selectedSlug.Equals(track.Slug) ? 
                         "gallery-item-container-selected item-revelation" : 
                         "gallery-item-container item-revelation")" 
                 style="background-image: url(@track.CoverUrl);"
                 @onclick="() => SetSelection(track.Slug, true)">
-                <div class="@(_SelectedSlug.Equals(track.Slug) ? 
+                <div class="@(_selectedSlug.Equals(track.Slug) ? 
                             "gallery-item-content-selected" : "gallery-item-content")">
                     <img
                         src="@track.LogoUrl"
@@ -84,8 +84,8 @@
 @code {
     [Parameter]
     public List<RaceTrack> Tracks { get; set; } = new();
-    private string _SelectedSlug = "";
-    private RaceTrack _SelectedTrack = new();
+    private string _selectedSlug = "";
+    private RaceTrack _selectedTrack = new();
 
     [Parameter]
     public bool IsMaximum { get; set; } = false;
@@ -125,10 +125,10 @@
 
     private async Task SetSelection(string? slug, bool allowResetAnimation = false)
     {
-        if (!string.IsNullOrEmpty(slug) && !_SelectedSlug.Equals(slug))
+        if (!string.IsNullOrEmpty(slug) && !_selectedSlug.Equals(slug))
         {
-            _SelectedSlug = slug;
-            _SelectedTrack = Tracks.Where(t => t.Slug == _SelectedSlug).FirstOrDefault() ?? new();
+            _selectedSlug = slug;
+            _selectedTrack = Tracks.Where(t => t.Slug == _selectedSlug).FirstOrDefault() ?? new();
 
             if (allowResetAnimation)
                 await ResetHighlightAnimationWithJS();
