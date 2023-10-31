@@ -111,3 +111,9 @@
     font-weight: 600;
     color: #f4f4f2;
 }
+
+@media (max-height: 414px) {
+    .modal-container {
+        width: 46vw;
+    }
+}
