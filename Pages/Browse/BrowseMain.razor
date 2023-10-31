@@ -8,81 +8,81 @@
 
 <PageTitle>Browse | GTRoad</PageTitle>
 
-@if (tracks == null || tracks.Count == 0)
+@if (_tracks == null || _tracks.Count == 0)
 {   
-    <NoDataView Message="@errorMessage" ShowError="@showError" OnTryAgainClicked="OnTryAgainHandler" />
+    <NoDataView Message="@_errorMessage" ShowError="@_showError" OnTryAgainClicked="OnTryAgainHandler" />
 }
 else
 {
-    <BrowseSubheader Info="@_ModeInfo" 
+    <BrowseSubheader Info="@_modeInfo" 
         OnCategoryChanged="OnCategoryChangedHandler" 
         OnSortChanged="OnSortChangedHandler"
         ChosenBrowseMode="ChangeBrowseMode"
-        SelectedSort="@_SelectedSort"
-        SelectedMode="@_SelectedMode"
-        selectedCategory="@_SelectedCategory" />
+        SelectedSort="@_selectedSort"
+        SelectedMode="@_selectedMode"
+        selectedCategory="@_selectedCategory" />
 
-    @if (_SelectedMode == BrowseMode.Gallery)
+    @if (_selectedMode == BrowseMode.Gallery)
     {
-        <BrowseGallery Tracks="@tracks" 
-            IsMaximum="@isMaximum" 
-            IsLoadMoreError="@isLoadMoreError"
-            IsLoadMoreDisabled="@isLoadMoreDisabled" 
+        <BrowseGallery Tracks="@_tracks" 
+            IsMaximum="@_isMaximum" 
+            IsLoadMoreError="@_isLoadMoreError"
+            IsLoadMoreDisabled="@_isLoadMoreDisabled" 
             OnLoadMoreClicked="LoadMoreTracks"
             OnViewClickHandler="AccessTrackDetail" />
     }
-    else if (_SelectedMode == BrowseMode.List)
+    else if (_selectedMode == BrowseMode.List)
     {
-        <BrowseList Tracks="@tracks"
-            IsMaximum="@isMaximum"
-            IsLoadMoreError="@isLoadMoreError"
-            IsLoadMoreDisabled="@isLoadMoreDisabled"
+        <BrowseList Tracks="@_tracks"
+            IsMaximum="@_isMaximum"
+            IsLoadMoreError="@_isLoadMoreError"
+            IsLoadMoreDisabled="@_isLoadMoreDisabled"
             OnLoadMoreClicked="@LoadMoreTracks"
             OnViewClickHandler="AccessTrackDetail" />
     }
-    else if (_SelectedMode == BrowseMode.Grid)
+    else if (_selectedMode == BrowseMode.Grid)
     {
-        <BrowseGrid Tracks="@tracks" 
-            IsMaximum="@isMaximum"
-            FirstIndexInCurrentPage="@firstIndexInCurrentPage" 
-            IsLoadMoreError="@isLoadMoreError"
-            IsLoadMoreDisabled="@isLoadMoreDisabled"
+        <BrowseGrid Tracks="@_tracks" 
+            IsMaximum="@_isMaximum"
+            FirstIndexInCurrentPage="@_firstIndexInCurrentPage" 
+            IsLoadMoreError="@_isLoadMoreError"
+            IsLoadMoreDisabled="@_isLoadMoreDisabled"
             OnLoadMoreClicked="LoadMoreTracks"
             OnViewClickHandler="AccessTrackDetail" />
     }
 }
 
 @code {
-    private List<RaceTrack> tracks = new();
-    private int currentPage = 1;
+    private List<RaceTrack> _tracks = new();
+    private int _currentPage = 1;
 
-    private const string galleryInfo = "Click or tap a track on the bottom to highlight";
-    private const string listInfo = "Click or tap a track on the list to highlight";
-    private const string gridInfo = "Click or tap a track to view";
-    private const int limitPerPage = 8;
+    private const string GalleryInfo = "Click or tap a track on the bottom to highlight";
+    private const string ListInfo = "Click or tap a track on the list to highlight";
+    private const string GridInfo = "Click or tap a track to view";
+    private const int LimitPerPage = 8;
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "category")]
     public string InitialCategory { get; set; } = "";
-    private string _SelectedCategory { get; set; } = BrowseCategory.Categories[0];
+    private string _selectedCategory { get; set; } = BrowseCategory.Categories[0];
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "mode")]
     public string SelectedModeQuery { get; set; } = ""; // use BrowseModeQuery
-    private BrowseMode _SelectedMode = BrowseMode.Gallery;
-    private string _ModeInfo = galleryInfo;
+    private BrowseMode _selectedMode = BrowseMode.Gallery;
+    private string _modeInfo = GalleryInfo;
 
     [Parameter]
     [SupplyParameterFromQuery(Name = "sort")]
     public string SelectedSortQuery { get; set; } = ""; // use BrowseSortQuery
-    private BrowseSort _SelectedSort = BrowseSort.Alphabetical;
+    private BrowseSort _selectedSort = BrowseSort.Alphabetical;
 
-    private bool isMaximum = false;
-    private int firstIndexInCurrentPage = 0;
-    private bool isLoadMoreError = false;
-    private bool isLoadMoreDisabled = false;
-    private string errorMessage = "";
-    private bool showError = false;
+    private bool _isMaximum = false;
+    private int _firstIndexInCurrentPage = 0;
+    private bool _isLoadMoreError = false;
+    private bool _isLoadMoreDisabled = false;
+    private string _errorMessage = "";
+    private bool _showError = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -105,45 +105,45 @@ else
 
     private async Task LoadTracks()
     {
-        var data = await RaceTrackService.GetTracks(currentPage);
+        var data = await RaceTrackService.GetTracks(_currentPage);
 
-        tracks.AddRange(data);
-        isMaximum = RaceTrackService.IsRaceTracksReachMaximum();
+        _tracks.AddRange(data);
+        _isMaximum = RaceTrackService.IsRaceTracksReachMaximum();
     }
 
     private async Task LoadMoreTracks()
     {
-        isLoadMoreDisabled = true;
+        _isLoadMoreDisabled = true;
 
-        if (!isMaximum)
+        if (!_isMaximum)
         {
-            int nextPage = currentPage + 1;
+            int nextPage = _currentPage + 1;
             
             var data = await RaceTrackService.GetTracks(nextPage);
 
             if (data.Count() > 0) // fetch success, if data > 0
             {
-                currentPage = nextPage;
+                _currentPage = nextPage;
                 
-                tracks.AddRange(data);
-                isMaximum = RaceTrackService.IsRaceTracksReachMaximum();
-                firstIndexInCurrentPage = limitPerPage * (currentPage - 1);
-                isLoadMoreError = false;
+                _tracks.AddRange(data);
+                _isMaximum = RaceTrackService.IsRaceTracksReachMaximum();
+                _firstIndexInCurrentPage = LimitPerPage * (_currentPage - 1);
+                _isLoadMoreError = false;
             }
             else
             {
-                isLoadMoreError = true;
+                _isLoadMoreError = true;
             }
 
-            isLoadMoreDisabled = false;
+            _isLoadMoreDisabled = false;
         }
     }
 
     private void ClearData()
     {
-        tracks.Clear();
-        currentPage = 1;
-        isMaximum = false;
+        _tracks.Clear();
+        _currentPage = 1;
+        _isMaximum = false;
         RaceTrackService.ResetRaceTracksList();
     }
 
@@ -165,25 +165,25 @@ else
 
     private void PreselectCategory()
     {
-        _SelectedCategory = string.IsNullOrWhiteSpace(InitialCategory) ? 
+        _selectedCategory = string.IsNullOrWhiteSpace(InitialCategory) ? 
             BrowseCategory.Categories[0] : 
             InitialCategory;
 
-        RaceTrackService.SetRaceTracksCategory(_SelectedCategory);
+        RaceTrackService.SetRaceTracksCategory(_selectedCategory);
     }
 
     private void CheckError()
     {
-        errorMessage = RaceTrackService.GetRecentErrorMessage();
-        showError = string.IsNullOrWhiteSpace(errorMessage) ? false : true;
+        _errorMessage = RaceTrackService.GetRecentErrorMessage();
+        _showError = string.IsNullOrWhiteSpace(_errorMessage) ? false : true;
     }
 
     private void ChangeCategory(string category)
     {
-        _SelectedCategory = category;
-        RaceTrackService.SetRaceTracksCategory(_SelectedCategory);
+        _selectedCategory = category;
+        RaceTrackService.SetRaceTracksCategory(_selectedCategory);
 
-        var updatedUrl = NavigationManager.GetUriWithQueryParameter("category", _SelectedCategory);
+        var updatedUrl = NavigationManager.GetUriWithQueryParameter("category", _selectedCategory);
         NavigationManager.NavigateTo(updatedUrl);
     }
 
@@ -208,21 +208,21 @@ else
 
     private void ChangeBrowseMode(BrowseMode mode)
     {
-        _SelectedMode = mode;
+        _selectedMode = mode;
 
-        switch (_SelectedMode)
+        switch (_selectedMode)
         {
             case BrowseMode.Gallery:
                 SelectedModeQuery = BrowseModeQuery.GalleryMode;
-                _ModeInfo = galleryInfo;
+                _modeInfo = GalleryInfo;
                 break;
             case BrowseMode.List:
                 SelectedModeQuery = BrowseModeQuery.ListMode;
-                _ModeInfo = listInfo;
+                _modeInfo = ListInfo;
                 break;
             case BrowseMode.Grid:
                 SelectedModeQuery = BrowseModeQuery.GridMode;
-                _ModeInfo = gridInfo;
+                _modeInfo = GridInfo;
                 break;
         }
         
@@ -255,10 +255,10 @@ else
 
     private void ChangeSortOption(BrowseSort sort)
     {
-        this._SelectedSort = sort;
-        RaceTrackService.SetSortOption(_SelectedSort);
+        this._selectedSort = sort;
+        RaceTrackService.SetSortOption(_selectedSort);
 
-        switch (this._SelectedSort)
+        switch (this._selectedSort)
         {
             case BrowseSort.Alphabetical:
                 SelectedSortQuery = BrowseSortQuery.Alphabetical;
@@ -288,13 +288,13 @@ else
             SelectedSortQuery = BrowseSortQuery.Alphabetical; // default to sort by alphabetical, if empty
 
         NavigationManager.NavigateTo($"/browse/detail/{slug}?"
-            +$"origin_page=browse&origin_category={_SelectedCategory}"
+            +$"origin_page=browse&origin_category={_selectedCategory}"
             +$"&origin_sort={SelectedSortQuery}&origin_mode={SelectedModeQuery}");
     }
 
     private async Task OnTryAgainHandler()
     {
-        showError = false;
+        _showError = false;
 
         await LoadData();
     }
