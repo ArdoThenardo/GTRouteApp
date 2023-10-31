@@ -7,12 +7,22 @@
             @onclick="() => SwitchMode(DetailGalleryMode.Slideshow)" 
             disabled=@_disableSlideshow>
             <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
+            <AppTooltip Text="Slideshow View"
+                HtmlPosition="absolute" 
+                WidthInPx="120" 
+                TopPositionInPx="42" 
+                LeftPositionInPx="8"/>
         </button>
 
         <button type="button" class="btn btn-selection"
             @onclick="() => SwitchMode(DetailGalleryMode.Grid)"
             disabled=@_disableGrid>
             <span class="bi bi-list-task" style="margin-left: -4px;"></span>
+            <AppTooltip Text="Grid View"
+                HtmlPosition="absolute" 
+                WidthInPx="94" 
+                TopPositionInPx="42" 
+                LeftPositionInPx="46"/>
         </button>
     </div>
 

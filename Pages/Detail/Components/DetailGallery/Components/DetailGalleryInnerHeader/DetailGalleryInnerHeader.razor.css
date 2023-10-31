@@ -41,11 +41,16 @@
     border-color: #ffc107;
 }
 
-.btn-selection:hover {
-    color: #1e2022;
-    background-color: #ffca2c;
-    border-color: #ffc720;
-}
+    .btn-selection:hover {
+        color: #1e2022;
+        background-color: #ffca2c;
+        border-color: #ffc720;
+    }
+
+    .btn-selection:hover > ::deep .button-tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
 
 @media (max-width: 540px) {
     .header-container {

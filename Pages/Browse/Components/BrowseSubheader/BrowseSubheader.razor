@@ -45,7 +45,7 @@
                     break;
             }
             | <span class="bi bi-caret-down-fill"></span>
-            <BrowseTooltip Text="Change Sort setting" 
+            <AppTooltip Text="Change Sort setting" 
                 WidthInPx="160" 
                 TopPositionInPx="122" 
                 RightPositionInPx="70" />
@@ -69,7 +69,7 @@
                     break;
             }
             | <span class="bi bi-caret-down-fill"></span>
-            <BrowseTooltip Text="Change View setting" 
+            <AppTooltip Text="Change View setting" 
                 WidthInPx="160" 
                 TopPositionInPx="122" 
                 RightPositionInPx="8" />
@@ -80,7 +80,7 @@
                 @onclick="() => SwitchMode(BrowseMode.Gallery)"
                 disabled=@disableGallery>
                 <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
-                <BrowseTooltip Text="Gallery View" 
+                <AppTooltip Text="Gallery View" 
                     WidthInPx="110" 
                     TopPositionInPx="122" 
                     RightPositionInPx="70" />
@@ -90,7 +90,7 @@
                 @onclick="() => SwitchMode(BrowseMode.List)"
                 disabled=@disableList>
                 <span class="bi bi-list-task"></span>
-                <BrowseTooltip Text="List View" 
+                <AppTooltip Text="List View" 
                     WidthInPx="90" 
                     TopPositionInPx="122" 
                     RightPositionInPx="40" />
@@ -100,7 +100,7 @@
                 @onclick="() => SwitchMode(BrowseMode.Grid)"
                 disabled=@disableGrid>
                 <span class="bi bi-grid-3x3-gap-fill" style="margin-right: 4px;"></span>
-                <BrowseTooltip Text="Grid View" 
+                <AppTooltip Text="Grid View" 
                     WidthInPx="95" 
                     TopPositionInPx="122" 
                     RightPositionInPx="8" />

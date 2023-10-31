@@ -1,0 +1,23 @@
+<span class="button-tooltip" 
+    style="--width: @(WidthInPx)px;
+        --htmlPos: @(HtmlPosition);
+        --topPos: @(TopPositionInPx)px;
+        --leftPos: @((LeftPositionInPx == 0) ? "unset" : $"{LeftPositionInPx}px"); 
+        --rightPos: @((RightPositionInPx == 0) ? "unset" : $"{RightPositionInPx}px");">
+    @Text
+</span>
+
+@code {
+    [Parameter]
+    public string? Text { get; set; }
+    [Parameter]
+    public string HtmlPosition { get; set; } = "fixed";
+    [Parameter]
+    public int WidthInPx { get; set; }
+    [Parameter]
+    public int TopPositionInPx { get; set; }
+    [Parameter]
+    public int LeftPositionInPx { get; set; }
+    [Parameter]
+    public int RightPositionInPx { get; set; }
+}
