@@ -18,6 +18,7 @@ p {
     position: relative;
     background-color: #2b2b28;
     width: 100%;
+    overflow: hidden;
 }
 
 .item-placeholder {
@@ -200,7 +201,7 @@ p {
     }
 
     .gallery-item img {
-        filter: grayscale(0.8);
+        filter: grayscale(0.4);
         border: 2px solid #1e2022;
     }
 
