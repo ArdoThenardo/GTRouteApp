@@ -1,5 +1,4 @@
 @using GTRouteApp.Helpers
-@using GTRouteApp.Components.Browse
 @namespace GTRouteApp.Components.Detail
 
 <div class="header-container">
@@ -8,7 +7,7 @@
             @onclick="() => SwitchMode(DetailGalleryMode.Slideshow)" 
             disabled=@_disableSlideshow>
             <span class="bi bi-image-fill" style="margin-left: 4px;"></span>
-            <BrowseTooltip Text="Slideshow View"
+            <AppTooltip Text="Slideshow View"
                 HtmlPosition="absolute" 
                 WidthInPx="120" 
                 TopPositionInPx="42" 
@@ -19,7 +18,7 @@
             @onclick="() => SwitchMode(DetailGalleryMode.Grid)"
             disabled=@_disableGrid>
             <span class="bi bi-list-task" style="margin-left: -4px;"></span>
-            <BrowseTooltip Text="Grid View"
+            <AppTooltip Text="Grid View"
                 HtmlPosition="absolute" 
                 WidthInPx="94" 
                 TopPositionInPx="42" 
