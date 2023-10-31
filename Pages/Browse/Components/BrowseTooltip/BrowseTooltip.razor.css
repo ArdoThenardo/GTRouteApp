@@ -1,9 +1,10 @@
 .button-tooltip {
     opacity: 0;
     visibility: hidden;
-    position: fixed;
+    position: var(--htmlPos); /* adjust with --htmlPos */
     width: var(--width); /* adjust with --width */
     top: var(--topPos); /* adjust with --topPos */
+    left: var(--leftPos); /* adjust with --leftPos */
     right: var(--rightPos); /* adjust with --rightPos */
     background-color: rgba(30, 32, 34, 0.85);
     color: #f4f4f2;
