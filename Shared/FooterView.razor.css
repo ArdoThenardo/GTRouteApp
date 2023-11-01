@@ -69,6 +69,10 @@ a:hover, ::deep a:hover {
     display: none;
 }
 
+.footer-build {
+    font-size: 12px;
+}
+
 @media (max-width: 540px) {
     a, ::deep a {
         font-size: 4.2vw;
