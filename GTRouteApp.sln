@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTRouteApp", "GTRouteApp.csproj", "{1CD4ED78-F585-4933-81B2-E8A28AEDFD5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTRouteApp.Tests", "tests\GTRouteApp.Tests.csproj", "{C0BD9EEE-B6F9-44E6-A4F2-517E09EA554A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTRouteApp", "src\GTRouteApp.csproj", "{BF5299C1-8783-409A-BBC5-D80F76346548}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +16,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1CD4ED78-F585-4933-81B2-E8A28AEDFD5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CD4ED78-F585-4933-81B2-E8A28AEDFD5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CD4ED78-F585-4933-81B2-E8A28AEDFD5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CD4ED78-F585-4933-81B2-E8A28AEDFD5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0BD9EEE-B6F9-44E6-A4F2-517E09EA554A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0BD9EEE-B6F9-44E6-A4F2-517E09EA554A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0BD9EEE-B6F9-44E6-A4F2-517E09EA554A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0BD9EEE-B6F9-44E6-A4F2-517E09EA554A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF5299C1-8783-409A-BBC5-D80F76346548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF5299C1-8783-409A-BBC5-D80F76346548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF5299C1-8783-409A-BBC5-D80F76346548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF5299C1-8783-409A-BBC5-D80F76346548}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
