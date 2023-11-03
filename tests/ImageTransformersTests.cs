@@ -27,7 +27,7 @@ public class ImageTransformersTests
     [Fact]
     public void GenerateThumbnailWithCloudinaryTest()
     {
-        string imageUrl = "https://res.cloudinary.com/doo5vwi4i/image/upload/test-img.jpg";
+        string imageUrl = "https://res.cloudinary.com/mock/image/upload/test-img.jpg";
         string generatedThumbnail = imageTransformers.GenerateThumbnail(imageUrl);
         
         bool isThumbnailEmpty = string.IsNullOrWhiteSpace(generatedThumbnail);
@@ -38,7 +38,7 @@ public class ImageTransformersTests
     [Fact]
     public void GenerateProgressive_WithCloudinaryTest()
     {
-        string imageUrl = "https://res.cloudinary.com/doo5vwi4i/image/upload/test-img.jpg";
+        string imageUrl = "https://res.cloudinary.com/mock/image/upload/test-img.jpg";
         string generatedThumbnail = imageTransformers.GenerateProgressive(imageUrl);
         
         bool isThumbnailEmpty = string.IsNullOrWhiteSpace(generatedThumbnail);
@@ -49,7 +49,7 @@ public class ImageTransformersTests
     [Fact]
     public void GenerateThumbailImageKitTest()
     {
-        string imageUrl = "https://ik.imagekit.io/gtrouteapp/test-img.jpg";
+        string imageUrl = "https://ik.imagekit.io/mock/test-img.jpg";
         string generatedThumbnail = imageTransformers.GenerateThumbnail(imageUrl);
 
         bool isThumbnailEmpty = string.IsNullOrWhiteSpace(generatedThumbnail);
@@ -60,7 +60,7 @@ public class ImageTransformersTests
     [Fact]
     public void GenerateProgressive_WithImageKitTest()
     {
-        string imageUrl = "https://ik.imagekit.io/gtrouteapp/test-img.jpg";
+        string imageUrl = "https://ik.imagekit.io/mock/test-img.jpg";
         string generatedThumbnail = imageTransformers.GenerateProgressive(imageUrl);
 
         bool isThumbnailEmpty = string.IsNullOrWhiteSpace(generatedThumbnail);
