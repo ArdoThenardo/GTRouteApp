@@ -16,10 +16,10 @@ public class ImageTransformersTests
             .AddJsonFile("./appsettings.test.json")
             .Build();
         var settings = new GTRouteAppSettings();
-        settings.CloudinaryApi = _configuration.GetSection("GTRouteAppSettings").GetValue<string>("CloudinaryApi") ?? "nihil";
-        settings.ImageKitPublicKey = _configuration.GetSection("GTRouteAppSettings").GetValue<string>("ImageKitPublicKey") ?? "";
-        settings.ImageKitPrivateKey = _configuration.GetSection("GTRouteAppSettings").GetValue<string>("ImageKitPrivateKey") ?? "";
-        settings.ImageKitEndpointUrl = _configuration.GetSection("GTRouteAppSettings").GetValue<string>("ImageKitEndpointUrl") ?? "";
+        settings.CloudinaryApi = _configuration.GetSection("AppSettings").GetValue<string>("CloudinaryApi") ?? "nihil";
+        settings.ImageKitPublicKey = _configuration.GetSection("AppSettings").GetValue<string>("ImageKitPublicKey") ?? "";
+        settings.ImageKitPrivateKey = _configuration.GetSection("AppSettings").GetValue<string>("ImageKitPrivateKey") ?? "";
+        settings.ImageKitEndpointUrl = _configuration.GetSection("AppSettings").GetValue<string>("ImageKitEndpointUrl") ?? "";
         
         imageTransformers = new ImageTransformers(Options.Create(settings));
     }
