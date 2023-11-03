@@ -25,4 +25,8 @@
     <ProjectReference Include="..\src\GTRouteApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="appsettings.test.json" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+
 </Project>
