@@ -7,7 +7,7 @@ namespace GTRouteApp.Tests;
 
 public class ImageTransformersTests
 {
-    private readonly IConfiguration _configuration;
+    IConfiguration _configuration;
     ImageTransformers imageTransformers;
 
     public ImageTransformersTests()
@@ -25,7 +25,7 @@ public class ImageTransformersTests
     }
 
     [Fact]
-    public void GenerateThumbnailWithCloudinaryTests()
+    public void GenerateThumbnailWithCloudinaryTest()
     {
         string imageUrl = "https://res.cloudinary.com/doo5vwi4i/image/upload/test-img.jpg";
         string generatedThumbnail = imageTransformers.GenerateThumbnail(imageUrl);
@@ -36,7 +36,18 @@ public class ImageTransformersTests
     }
 
     [Fact]
-    public void GenerateThumbailImageKitTests()
+    public void GenerateProgressive_WithCloudinaryTest()
+    {
+        string imageUrl = "https://res.cloudinary.com/doo5vwi4i/image/upload/test-img.jpg";
+        string generatedThumbnail = imageTransformers.GenerateProgressive(imageUrl);
+        
+        bool isThumbnailEmpty = string.IsNullOrWhiteSpace(generatedThumbnail);
+
+        Assert.False(isThumbnailEmpty);
+    }
+
+    [Fact]
+    public void GenerateThumbailImageKitTest()
     {
         string imageUrl = "https://ik.imagekit.io/gtrouteapp/test-img.jpg";
         string generatedThumbnail = imageTransformers.GenerateThumbnail(imageUrl);
@@ -47,10 +58,30 @@ public class ImageTransformersTests
     }
 
     [Fact]
-    public void RevertToOriginalUrl_AfterGenerateThumbnailWithOtherTests()
+    public void GenerateProgressive_WithImageKitTest()
+    {
+        string imageUrl = "https://ik.imagekit.io/gtrouteapp/test-img.jpg";
+        string generatedThumbnail = imageTransformers.GenerateProgressive(imageUrl);
+
+        bool isThumbnailEmpty = string.IsNullOrWhiteSpace(generatedThumbnail);
+
+        Assert.False(isThumbnailEmpty);
+    }
+
+    [Fact]
+    public void RevertToOriginalUrl_AfterGenerateThumbnailWithOtherTest()
     {
         string imageUrl = "img/test-img.jpg";
         string generatedThumbnail = imageTransformers.GenerateThumbnail(imageUrl);
+
+        Assert.Equal("img/test-img.jpg", imageUrl);
+    }
+
+    [Fact]
+    public void RevertToOriginalUrl_AfterGenerateProgressiveWithOtherTest()
+    {
+        string imageUrl = "img/test-img.jpg";
+        string generatedThumbnail = imageTransformers.GenerateProgressive(imageUrl);
 
         Assert.Equal("img/test-img.jpg", imageUrl);
     }
