@@ -10,6 +10,6 @@ public class TimeConvertersTests
         int seconds = 120;
         string minutesInString = TimeConverters.ConvertSecondsToMinutes(seconds);
 
-        Assert.Equal(minutesInString, "02:00");
+        Assert.Equal("02:00", minutesInString);
     }
 }
