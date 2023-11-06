@@ -80,4 +80,40 @@ public static class SampleJson
             ]
         }
     """;
+
+    public const string SampleFeaturedImageJson = """
+        {
+            "numberOfData": 2,
+            "data": [
+                {
+                    "slug": "city-circuit-track",
+                    "trackName": "City Circuit Track",
+                    "logoUrl": "img/logo.jpg",
+                    "category": "City Circuit",
+                    "country": {
+                        "name": "Japan",
+                        "code": "jp"
+                    },
+                    "imageName": "image-01",
+                    "imageUrl": "img/track-01.jpg",
+                    "description": "picture desc",
+                    "author": "admin"
+                },
+                {
+                    "slug": "dirt-track",
+                    "trackName": "Dirt Track",
+                    "logoUrl": "img/logo.jpg",
+                    "category": "Dirt Circuit",
+                    "country": {
+                        "name": "USA",
+                        "code": "us"
+                    },
+                    "imageName": "image-02",
+                    "imageUrl": "img/track-02.jpg",
+                    "description": "picture desc",
+                    "author": "admin"
+                }
+            ]
+        }
+    """;
 }

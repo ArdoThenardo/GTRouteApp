@@ -114,4 +114,34 @@ public class FeaturedServiceTests
         // assert
         Assert.Empty(response);
     }
+
+    [Fact]
+    public async Task Fetch_FeaturedImageTest()
+    {
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/featured/media/image?numberOfMedia=2")
+            .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleFeaturedImageJson);
+
+        // call api to get result
+        var response = await service.GetFeaturedMediaImage(2);
+
+        // assert
+        Assert.Equal(2, response.Count());
+        Assert.Equal("image-02", response.ElementAt(1).ImageName);
+        Assert.Equal("img/track-02.jpg", response.ElementAt(1).ImageUrl);
+    }
+
+    [Fact]
+    public async Task FetchError_FeaturedImageTest()
+    {
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/featured/media/video?numberOfMedia=2")
+            .Respond(HttpStatusCode.InternalServerError, "application/json", SampleJson.SampleFeaturedImageJson);
+
+        // call api to get result
+        var response = await service.GetFeaturedMediaImage(2);
+
+        // assert
+        Assert.Empty(response);
+    }
 }
