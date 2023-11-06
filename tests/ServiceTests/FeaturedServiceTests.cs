@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
 using Xunit.Abstractions;
 using GTRouteApp.Models;
+using GTRouteApp.Helpers;
 using GTRouteApp.Services;
 using GTRouteApp.Tests.Sample;
 using RichardSzalay.MockHttp;
@@ -61,7 +62,7 @@ public class FeaturedServiceTests
     {
         // set expected uri & response
         mockHttp.When($"{settings.BaseApi}/featured")
-            .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleEmptyFeaturedTrackJson);
+            .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleEmptyJson);
 
         // call api to get result
         var response = await service.GetFeaturedTracks();
@@ -79,6 +80,36 @@ public class FeaturedServiceTests
 
         // call api to get result
         var response = await service.GetFeaturedTracks();
+
+        // assert
+        Assert.Empty(response);
+    }
+
+    [Fact]
+    public async Task Fetch_FeaturedVideoTest()
+    {
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/featured/media/video?numberOfMedia=2")
+            .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleFeaturedVideoJson);
+
+        // call api to get result
+        var response = await service.GetFeaturedMediaVideo(2);
+
+        // assert
+        Assert.Equal(2, response.Count());
+        Assert.Equal("video-id-002", response.ElementAt(1).VideoId);
+        Assert.Equal("01:00", TimeConverters.ConvertSecondsToMinutes(response.ElementAt(1).DurationInSeconds.GetValueOrDefault()));
+    }
+
+    [Fact]
+    public async Task FetchError_FeaturedVideoTest()
+    {
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/featured/media/video?numberOfMedia=2")
+            .Respond(HttpStatusCode.InternalServerError, "application/json", SampleJson.SampleFeaturedVideoJson);
+
+        // call api to get result
+        var response = await service.GetFeaturedMediaVideo(2);
 
         // assert
         Assert.Empty(response);

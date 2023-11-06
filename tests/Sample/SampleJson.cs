@@ -2,6 +2,11 @@ namespace GTRouteApp.Tests.Sample;
 
 public static class SampleJson
 {
+    public const string SampleEmptyJson = """
+        "numberOfData": 0,
+        "data": []
+    """;
+
     public const string SampleFeaturedTrackJson = """
         {
             "numberOfData": 2,
@@ -34,8 +39,45 @@ public static class SampleJson
         }
     """;
 
-    public const string SampleEmptyFeaturedTrackJson = """
-        "numberOfData": 0,
-        "data": []
+    public const string SampleFeaturedVideoJson = """
+        {
+            "numberOfData": 2,
+            "data": [
+                {
+                    "slug": "test-track",
+                    "trackName": "Test Track",
+                    "logoUrl": "img/logo.jpg",
+                    "category": "Original Circuit",
+                    "country": {
+                        "name": "United Kingdom",
+                        "code": "gb"
+                    },
+                    "videoName": "Track Video 001",
+                    "videoType": "Race",
+                    "videoId": "video-id-001",
+                    "thumbnailUrl": "img/thumbnail.jpg",
+                    "durationInSeconds": 120,
+                    "description": "video desc",
+                    "author": "admin"
+                },
+                {
+                    "slug": "test-track",
+                    "trackName": "Test Track",
+                    "logoUrl": "img/logo.jpg",
+                    "category": "Original Circuit",
+                    "country": {
+                        "name": "United Kingdom",
+                        "code": "gb"
+                    },
+                    "videoName": "Track Video 002",
+                    "videoType": "Time Trial",
+                    "videoId": "video-id-002",
+                    "thumbnailUrl": "img/thumbnail.jpg",
+                    "durationInSeconds": 60,
+                    "description": "video desc",
+                    "author": "admin"
+                }
+            ]
+        }
     """;
 }
