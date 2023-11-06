@@ -55,4 +55,32 @@ public class FeaturedServiceTests
         Assert.Equal("Real Circuit", response.ElementAt(1).Category);
         Assert.Equal("jp", response.ElementAt(1).Country!.code);
     }
+
+    [Fact]
+    public async Task FetchEmpty_FeaturedTracksTest()
+    {
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/featured")
+            .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleEmptyFeaturedTrackJson);
+
+        // call api to get result
+        var response = await service.GetFeaturedTracks();
+
+        // assert
+        Assert.Empty(response);
+    }
+
+    [Fact]
+    public async Task FetchError_FeaturedTracksTest()
+    {
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/featured")
+            .Respond(HttpStatusCode.InternalServerError, "application/json", SampleJson.SampleFeaturedTrackJson);
+
+        // call api to get result
+        var response = await service.GetFeaturedTracks();
+
+        // assert
+        Assert.Empty(response);
+    }
 }

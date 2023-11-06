@@ -33,4 +33,9 @@ public static class SampleJson
             ]
         }
     """;
+
+    public const string SampleEmptyFeaturedTrackJson = """
+        "numberOfData": 0,
+        "data": []
+    """;
 }
