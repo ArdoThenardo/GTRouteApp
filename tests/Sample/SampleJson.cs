@@ -116,4 +116,145 @@ public static class SampleJson
             ]
         }
     """;
+
+    public const string SampleAllRaceTracks = """
+        {
+            "numberOfData": 5,
+            "data": [
+                {
+                    "slug": "city-circuit-track-name",
+                    "name": "City Circuit Track Name",
+                    "logoUrl": "img/track-samples/gtroad-sample-logo.png",
+                    "coverUrl": "img/track-samples/gtroad-sample-city-circuit.jpg",
+                    "category": "City Circuit",
+                    "roadType": "Tarmac",
+                    "numberOfLayouts": 3,
+                    "country": {
+                        "name": "Japan",
+                        "code": "jp"
+                    }
+                },
+                {
+                    "slug": "dirt-track-name",
+                    "name": "Dirt Track Name",
+                    "logoUrl": "img/track-samples/gtroad-sample-logo.png",
+                    "coverUrl": "img/track-samples/gtroad-sample-dirt-circuit.jpg",
+                    "category": "Dirt Circuit",
+                    "roadType": "Dirt/Tarmac",
+                    "numberOfLayouts": 2,
+                    "country": {
+                        "name": "USA",
+                        "code": "us"
+                    }
+                },
+                {
+                    "slug": "orginal-circuit-track-name",
+                    "name": "Original Circuit Track Name",
+                    "logoUrl": "img/track-samples/gtroad-sample-logo.png",
+                    "coverUrl": "img/track-samples/gtroad-sample-original-circuit.jpg",
+                    "category": "Original Circuit",
+                    "roadType": "Tarmac",
+                    "numberOfLayouts": 3,
+                    "country": {
+                        "name": "United Kingdom",
+                        "code": "gb"
+                    }
+                },
+                {
+                    "slug": "real-circuit-track-name",
+                    "name": "Real Circuit Track Name",
+                    "logoUrl": "img/track-samples/gtroad-sample-logo.png",
+                    "coverUrl": "img/track-samples/gtroad-sample-real-circuit.jpg",
+                    "category": "Real Circuit",
+                    "roadType": "Tarmac",
+                    "numberOfLayouts": 3,
+                    "country": {
+                        "name": "Belgium",
+                        "code": "be"
+                    }
+                },
+                {
+                    "slug": "snow-track-name",
+                    "name": "Snow Track Name",
+                    "logoUrl": "img/track-samples/gtroad-sample-logo.png",
+                    "coverUrl": "img/track-samples/gtroad-sample-snow-circuit.jpg",
+                    "category": "Snow Circuit",
+                    "roadType": "Snow/Tarmac",
+                    "numberOfLayouts": 2,
+                    "country": {
+                        "name": "Italy",
+                        "code": "it"
+                    }
+                }
+            ]
+        }
+    """;
+
+    public const string SampleOriginalRaceTracks = """
+        {
+            "numberOfData": 2,
+            "data": [
+                {
+                    "slug": "orginal-circuit-track-name",
+                    "name": "Original Circuit Track Name",
+                    "logoUrl": "img/track-samples/gtroad-sample-logo.png",
+                    "coverUrl": "img/track-samples/gtroad-sample-original-circuit.jpg",
+                    "category": "Original Circuit",
+                    "roadType": "Tarmac",
+                    "numberOfLayouts": 3,
+                    "country": {
+                        "name": "United Kingdom",
+                        "code": "gb"
+                    }
+                },
+                {
+                    "slug": "orginal-circuit-2-track-name",
+                    "name": "Original Circuit 2 Track Name",
+                    "logoUrl": "img/track-samples/gtroad-sample-logo.png",
+                    "coverUrl": "img/track-samples/gtroad-sample-original-circuit.jpg",
+                    "category": "Original Circuit",
+                    "roadType": "Tarmac",
+                    "numberOfLayouts": 3,
+                    "country": {
+                        "name": "United Kingdom",
+                        "code": "gb"
+                    }
+                }
+            ]
+        }
+    """;
+
+    public const string SampleOffroadRaceTracks = """
+        {
+            "numberOfData": 2,
+            "data": [
+                {
+                    "slug": "dirt-track-name",
+                    "name": "Dirt Track Name",
+                    "logoUrl": "img/track-samples/gtroad-sample-logo.png",
+                    "coverUrl": "img/track-samples/gtroad-sample-dirt-circuit.jpg",
+                    "category": "Dirt Circuit",
+                    "roadType": "Dirt/Tarmac",
+                    "numberOfLayouts": 2,
+                    "country": {
+                        "name": "USA",
+                        "code": "us"
+                    }
+                },
+                {
+                    "slug": "snow-track-name",
+                    "name": "Snow Track Name",
+                    "logoUrl": "img/track-samples/gtroad-sample-logo.png",
+                    "coverUrl": "img/track-samples/gtroad-sample-snow-circuit.jpg",
+                    "category": "Snow Circuit",
+                    "roadType": "Snow/Tarmac",
+                    "numberOfLayouts": 2,
+                    "country": {
+                        "name": "Italy",
+                        "code": "it"
+                    }
+                }
+            ]
+        }
+    """;
 }
