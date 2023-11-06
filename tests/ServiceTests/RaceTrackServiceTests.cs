@@ -106,4 +106,49 @@ public class RaceTrackServiceTests
         Assert.NotNull(response);
         Assert.Equal("Dirt Circuit", response.ElementAt(0).Category);
     }
+
+    [Fact]
+    private async Task FetchEmpty_RaceTracksTest()
+    {
+        service.SetRaceTracksCategory(BrowseCategory.Categories[0]); // All
+
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/tracks/")
+                .WithQueryString(new Dictionary<string, string>{
+                    { "page", "1" },
+                    { "limit", "8" },
+                    { "shouldSortByName", "True" },
+                    { "isDescending", "False" }
+                })
+                .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleEmptyJson);
+
+        // call api to get result
+        var response = await service.GetTracks(1);
+
+        // assert
+        Assert.Empty(response);
+    }
+
+    [Fact]
+    private async Task FetchError_RaceTracksTest()
+    {
+        service.SetRaceTracksCategory(BrowseCategory.Categories[0]); // All
+
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/tracks/")
+                .WithQueryString(new Dictionary<string, string>{
+                    { "page", "1" },
+                    { "limit", "8" },
+                    { "shouldSortByName", "True" },
+                    { "isDescending", "False" }
+                })
+                .Respond(HttpStatusCode.InternalServerError, "application/json", SampleJson.SampleAllRaceTracks);
+
+        // call api to get result
+        var response = await service.GetTracks(1);
+
+        // assert
+        Assert.Empty(response);
+        Assert.Equal(ErrorMessage.LoadTracksFailed, service.GetRecentErrorMessage());
+    }
 }
