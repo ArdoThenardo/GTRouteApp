@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Xunit.Abstractions;
 using GTRouteApp.Models;
 using GTRouteApp.Services;
+using GTRouteApp.Tests.Sample;
 using RichardSzalay.MockHttp;
 
 namespace GTRouteApp.Tests;
@@ -40,12 +41,18 @@ public class FeaturedServiceTests
     {
         // set expected uri & response
         mockHttp.When($"{settings.BaseApi}/featured")
-            .Respond(HttpStatusCode.OK, "application/json", "{ \"numberOfData\": 1, \"data\": [{ \"slug\": \"test\", \"name\": \"Test\" }] }");
+            .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleFeaturedTrackJson);
 
         // call api to get result
         var response = await service.GetFeaturedTracks();
 
         // assert
-        Assert.Single(response);
+        Assert.Equal(2, response.Count());
+        Assert.Equal("test-track", response.ElementAt(0).Slug);
+        Assert.Equal("Original Circuit", response.ElementAt(0).Category);
+        Assert.Equal("gb", response.ElementAt(0).Country!.code);
+        Assert.Equal("test-track-2", response.ElementAt(1).Slug);
+        Assert.Equal("Real Circuit", response.ElementAt(1).Category);
+        Assert.Equal("jp", response.ElementAt(1).Country!.code);
     }
 }
