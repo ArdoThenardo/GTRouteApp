@@ -281,4 +281,83 @@ public static class SampleJson
             }
         }
     """;
+
+    public const string SampleTrackDetail = """
+        {
+            "numberOfData": 1,
+            "data": {
+                "name": "City Circuit Track Name",
+                "coverUrl": "img/cover.jpg",
+                "logoUrl": "img/logo.jpg",
+                "category": "City Circuit",
+                "roadType": "Tarmac",
+                "numberOfLayouts": 3,
+                "country": {
+                    "name": "Japan",
+                    "code": "jp"
+                },
+                "layouts": [
+                    {
+                        "slug": "city-circuit-track-name",
+                        "layoutName": "Full Course",
+                        "mapUrl": "img/track-samples/gtroad-sample-layout-map.jpg",
+                        "length": 7.65,
+                        "corners": 16
+                    },
+                    {
+                        "slug": "city-circuit-track-name",
+                        "layoutName": "Short Course",
+                        "mapUrl": "img/track-samples/gtroad-sample-layout-map.jpg",
+                        "length": 2.56,
+                        "corners": 8
+                    },
+                    {
+                        "slug": "city-circuit-track-name",
+                        "layoutName": "GP Course",
+                        "mapUrl": "img/track-samples/gtroad-sample-layout-map.jpg",
+                        "length": 5.12,
+                        "corners": 12
+                    }
+                ],
+                "videos": [],
+                "images": [
+                    {
+                        "slug": "city-circuit-track-name",
+                        "imageName": "city-circuit-track-name_01",
+                        "imageUrl": "img/track-samples/gtroad-sample-city-circuit.jpg",
+                        "description": "Picture of City Circuit from GTRoad.",
+                        "author": "gtroad-admin"
+                    },
+                    {
+                        "slug": "city-circuit-track-name",
+                        "imageName": "city-circuit-track-name_02",
+                        "imageUrl": "img/track-samples/gtroad-sample-city-circuit.jpg",
+                        "description": "Picture of City Circuit from GTRoad.",
+                        "author": "gtroad-admin"
+                    },
+                    {
+                        "slug": "city-circuit-track-name",
+                        "imageName": "city-circuit-track-name_03",
+                        "imageUrl": "img/track-samples/gtroad-sample-city-circuit.jpg",
+                        "description": "Picture of City Circuit from GTRoad.",
+                        "author": "gtroad-admin"
+                    },
+                    {
+                        "slug": "city-circuit-track-name",
+                        "imageName": "city-circuit-track-name_04",
+                        "imageUrl": "img/track-samples/gtroad-sample-city-circuit.jpg",
+                        "description": "Picture of City Circuit from GTRoad.",
+                        "author": "gtroad-admin"
+                    },
+                    {
+                        "slug": "city-circuit-track-name",
+                        "imageName": "city-circuit-track-name_05",
+                        "imageUrl": "img/track-samples/gtroad-sample-city-circuit.jpg",
+                        "description": "Picture of City Circuit from GTRoad.",
+                        "author": "gtroad-admin"
+                    }
+                ]
+            }
+        }
+    """;
 }

@@ -83,4 +83,49 @@ public class TrackDetailServiceTests
 
         Assert.Equal(ErrorMessage.LoadDetailFailed, service.GetRecentErrorMessage());
     }
+
+    [Fact]
+    public async Task GetFull_TrackDetailTest()
+    {
+        var slug = "track-slug";
+
+        mockHttp.When($"{settings.BaseApi}/detail")
+                .WithQueryString("slug", slug)
+                .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleTrackDetail);
+        
+        var response = await service.GetTrackDetail(slug);
+
+        Assert.NotNull(response);
+        Assert.Equal("City Circuit Track Name", response.Name);
+        Assert.True(response.Layouts.Count() > 0);
+        Assert.True(response.Images.Count() > 0);
+    }
+
+    [Fact]
+    public async Task ShouldEmpty_GetFull_TrackDetailTest()
+    {
+        var slug = "track-slug";
+
+        mockHttp.When($"{settings.BaseApi}/detail")
+                .WithQueryString("slug", slug)
+                .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleEmptyObjectJson);
+        
+        var response = await service.GetTrackDetail(slug);
+
+        Assert.Equal(ErrorMessage.NoData, service.GetRecentErrorMessage());
+    }
+
+    [Fact]
+    public async Task ShouldError_GetFull_TrackDetailTest()
+    {
+        var slug = "track-slug";
+
+        mockHttp.When($"{settings.BaseApi}/detail")
+                .WithQueryString("slug", slug)
+                .Respond(HttpStatusCode.InternalServerError, "application/json", SampleJson.SampleEmptyObjectJson);
+        
+        var response = await service.GetTrackDetail(slug);
+
+        Assert.Equal(ErrorMessage.LoadDetailFailed, service.GetRecentErrorMessage());
+    }
 }
