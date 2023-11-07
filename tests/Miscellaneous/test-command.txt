@@ -4,4 +4,4 @@ dotnet test --collect:"XPlat Code Coverage"
 
 Command to generate HTML report:
 --------------------------------
-reportgenerator -reports:"./GTRouteApp.Tests/TestResults/folder-id/coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:Html
+reportgenerator -reports:"./tests/TestResults/folder-id/coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:Html
