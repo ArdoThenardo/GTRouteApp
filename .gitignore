@@ -455,3 +455,8 @@ $RECYCLE.BIN/
 appsettings.Development.json
 appsettings.test.json
 appsettings.json
+
+##
+## Test
+##
+coveragereport/
