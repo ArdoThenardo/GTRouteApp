@@ -3,8 +3,17 @@ namespace GTRouteApp.Tests.Sample;
 public static class SampleJson
 {
     public const string SampleEmptyJson = """
-        "numberOfData": 0,
-        "data": []
+        {
+            "numberOfData": 0,
+            "data": []
+        }   
+    """;
+
+    public const string SampleEmptyObjectJson = """
+        {
+            "numberOfData": 0,
+            "data": {}
+        } 
     """;
 
     public const string SampleFeaturedTrackJson = """
@@ -255,6 +264,21 @@ public static class SampleJson
                     }
                 }
             ]
+        }
+    """;
+
+    public const string SampleBasicTrackDetail = """
+        {
+            "numberOfData": 1,
+            "data": {
+                "name": "City Circuit Track Name",
+                "logoUrl": "img/logo.jpg",
+                "category": "City Circuit",
+                "country": {
+                    "name": "Japan",
+                    "code": "jp"
+                }
+            }
         }
     """;
 }
