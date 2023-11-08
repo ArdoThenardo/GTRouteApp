@@ -53,6 +53,19 @@ public class VideoPlayerServiceTests
     }
 
     [Fact]
+    public async Task GetVideo_ErrorTest()
+    {
+        var videoId = "video-id";
+
+        mockHttp.When($"{settings.BaseApi}/video/{videoId}")
+            .Respond(HttpStatusCode.InternalServerError, "application/json", SampleJson.SampleVideoData);
+        
+        var response = await service.GetVideoDataById(videoId);
+
+        Assert.Equal(ErrorMessage.LoadVideoFailed, service.GetRecentErrorMessage());
+    }
+
+    [Fact]
     public async Task GetOtherVideosTest()
     {
         var videoId = "video-id";
@@ -64,5 +77,31 @@ public class VideoPlayerServiceTests
 
         Assert.NotNull(response);
         Assert.Equal(2, response.Count());
+    }
+
+    [Fact]
+    public async Task GetOtherVideos_EmptyTest()
+    {
+        var videoId = "video-id";
+
+        mockHttp.When($"{settings.BaseApi}/video/{videoId}/other")
+            .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleEmptyJson);
+
+        var response = await service.GetOtherVideosById(videoId);
+
+        Assert.Equal(ErrorMessage.NoRelatedVideos, service.GetRecentErrorForOtherVideos());
+    }
+
+    [Fact]
+    public async Task GetOtherVideos_ErrorTest()
+    {
+        var videoId = "video-id";
+
+        mockHttp.When($"{settings.BaseApi}/video/{videoId}/other")
+            .Respond(HttpStatusCode.InternalServerError, "application/json", SampleJson.SampleOtherVideos);
+
+        var response = await service.GetOtherVideosById(videoId);
+
+        Assert.Equal(ErrorMessage.LoadOtherVideoFailed, service.GetRecentErrorForOtherVideos());
     }
 }
