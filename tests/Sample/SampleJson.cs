@@ -360,4 +360,51 @@ public static class SampleJson
             }
         }
     """;
+
+    public const string SampleVideoData = """
+        {
+            "numberOfData": 1,
+            "data": {
+                "id": "video-id",
+                "slug": "orginal-circuit-track-name",
+                "videoName": "Trial Mountain GT3 Race",
+                "videoUrl": "https://www.youtube.com/embed/EQPgWtBC8ec",
+                "thumbnailUrl": "img/thumbnail.jpg",
+                "durationInSeconds": 120,
+                "videoType": "Race",
+                "description": "Video description.",
+                "author": "admin"
+            }
+        }
+    """;
+
+    public const string SampleOtherVideos = """
+        {
+            "numberOfData": 2,
+            "data": [
+                {
+                    "id": "video-id-1",
+                    "slug": "orginal-circuit-track-name",
+                    "videoName": "Trial Mountain GT1 Race",
+                    "videoUrl": "https://www.youtube.com/embed/EQPgWtBC8ec",
+                    "thumbnailUrl": "img/thumbnail.jpg",
+                    "durationInSeconds": 60,
+                    "videoType": "Race",
+                    "description": "Video description.",
+                    "author": "admin"
+                },
+                {
+                    "id": "video-id-2",
+                    "slug": "orginal-circuit-track-name",
+                    "videoName": "Porsche 911 Race",
+                    "videoUrl": "https://www.youtube.com/embed/EQPgWtBC8ec",
+                    "thumbnailUrl": "img/thumbnail.jpg",
+                    "durationInSeconds": 30,
+                    "videoType": "Race",
+                    "description": "Video description.",
+                    "author": "admin"
+                }
+            ]
+        }
+    """;
 }
