@@ -1,10 +1,13 @@
-﻿<nav class="navbar navbar-expand-sm navbar-dark">
+﻿@inject NavigationManager NavigationManager
+
+<nav class="navbar navbar-expand-sm navbar-dark">
     <div class="container-fluid" style="padding-inline: 16px;">
         <a class="navbar-brand" href="">
             <img src="img/general/gtroad_logo_00.png" alt="gtroad" />
         </a>
         <div class="navbar-button-group">
             <button title="Search"
+                @onclick="() => AccessSearch()"
                 class="navbar-button">
                 <span class="bi bi-search"></span>
             </button>
@@ -35,8 +38,16 @@
             </div>
         </div>
         <button title="Search"
+            @onclick="() => AccessSearch()"
             class="navbar-button standalone-button">
             <span class="bi bi-search"></span>
         </button>
     </div>
 </nav>
+
+@code {
+    private void AccessSearch()
+    {
+        NavigationManager.NavigateTo("/search");
+    }
+}
