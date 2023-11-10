@@ -34,6 +34,9 @@
 
 .standalone-button {
     display: block;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    box-shadow: 1px 0px 8px rgba(30, 32, 34, 0.6);
 }
 
 .navbar-brand {
