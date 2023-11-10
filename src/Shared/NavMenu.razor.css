@@ -2,9 +2,47 @@
     width: 100%;
 }
 
-.navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+.navbar-button-group {
+    display: none; /* flex on smaller screen */
+    flex-direction: row;
+    gap: 8px;
 }
+
+.navbar-button {
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 1.25em;
+    padding: .25em .75em;
+    line-height: 1;
+    border: 1px solid transparent;
+    border-radius: .25em;
+    transition: .25s;
+}
+
+    .navbar-button:hover {
+        box-shadow: 0 0 0 .25rem;
+    }
+
+    .navbar-button span {
+        color: rgba(255, 255, 255, 0.75);
+        display: inline-flex;
+        width: 1.5em;
+        height: 1.5em;
+        align-items: center;
+        justify-content: center;
+    }
+
+.standalone-button {
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    box-shadow: 1px 0px 8px rgba(30, 32, 34, 0.6);
+}
+
+    .standalone-button:hover > ::deep .button-tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
 
 .navbar-brand {
     width: 160px;
@@ -61,6 +99,14 @@
 /* END OF underline animation on hover */
 
 @media (max-width: 575px) {
+    .navbar-button-group {
+        display: flex;
+    }
+
+    .standalone-button {
+        display: none;
+    }
+
     .nav-item {
         padding: 0;
     }
