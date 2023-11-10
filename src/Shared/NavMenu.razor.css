@@ -39,6 +39,11 @@
     box-shadow: 1px 0px 8px rgba(30, 32, 34, 0.6);
 }
 
+    .standalone-button:hover > ::deep .button-tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
 .navbar-brand {
     width: 160px;
 }

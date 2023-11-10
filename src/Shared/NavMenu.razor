@@ -37,10 +37,13 @@
                 </div>
             </div>
         </div>
-        <button title="Search"
-            @onclick="() => AccessSearch()"
+        <button @onclick="() => AccessSearch()"
             class="navbar-button standalone-button">
             <span class="bi bi-search"></span>
+            <AppTooltip Text="Search Race Track"
+                WidthInPx="150" 
+                TopPositionInPx="68" 
+                RightPositionInPx="22"/>
         </button>
     </div>
 </nav>
