@@ -2,8 +2,38 @@
     width: 100%;
 }
 
-.navbar-toggler {
+.navbar-button-group {
+    display: none; /* flex on smaller screen */
+    flex-direction: row;
+    gap: 8px;
+}
+
+.navbar-button {
+    color: rgba(255, 255, 255, 0.5);
     background-color: rgba(255, 255, 255, 0.1);
+    font-size: 1.25em;
+    padding: .25em .75em;
+    line-height: 1;
+    border: 1px solid transparent;
+    border-radius: .25em;
+    transition: .25s;
+}
+
+    .navbar-button:hover {
+        box-shadow: 0 0 0 .25rem;
+    }
+
+    .navbar-button span {
+        color: rgba(255, 255, 255, 0.75);
+        display: inline-flex;
+        width: 1.5em;
+        height: 1.5em;
+        align-items: center;
+        justify-content: center;
+    }
+
+.standalone-button {
+    display: block;
 }
 
 .navbar-brand {
@@ -61,6 +91,14 @@
 /* END OF underline animation on hover */
 
 @media (max-width: 575px) {
+    .navbar-button-group {
+        display: flex;
+    }
+
+    .standalone-button {
+        display: none;
+    }
+
     .nav-item {
         padding: 0;
     }
