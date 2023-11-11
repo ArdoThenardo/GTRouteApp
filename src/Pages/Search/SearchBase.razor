@@ -1,5 +1,40 @@
 @page "/search"
 
-<div>
-    Under Construction
+<div class="search-container">
+    <div class="inner-container">
+        <div class="search-input-group">
+            <input class="form-control form-control-lg keyword-form" 
+                placeholder="Find race track..." 
+                @bind="@_keyword"
+                @bind:event="oninput"
+                @onkeypress="HandleKeyDown" />
+            <button class="btn btn-success" 
+                @onclick="Find" 
+                type="button">
+                <span class="bi bi-search"></span> Search
+            </button>
+        </div>
+        <div>
+            <p>
+                Search result will be shown here
+            </p>
+        </div>
+    </div>
 </div>
+
+@code {
+    private string _keyword = "";
+
+    private void HandleKeyDown(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            Find();
+        }
+    }
+
+    public void Find()
+    {
+        Console.WriteLine($"keyword = {_keyword}");
+    }
+}
