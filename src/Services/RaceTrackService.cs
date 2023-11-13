@@ -10,6 +10,8 @@ public class RaceTrackService: BaseService
     private readonly string GetTracksUrl;
     // remote: /offroads
     private readonly string GetOffroadsUrl;
+    // remote: /tracks/all
+    private readonly string GetAllTracksUrl;
     private const int Limit = 8;
     private List<RaceTrack> tracks = new();
     private int numberOfTotalRaceTracks = 0;
@@ -24,6 +26,33 @@ public class RaceTrackService: BaseService
     { 
         this.GetTracksUrl = $"{_baseUrl}/tracks";
         this.GetOffroadsUrl = $"{_baseUrl}/offroads";
+        this.GetAllTracksUrl = $"{_baseUrl}/tracks/all";
+    }
+
+    public async Task<List<RaceTrack>> GetAllTracks()
+    {
+        tracks.Clear();
+        recentError = "";
+
+        BaseModel<List<RaceTrack>> tracksData = new();
+
+        try
+        {
+            tracksData = await HitRequest<BaseModel<List<RaceTrack>>>(GetAllTracksUrl);
+
+            if (tracksData.NumberOfData == 0)
+                recentError = ErrorMessage.NoTrack;
+            
+            tracks.AddRange(tracksData.Data ?? Enumerable.Empty<RaceTrack>().ToList());
+
+            return tracks;
+        }
+        catch
+        {
+            recentError = ErrorMessage.LoadTracksFailed;
+
+            return Enumerable.Empty<RaceTrack>().ToList();
+        }
     }
 
     public async Task<List<RaceTrack>> GetTracks(int page)
