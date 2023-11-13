@@ -78,7 +78,7 @@
 
     public void Find()
     {
-        if (ValidateKeyword(_keyword))
+        if (ValidateKeywords(_keyword))
         {
             var keywordLowerCase = _keyword.ToLower();
             _validationCssClass = "";
@@ -104,7 +104,7 @@
         }
     }
 
-    private bool ValidateKeyword(string keyword)
+    private bool ValidateKeywords(string keyword)
     {
         if (string.IsNullOrEmpty(_keyword) || _keyword.Length < 3)
             return false;
