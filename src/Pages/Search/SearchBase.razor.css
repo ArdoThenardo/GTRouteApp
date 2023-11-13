@@ -40,7 +40,7 @@
 }
 
 .search-result-area {
-    display: none;
+    display: block;
 }
 
 .search-notice-container {
