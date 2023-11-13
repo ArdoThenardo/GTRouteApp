@@ -59,7 +59,11 @@
     protected override async Task OnInitializedAsync()
     {
         SetNotice(InitialIconCssClass, InitialNotice);
-        
+        await PreloadTracks();
+    }
+
+    private async Task PreloadTracks()
+    {
         var data = await RaceTrackService.GetAllTracks();
         _allTracks.AddRange(data);
     }
