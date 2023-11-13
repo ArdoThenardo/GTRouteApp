@@ -8,7 +8,7 @@
     <div class="inner-container">
         <!-- TODO: show search-prepare if allTracks is empty  -->
         <div class="search-input-group">
-            <input class="form-control form-control-lg keyword-form" 
+            <input class="form-control form-control-lg keyword-form @_validationCssClass"
                 placeholder="Find race track..." 
                 @bind="@_keyword"
                 @bind:event="oninput"
@@ -18,6 +18,10 @@
                 type="button">
                 <span class="bi bi-search"></span> Search
             </button>
+        </div>
+        <div class="invalid-message"
+            style="visibility: @(_showInvalidFormFeedback ? "visible" : "hidden");">
+            Please type in keywords with minimal 3 characters.
         </div>
         @if (_shouldShowResult)
         {
@@ -38,15 +42,18 @@
 </div>
 
 @code {
+    private const string InvalidFormCssClass = "invalid-form";
     private const string InitialIconCssClass = "bi bi-map";
     private const string NotFoundIconCssClass = "bi bi-database-slash";
     private const string InitialNotice = "Search result will be shown here.";
     private const string NotFoundNotice = "Race track could not be found. Please try again with different keyword.";
+    private string _validationCssClass = "";
     private string _noticeIcon = "";
     private string _textNotice = "";
     private string _keyword = "";
     private List<RaceTrack> _allTracks = new();
     private List<RaceTrack> _trackSearchResults = new();
+    private bool _showInvalidFormFeedback = false;
     private bool _shouldShowResult = false;
 
     protected override async Task OnInitializedAsync()
@@ -67,9 +74,11 @@
 
     public void Find()
     {
-        if (!string.IsNullOrEmpty(_keyword))
+        if (ValidateKeyword(_keyword))
         {
             var keywordLowerCase = _keyword.ToLower();
+            _validationCssClass = "";
+            _showInvalidFormFeedback = false;
             _trackSearchResults.Clear();
 
             var results = _allTracks.Where(t => t.Name!.ToLower().Contains(keywordLowerCase)).ToList();
@@ -84,9 +93,22 @@
                 SetNotice(NotFoundIconCssClass, NotFoundNotice);
             }
         }
+        else
+        {
+            _validationCssClass = InvalidFormCssClass;
+            _showInvalidFormFeedback = true;
+        }
     }
 
-    private void SetNotice (string iconCssClass, string text)
+    private bool ValidateKeyword(string keyword)
+    {
+        if (string.IsNullOrEmpty(_keyword) || _keyword.Length < 3)
+            return false;
+
+        return true;
+    }
+
+    private void SetNotice(string iconCssClass, string text)
     {
         _noticeIcon = iconCssClass;
         _textNotice = text;
