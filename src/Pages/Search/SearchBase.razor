@@ -1,4 +1,5 @@
 @page "/search"
+@namespace GTRouteApp.Components.Search
 
 <div class="search-container">
     <div class="inner-container">
@@ -16,15 +17,19 @@
         </div>
         <div class="search-result-area">
         </div>
-        <div class="search-notice">
-            <p>
-                Search result will be shown here
-            </p>
+        <div class="search-notice-container">
+            <SearchNotice IconCssClass="@_noticeIcon" Text="@_textNotice" />
         </div>
     </div>
 </div>
 
 @code {
+    private const string InitialIconCssClass = "bi bi-map";
+    private const string NotFoundIconCssClass = "bi bi-database-slash";
+    private const string InitialNotice = "Search result will be shown here.";
+    private const string NotFoundNotice = "Race track could not be found. Please try again with different keyword.";
+    private string _noticeIcon = InitialIconCssClass;
+    private string _textNotice = InitialNotice;
     private string _keyword = "";
 
     private void HandleKeyDown(KeyboardEventArgs args)

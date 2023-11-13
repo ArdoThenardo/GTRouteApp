@@ -1,0 +1,15 @@
+@namespace GTRouteApp.Components.Search
+
+<div class="search-notice">
+    <span class="@IconCssClass"></span>
+    <p>
+        @Text
+    </p>
+</div>
+
+@code {
+    [Parameter]
+    public string IconCssClass { get; set; } = "";
+    [Parameter]
+    public string Text { get; set; } = "";
+}
