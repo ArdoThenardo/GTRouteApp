@@ -1,10 +1,14 @@
 @page "/search"
+@using GTRouteApp.Models
+@using GTRouteApp.Services
 @namespace GTRouteApp.Components.Search
+@inject RaceTrackService RaceTrackService
 
 <div class="search-container">
     <div class="inner-container">
+        <!-- TODO: show search-prepare if allTracks is empty  -->
         <div class="search-input-group">
-            <input class="form-control form-control-lg keyword-form" 
+            <input class="form-control form-control-lg keyword-form @_validationCssClass"
                 placeholder="Find race track..." 
                 @bind="@_keyword"
                 @bind:event="oninput"
@@ -15,22 +19,54 @@
                 <span class="bi bi-search"></span> Search
             </button>
         </div>
-        <div class="search-result-area">
+        <div class="invalid-message"
+            style="visibility: @(_showInvalidFormFeedback ? "visible" : "hidden");">
+            Please type in keywords with minimal 3 characters.
         </div>
-        <div class="search-notice-container">
-            <SearchNotice IconCssClass="@_noticeIcon" Text="@_textNotice" />
-        </div>
+        @if (_shouldShowResult)
+        {
+            <div class="search-result-area">
+                @foreach (var track in _trackSearchResults)
+                {
+                    <p>@track.Name</p><br>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="search-notice-container">
+                <SearchNotice IconCssClass="@_noticeIcon" Text="@_textNotice" />
+            </div>
+        }
     </div>
 </div>
 
 @code {
+    private const string InvalidFormCssClass = "invalid-form";
     private const string InitialIconCssClass = "bi bi-map";
     private const string NotFoundIconCssClass = "bi bi-database-slash";
     private const string InitialNotice = "Search result will be shown here.";
     private const string NotFoundNotice = "Race track could not be found. Please try again with different keyword.";
-    private string _noticeIcon = InitialIconCssClass;
-    private string _textNotice = InitialNotice;
+    private string _validationCssClass = "";
+    private string _noticeIcon = "";
+    private string _textNotice = "";
     private string _keyword = "";
+    private List<RaceTrack> _allTracks = new();
+    private List<RaceTrack> _trackSearchResults = new();
+    private bool _showInvalidFormFeedback = false;
+    private bool _shouldShowResult = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        SetNotice(InitialIconCssClass, InitialNotice);
+        await PreloadTracks();
+    }
+
+    private async Task PreloadTracks()
+    {
+        var data = await RaceTrackService.GetAllTracks();
+        _allTracks.AddRange(data);
+    }
 
     private void HandleKeyDown(KeyboardEventArgs args)
     {
@@ -42,6 +78,43 @@
 
     public void Find()
     {
-        Console.WriteLine($"keyword = {_keyword}");
+        if (ValidateKeywords(_keyword))
+        {
+            var keywordLowerCase = _keyword.ToLower();
+            _validationCssClass = "";
+            _showInvalidFormFeedback = false;
+            _trackSearchResults.Clear();
+
+            var results = _allTracks.Where(t => t.Name!.ToLower().Contains(keywordLowerCase)).ToList();
+            if (results.Count() > 0)
+            {
+                _shouldShowResult = true;
+                _trackSearchResults.AddRange(results);
+            }
+            else
+            {
+                _shouldShowResult = false;
+                SetNotice(NotFoundIconCssClass, NotFoundNotice);
+            }
+        }
+        else
+        {
+            _validationCssClass = InvalidFormCssClass;
+            _showInvalidFormFeedback = true;
+        }
+    }
+
+    private bool ValidateKeywords(string keyword)
+    {
+        if (string.IsNullOrEmpty(_keyword) || _keyword.Length < 3)
+            return false;
+
+        return true;
+    }
+
+    private void SetNotice(string iconCssClass, string text)
+    {
+        _noticeIcon = iconCssClass;
+        _textNotice = text;
     }
 }

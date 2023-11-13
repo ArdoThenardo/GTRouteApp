@@ -36,11 +36,26 @@
 .keyword-form {
     position: relative;
     font-weight: 500;
+    border-color: #ced4da;
     border-radius: 16px;
 }
 
+.invalid-form {
+    border-color: #dc3545;
+}
+
+.invalid-message {
+    display: block;
+    margin-top: .25rem;
+    margin-left: 12px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: #dc3545;
+}
+
 .search-result-area {
-    display: none;
+    display: block;
 }
 
 .search-notice-container {
