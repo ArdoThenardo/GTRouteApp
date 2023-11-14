@@ -7,22 +7,7 @@
 <div class="search-container">
     <div class="inner-container">
         <!-- TODO: show search-prepare if allTracks is empty  -->
-        <div class="search-input-group">
-            <input class="form-control form-control-lg keyword-form @_validationCssClass"
-                placeholder="Find race track..." 
-                @bind="@_keyword"
-                @bind:event="oninput"
-                @onkeypress="HandleKeyDown" />
-            <button class="btn btn-success" 
-                @onclick="Find" 
-                type="button">
-                <span class="bi bi-search"></span> Search
-            </button>
-        </div>
-        <div class="invalid-message"
-            style="visibility: @(_showInvalidFormFeedback ? "visible" : "hidden");">
-            Please type in keywords with minimal 3 characters.
-        </div>
+        <SearchInput OnFindExecuted="Find" IsValid="@_isInputValid" />
         @if (_shouldShowResult)
         {
             <div class="search-result-area">
@@ -42,19 +27,16 @@
 </div>
 
 @code {
-    private const string InvalidFormCssClass = "invalid-form";
     private const string InitialIconCssClass = "bi bi-map";
     private const string NotFoundIconCssClass = "bi bi-database-slash";
     private const string InitialNotice = "Search result will be shown here.";
-    private const string NotFoundNotice = "Race track could not be found. Please try again with different keyword.";
-    private string _validationCssClass = "";
+    private const string NotFoundNotice = "Race track could not be found. Please try again with different keywords.";
     private string _noticeIcon = "";
     private string _textNotice = "";
-    private string _keyword = "";
     private List<RaceTrack> _allTracks = new();
     private List<RaceTrack> _trackSearchResults = new();
-    private bool _showInvalidFormFeedback = false;
     private bool _shouldShowResult = false;
+    private bool _isInputValid = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -68,21 +50,12 @@
         _allTracks.AddRange(data);
     }
 
-    private void HandleKeyDown(KeyboardEventArgs args)
+    public void Find(string keywords)
     {
-        if (args.Key == "Enter")
+        if (ValidateKeywords(keywords))
         {
-            Find();
-        }
-    }
-
-    public void Find()
-    {
-        if (ValidateKeywords(_keyword))
-        {
-            var keywordLowerCase = _keyword.ToLower();
-            _validationCssClass = "";
-            _showInvalidFormFeedback = false;
+            var keywordLowerCase = keywords.ToLower();
+            _isInputValid = true;
             _trackSearchResults.Clear();
 
             var results = _allTracks.Where(t => t.Name!.ToLower().Contains(keywordLowerCase)).ToList();
@@ -99,14 +72,13 @@
         }
         else
         {
-            _validationCssClass = InvalidFormCssClass;
-            _showInvalidFormFeedback = true;
+            _isInputValid = false;
         }
     }
 
-    private bool ValidateKeywords(string keyword)
+    private bool ValidateKeywords(string keywords)
     {
-        if (string.IsNullOrEmpty(_keyword) || _keyword.Length < 3)
+        if (string.IsNullOrEmpty(keywords) || keywords.Length < 3)
             return false;
 
         return true;
