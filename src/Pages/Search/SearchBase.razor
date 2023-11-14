@@ -1,4 +1,5 @@
 @page "/search"
+@using GTRouteApp.Helpers
 @using GTRouteApp.Models
 @using GTRouteApp.Services
 @namespace GTRouteApp.Components.Search
@@ -19,26 +20,20 @@
         }
         else
         {
-            <SearchNotice IconCssClass="@_noticeIcon" Text="@_textNotice" />
+            <SearchNotice Status="@_status" />
         }
     </div>
 </div>
 
 @code {
-    private const string InitialIconCssClass = "bi bi-map";
-    private const string NotFoundIconCssClass = "bi bi-database-slash";
-    private const string InitialNotice = "Search results will be shown here.";
-    private const string NotFoundNotice = "Race track could not be found. Please try again with different keywords.";
-    private string _noticeIcon = "";
-    private string _textNotice = "";
     private List<RaceTrack> _allTracks = new();
     private List<RaceTrack> _trackSearchResults = new();
     private bool _shouldShowResult = false;
     private bool _isInputValid = true;
+    private SearchStatus _status = SearchStatus.Initial;
 
     protected override async Task OnInitializedAsync()
     {
-        SetNotice(InitialIconCssClass, InitialNotice);
         await PreloadTracks();
     }
 
@@ -65,7 +60,7 @@
             else
             {
                 _shouldShowResult = false;
-                SetNotice(NotFoundIconCssClass, NotFoundNotice);
+                _status = SearchStatus.NotFound;
             }
         }
         else
@@ -80,11 +75,5 @@
             return false;
 
         return true;
-    }
-
-    private void SetNotice(string iconCssClass, string text)
-    {
-        _noticeIcon = iconCssClass;
-        _textNotice = text;
     }
 }
