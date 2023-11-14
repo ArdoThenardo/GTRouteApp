@@ -24,3 +24,8 @@ public enum DetailGalleryMode {
     Slideshow,
     Grid
 }
+
+public enum SearchStatus {
+    Initial,
+    NotFound
+}

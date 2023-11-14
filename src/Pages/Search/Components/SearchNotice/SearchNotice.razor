@@ -1,15 +1,41 @@
+@using GTRouteApp.Helpers
 @namespace GTRouteApp.Components.Search
 
 <div class="search-notice">
-    <span class="@IconCssClass"></span>
+    <span class="@_noticeIcon"></span>
     <p>
-        @Text
+        @_textNotice
     </p>
 </div>
 
 @code {
+    private const string InitialIconCssClass = "bi bi-map";
+    private const string NotFoundIconCssClass = "bi bi-database-slash";
+    private const string InitialNotice = "Search results will be shown here.";
+    private const string NotFoundNotice = "Race track could not be found. Please try again with different keywords.";
+    
     [Parameter]
-    public string IconCssClass { get; set; } = "";
-    [Parameter]
-    public string Text { get; set; } = "";
+    public SearchStatus Status { get; set; }
+    
+    private string _noticeIcon = "";
+    private string _textNotice = "";
+
+    protected override void OnParametersSet()
+    {
+        switch (Status)
+        {
+            case SearchStatus.Initial:
+                SetNotice(InitialIconCssClass, InitialNotice);
+                break;
+            case SearchStatus.NotFound:
+                SetNotice(NotFoundIconCssClass, NotFoundNotice);
+                break;
+        }
+    }
+
+    private void SetNotice(string iconCssClass, string text)
+    {
+        _noticeIcon = iconCssClass;
+        _textNotice = text;
+    }
 }
