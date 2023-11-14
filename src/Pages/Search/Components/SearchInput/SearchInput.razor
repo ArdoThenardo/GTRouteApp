@@ -1,0 +1,41 @@
+@namespace GTRouteApp.Components.Search
+
+<div class="input-container">
+    <div class="search-input-group">
+        <input class="form-control form-control-lg keyword-form @(IsValid ? "" : "invalid-form")"
+            placeholder="Find race track..." 
+            @bind="@_keywords"
+            @bind:event="oninput"
+            @onkeypress="HandleKeyDown" />
+        <button class="btn btn-success" 
+            @onclick="() => FindBasedOnKeywords(_keywords)" 
+            type="button">
+            <span class="bi bi-search"></span> Search
+        </button>
+    </div>
+    <div class="invalid-message"
+        style="visibility: @(IsValid ? "hidden" : "visible");">
+        Please type in keywords with minimal 3 characters.
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<string> OnFindExecuted { get; set; }
+    [Parameter]
+    public bool IsValid { get; set; }
+    public string _keywords = "";
+
+    private async Task HandleKeyDown(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            await FindBasedOnKeywords(_keywords);
+        }
+    }
+
+    private async Task FindBasedOnKeywords(string keywords)
+    {
+        await OnFindExecuted.InvokeAsync(keywords);
+    }
+}
