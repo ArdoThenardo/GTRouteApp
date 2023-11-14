@@ -12,10 +12,9 @@
         @if (_shouldShowResult)
         {
             <div class="search-result-area">
-                @foreach (var track in _trackSearchResults)
-                {
-                    <p>@track.Name</p><br>
-                }
+                <Virtualize Items="@_trackSearchResults" Context="track">
+                    <SearchItem Track="track" />
+                </Virtualize>
             </div>
         }
         else

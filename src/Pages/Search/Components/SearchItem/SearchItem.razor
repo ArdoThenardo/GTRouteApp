@@ -1,0 +1,18 @@
+@using GTRouteApp.Helpers
+@using GTRouteApp.Models
+@namespace GTRouteApp.Components.Search
+
+<div class="item-container">
+    <img src="@Track.LogoUrl" alt="@Track.Name" />
+    <div class="item-information">
+        <p>@Track.Name</p>
+        <hr>
+        <p>@Track.Category</p>
+        <p><span class="fi fi-@Track.Country?.code"></span> @Track.Country?.name</p>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public RaceTrack Track { get; set; } = new();
+}
