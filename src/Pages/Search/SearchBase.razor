@@ -19,9 +19,7 @@
         }
         else
         {
-            <div class="search-notice-container">
-                <SearchNotice IconCssClass="@_noticeIcon" Text="@_textNotice" />
-            </div>
+            <SearchNotice IconCssClass="@_noticeIcon" Text="@_textNotice" />
         }
     </div>
 </div>
@@ -29,7 +27,7 @@
 @code {
     private const string InitialIconCssClass = "bi bi-map";
     private const string NotFoundIconCssClass = "bi bi-database-slash";
-    private const string InitialNotice = "Search result will be shown here.";
+    private const string InitialNotice = "Search results will be shown here.";
     private const string NotFoundNotice = "Race track could not be found. Please try again with different keywords.";
     private string _noticeIcon = "";
     private string _textNotice = "";
