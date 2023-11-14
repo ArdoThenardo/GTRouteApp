@@ -4,7 +4,12 @@
 
 <div class="item-container">
     <img src="@Track.LogoUrl" alt="@Track.Name" />
-    <p>@Track.Name</p>
+    <div class="item-information">
+        <p>@Track.Name</p>
+        <hr>
+        <p>@Track.Category</p>
+        <p><span class="fi fi-@Track.Country?.code"></span> @Track.Country?.name</p>
+    </div>
 </div>
 
 @code {
