@@ -1,8 +1,8 @@
-@using GTRouteApp.Helpers
 @using GTRouteApp.Models
 @namespace GTRouteApp.Components.Search
 
-<div class="item-container">
+<article class="item-container" 
+    @onclick="@(() => AccessTrackItemDetail(Track.Slug ?? ""))">
     <img src="@Track.LogoUrl" alt="@Track.Name" />
     <div class="item-information">
         <p>@Track.Name</p>
@@ -10,9 +10,16 @@
         <p>@Track.Category</p>
         <p><span class="fi fi-@Track.Country?.code"></span> @Track.Country?.name</p>
     </div>
-</div>
+</article>
 
 @code {
     [Parameter]
     public RaceTrack Track { get; set; } = new();
+    [Parameter]
+    public EventCallback<string> OnTrackItemClicked { get; set; }
+    
+    private async Task AccessTrackItemDetail(string slug)
+    {
+        await OnTrackItemClicked.InvokeAsync(slug);
+    }
 }

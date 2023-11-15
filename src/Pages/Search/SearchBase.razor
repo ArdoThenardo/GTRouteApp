@@ -3,6 +3,7 @@
 @using GTRouteApp.Models
 @using GTRouteApp.Services
 @namespace GTRouteApp.Components.Search
+@inject NavigationManager NavigationManager
 @inject RaceTrackService RaceTrackService
 
 <div class="search-container">
@@ -13,7 +14,7 @@
         {
             <div class="search-result-area">
                 <Virtualize Items="@_trackSearchResults" Context="track">
-                    <SearchItem Track="track" />
+                    <SearchItem Track="track" OnTrackItemClicked="AccessTrackDetail" />
                 </Virtualize>
             </div>
         }
@@ -74,5 +75,10 @@
             return false;
 
         return true;
+    }
+
+    private void AccessTrackDetail(string slug)
+    {
+        NavigationManager.NavigateTo($"/browse/detail/{slug}");
     }
 }
