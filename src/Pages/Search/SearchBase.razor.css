@@ -54,4 +54,8 @@
         border-radius: 0;
         box-shadow: unset;
     }
+
+    .search-result-area {
+        gap: 4px;
+    }
 }

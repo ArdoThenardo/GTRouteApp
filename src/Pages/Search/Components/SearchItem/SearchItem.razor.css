@@ -59,3 +59,27 @@
     .item-information hr {
         margin: 8px 0;
     }
+
+@media (max-width: 540px) {
+    .item-container {
+        flex-direction: column;
+    }
+
+        .item-container img {
+            width: 100%;
+            height: 108px;
+        }
+
+    .item-information {
+        margin-bottom: 6px;
+        padding-inline: 4px;
+    }
+
+        .item-information p:first-of-type {
+            font-size: 18px;
+        }
+
+        .item-information hr {
+            margin: 4px 0;
+        }
+}
