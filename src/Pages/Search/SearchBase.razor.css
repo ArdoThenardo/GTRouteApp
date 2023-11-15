@@ -38,3 +38,24 @@
 .search-notice-container {
     height: 100%;
 }
+
+@media (max-width: 540px) {
+    .search-container {
+        height: unset;
+        min-height: 88vh;
+        padding-block: 0;
+    }
+
+    .inner-container {
+        min-height: inherit;
+        height: inherit;
+        width: 100%;
+        padding: 16px;
+        border-radius: 0;
+        box-shadow: unset;
+    }
+
+    .search-result-area {
+        gap: 4px;
+    }
+}

@@ -29,3 +29,10 @@
     font-size: 64px;
     margin-bottom: 0;
 }
+
+@media (max-width: 540px) {
+    .message-container {
+        padding-top: 24vh;
+        padding-inline: 16px;
+    }
+}
