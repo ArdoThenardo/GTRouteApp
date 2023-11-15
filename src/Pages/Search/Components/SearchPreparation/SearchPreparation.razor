@@ -1,0 +1,49 @@
+@namespace GTRouteApp.Components.Search
+
+<div class="preparation-container">
+    <div class="message-container">
+        @if (ShowError)
+        {
+            <div class="disconnect-icon">
+                <span class="bi bi-cloud-slash"></span>
+            </div>
+        }
+        else
+        {
+            <div class="loading-container">
+                <div class="loading-traditional"></div>
+            </div>
+        }
+        
+        <p>@_message</p>
+
+        @if (ShowError)
+        {
+            <button type="button" class="btn btn-secondary" @onclick="() => TryAgain()">
+                <span class="bi bi-arrow-clockwise"></span> Try Again
+            </button>
+        }
+    </div>
+</div>
+
+@code {
+    private const string PreparingMessage = "Preparing the search function. Please wait...";
+    private const string PreparationFailedMessage = "Unable to prepare the search function. Please check your network connection and try again.";
+
+    [Parameter]
+    public bool ShowError { get; set; } = false;
+    [Parameter]
+    public EventCallback OnTryAgainClicked { get; set; }
+
+    private string _message = "";
+
+    protected override void OnParametersSet()
+    {
+        _message = ShowError ? PreparationFailedMessage : PreparingMessage;
+    }
+
+    private async Task TryAgain()
+    {
+        await OnTryAgainClicked.InvokeAsync();
+    }
+}
