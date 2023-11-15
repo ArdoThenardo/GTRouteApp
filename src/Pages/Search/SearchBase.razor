@@ -6,21 +6,29 @@
 @inject NavigationManager NavigationManager
 @inject RaceTrackService RaceTrackService
 
+<PageTitle>Search | GTRoad</PageTitle>
+
 <div class="search-container">
     <div class="inner-container">
-        <!-- TODO: show search-prepare if allTracks is empty  -->
-        <SearchInput OnFindExecuted="Find" IsValid="@_isInputValid" />
-        @if (_shouldShowResult)
+        @if (_allTracks.Count() == 0)
         {
-            <div class="search-result-area">
-                <Virtualize Items="@_trackSearchResults" Context="track">
-                    <SearchItem Track="track" OnTrackItemClicked="AccessTrackDetail" />
-                </Virtualize>
-            </div>
+            <SearchPreparation ShowError="@_showError" OnTryAgainClicked="RetryPreparation" />
         }
         else
         {
-            <SearchNotice Status="@_status" />
+            <SearchInput OnFindExecuted="Find" IsValid="@_isInputValid" />
+            @if (_shouldShowResult)
+            {
+                <div class="search-result-area">
+                    <Virtualize Items="@_trackSearchResults" Context="track">
+                        <SearchItem Track="track" OnTrackItemClicked="AccessTrackDetail" />
+                    </Virtualize>
+                </div>
+            }
+            else
+            {
+                <SearchNotice Status="@_status" />
+            }
         }
     </div>
 </div>
@@ -31,10 +39,17 @@
     private bool _shouldShowResult = false;
     private bool _isInputValid = true;
     private SearchStatus _status = SearchStatus.Initial;
+    private bool _showError = false;
 
     protected override async Task OnInitializedAsync()
     {
+        await PrepareSearchData();
+    }
+
+    private async Task PrepareSearchData()
+    {
         await PreloadTracks();
+        CheckError();
     }
 
     private async Task PreloadTracks()
@@ -80,5 +95,17 @@
     private void AccessTrackDetail(string slug)
     {
         NavigationManager.NavigateTo($"/browse/detail/{slug}");
+    }
+
+    private void CheckError()
+    {
+        _showError = string.IsNullOrWhiteSpace(RaceTrackService.GetRecentErrorMessage()) ? false : true;
+    }
+
+    private async Task RetryPreparation()
+    {
+        _showError = false;
+
+        await PrepareSearchData();
     }
 }
