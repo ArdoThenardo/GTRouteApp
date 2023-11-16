@@ -38,6 +38,21 @@ public class RaceTrackServiceTests
     }
 
     [Fact]
+    public async Task FetchAll_WithoutPageAndLimit_RaceTracksTest()
+    {
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/tracks/all")
+                .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleAllRaceTracks);
+
+        // call api to get result
+        var response = await service.GetAllTracks();
+
+        // assert
+        Assert.NotNull(response);
+        Assert.True(response.Count() > 0);
+    }
+
+    [Fact]
     public async Task FetchAll_RaceTracksTest()
     {
         service.SetRaceTracksCategory(BrowseCategory.Categories[0]); // All
@@ -108,6 +123,20 @@ public class RaceTrackServiceTests
     }
 
     [Fact]
+    private async Task FetchEmpty_AllWithoutPageAndLimit_RaceTracksTest()
+    {
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/tracks/all")
+                .Respond(HttpStatusCode.OK, "application/json", SampleJson.SampleEmptyJson);
+
+        // call api to get result
+        var response = await service.GetAllTracks();
+
+        // assert
+        Assert.Empty(response);
+    }
+
+    [Fact]
     private async Task FetchEmpty_RaceTracksTest()
     {
         service.SetRaceTracksCategory(BrowseCategory.Categories[0]); // All
@@ -127,6 +156,21 @@ public class RaceTrackServiceTests
 
         // assert
         Assert.Empty(response);
+    }
+
+    [Fact]
+    private async Task FetchError_AllWithoutPageAndLimit_RaceTracksTest()
+    {
+        // set expected uri & response
+        mockHttp.When($"{settings.BaseApi}/tracks/all")
+                .Respond(HttpStatusCode.InternalServerError, "application/json", SampleJson.SampleAllRaceTracks);
+
+        // call api to get result
+        var response = await service.GetAllTracks();
+
+        // assert
+        Assert.Empty(response);
+        Assert.Equal(ErrorMessage.LoadTracksFailed, service.GetRecentErrorMessage());
     }
 
     [Fact]
