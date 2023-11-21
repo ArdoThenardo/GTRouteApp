@@ -25,7 +25,7 @@ public class IndexFeaturedTrackTests: TestContext
     }
 
     [Fact]
-    public void LoadIndexFeaturedTrack_WithParameters()
+    public void LoadIndexFeaturedTrack_WithParametersTest()
     {
         var featuredTracksContent = JsonSerializer.Deserialize<BaseModel<List<FeaturedTrack>>>(
             SampleJson.SampleFeaturedTrackJson, serializerOptions)!;
