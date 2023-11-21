@@ -3,9 +3,9 @@
 @inject NavigationManager NavigationManager
 
 <div class="home-featured">
-    <div class="featured-row-1">
+    <div class="featured-row">
         <!-- Real Circuit -->
-        <div class="row-1-featured-item" 
+        <article class="featured-track-item" 
             style="--bg-cover: url(@Tracks.ElementAt(3).CoverUrl); 
                 --delay: 0s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(3).Slug!)">
@@ -19,10 +19,10 @@
                     <i class="bi bi-info-circle"></i> @((MarkupString)(Tracks.ElementAt(3).Text ?? ""))
                 </p>
             </div>
-        </div>
+        </article>
 
         <!-- Original Circuit -->
-        <div class="row-1-featured-item" 
+        <article class="featured-track-item" 
             style="--bg-cover: url(@Tracks.ElementAt(0).CoverUrl); 
                 --delay: .15s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(0).Slug!)">
@@ -36,7 +36,7 @@
                     <i class="bi bi-info-circle"></i> @((MarkupString)(Tracks.ElementAt(0).Text ?? ""))
                 </p>
             </div>
-        </div>
+        </article>
     </div>
 
     <!-- Featured Images for mobile -->
@@ -48,9 +48,9 @@
         </div>
     }
 
-    <div class="featured-row-2">
+    <div class="featured-row">
         <!-- City Circuit -->
-        <div class="row-2-featured-item" 
+        <article class="featured-track-item" 
             style="--bg-cover: url(@Tracks.ElementAt(2).CoverUrl); 
                 --delay: .2s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(2).Slug!)">
@@ -64,10 +64,10 @@
                     <i class="bi bi-info-circle"></i> @((MarkupString)(Tracks.ElementAt(2).Text ?? ""))
                 </p>
             </div>
-        </div>
+        </article>
 
         <!-- Dirt / Snow -->
-        <div class="row-2-featured-item" 
+        <article class="featured-track-item" 
             style="--bg-cover: url(@Tracks.ElementAt(4).CoverUrl); 
                 --delay: .25s;"
             @onclick="() => AccessTrackDetail(Tracks.ElementAt(4).Slug!)">
@@ -81,7 +81,7 @@
                     <i class="bi bi-info-circle"></i> @((MarkupString)(Tracks.ElementAt(4).Text ?? ""))
                 </p>
             </div>
-        </div>
+        </article>
     </div>
 
     <!-- Featured Videos for mobile -->
